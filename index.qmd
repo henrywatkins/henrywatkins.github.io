@@ -1,5 +1,5 @@
 ---
-title: "ModuloAlpha"
+title: "News and Views"
 listing:
   contents: posts
   sort: "date desc"
