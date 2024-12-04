@@ -1,0 +1,63 @@
+---
+title: "What is a literature review for?"
+description: "Crafting a literature review for your research project"
+author: "Henry Watkins"
+date: "12/04/2024"
+draft: true
+---
+
+A literature review forms the foundation of any research project, serving as both a learning tool and a roadmap for your academic journey. This is true for researchers and students of any level, but this is particularly true for graduate students starting off on their research career. Remember that it is primarily through reading the literature of a field that we become experts not only in the most recent results, but also the methods, trends and the academic community. Furthermore, by taking a step back and getting an expansive view of the key problems before jumping into your investigation, you prevent wasting your own time chasing false leads and unnecessary research directions. The literature review process helps researchers develop a deep understanding of their field before conducting original research. This critical step ensures your work builds upon existing knowledge while identifying genuine research gaps. Your review should demonstrate both breadth of knowledge and depth of understanding in your chosen area. Let's explore each aspect in detail.
+
+## Consider your question 
+
+Your research question serves as the compass for your literature review. Possibly you have been provided with a central task, question or objective for your work, or perhaps you have been given free rein to come up with the subject of your thesis yourself. Either way it is paramount to firmly define what your work is about. Before diving into the literature, you need to frame your research question. 
+
+Firstly, consider whether you are solving a specific problem. Many fields have converged on particular problems; some will be famous with a history of defeating even the most ardent attempts at a solution. Others-and these are perhaps the more intriguing-lie unloved and somewhat orphaned, despite potentially showing the way to fertile pastures. The second type is investigating to discover something new. This is particularly true of 'blue skies' or exploratory research. Simply trying something out because you think it might be interesting or playing around in a less serious logic than the supposed coldness that people ascribe to the sciences. These last two paradigms represent what the mathematician Sir Michael Atiyah in *Advice to a Young Mathematician* called "problem solvers” or “theorists". The former are motivated by the task of proving conjectures while the latter dedicate themselves to the development of theory. The third type I will identify is creating or developing something novel. This might be a technique, technology or tool. In truth most research is a mixture, and rarely does the initial question stay the same throughout a project. 
+
+In each case you should be able to write down a sentence describing your question, and indeed it helps to be in the form of a question, for the form of a question invites a kind of internal dialectic helpful when planning a project.
+
+## Searching for literature
+
+The first stage is to hit the literature. Collect papers on the topic, especially review articles and the latest research. Another underused source is PhD theses and dissertations; these contain the results of previous graduate students' attempts at chewing through the literature of a field. As such they are an invaluable source of references and background.
+
+These days the field of helpful tools has expanded far beyond trawling through archives. Aside from Google scholar, there are many AI-powered services you can use to power your search. A few favourites are:
+
+- [Elicit](https://elicit.com/): Helps search and synthesize research findings and identify patterns across papers
+- [Consensus](https://consensus.app/): Search and aggregates scientific results on specific topics
+- [PaperQA](https://www.futurehouse.org/): Enables targeted questions about research papers
+- [ConnectedPapers](https://www.connectedpapers.com/): Visualizes relationships between publications, including the most relevant and heavily cited works.
+- [Mendeley](https://www.mendeley.com/): Reference manager and library for your collected articles
+- [Zotero](https://www.zotero.org/): Similar to Mendeley. Zotero, Mendeley and Google scholar allow one to export bibtex for reference management and writing. Scientific writing tools like latex require bibtex format references and it can be helpful to auto generate your project-specific references.
+
+All of these can help you find and filter the most relevant literature for your problem. To filter the set of papers you have collected, first read the title and the abstract; if this seems promising and relevant, then read the conclusions and the figures. The sad reality is there has been an explosion in literature in the sciences, and keeping up with developments is a difficult task. One does not have the time to read every article in the field, even less to understand each fully. The key is filtering and selecting those upon which you can build an interesting and insightful research project of your own. The key object of the review exercise is to build an argument, not a library. For this purpose one must be selective and filter out only those articles that are most relevant. When you have selected your corpus, consider the following:
+
+- What has been left out?
+- Where does it lead?
+- What is/could be the next step?
+- What is the kernel of unevaluated science in this paper?
+
+Also don't forget the quality of the studies themselves, in particular consider the
+
+- Methodological strengths and limitations
+- Underlying assumptions
+- Potential applications to your research
+- Unexplored implications.
+
+The rapid expansion of AI in recent years is a case in point. Some successful papers in the field have been the result of successfully expanding on appendices and 'side' experiments of previous papers. Consider that which one author might condemn to an appendix may be an incredibly insightful result with just some extra thought and effort. 
+
+You should at this stage have a set of key papers of interest to you. Briefly describe the background and context of these; after all, this context is also that of your work too. Define the objectives and key methods of these papers. What approaches did they use? Could you adopt or adapt them for your project too? Finally consider a small summary of the literature itself, with a paragraph for each of the main papers and how they contribute to your work. The review should have a narrative thread that leads to your research being a good idea. Again AI tools can help you with this, take full advantage of them, but remember this exercise is for your own benefit. It is for you to understand the state of the field.
+
+Consider the people too, look at the various groups and individuals who are publishing relevant work. By reviewing literature we also come to know who are the 'movers and shakers' and the most influential labs. This is important because this is where you can find potential collaborators, reviewers, and possibly even your future colleagues. 
+
+## Writing the review
+
+Once you have compiled your corpus of literature it is time to put it all together. A basic introduction-body-conclusion structure will suffice. The introduction should establish your review's focus, outline the scope of literature covered, and highlight the significance of your topic. Include your research question and briefly explain how you've broken down the review. In the body, for each key paper, provide:
+
+- Background and contextual information
+- Clear objectives and methodological approaches
+- Potential adaptations for your research
+- Critically evaluate the strengths and weaknesses of research method
+
+The conclusion should synthesize the key findings, discuss their implications, and identify research gaps that justify your own study. Don't worry about writing a comprehensive review of the whole field, and don't spend too long describing the minutiae of competing methods. If all is well you will pick and choose parts of previous work to assemble your own approach.  
+
+A well-structured literature review for a scientific research project should follow a clear organizational framework that effectively synthesizes and analyses existing research. A well-crafted literature review does more than summarize existing research—it builds a compelling argument for your research direction while demonstrating your thorough understanding of the field's current state. Lastly, and most importantly, it builds your own understanding and helps you devise your project's direction.
