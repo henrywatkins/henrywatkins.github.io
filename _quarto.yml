@@ -3,9 +3,14 @@ project:
 
 website:
   title: "Henry Watkins"
+  google-analytics: "G-4KRLE15B5S"
   navbar:
     right:
-      - about.qmd
+      - text: "Home"
+        href: index.qmd   # Links to the homepage
+      - text: "Blog"
+        href: blog.qmd    # Links to the blog page
+
 format:
   html:
     theme: litera
