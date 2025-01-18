@@ -1,0 +1,103 @@
+---
+title: "A Scientific Project Template"
+description: "Keeping your scientific projects organized"
+author: "Henry Watkins"
+date: "01/18/2025"
+image: folder.jpg
+draft: false
+---
+# A Scientific Project Template
+
+I have found it helpful to have a standard template with which to start my projects; knowing where to start is the hardest part of any research project. I have created a simple science project template that I hope others might find useful. The [scientific project template](https://github.com/henrywatkins/scientific_project_template) provides a structured starting point for organizing your project. It emphasizes keeping all files in one place and using version control with Git and GitHub for backup management. Embarking on a programming-based science project, or indeed any modern research project, requires good management of sources. The key to success lies in proper organization. Feel free to fork  or clone the repository, changing it for your own needs. This template is for a python project, but the structure can be easily adapted to other popular scientific programming languages like MATLAB. Below I will go through the structure and workflow, including how I use git and Github to backup my work. 
+
+I have worked on different kinds of programming and research projects in the past; I have found the conventional project structure used in programming projects is ill-suited to scientific projects. Even if the project is heavily programming-based, science projects still need a way of tracking data, literature, plots, a labbook, and the eventual writeup. 
+
+## Organization
+
+Let's start with a look at the folder organization. The key is to keep everything you need in one repository, with all code, plots, lab-books, notes and Jupyter notebooks together for easy reference. Keep all related files—data, scripts, documentation, and results—in a single folder or repository. This ensures everything is easily accessible and reduces the risk of losing important components. 
+
+- Use clear naming conventions for files and folders to make navigation intuitive.
+- Maintain a clear directory structure that separates raw data, processed data, scripts, and outputs.
+
+The template had the structure listed below. I will go through each part and explain the workflow, but feel free to delete or add whatever you need.
+
+```
+.
+├── README.md
+├── env.yaml
+├── labbook_template.md
+├── lit_rev.md
+├── paper_skeleton.md
+├── plots
+├── run_project.sh
+└── src
+    ├── __init__.py
+    ├── lib.py
+    ├── notebook.py
+    └── script.py
+```
+
+Firstly, all code projects should have a basic README file. This is a simple file describing the repository - what it's for, who wrote it and the most important information for starting to use the repository. This is the information you see when looking at repositories on GitHub, and are standard practice for all programming projects.
+
+The `env.yml` file is an anaconda environment file which describes the dependences and anaconda environment setup for the project. Programming-based science projects often involve numerous dependencies. Using environments can help you manage these effectively. For Python projects, Anaconda environments are highly recommended as they allow you to isolate dependencies for each project. While Python is the standard in scientific programming, tools like MATLAB or Julia may also be used depending on your field. Anaconda environments are the standard in scientific fields, particularly for those working in python. Python has certainly become the standard for all scientific programming and analysis tasks in recent years. Although MATLAB is still very popular and Julia has a lot of fans. Environments are your friend, and although one does not expect most scientist to be experienced software engineers, they can be a lifesaver when dealing with a plethora of competing dependencies.
+
+The `labbook_template.md` is a simple markdown - formatted labbook to record your research as you go. There are a range of electronic labbooks available that you can use instead, but I still prefer a simple text-based file. The key is as always to keep a record of your work for yourself more than anything. The `lit-rev.md` is a template I use for reviewing preliminary literature. The `paper_skeleton.md` is a template for outlining the project and eventually helping to draft the resulting paper. The `plots` directory is self-explanatory, a place to keep all the important plots for your paper. 
+
+The `src` folder contains all the python code you write for your project. This includes Jupyter notebooks, python scripts and python library modules. These can be structured however you need, but in general I have found it is unnecessary to hew too close to proper programming practices when doing scientific projects. A final useful addition is a data folder in which you can keep raw data, processed data and results.
+
+## Workflow
+
+Start with the literature; as you go through the relevant literature, fill in a short entry for each article. 
+
+REFERENCE
+
+- objective
+- methods
+- key results
+- conclusions
+
+Finally write a short summary of the literature you have reviewed to give yourself an overview of the most important references. 
+
+Once you have a plan and have a good view of the literature you can start with a few simple questions, I have included these in the `paper_skeleton.md` file.
+
+- What are you doing?
+- What is the context for this work?
+- Why is it interesting?
+- Where does this work follow from?
+- What are the key references of this work? (e.g. Smith et al. 2017)
+- What does the field need?
+- How does this improve on previous work?
+- What methods are being used?
+- Describe the data you are using
+- What are your results?
+- What do your results mean in context?
+- What are your conclusions?
+- How has your work fulfilled what the field needs?
+- How would you describe the narrative of this work?
+- What is a possible title of this work?
+- Write an abstract for your work
+- What possible journals are there for this work?
+
+As the project proceeds fill each of these questions. Eventually you should be able to quickly write up a draft of you results. On the programming front, keep all your scripts and jupyter notebooks together, keeping track of all your plots and keeping everything in a simple logbook to track the progress of your project. 
+
+Any project will involve running and rerunning scripts, analyses and plotting functions as you go on. For this purpose I use a simple bash file. This bash file of terminal commands is helpful for multi-step processing and analyses. This is particularly important with regard to reproducibility; the ability to quickly repeat the whole analysis pipeline from the raw data is valuable for anyone trying to recreate your work.  For example:
+
+```bash
+mkdir data
+cp -r old_data data
+python script1.py
+python analyse_data.py
+python plot_output.py
+```
+
+## Version control and collaboration
+
+Git is a tool for managing changes in your project, while GitHub provides an online platform for hosting repositories. It might be a little unnecessary for scientific projects, but the ability to backup you work and version control long projects is incredibility valuable. The key value however is in collaborative projects; if you are in a team working on a large project, the branching and cloud backup ability of git and Github is no less useful for scientists than it is for programmers. You can take a look at the Github website or any of the online resources if you want to find out how it works. Version control systems like Git can be essential for scientific projects because they:
+
+- Track every change made to your files, ensuring transparency and reproducibility.
+- Facilitate collaboration by allowing multiple contributors to work on the same project simultaneously.
+- Provide a safety net by enabling you to revert to previous versions if errors occur.
+
+## Conclusion
+
+Starting a programming-based science project requires careful planning, organization, and the right tools. By following these steps—organizing files, utilizing version control, documenting thoroughly, managing dependencies with environments, automating tasks, backing up regularly, and fostering collaboration—you can streamline your workflow and ensure the success of your project. With these practices in place, you’ll be well-equipped to tackle complex scientific challenges while maintaining reproducibility and efficiency.
