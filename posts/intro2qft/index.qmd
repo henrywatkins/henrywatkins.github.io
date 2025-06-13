@@ -1,0 +1,214 @@
+---
+title: "Path integrals in Quantum Field Theory"
+description: "An brief introduction"
+author: "Henry Watkins"
+date: "06/12/2025"
+image: paths.jpg
+draft: true
+bibliography: references.bib
+---
+
+Quantum Field Theory grew out of the attempt to reconcile Special Relativity with Quantum Mechanics. The fundamental objects in this theory are the fields whose behaviour are described by the Lagrangian and the Euler-Lagrange field equations. Then using the path integral of the field it is possible to calculate probabilities for processes that can be observed. Quantum Field Theories are able to explain particle interaction and the creation and annihilation of particles that does not occur in Quantum Mechanics. The Standard Model is built in terms of Quantum Field Theories and so the notion of time in Quantum Field Theory is important for studying physics beyond the Standard Model [@zee2010quantum].
+
+It is evident that on a macroscopic scale that there are not two dimensions of time and so to introduce the possibility of such a dimensionality we must go down the length scale and up the energy scale to a region that does not follow intuitive classical physics and perhaps will allow new effects that are indicative of extra times. This means using Quantum Field Theory.
+
+Since this project focused on the formalism of Quantum Field Theory is is important to introduce certain key parts of the path integral approach to QFT. The Path Integral Formulation of Quantum Field Theory  has been used as the basis of the analysis in this work because it is easier to allow extra dimensions in this formulation than Canonical Quantisation. What follows is a short overview of this formulation that was used as the basis of the calculations and analysis in this work.
+
+## Path Integrals in Quantum Mechanics
+When a quantum state evolves from one state to another the underlying principle of the path integral approach is that all possible paths of evolution from the initial to final state are considered.
+
+The question is one may bother with the path integral formulation when there are the conventional methods in quantum mechanics available. The path integral method provides a simpler method of calculating certain processes and in particular gives a much more elegant way of approaching field theory.
+
+The path integral determines the amplitude of evolving from one state to another. Quantum mechanically, the amplitude for this is [@mackenzie2000path]
+
+$$
+M=\bra{q'}e^{-iHT}\ket{q}.
+$$
+
+Now the aim is to derive this amplitude as a sum over histories of all paths between q and q'. This is done by separating the time period into a small $\delta t=T/N$.
+
+$$
+M=\bra{q'}e^{-iH\delta t}e^{-iH\delta t}e^{-iH\delta t}...e^{-iH\delta t}\ket{q}
+$$ 
+
+Then the intervening states are put by using the completeness condition
+
+$$
+1=\int\ket{q}\bra{q}dq
+$$
+
+so it is possible to write
+
+$$
+M=\int dq_1dq_2..dq_{N-1} \bra{q'}e^{-iH\delta t}\ket{q_{N-1}}\bra{q_{N-1}}e^{-iH\delta t}\ket{q_{N-2}}\\
+\bra{q_{N-2}}e^{-iH\delta t}\ket{q_{N-3}}...\bra{q_1}e^{-iH\delta t}\ket{q}
+$$
+
+which is just a sum over a product of all possible possibilities.
+This is reminiscent of the double slit experiment in which light is fed through two slits. If there are two slits, there are two of the factors in eq.(4.1), but as extra slits are added the number increases (fig. 6.1). Instead the number of barriers is played by the different time steps.
+Since now the time steps are small the exponents in the individual factors can now be expanded and taken to first order. Taking one of the factors
+
+$$
+M_{j,j+1}=\bra{q_{j+1}}\ket{q_j}-i\delta t\bra{q_{j+1}}H\ket{q_j}+O.
+$$
+
+Now using the completeness relation in momentum space $\int\dfrac{dp}{2\pi}\ket{p}\bra{p}=1$
+
+$$
+\begin{aligned}
+M_{j,j+1}&=\bra{q_{j+1}}\ket{q_j}-i\delta t\bra{q_{j+1}}H\int\dfrac{dp_j}{2\pi}\ket{p_j}\bra{p_j}\ket{q_j}\\
+&=\int\dfrac{dp_j}{2\pi} e^{ip_j (q_{j+1}-q_j)}e^{-i\delta t H}\\
+&=\int\dfrac{dp_j}{2\pi} e^{i\delta t( p_j \dot{q_j}- H)}
+\end{aligned}
+$$
+
+When this is taken over all the factors j up to N then the total propagator is
+
+$$
+M=\int \prod_{j=1}^{N-1}dq_j \int\prod_{j=0}^{N-1}\dfrac{dp_j}{2\pi} \exp{ i\delta t\sum_{j=0}^{N-1}
+( p_j \dot{q_j}- H)}
+$$
+
+the letting N tend to infinity so there are an infinite number of paths gives the phase-space integral
+
+$$
+M=\int Dp Dq \exp{(iS)}.
+$$
+
+Which can be transformed into the configuration space path integral by performing the integral over the momenta
+
+$$
+\begin{aligned}
+M &=\lim_{N\rightarrow\infty} \left(\frac{-im}{2\pi \delta t}  \right)^{N/2} \left( \prod_{j=1}^{N-1}\int dq_j\right) e^{iS}\\
+M &=\int Dq e^{iS}
+\end{aligned}
+$$
+
+Where the definition of the Hamiltonian has been used to replace the factor in the exponent with the Lagrangian and then the action.
+
+![Double slit experiment with one barrier](doubleslit1.png)
+
+![Double slit experiment with two barriers](doubleslit2.png)
+
+![Double slit experiment with three barriers](doubleslit3.png)
+
+## Path Integrals in Quantum Field Theory
+In moving from Quantum Mechanics the Quantum Field Theory the path integral method changes only slightly. In Quantum Field Theory the states are no longer the basic objects and they are replaced by fields that act on vacuum states to give particles. 
+
+It is thus the Lagrangian density that appears in the action. The Lagrangian density is a function of the field and not the position and speed as the Lagrangian is in the Quantum Mechanical case. The variable q in the path integral is replaced by the field $\phi$, the index j becomes a continuum and the path integral is no longer taken as the evolution between two states $\ket{q},\ket{q'}$ but between two vacuum states,$\ket{0}$. This is only convention and represents the fact it is possible to create any state by acting the field operator on the vacuum. So the path integral becomes
+
+$$
+Z=\int D\phi e^{i\int \mathcal{L}d^4 x}
+$$   
+
+The question now with the path integral in Quantum Field Theory is how to use it to find observables. This work and in particular the next chapter is focused on using scalar fields to explore extra times and so the discussion shall be limited to this kind of field. 
+
+## The Propagator
+The dimensionality of the space makes its appearance in Quantum Field Theory entirely through the propagator. As such it is the most important structure to consider when considering theories with extra dimensions. The propagator when mod squared gives the probability of a particle moving from one place to another (hence propagation) and is derived from the governing equation of the field. Working in the path integral formulation the propagator is derived below.
+
+The path integral for a scalar field theory is (lower case letters like x,y signify 4-vectors)
+
+$$
+Z=\int D\phi e^{iS}
+$$
+
+where D signifies the integration measure that includes the product, limit etc. S is the action given by
+
+$$
+S=\int d^4 x \dfrac{1}{2} (\partial_\mu \phi \partial^\mu \phi -m^2\phi^2)+J\phi.
+$$
+
+Where J is some source function and $\mu \in(0,1,2,3,4)$. To calculate the propagator first one must focus on the action and integrate by parts to get
+
+$$
+\int d^4 x \left[ -\phi\frac{1}{2}(\partial_\mu \partial^\mu +m^2)\phi +J\phi\right] .
+$$
+
+Then use the greens function form
+
+$$
+(\partial_\mu \partial^\mu +m^2)D(x-y)=-\delta^{(4)}(x-y)
+$$
+
+such that the field satisfies
+
+$$
+\phi(x)=\int d^4 y D(x-y)J(y)
+$$
+
+and putting this form into the action above, the result is
+
+$$
+\frac{1}{2}\int d^4 x \int d^4 y J(x) D(x-y) J(y) 
+$$
+
+and using Fourier transforms shows the explicit appearance of the propagator
+
+$$
+\tilde{D(k)}=\dfrac{1}{k^2-m^2}
+$$
+
+where the denominator can be replaced by whatever dispersion relation that follows the simple scalar field in Minkowski space form i.e just add extra positive terms for time-like dimensions and negative ones for space-like dimensions.
+
+What follows is an investigation into the propagators and potentials in different space-times and the effects that may arise.   
+
+## The Correlation Function and Space-Time Geometry
+
+The correlation function gives the probability of some interaction or propagation. The two point correlation function is simply the familiar Green's function. Since it gives the probability of propagation from one point to another it will be interesting to look into the form of the correlation function in Space-Like and Time-Like intervals in extra time spaces.
+
+In the familiar case of 3+1 dimensions that two point correlation function for propagation from the origin to x is
+
+$$
+D(x)=-i\int \dfrac{d^3 k}{(2\pi)^3 2\omega_k} \left[ e^{-i(\omega_k t-k\cdot x)} \theta(t) +e^{i(\omega_k t-k\cdot x)} \theta(-t)\right].
+$$
+
+In the time-like case it is always possible to make a Lorentz boost into a frame in which $x=(t,0)$.
+
+$$
+D(x)=-i\int \dfrac{d^3 k}{(2\pi)^3 2\omega_k} \left[ e^{-i(\omega_k t)} \theta(t) +e^{i(\omega_k t)} \theta(-t)\right]
+$$
+
+This is an oscillating wave- like solution for a time-like interval. In the space like case we can put $x=(0,x)$ with $\theta(0)=1/2$.
+
+$$
+D(x)=-\int_0^\infty \dfrac{kdk}{(2\pi)^2 r}\frac{1}{\sqrt{k^2 +m^2}} (e^{ikr} -e^{-ikr})
+$$
+
+which approximates to $\sim e^{-mx}$
+
+It is interesting to look at what these two are like for 3+2 spacetime. It is clear that it is difficult to complete the integral since both times cannot be eliminated as above. Once  one is eliminated there is  a square root in the denominator which prevents eliminating the second time component. 
+
+## The Potential
+The potential can be found by taking the spatial Fourier transform of the propagator. The hardest and perhaps most important part is how the sources and sinks are set up in the calculation of a potential. In the path integral formulation this must be done to allow a potential to appear, after all there can be no propagator and hence no potential without anything to propagate between.
+
+As a first example the potential will derived in 3+1 dimensions using a source function that consists of two Dirac delta sources $J(x)=\delta^{(3)}(\vec{x}-\vec{x_1})+ \delta^{(3)}(\vec{x}-\vec{x_2})$. These are fixed at the spatial positions $\vec{x_1}$ and $\vec{x_2}$. There will be a number of terms in the action arising from the product of the two J functions in eq.(4.20) but since the only interesting one is where a particle is created at 1 and annihilated at 2 the only one that is considered is
+
+$$
+S=-\dfrac{1}{(2\pi)^4} \int d^4 x' \int d^4 x \int d^4 k \dfrac{\delta(\vec{x}-\vec{x_1}) e^{ik\cdot(x-x')} \delta(\vec{x'}-\vec{x'_2})}{\omega^2-k^2-m^2}
+$$ 
+
+Where the sources are placed at a particular position in space but have no fixed time coordinate. This leads to
+
+$$
+\begin{aligned}
+S&=-\dfrac{1}{(2\pi)^4} \int dt' \int dt \int d\omega e^{i\omega(t-t')} \int d^3 k \dfrac{e^{-i\vec{k}(\vec{x_1}-\vec{x'_2})}}{\omega^2-k^2-m^2}\\
+&=-\dfrac{1}{(2\pi)^3}\int dt \int d\omega \delta(\omega) \int d^3 k \dfrac{e^{-i\vec{k}(\vec{x_1}-\vec{x'_2})}}{\omega^2-k^2-m^2}\\
+&=\dfrac{1}{(2\pi)^3}\int dt \int d^3 k \dfrac{e^{i\vec{k}(\vec{x_1}-\vec{x'_2})}}{k^2+m^2}
+\end{aligned}
+$$
+
+Letting the time integral be $\int dt=T$ to make the association with the T in $\bra{0} e^{-iHT}\ket{0}=e^{-iET}$ so the potential is (and writing $\vec{x}=\vec{x_1}-\vec{x'_2}$)
+
+$$
+\int \dfrac{d^3 k}{(2\pi)^3}\dfrac{e^{i\vec{k}.\vec{x}}}{k^2+m^2}=\frac{1}{4 \pi r}e^{-mr} 
+$$ 
+
+Another important point is the validity of fixing the source and sink in space but not in time. When this was done is was clear that a Dirac delta function appeared in $\omega$ that cut out the time-term from the propagator.
+
+From the path integral approach as described in Zee [@zee2010quantum] the specification of the sources and sinks is essential to correctly calculate the potential arising from particle propagation from source to sink.
+
+Trying the calculation 2 times where the source and sink have definite positions in the other time dimension so that evolution only occurs through normal time results in exactly the same case for the single-time case above. This is because when one fixes the time position one cuts out the extra time from the propagator. This exemplifies the importance of specifying the source and sink.
+
+The reason for focusing on the potential is that it gives a clear result of a real observable that depends on the dimensionality of the space. It is possible to find experimentally measurable effects by using the potential, this will be covered in chapter 8. 
+
+
