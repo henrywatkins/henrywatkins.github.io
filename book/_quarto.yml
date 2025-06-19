@@ -1,5 +1,6 @@
 project:
   type: book
+  output-dir: ../docs/book
 
 book:
   title: "Plasma Physics: An Outline"
@@ -25,10 +26,10 @@ format:
       - brand
     toc: true
     toc-location: left
-  pdf:
-    documentclass: scrreprt
-  epub:
-    cover-image: cover.png
+  #pdf:
+  #  documentclass: scrreprt
+  #epub:
+  #  cover-image: cover.png
 
 
 
