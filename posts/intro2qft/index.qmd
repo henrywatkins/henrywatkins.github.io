@@ -1,5 +1,5 @@
 ---
-title: "Path integrals in Quantum Field Theory"
+title: "Path Integrals in Quantum Field Theory"
 description: "An brief introduction"
 author: "Henry Watkins"
 date: "06/15/2025"

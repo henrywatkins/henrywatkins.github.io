@@ -1,0 +1,148 @@
+
+\section{Magnetised Transport}
+
+\subsection*{The Transport Coefficients}
+
+Electrons in a magnetised plasma travel on circular orbits in the plain perpendicular to the direction of the magnetic field $\hat{\textbf{b}}$. These orbits have a radius $r_L(=v/\omega_c)$, the $\textit{Larmor radius}$ and orbit at the Larmor or $\textit{cyclotron frequency}$, $\omega_c$,
+\begin{equation}
+    \omega_c=\frac{e B}{m_e}.
+\end{equation}
+
+Electrons in a plasma are constantly performing Coulomb collisions with ions and other electrons. In classical plasma theory, transport is a collisional process and it is possible to parameterise the influence of the magnetic field in terms of a dimensionless parameter known as the $\textit{Hall parameter}$
+\begin{equation}
+\chi =\omega_c\tau_{ei},
+\end{equation}
+which is a product of the electron-ion collision time and the electron cyclotron frequency. This parameter is a measure of how magnetised the plasma is; when electrons undergo Coulomb collisions, they hop onto a different Larmor orbit. If the Hall parameter is low, (see figure \ref{fig:colpic}) the magnetic field does not deflect the electron far from its path between collisions, if the Hall parameter is large the electron is effectively `confined' to a small region, with the electron performing potentially many full orbits between collisions.  
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\columnwidth]{Figures/Theory/colpic.png}
+    \caption[An illustration of magnetisation of a plasma]{At low magnetisation (right), the electron mean free path changes little under a magnetic field. When the magnetisation is very large, (left) the collisional transport is `constrained' into a smaller region.}
+    \label{fig:colpic}
+\end{figure}
+
+The deviation from isotropic, unmagnetised transport is encapsulated in the dimensionless tensors $\underline{\underline{\boldsymbol{\alpha}}}^c,\underline{\underline{\boldsymbol{\beta}}}^c,\underline{\underline{\boldsymbol{\kappa}}}^c$,
+\begin{align*}
+&\underline{\underline{\boldsymbol{\alpha}}}=\frac{m_e n_e}{\tau_{ei}}\underline{\underline{\boldsymbol{\alpha}}}^c,\\
+&\underline{\underline{\boldsymbol{\beta}}}=\underline{\underline{\boldsymbol{\beta}}}^c,\\
+&\underline{\underline{\boldsymbol{\kappa}}}=\frac{n_e T_e \tau_{ei}}{m_e}\underline{\underline{\boldsymbol{\kappa}}}^c.
+\end{align*}
+When the plasma is completely unmagnetised, such that $\chi\rightarrow 0$, the coefficients $\underline{\underline{\boldsymbol{\alpha}}}^c,\underline{\underline{\boldsymbol{\kappa}}}^c$ become diagonal and $\underline{\underline{\boldsymbol{\beta}}}^c$ vanishes. 
+
+To better understand the effect the anisotropic, off-diagonal terms have on transport, these coefficients can be written in a geometry where the basis is set by the direction of the magnetic field. When a magnetic field is applied to a plasma it defines a preferred direction, breaking the isotropy of transport processes in a plasma and turning the transport coefficients into tensors. The magnetic field direction is defined
+\begin{equation}
+\hat{\textbf{b}}=\frac{\textbf{B}}{|\textbf{B}|}.
+\end{equation}
+Given this geometry it is possible to write the contraction of a general transport coefficient $\underline{\underline{\eta}}$ with a driving gradient $\textbf{s}$ as
+\begin{equation}
+\underline{\underline{\eta}}\cdot\textbf{s}=\eta_\parallel \hat{\textbf{b}}( \hat{\textbf{b}}\cdot\textbf{s})+\eta_\perp \hat{\textbf{b}}\times (\textbf{s}\times\hat{\textbf{b}})+\eta_\wedge \hat{\textbf{b}}\times\textbf{s}.
+\end{equation}
+This splits the transport into three terms, parallel $\eta_\parallel$, perpendicular $\eta_\perp$ and cross-perpendicular $\eta_\wedge$ to the magnetic field. These directions are illustrated in figure \ref{fig:b_geometry}.
+
+\begin{figure}
+\includegraphics[width=0.5\columnwidth]{Figures/Theory/b_geometry.png}
+\centering
+\caption[Diagram of the geometry of magnetised transport]{The three components have directions parallel, perpendicular and cross-perpendicular relative to the magnetic field. In this way one can define a perpendicular coordinate system based on the magnetic field direction $\textbf{b}$ and the driving gradient direction $\textbf{s}$.}
+\label{fig:b_geometry}
+\end{figure}
+
+A Cartesian tensor form for this contraction will be useful when transitioning to a numerical model,  
+\begin{equation}
+    \eta_{ij}=\eta_\parallel b_ib_j+\eta_\perp\left(\delta_{ij}-b_ib_j\right)+\eta_\wedge\epsilon_{ikj}b_k, 
+\end{equation}
+which in full matrix form is
+\begin{equation}
+\underline{\underline{\eta}}=
+\begin{pmatrix}
+\eta_\perp+(\eta_\parallel-\eta_\perp)b^2_x && -\eta_\wedge b_z+(\eta_\parallel-\eta_\perp)b_x b_y && \eta_\wedge b_y +(\eta_\parallel-\eta_\perp)b_x b_z \\
+\eta_\wedge b_z +(\eta_\parallel-\eta_\perp)b_x b_y && \eta_\perp+(\eta_\parallel-\eta_\perp)b^2_y && -\eta_\wedge b_x +(\eta_\parallel-\eta_\perp)b_y b_z \\
+-\eta_\wedge b_y+(\eta_\parallel-\eta_\perp)b_x b_z && \eta_\wedge b_x +(\eta_\parallel-\eta_\perp) b_y b_z  && \eta_\perp +(\eta_\parallel-\eta_\perp) b^2_z
+\end{pmatrix}
+\end{equation}
+
+The closure equations of the previous section were derived without the electron-electron collision operator. While the assumption of no electron collisions applies for high-Z plasmas, the effect must be considered for low-Z plasmas. Calculating the magnetised transport coefficients with a full electron-electron Fokker-Planck collision operator is not analytically feasible. Epperlein and Haines \citep{Epperlein1986PlasmaEquation} used a numerical scheme to solve the electron Vlaslov-Fokker-Planck equation with electron-electron collisions and fitted a polynomial expansion to the result to give expressions of the transport coefficients in terms of the dimensionless Hall parameter. These functional forms have explicit dependence on the Hall parameter and will be used later in the numerical model. The full coefficients can be found in Appendix A. As an example, figure \ref{fig:coefs} shows the Epperlein and Haines coefficients as functions of the Hall parameter for $Z=1$.
+
+\begin{figure}
+\includegraphics[width=0.75\columnwidth]{Figures/Theory/coeffplot.eps}
+\centering
+\caption[Plots of the magnetised transport coefficients]{Shown here are the six magnetised transport coefficients plotted against the Hall parameter. These coefficients are for a hydrogen Z=1 plasma as calculated by Epperlein and Haines \cite{Epperlein1986PlasmaEquation}. In the limit $\chi\rightarrow 0$, the $\wedge$ coefficients vanish and the perpendicular coefficients converge on a constant value. }
+\label{fig:coefs}
+\end{figure}
+
+\newpage
+\section{Magnetised Transport Phenomena}
+
+The magnetised form of the transport coefficients greatly complicates the possible behaviour with more terms and the appearance of thermoelectric transport $\underline{\underline{\boldsymbol{\beta}}}$ in Ohm's law. This section will discuss the different phenomena that appear out of these tensor coefficients.    
+\subsection*{Diffusive and Righi-Leduc Heat Flow}
+Considering eqs. 2.74 and 2.78, the heat flow now splits into three parts
+\begin{equation}
+    \textbf{q}_T=-\kappa_\parallel \nabla_\parallel T_e - \kappa_\perp\nabla_\perp T_e - \kappa_\wedge\textbf{b}\times\nabla T_e.
+\end{equation}
+The first two terms are $\textit{diffusive heat flow}$ and the third term is the $\textit{Righi-Leduc heat flow}$. The diffusive nature is made clear with eq. 2.41 and looking only at the time derivative and heat flow divergence terms. After substituting $\textbf{q}$, the result is a diffusion equation
+\begin{equation}
+    \frac{3}{2}n_e\frac{\partial T_e}{\partial t}=\nabla\cdot\left(\kappa_\parallel \nabla_\parallel T_e + \kappa_\perp\nabla_\perp T_e + \kappa_\wedge\textbf{b}\times\nabla T_e\right).
+\end{equation}
+
+Looking at the asymptotic forms of the perpendicular heat flow $\kappa_\perp$ as $\chi \rightarrow 0$ and $\chi \rightarrow \infty$, Helander \cite{Helander2005CollisionalPlasmas} has (for a Lorentz plasma)
+\begin{align}
+    \kappa_\perp &= \frac{n_e \lambda_{ei}^2}{\tau_{ei}} \frac{128}{3\pi},& \chi << 1\\
+    \kappa_\perp &= \frac{n_e \lambda_{ei}^2}{\tau_{ei}} \frac{13}{4 \chi^2},& \chi >> 1\\
+    &=n_e \frac{r_L^2}{\tau_{ei}}\frac{13}{4}.
+\end{align}
+Using the length scale definition of the Hall parameter $\chi=\lambda_{ei}/r_L$, it is clear at very high magnetisation the characteristic diffusive `step-length' switches from the electron-ion mean free path $\lambda_{ei}$ to the Larmor radius $r_L$. The Righi-Leduc heat flow $\textbf{q}_\wedge$ acts perpendicular to both the magnetic field and the temperature gradient. It `deflects' the flow of thermal energy, rotating the temperature profile of the plasma in the plane perpendicular to the magnetic field. As noted by Bissell \cite{Readphd}, the Righi-Leduc heat flow can dominate over the diffusive heat flow $\textbf{q}_\perp$ when $\chi$ is very large. In the regime of $\chi>>1$, the perpendicular thermal conductivity  $\kappa_\perp \propto \kappa_\parallel /\chi^2$ and the Righi-Leduc conductivity $\kappa_\wedge \propto \kappa_\parallel /\chi$.
+
+\subsection*{Ettingshausen Heat Flow}
+
+The $\textit{Ettingshausen heat flow}$ is a thermoelectric heat flow that results from the $\beta_\wedge$ term of eq. 2.72,
+\begin{equation}
+    \textbf{q}_E=-\beta_\wedge \frac{T_e}{e} \textbf{b}\times\textbf{j}.
+\end{equation}
+This flow is associated with the advection of temperature down magnetic field gradients. As noted by Bissell \cite{Bissell2013} this is made clear when eq. 2.85 is substituted into eq. 2.41 and using Ampere's law to get
+\begin{equation}
+     \frac{3}{2}n_e\frac{\partial T_e}{\partial t}+\nabla \cdot\left(\textbf{v}_E T_e\right)=0.
+\end{equation}
+This is an advection equation for temperature with an advection velocity 
+\begin{equation}
+    \textbf{v}_E = -\frac{\beta_\wedge}{e \mu_0}\nabla B.
+\end{equation}
+However generally this term has found to play a relatively minor role.
+
+\subsection*{The Nernst Effect}
+
+The $\textit{Nernst effect}$ likewise arises from the $\beta_\wedge$ term. However instead it represents an advection of magnetic fields down temperature gradients. This has been used to infer a relationship with diffusive heat flow, which has been used alongside non-local thermal transport models for non-local corrections to Nernst advection \cite{Brodrick2018IncorporatingSimulations}. When the thermoelectric term of Ohm's law is substituted into Faraday's law, one finds an advection equation
+\begin{equation}
+    \frac{\partial \textbf{B}}{\partial t}=\nabla\times(\textbf{v}_N\times\textbf{B}),
+\end{equation}
+with the characteristic velocity
+\begin{equation}
+    \textbf{v}_N=-\frac{\beta_\wedge \nabla T_e}{e B}.
+\end{equation}
+Therefore the Nernst effect advects magnetic fields with velocity $\textbf{v}_N$ down temperature gradients, concentrating the magnetic field in low temperature regions. Davies $\textit{et al.}$ \cite{Davies2015TheImplosions} and Walsh $\textit{et al.}$ \cite{Walsh2017Self-GeneratedFacility} showed the Nernst effect plays a significant role in compressing self-generated magnetic fields in ICF implosions, suggesting this once-neglected effect should play a greater role in plasma physics simulations. 
+
+\subsection*{Resistive Diffusion}
+
+In resistive MHD the term $\frac{1}{en_e}\underline{\underline{\boldsymbol{\alpha}}}\cdot\textbf{j}$, in conjunction with Faraday's and Ampere's law (eqs. 2.47 and 2.48) can be combined to give an advection-diffusion equation
+\begin{equation}
+    \frac{\partial \textbf{B}}{\partial t}=\textbf{v}_\alpha\times(\nabla\times\textbf{B})+\frac{\alpha_\perp}{e^2 n_e^2 \mu_0}\nabla^2 \textbf{B},
+\end{equation}
+with the advection velocity
+\begin{equation}
+    \textbf{v}_\alpha=-\frac{1}{e^2 \mu_0}\nabla\left(\frac{\alpha_\perp}{n_e^2}\right).
+\end{equation}
+
+The second term on the right hand side of eq. 2.90 refers to the resistive diffusion of the magnetic field. The advective term with velocity $\textbf{v}_\alpha$ corresponds to the resistive advection of the magnetic field in regions where the resistivity is non-uniform. While small in general, the resistive advection can grow to be as fast as the frozen in flow near shock fronts \cite{Davies2015TheImplosions}.
+
+\subsection*{Biermann Battery Magnetic Field Generation}
+
+Though not a result of the collisional transport terms, the Biermann battery effect \cite{Schluter1950} is an important magnetic field generation mechanism arising from the electron pressure term in Ohm's law (eq. 2.70). Though first discovered in the context of interstellar magnetic fields, the Biermann battery effect is significant in the regimes of laser-plasma interactions and has been used as a means to induce $\sim 100 T$ magnetic fields with nanosecond laser pulses \cite{Nilson2006}.
+
+Considering the electric field determined by the electron pressure gradient (also known as the $\textit{ambipolar electric field}$) in Ohm's law 
+\begin{equation}
+    \textbf{E}=-\frac{\nabla p_e}{en_e},
+\end{equation}
+and using the ideal gas law $p_e=n_e T_e$ with Faraday's law (eq. 2.47), the Biermann magnetic field generation mechanism follows
+\begin{equation}
+    \frac{\partial \textbf{B}}{\partial t}=\frac{1}{e n_e} \nabla T_e\times\nabla n_e.
+\end{equation}
+
+From this expression one can see if the electron density and electron temperature fields have non-parallel gradients, a magnetic field will be induced via the Biermann battery effect. In laser-generated plasmas, energy deposition via a laser heating mechanism will locally heat a region of the plasma. With a very non-uniform density profile - as is common in laser-plasma interactions - magnetic field generation via this mechanism is one of the most significant sources of magnetic fields in experiments. Even if a magnetic field has not been imposed externally, this mechanism can magnetise the plasma, leading to magnetised transport terms.

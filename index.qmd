@@ -12,7 +12,7 @@ about:
       href: https://github.com/henrywatkins
     - icon: envelope
       text: Email
-      href: mailto:henry.watkins@fujitsu.com
+      href: mailto:h.watkins@hotmail.com
     - icon: "{{< ai google-scholar >}} Google Scholar"
       text: Google Scholar
       href: https://scholar.google.com/citations?user=cGVZMOcAAAAJ

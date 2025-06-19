@@ -1,0 +1,103 @@
+
+\section{Closure and Collisions}
+
+So far the system of equations is not closed as there is no equation that could be used to eliminate heat flow $\textbf{q}$ or the electric field $\textbf{E}$ or the collision term $\textbf{R}_e$ from the system. The conventional approach to close the system of equations is to use the Chapman-Enskog expansion \cite{Boyd2003ThePlasmas}. In this approach the distribution function is assumed to be approximately Maxwellian with only a small deviation. This approximation holds very well in very collisional plasmas because collisions drive the distribution towards equilibrium. In calculating collision terms, closure relations will be found that complete the model.
+
+\subsection*{Collisions in Plasmas}
+
+The collisions between charged particles in a plasma are $\textbf{Coulomb collisions}$, where a charged particle is scattered by the electrostatic field of another charged particle. Considering the single-particle motion of an electron in an electrostatic field, the collision frequency of an electron with speed $v$ from ions in a plasma is \cite{Helander2005CollisionalPlasmas, S.I.Braginskii1965}
+\begin{equation}
+    \nu_{ei}(v)=\frac{n_i\Gamma_{ei}}{v^3}=\frac{3 \sqrt{\pi}}{4 \tau_{ei}} \left(\frac{v_{th}}{v}\right)^3,
+\end{equation}
+with the factor $\Gamma_{ei}$, collision time $\tau_{ei}$, Coulomb logarithm $\ln \Lambda$ and thermal speed $v_{th}$ defined as 
+\begin{align}
+    \Gamma_{ei}&=\frac{Z^2 e^4 \ln{\Lambda}}{4\pi \epsilon_0^2 m_e^2},\\
+    \tau_{ei}&=\frac{12\pi^{3/2}}{\sqrt{2}}\frac{\sqrt{m_e} T_e^{3/2} \epsilon_0^2}{n_i Z^2 e^4 \ln \Lambda},\\
+    \ln{\Lambda}&=\ln(4\pi n_e \lambda^3_D),\\
+    v_{th}&=\sqrt{\frac{T_e}{m_e}}.
+\end{align}
+The velocity dependence of the collision frequency is of the order $v^{-3}$ and so slow, low energy particles are highly collisional whereas fast particles are collisionless. At the thermal speed one can also see from this definition the temperature dependence of the collision frequency is of the order $T_e^{-3/2}$. One can also define the mean free path of e-i collisions $\lambda_{ei}$ to be 
+\begin{equation}
+    \lambda_{ei}=v_{th}\tau_{ei}.
+\end{equation}
+
+Comparing the collision frequencies of ion-ion, electron-electron and ion-electron collisions one can find they approximately follow the scaling \cite{Helander2005CollisionalPlasmas}
+\begin{equation}
+    \nu_{ee}\sim\nu_{ei}/\sqrt{2}>>\nu_{ii}\sim\sqrt{\frac{m_e}{m_i}}\nu_{ei}>>\nu_{ie}\sim\frac{m_e}{m_i}\nu_{ei}.
+\end{equation}
+Since i-i and i-e collisions have a frequency much lower than e-i collisions (by factors $\sqrt{m_e/m_i}$ and $m_e/m_i$ respectively) it is possible to safely ignore them in approximations of transport and collisional effects on the distribution function. This argument cannot however be applied to electron-electron collisions and so the e-e operator must be included. 
+
+\subsection*{The Fokker-Planck Collision Operator}
+
+The starting point to derive collision terms is first to derive the form of the collision operator alluded to in eq. 2.4. For the plasmas in this thesis, Coulomb collisions are small-angle, glancing collisions and the operator that very accurately models such collisions in this regime is the Fokker-Planck operator 
+\begin{equation}
+\left(\frac{\partial f}{\partial t}\right)_{coll}=-\frac{\partial}{\partial \textbf{v}}\left(\frac{\langle\Delta \textbf{v}\rangle f}{\Delta t}\right)+\frac{1}{2}\frac{\partial^2}{\partial\textbf{v}\partial\textbf{v}}\left(\frac{\langle \Delta \textbf{v}\Delta \textbf{v}\rangle f}{\Delta t}\right).
+\end{equation}
+
+This operator is split into two terms that represent `drift' and `diffusion' of the distribution function through velocity space. To transform the Fokker-Planck operator into explicitly Coulomb-collision form, the Rosenbluth potentials $H_\beta$ and $G_\beta$ are used for species $\beta$. The expressions $\frac{\langle \Delta \textbf{v}\Delta \textbf{v}\rangle}{\Delta t}$ and $\frac{\langle \Delta \textbf{v}\rangle}{\Delta t}$ are written in terms of these potentials thus
+\begin{align}
+    &\frac{\langle \Delta v_i \rangle}{\Delta t}=\Gamma_{\alpha\beta}\frac{\partial H_\beta}{\partial v_i},\\
+    &\frac{\langle \Delta v_i \Delta v_j \rangle}{\Delta t}=\Gamma_{\alpha\beta} \frac{\partial G_\beta}{\partial v_i \partial v_j},\\
+    &G_\beta(\textbf{v})=\int |\textbf{v}-\textbf{v}_\beta|f_\beta(\textbf{v}_\beta)d\textbf{v}_\beta,\\
+    &H_\beta(\textbf{v})= \frac{m+m_\beta}{m_\beta}\int \frac{f_\beta(\textbf{v}_\beta)}{ |\textbf{v}-\textbf{v}_\beta|} d\textbf{v}_\beta,
+\end{align}
+for collisions between species $\alpha$ and $\beta$. By using these forms the Rosenbluth form of the Fokker-Planck equation becomes
+\begin{equation}
+\left( \frac{\partial f_\alpha}{\partial t} \right)_{coll}= \Gamma_{\alpha\beta}\left[ - \frac{\partial}{\partial v_i}\left(f_\alpha \frac{\partial}{\partial v_j} H_\beta \right) + \frac{1}{2}\frac{\partial}{\partial v_i}\frac{\partial}{\partial v_j}\left( f_\alpha \frac{\partial}{\partial v_i}\frac{\partial}{\partial v_j}G_\beta \right) \right].
+\end{equation}
+
+Furthermore, the cold ion approximation means a Maxwellian ion distribution is taken to be a Dirac delta $f_i=n_i\delta(\textbf{v}_i)$ because the variance of the ion distribution vanishes. The Rosenbluth potentials reduce to
+\begin{align}
+    &G_i(\textbf{v})=n_i v,\\
+    &H_i(\textbf{v})=n_i/v.
+\end{align}
+The Fokker-Planck operator for electron-ion collisions reduces to the Lorentz scattering operator.
+\begin{equation}
+    \left( \frac{\partial f_e}{\partial t} \right)_{coll}= \frac{n_i\Gamma_{ei}}{2}\frac{\partial}{\partial v_i}\left[\left( \frac{v^2\delta_{ij}-v_i v_j}{v^3}\right) \frac{\partial f_e}{\partial v_j} \right].
+\end{equation}
+
+\subsection*{Closure using a near-Maxwellian distribution}
+
+Closure is achieved via the Chapman-Enskog method \cite{Helander2005CollisionalPlasmas}, whereby the distribution function is assumed to be approximately Maxwellian,
+\begin{equation}
+    f_e(\textbf{x},\textbf{v},t)=f_m+\delta f.
+\end{equation}
+Spherical harmonics can be used to take advantage of the form of the Lorentz scattering operator. This operator is linear and has  spherical harmonic eigenfunctions and so expanding the distribution function in terms of spherical harmonics will simplify the collision term.
+\begin{equation}
+    f_e(\textbf{x},\textbf{v},t)=\sum^\infty_{l=0}\sum^l_{m=-l}f_l^m(\textbf{x},v,t)P^m_l(\cos \theta)e^{im\phi},
+\end{equation}
+
+Of particular importance to this thesis will be the use of the $\textit{diffusive approximation}$. In this approximation the expansion of the distribution function expansion is truncated after $l=1$ such that the terms $l>1$ are ignored. If $f_0$ is further assumed to be Maxwellian $f_m$, this becomes the $\textit{local approximation}$. Using this local approximation in the VFP equation, the expressions for the collisional force terms $\textbf{R}$ and the heat flow $\textbf{q}$ are obtained from the moment definitions eq. 2.18 and 2.9 respectively.
+
+\subsection*{The Collision Terms}
+
+The momentum exchange terms $\textbf{R}_e$ can be split into thermal and friction components
+\begin{equation}
+\textbf{R}=\textbf{R}_T + \textbf{R}_u.
+\end{equation} 
+Following Braginskii \cite{S.I.Braginskii1965}, these components are proportional to the temperature gradient and current respectively
+\begin{align}
+\textbf{R}_T &= - n_e \underline{\underline{\boldsymbol{\beta}}}\cdot \nabla T, \\
+\textbf{R}_u &= \underline{\underline{\boldsymbol{\alpha}}}\cdot \textbf{j} \frac{1}{e n_e}.
+\end{align}
+The transport coefficients $\underline{\underline{\boldsymbol{\beta}}}$ and $\underline{\underline{\boldsymbol{\alpha}}}$ are the thermoelectric tensor and the resistivity tensor respectively. These coefficients are tensors because transport parallel and perpendicular to a magnetic field is not equal and so the transport becomes anisotropic.
+
+\subsection*{Ohm's Law}
+
+Ohm's law is derived from the momentum equation for the electrons eq. 2.26. Ignoring electron inertia and inputting the form of the collision term $\textbf{R}_e$ above yields the full generalised Ohm's law
+\begin{equation}
+e n_e(\textbf{E}+\textbf{V}\times\textbf{B})= -\nabla p_e+ \textbf{j}\times\textbf{B} +\frac{1}{en_e}\underline{\underline{\boldsymbol{\alpha}}}\cdot\textbf{j}-n_e\underline{\underline{\boldsymbol{\beta}}}\cdot \nabla T_e.
+\end{equation}
+
+\subsection*{The Heat Flow Equation}
+
+The electron heat flux is found from the moment definition eq. 2.9 and considering the difference between intrinsic and extrinsic heat flow, eq. 2.40. Like the collision term $\textbf{R}_e$ it is made up of two parts corresponding to thermal and frictional components 
+\begin{equation}
+    \textbf{q}_e=\textbf{q}_u+\textbf{q}_T,
+\end{equation}
+where
+\begin{align}
+    &\textbf{q}_u= - \underline{\underline{\mathbf{\beta}}}\cdot\textbf{j} \frac{T_e}{e},\\
+    &\textbf{q}_T=-\underline{\underline{\mathbf{\kappa}}}\cdot\nabla T_e.
+\end{align}
+These expressions close the system of equations, however the exact forms of the magnetised transport coefficients $\underline{\underline{\mathbf{\alpha}}},\underline{\underline{\mathbf{\beta}}},\underline{\underline{\mathbf{\kappa}}}$ must now be specified. Alternative descriptions of the derivation of the transport terms can also be found in Helander and Sigmar \cite{Helander2005CollisionalPlasmas} or Boyd and Sanderson \cite{Boyd2003ThePlasmas}. 

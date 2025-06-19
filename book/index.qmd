@@ -1,0 +1,54 @@
+# Introduction to Plasma Physics {.unnumbered}
+This chapter will introduce the important theoretical background and equations lying at the foundation of this thesis. The plasma state is characterised by being a macroscopically quasi-neutral ensemble of charged particles. As such the electromagnetic interactions between the charged particles lead to long-range electromagnetic forces, alongside the short range collisional forces. 
+
+Kinetic theory will be the framework used to describe the dynamics of this state of matter. The starting point of this chapter will be the Vlasov-Fokker-Planck equation and an introduction to the kinetic theory of plasmas, following with the derivation of the single fluid model of Magneto-Hydrodynamics. Alongside the basics of collisions and transport phenomena, this chapter will include an introduction to magnetised and non-local transport, focusing on the processes relevant to results of later chapters. This chapter will end with the closure of the Magneto-Hydrodynamic equation set used in this thesis.
+
+
+\newpage
+\section{The Single-Fluid Model}
+
+Finally, bringing together the results of the previous sections together, the set of equations that describe a single-fluid magnetised plasma, and which will be used as the core set in this thesis is thus:
+\\
+\subsubsection*{The Continuity Equation}
+
+\begin{equation}
+\frac{\partial \rho}{\partial t}+\nabla \cdot (\rho\textbf{V})=0 
+\end{equation}
+
+\subsubsection*{The Momentum Equation}
+
+\begin{equation}
+\rho\frac{\partial \textbf{V}}{\partial t} +\rho\textbf{V}\cdot\nabla\textbf{V} =-\nabla p_e +\textbf{j}\times\textbf{B}
+\end{equation}
+
+\subsubsection*{Ohm's Law}
+
+\begin{equation}
+e n_e(\textbf{E}+\textbf{V}\times\textbf{B})= -\nabla p_e+ \textbf{j}\times\textbf{B} +\frac{1}{en_e}\underline{\underline{\mathbf{\alpha}}}\cdot\textbf{j}-n_e\underline{\underline{\mathbf{\beta}}}\cdot \nabla T_e
+\end{equation}
+
+\subsubsection*{Heat Flow Equation}
+
+\begin{equation}
+\mathbf{q}_e=-\underline{\underline{\mathbf{\kappa}}}\cdot\nabla T_e - \underline{\underline{\mathbf{\beta}}}\cdot\textbf{j} \frac{T_e}{e}
+\end{equation}
+
+\subsubsection*{The Energy Equation}
+
+\begin{equation}
+\frac{3}{2}n_e\left(\frac{\partial T_e}{\partial t}+\textbf{V}\cdot\nabla T_e\right)+p_e\nabla \cdot\textbf{V}+\nabla \cdot \textbf{q}=\textbf{E}\cdot\textbf{j}
+\end{equation}
+
+\subsubsection*{Maxwell's Equations}
+\begin{equation}
+\nabla \times \textbf{E}=-\frac{\partial \textbf{B}}{\partial t}
+\end{equation}
+
+\begin{equation}
+\nabla \times \textbf{B}=\mu_0 \textbf{j}
+\end{equation}
+
+\newpage
+
+
+

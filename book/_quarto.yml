@@ -1,0 +1,34 @@
+project:
+  type: book
+
+book:
+  title: "Plasma Physics: An Outline"
+  author: "Henry Watkins"
+  date: "6/19/2025"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - collisions.qmd
+    - transport.qmd
+    - nonlocal_transport.qmd
+    - lasers.qmd
+    - laserplasma.qmd
+    - applications.qmd
+    - summary.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    toc: true
+    toc-location: left
+  pdf:
+    documentclass: scrreprt
+  epub:
+    cover-image: cover.png
+
+
+
