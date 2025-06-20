@@ -11,8 +11,8 @@ website:
         href: index.qmd   # Links to the homepage
       - text: "Blog"
         href: blog.qmd    # Links to the blog page
-      #- text: "Plasma Book"
-      #  href: ../book/index.html #chapters/index.qmd
+      - text: "Plasma Book"
+        href: ../book/index.html #chapters/index.qmd
 
 #format:
 #  html:
