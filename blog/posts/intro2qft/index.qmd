@@ -5,6 +5,7 @@ author: "Henry Watkins"
 date: "06/15/2025"
 image: paths.jpg
 draft: false
+toc: true
 bibliography: references.bib
 license: "CC BY"
 copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."

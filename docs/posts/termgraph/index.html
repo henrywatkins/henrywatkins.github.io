@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Henry Watkins">
-<meta name="dcterms.date" content="2025-06-15">
-<meta name="description" content="An brief introduction">
+<meta name="dcterms.date" content="2025-06-10">
+<meta name="description" content="Uncovering semantic structures in neurological language using graph-based techniques">
 
-<title>Path Integrals in Quantum Field Theory – Henry Watkins</title>
+<title>Graphs of Neurological Terminology – Henry Watkins</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -100,35 +100,6 @@ gtag('js', new Date());
 gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -172,10 +143,10 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Path Integrals in Quantum Field Theory</h1>
+      <h1 class="title">Graphs of Neurological Terminology</h1>
                   <div>
         <div class="description">
-          An brief introduction
+          Uncovering semantic structures in neurological language using graph-based techniques
         </div>
       </div>
                 </div>
@@ -194,7 +165,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 15, 2025</p>
+        <p class="date">June 10, 2025</p>
       </div>
     </div>
     
@@ -213,171 +184,93 @@ window.Quarto = {
 
 
 
-<p>In this post I am going to give a brief introduction to one of the central ideas in theoretical physics. quantum field theory might seem a daunting subject, but behind the intimidating mathematical formulation lies an approachable interpretation for describing physics processes. Like most physicists, I was first taught field theory in the form of canonical quantization. However, I find the alternative approach of the path integral formalism to much more approachable and intuitive. Path integral formulations also exist for statistical mechanics applications, but here I will describe how it is used in quantum mechanics.</p>
-<p>Initially, quantum field theory grew out of an attempt to reconcile special relativity with Quantum Mechanics. While Quantum Mechanics describes quantum <em>states</em> and their evolution and interaction, central to Quantum Field Theory are the <em>fields</em> whose behavior are described by the Lagrangian and the Euler-Lagrange field equations. These fields then act on states, possibly creating and annihilating quanta (or particles) of the field. Using the path integral of the field it is possible to calculate probabilities for processes that can be observed. Quantum field theories are able to explain particle interaction and the creation and annihilation of particles that does not occur in standard quantum mechanics making such theories much more flexible. The Standard Model is built in terms of quantum field theories, where each fundamental particle is described by a field.</p>
-<p>There are plenty of good resources for learning about quantum field theory and path integrals, but I will rely heavily on the book by <span class="citation" data-cites="zee2010quantum">Zee (<a href="#ref-zee2010quantum" role="doc-biblioref">2010</a>)</span>. It is an excellent introduction to the subject and I highly recommend it.</p>
-<section id="path-integrals-in-quantum-mechanics" class="level2">
-<h2 class="anchored" data-anchor-id="path-integrals-in-quantum-mechanics">Path Integrals in Quantum Mechanics</h2>
-<p>The underlying principle of the path integral approach is that all possible paths of evolution from the initial to final state are considered. When a quantum state evolves from one state to another, we consider and incorporate all contributions from all possible paths into a final amplitude that describes the process. The advantage of the path integral method in quantum mechanical calculations is that it provides a simpler method of calculating certain processes, and in particular it gives a much more elegant way of approaching field theory. I will start by following <span class="citation" data-cites="mackenzie2000path">MacKenzie (<a href="#ref-mackenzie2000path" role="doc-biblioref">2000</a>)</span>. The path integral determines the amplitude of evolving from one state to another. Quantum mechanically, the amplitude for this is</p>
-<p><span class="math display">\[
-M=\bra{q'}e^{-iHT}\ket{q}.
-\]</span></p>
-<p>Where I have used the notation <span class="math inline">\(\bra{q'}\)</span> to signify the state at time <span class="math inline">\(T\)</span> and <span class="math inline">\(\ket{q}\)</span> to signify the state at time <span class="math inline">\(0\)</span>. The Hamiltonian <span class="math inline">\(H\)</span> is the operator that governs the evolution of the system. The amplitude <span class="math inline">\(M\)</span> is a complex number that gives the probability of evolving from state <span class="math inline">\(\ket{q}\)</span> to state <span class="math inline">\(\bra{q'}\)</span> in time <span class="math inline">\(T\)</span>. Now the aim is to derive this amplitude as a sum over histories of all paths between q and q’. This is done by separating the time period into a small <span class="math inline">\(\delta t=T/N\)</span>.</p>
-<p><span class="math display">\[
-M=\bra{q'}e^{-iH\delta t}e^{-iH\delta t}e^{-iH\delta t}...e^{-iH\delta t}\ket{q}
-\]</span></p>
-<p>Then the intervening states are included by using the completeness condition</p>
-<p><span class="math display">\[
-1=\int\ket{q}\bra{q}dq
-\]</span></p>
-<p>so it is possible to write</p>
-<p><span class="math display">\[
-M=\int dq_1dq_2..dq_{N-1} \bra{q'}e^{-iH\delta t}\ket{q_{N-1}}\bra{q_{N-1}}e^{-iH\delta t}\ket{q_{N-2}}\\
-\bra{q_{N-2}}e^{-iH\delta t}\ket{q_{N-3}}...\bra{q_1}e^{-iH\delta t}\ket{q}
-\]</span></p>
-<p>which is just a sum over a product of all possible possibilities. This is reminiscent of the double slit experiment in which light is fed through two slits. If there are two slits (<a href="#fig-doubleslit" class="quarto-xref">Figure&nbsp;1</a>), there are two possible paths, and two corresponding factors, but as extra slits are added the number increases.</p>
-<div id="fig-doubleslit" class="quarto-layout-panel">
+<p>Understanding how neurological conditions are described in medical literature is critical for improving communication, advancing research, and enhancing patient care. Neurological descriptions often involve complex, nuanced language, which can obscure underlying relationships between conditions and treatments. By leveraging computational approaches to analyse these descriptions, we can uncover semantic patterns that enhance our understanding of neurological discourse. In this post I am going to describe some work I completed as part of a fellowship project this year. The aim is to build a network of terms from neurological descriptions using point-wise mutual information (PMI) and applies graphical modelling to identify key semantic structures. I isolate an ontological structure from reporting in an unsupervised manner, find key patterns of presentation, and find the key correlates of disorders with their description.</p>
+<p>Unstructured text in radiological reports poses significant barriers to effective diagnosis and clinical standardisation. Neurological radiological reports, in particular, contain diverse terminology and data linked to complex conditions such as strokes and epilepsy. Despite their richness, these reports lack standardised frameworks for terminology usage, making it difficult to extract actionable insights or ensure consistency across clinical settings. Advances in natural language processing, particularly transformer-based models like BERT have shown promise in analysing medical texts. However while these approaches have been applied to general radiology or specific imaging modalities like chest X-rays, their application to neurological radiological reports remains limited.</p>
+<p>A large part of the Guarantors of Brain project involved building tools for analysing and understanding the language used in neurological reports. A small part of which builds on prior work by integrating language model-derived embeddings with graph-based analytical techniques to uncover latent structures within neurological radiological reports. By identifying clusters of terms and analysing their relationships through co-occurrence graphs, we can reveal diagnostic patterns and terminology usage variations that can inform clinical practice and standardisation efforts. In this project, I find the distinct meta-language of neuroradiology. It aims to uncover diagnostic patterns and terminology usage in neurology by analysing co-occurrence graphs and clustering neurological terms.</p>
+<p>In short, understanding latent structures in radiological reports can:</p>
+<ul>
+<li>Improve diagnostic accuracy by identifying patterns in terminology usage.</li>
+<li>Standardise medical language, reducing inconsistencies across clinical settings.</li>
+<li>Enhance knowledge representation for electronic health records (EHRs), enabling better decision-making tools for clinicians.</li>
+</ul>
+<p>The approach begins with the extraction of terms and phrases from a corpus of neurological texts, followed by the computation of PMI to identify statistically significant co-occurrences of terms. These co-occurrences are represented as a weighted graph, where nodes are terms and weighted edges reflect their mutual information. A graph model is trained on this graph to identify higher-order structures and patterns. Semantic sub-networks can be extracted and analysed, focusing on the relationships between conditions, interventions, and descriptors. We extracted terms and phrases from a large corpus of neurological texts—including over 300,000 MRI head scans collected during 25 years of clinical practice at Queen Square—to capture the diverse language used in radiological reports. High PMI values might indicate meaningful relationships, such as common co-morbidities or symptom-disease relationships.</p>
+<p>With the graph constructed, we can then move onto applying node clustering algorithms. I used soft Louvain clustering to identify communities within the network, allowing for the detection of non-exclusive thematic groups. Unlike traditional Louvain clustering, soft Louvain clustering ascribes a probability of membership to each node in the graph, therefore I can use this parameter to find non-exclusive communities of nodes in the graph. The value of non-exclusive community detection is that it allows each node to belong to more than one community. This is certainly the case for non-specific terminology such as “inflammation” that can co-occur alongside multiple different conditions or diagnoses. These communities might correspond to thematic areas within a corpus, such as specific branches of medicine or research clusters. Investigating these communities can reveal how different topics are interconnected and identify potential interdisciplinary research areas. A threshold was applied to aggregate nodes for clarity, while Eigenvector Centrality was used to pinpoint the most influential terms within each cluster. These high-centrality primary nodes served as the “head” terms in an ontology, with the associated clusters forming templates that describe pathological conditions, imaging presentations, and key anatomical locations.</p>
+<p>In addition to community detection, other graph metrics such as the clustering coefficient can be applied to the terminology graph to uncover structure. High clustering coefficients suggest the presence of specialised subtopics or highly focused areas within the medical texts. These cliques could represent highly interconnected fields, such as specific diseases with multiple associated symptoms or treatments.</p>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>The analysis reveals distinct semantic clusters corresponding to different neurological conditions, such as oncological and degenerative diseases. Sub-networks highlight how oncological conditions are interrelated through shared descriptors, suggesting potential overlaps in diagnostic and therapeutic approaches. Here I show four example sub-graphs extracted from the larger terminology graph.</p>
+<div id="fig-meningioma" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-doubleslit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="doubleslit1.png" class="img-fluid figure-img" style="width:2in"></p>
-<figcaption>one barrier</figcaption>
-</figure>
+<div aria-describedby="fig-meningioma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Meningioma_group.png" class="img-fluid figure-img">
 </div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="doubleslit2.png" class="img-fluid figure-img" style="width:5in"></p>
-<figcaption>two barriers</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="doubleslit3.png" class="img-fluid figure-img" style="width:3in"></p>
-<figcaption>three barriers</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-doubleslit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: The double slit experiment with one, two and three barriers. The number of paths increases with the number of barriers.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-meningioma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Here we take the semantic sub-graph identified with the Meningioma term. This sub-graph represents the semantic network of terminology co-occurrent with meningiomas and their associated description and locations.
 </figcaption>
 </figure>
 </div>
-<p>We can extend the analogy of barriers in a double slit experiment to time steps in an evolution from one state to another. Now that the time steps are small, the exponents in the individual factors can be expanded using a Taylor series and taken to first order. Taking one of the factors</p>
-<p><span class="math display">\[
-M_{j,j+1}=\braket{q_{j+1} | q_j}-i\delta t\bra{q_{j+1}}H\ket{q_j}+O(\delta t^2).
-\]</span></p>
-<p>And using the completeness relation in momentum space <span class="math inline">\(\int\dfrac{dp}{2\pi}\ket{p}\bra{p}=1\)</span> we can retrieve</p>
-<p><span class="math display">\[
-\begin{aligned}
-M_{j,j+1}&amp;=\braket{q_{j+1} | q_j}-i\delta t\bra{q_{j+1}}H\int\dfrac{dp_j}{2\pi}\ket{p_j}\braket{p_j |q_j}\\
-&amp;=\int\dfrac{dp_j}{2\pi} e^{ip_j (q_{j+1}-q_j)}e^{-i\delta t H}\\
-&amp;=\int\dfrac{dp_j}{2\pi} e^{i\delta t( p_j \dot{q_j}- H)}
-\end{aligned}
-\]</span></p>
-<p>When this is taken over all the factors j up to N then the total propagator is</p>
-<p><span class="math display">\[
-M=\int \prod_{j=1}^{N-1}dq_j \int\prod_{j=0}^{N-1}\dfrac{dp_j}{2\pi} \exp{ i\delta t\sum_{j=0}^{N-1}.
-( p_j \dot{q_j}- H)}
-\]</span></p>
-<p>Now let N tend to infinity so there are an infinite number of paths. This gives the phase-space integral</p>
-<p><span class="math display">\[
-M=\int Dp Dq \exp{(iS)}.
-\]</span></p>
-<p>Which can be transformed into the configuration space path integral by performing the integral over the momenta</p>
-<p><span class="math display">\[
-\begin{aligned}
-M &amp;=\lim_{N\rightarrow\infty} \left(\frac{-im}{2\pi \delta t}  \right)^{N/2} \left( \prod_{j=1}^{N-1}\int dq_j\right) e^{iS}\\
-M &amp;=\int Dq e^{iS}
-\end{aligned}
-\]</span></p>
-<p>Where the definition of the Hamiltonian has been used to replace the factor in the exponent with the Lagrangian and then the action.</p>
-</section>
-<section id="path-integrals-in-quantum-field-theory" class="level2">
-<h2 class="anchored" data-anchor-id="path-integrals-in-quantum-field-theory">Path Integrals in Quantum Field Theory</h2>
-<p>To move from quantum mechanics the quantum field theory, only a small change is needed to the path integral. In quantum field theory the states are no longer the basic objects; they are replaced by fields that act on vacuum states to create particles.</p>
-<p>It is now the Lagrangian density that appears in the action. The Lagrangian density is a function of the field and its derivatives rather than the position and momentum of a particle as in the quantum mechanical case. The variable q in the path integral is replaced by the field <span class="math inline">\(\phi\)</span>, the index j becomes a continuum and the path integral is no longer taken as the evolution between two states <span class="math inline">\(\ket{q},\ket{q'}\)</span> but between two vacuum states, <span class="math inline">\(\ket{0}\)</span>. This is only convention and represents the fact it is possible to create any state by acting the field operator on the vacuum. So the path integral becomes</p>
-<p><span class="math display">\[
-Z=\int D\phi e^{i\int \mathcal{L}d^4 x}
-\]</span></p>
-<p>The question now with the path integral in quantum field theory is how to use it to find observables. The key component one can find from the path integral is the propagator, which gives the probability of a particle moving from one point to another. The propagator is derived from the action and is a central object in quantum field theory.</p>
-</section>
-<section id="the-propagator" class="level2">
-<h2 class="anchored" data-anchor-id="the-propagator">The Propagator</h2>
-<p>The square of the absolute value of the propagator gives us the probability of a particle moving from one place to another (hence <em>propagation</em>) and is derived from the governing equation of the field. The path integral for a scalar field theory is (lower case letters like x, y signify 4-vectors)</p>
-<p><span class="math display">\[
-Z=\int D\phi e^{iS}
-\]</span></p>
-<p>where D signifies the integration measure that includes the product, limit etc. S is the action given by</p>
-<p><span class="math display">\[
-S=\int d^4 x \dfrac{1}{2} (\partial_\mu \phi \partial^\mu \phi -m^2\phi^2)+J\phi.
-\]</span></p>
-<p>Where J is some source function and <span class="math inline">\(\mu \in(0,1,2,3,4)\)</span>. To calculate the propagator first one must focus on the action and integrate by parts to get</p>
-<p><span class="math display">\[
-\int d^4 x \left[ -\phi\frac{1}{2}(\partial_\mu \partial^\mu +m^2)\phi +J\phi\right].
-\]</span></p>
-<p>Then use the Green’s function form</p>
-<p><span class="math display">\[
-(\partial_\mu \partial^\mu +m^2)D(x-y)=-\delta^{(4)}(x-y)
-\]</span></p>
-<p>such that the field satisfies</p>
-<p><span class="math display">\[
-\phi(x)=\int d^4 y D(x-y)J(y)
-\]</span></p>
-<p>and putting this form into the action above, the result is</p>
-<p><span class="math display">\[
-\frac{1}{2}\int d^4 x \int d^4 y J(x) D(x-y) J(y)
-\]</span></p>
-<p>and using Fourier transforms shows the explicit appearance of the propagator</p>
-<p><span class="math display">\[
-\tilde{D}(k)=\dfrac{1}{k^2-m^2}
-\]</span></p>
-<p>where the denominator can be replaced by whatever dispersion relation that follows the simple scalar field in Minkowski space form i.e just add extra positive terms for time-like dimensions and negative ones for space-like dimensions.</p>
-</section>
-<section id="the-potential" class="level2">
-<h2 class="anchored" data-anchor-id="the-potential">The Potential</h2>
-<p>A simple application of the propagator is to calculate the potential between two particles. The potential is a measure of the interaction between particles and can be derived from the propagator. In quantum field theory, the potential is not a fundamental quantity but rather an emergent one that arises from the interactions of particles. The potential can be found by taking the spatial Fourier transform of the propagator. The hardest and perhaps most important part is how the sources and sinks are set up in the calculation of a potential. In the path integral formulation this must be done to allow a potential to appear, after all there can be no propagator and hence no potential without anything to propagate between.</p>
-<p>As a first example the potential will derived in 3+1 dimensions using a source function that consists of two Dirac delta sources <span class="math inline">\(J(x)=\delta^{(3)}(\vec{x}-\vec{x_1})+ \delta^{(3)}(\vec{x}-\vec{x_2})\)</span>. These are fixed at the spatial positions <span class="math inline">\(\vec{x_1}\)</span> and <span class="math inline">\(\vec{x_2}\)</span>. There will be a number of terms in the action arising from the product of the two source functions but since the only interesting one is where a particle is created at 1 and annihilated at 2 the only one that is considered is</p>
-<p><span class="math display">\[
-S=-\dfrac{1}{(2\pi)^4} \int d^4 x' \int d^4 x \int d^4 k \dfrac{\delta(\vec{x}-\vec{x_1}) e^{ik\cdot(x-x')} \delta(\vec{x'}-\vec{x'_2})}{\omega^2-k^2-m^2}
-\]</span></p>
-<p>Where the sources are placed at a particular position in space but have no fixed time coordinate. This leads to</p>
-<p><span class="math display">\[
-\begin{aligned}
-S&amp;=-\dfrac{1}{(2\pi)^4} \int dt' \int dt \int d\omega e^{i\omega(t-t')} \int d^3 k \dfrac{e^{-i\vec{k}(\vec{x_1}-\vec{x'_2})}}{\omega^2-k^2-m^2}\\
-&amp;=-\dfrac{1}{(2\pi)^3}\int dt \int d\omega \delta(\omega) \int d^3 k \dfrac{e^{-i\vec{k}(\vec{x_1}-\vec{x'_2})}}{\omega^2-k^2-m^2}\\
-&amp;=\dfrac{1}{(2\pi)^3}\int dt \int d^3 k \dfrac{e^{i\vec{k}(\vec{x_1}-\vec{x'_2})}}{k^2+m^2}
-\end{aligned}
-\]</span></p>
-<p>Letting the time integral be <span class="math inline">\(\int dt=T\)</span> to make the association with the T in <span class="math inline">\(\bra{0} e^{-iHT}\ket{0}=e^{-iET}\)</span> so the potential is (and writing <span class="math inline">\(\vec{x}=\vec{x_1}-\vec{x'_2}\)</span>)</p>
-<p><span class="math display">\[
-\int \dfrac{d^3 k}{(2\pi)^3}\dfrac{e^{i\vec{k}.\vec{x}}}{k^2+m^2}=\frac{1}{4 \pi r}e^{-mr}
-\]</span></p>
-<p>Another important point is the validity of fixing the source and sink in space but not in time. When this was done is was clear that a Dirac delta function appeared in <span class="math inline">\(\omega\)</span> that cut out the time-term from the propagator. From the path integral approach as described in <span class="citation" data-cites="zee2010quantum">Zee (<a href="#ref-zee2010quantum" role="doc-biblioref">2010</a>)</span> the specification of the sources and sinks is essential to correctly calculate the potential arising from particle propagation from source to sink.</p>
-<p>This form of potential between two particles is called the Yukawa potential. It acts as the familiar Coulomb potential for massless particles, but for massive particles the potential is exponentially suppressed at large distances.</p>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>In this brief intro I have mentioned some high-level concepts such as Green’s functions, four-vectors and the Lagrangian density. These are all important concepts in quantum field theory and this post shouldn’t be seen as a comprehensive guide, but rather a jumping off point to explore these ideas further. The path integral approach to quantum field theory is a powerful tool that allows for the calculation of probabilities and potentials in a way that is I think is more intuitive than the canonical quantization approach. It is a central part of the modern understanding of particle physics and is essential for understanding the Standard Model.</p>
+<p><a href="#fig-meningioma" class="quarto-xref">Figure&nbsp;1</a> shows a large semantic sub-graph identified with the Meningioma term. The blue, red and pink nodes represent pathological, descriptive and location terms respectively. With this layout, we can identify the primary terminology concurrent with meningiomas (the direct connections to meningioma terms) and also the second-order terminology. <a href="#fig-encephalitis" class="quarto-xref">Figure&nbsp;2</a> shows the encephalitis group, which is a cluster of terms related to encephalitis, a condition characterised by inflammation of the brain.</p>
+<div id="fig-encephalitis" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-encephalitis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Encephalitis_group.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-encephalitis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: This encephalitis group shows the key terminology that co-occurs alongside encephalitis. Note the key locations of the limbic system and cingulate gyri, both anatomical locations consistent with common presentations of this pathology.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-aneurysm" class="quarto-xref">Figure&nbsp;3</a> shows the aneurysm sub-graph. This sub-graph is smaller and was extracted using a higher probability threshold in the Louvain community detection routine. As such, this group represents a much tighter terminology set associated with aneurysms. <a href="#fig-taxonomy" class="quarto-xref">Figure&nbsp;4</a> shows a small subset of the whole ontology created by identifying the high-centrality terms (which define sub-specialities) and their constituent terminology that defines their wider presentation. This method provides an entirely data-driven approach to creating ontologies directly from medical text, without the need for manual curation or a-priori input.</p>
+<div id="fig-aneurysm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-aneurysm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Aneurysm_group.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-aneurysm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: This aneurysm sub-graph shows the key terminology associated with the presentation of aneurysms in practice. One can see that coiling, a primary intervention used in the treatment of aneurysms, features prominently in the network.
+</figcaption>
+</figure>
+</div>
+<div id="fig-taxonomy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-taxonomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="taxonomy_tree.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-taxonomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: The clustering and graphical structure allow us to create an automated ontology based on the structure and centrality terms. Here a subset of the clusters, identified by their most important term, shows the sub-nodes that exemplify their presentation.
+</figcaption>
+</figure>
+</div>
+<div id="fig-demyelination" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-demyelination-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Demyelination_group.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demyelination-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: The demyelination group shows a short graph distance to terms involved in small vessel disease and ischaemia, this is not unsuprising given their similar appearances on imaging.
+</figcaption>
+</figure>
+</div>
+<div id="fig-stroke" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stroke-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Stroke_group.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stroke-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: The stroke group shows the key terminology in the centre, in this case ‘infarction’ and ‘haemorrhage’, with the associated descriptive and anatomical terms.
+</figcaption>
+</figure>
+</div>
+<p>By identifying key semantic structures in neurological descriptions, this approach provides insights into medical language that can improve patient care and support research. This method is also flexible enough to be applied to other domains of medical and scientific text, bridging the gap between unstructured data and actionable knowledge. With this approach, I can (1) identify clusters of related terms and provide insights into diagnostic patterns that can aid clinicians in recognising complex conditions more effectively. (2) The observed inconsistencies underscore the need for standardised medical language across clinical settings. Standardization could improve communication among healthcare professionals and reduce diagnostic variability. (3) Insights from co-occurrence graphs can inform better knowledge representation within EHR systems by highlighting key terms and their relationships. (4) Variations in terminology usage across demographics suggest potential biases that should be addressed to ensure equitable care. (5) Expanding this approach to other medical domains or integrating multimodal data (e.g., imaging features) could further enhance its applicability. Additionally, exploring advanced graph neural networks could provide deeper insights into term interconnections.</p>
+<p>The full report and further details can be found in our <a href="https://arxiv.org/abs/2506.06208">preprint</a>, <span class="citation" data-cites="watkins2025buildingmodelsneurologicallanguage">(<a href="#ref-watkins2025buildingmodelsneurologicallanguage" role="doc-biblioref">Watkins 2025</a>)</span>.</p>
 
 
 
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-mackenzie2000path" class="csl-entry" role="listitem">
-MacKenzie, Richard. 2000. <span>“Path Integral Methods and Applications.”</span> <em>arXiv Preprint Quant-Ph/0004090</em>.
-</div>
-<div id="ref-zee2010quantum" class="csl-entry" role="listitem">
-Zee, Anthony. 2010. <em>Quantum Field Theory in a Nutshell</em>. Princeton university press.
+<div id="ref-watkins2025buildingmodelsneurologicallanguage" class="csl-entry" role="listitem">
+Watkins, Henry. 2025. <span>“Building Models of Neurological Language.”</span> <a href="https://arxiv.org/abs/2506.06208">https://arxiv.org/abs/2506.06208</a>.
 </div>
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

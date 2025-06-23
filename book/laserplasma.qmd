@@ -1,5 +1,5 @@
 
-\section{Plasma-Laser Coupling}
+# Plasma-Laser Coupling
 
 As the core of this thesis is an investigation of laser-plasma interactions, it is necessary to introduce the interaction processes. The plasmas of interest here are all produced by long pulse lasers with a laser wavelength of $\lambda_l= 1 \mu m$. As such the laser intensity is moderate, with a peak intensity around $10^{15} W cm^{-2}$ and a laser-plasma coupling parameter $I\lambda_l^2$ in the region of $10^7 W$. To get a measure for the importance of special relativistic effects in laser-plasma coupling, one can consider the magnitude of the electron quiver speed $v_{osc}$, this is the speed of oscillation of an electron in the electric field of the laser. With intensities this low, relativistic effects can be ignored since the electron quiver speed relative to the speed of light
 \begin{equation}
@@ -102,3 +102,21 @@ where the ion-acoustic frequency $\omega_{ia}=v_s k_{ia}$ is defined via the ion
     \gamma_{max}=\frac{1}{2\sqrt{2}}\frac{k_0 v_{osc}\omega_{ia}}{\sqrt{\omega_0 k_0 v_s}}.
 \end{equation}
 For plasma conditions expected to be produced by high-power laser implosions at the National Ignition Facility, the backscatter from both SBS and SRS is large enough to reflect a significant portion of the laser light \cite{Lindl2004TheFacility}. In both indirect and direct-drive ICF the coupling of energy into the target is significantly decreased, as such these LPIs must be avoided for good implosion performance. 
+
+\subsection*{Non-Locality and Laser Propagation}
+
+In laser propagation, the thermal mechanisms of self-focusing and filamentation of a laser are mediated by the thermal conductivity; as such we expect these processes to be modified by a mixture of non-locality and magnetisation. 
+Kinetic theory applied to linearised filamentation models by Epperlein \cite{Epperlein1992NonlocalPlasmas, Epperlein1990a} and corresponding simulations \cite{Epperlein1991KineticPlasmas} show the thermal mechanism becoming dominant because of a non-local reduction in thermal conductivity. This can increase the growth rate of filamentation far above the local model, which is illustrated in figure \ref{fig:eppgrow}. This figure compares the growth rates of filamentation against wavenumber of three mechanisms, the first is for the thermal mechanism derived from kinetic theory, the second is for the classical thermal mechanism derived from a fluid model, and the third is the growth rate for filamentation resulting from the ponderomotive force of the laser. Functional forms for these growth rates are discussed in greater detail in sections 5.4 and 6.2. Methods have been derived to go beyond the diffusive approximation; for linear waves in a plasma Epperlein defined a correction to the collision frequency that could go beyond the diffusion approximation and account for the the whole electron distribution expansion  \cite{Epperlein1992DampingCollisions}. Bychenkov $\textit{et al.}$ then applied this method to the decay of waves, and derived transport coefficients that were exact in the regime of linear perturbations \cite{Bychenkov1995NonlocalPlasma}. While useful for unmagnetised plasmas, this result has not been applied to magnetised focusing, or to the explanation of the interplay between magnetisation and non-locality.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\textwidth]{Figures/Introduction/eppgrowth.png}
+    \caption[Non-local filamentation growth rates calculated by Epperlein]{Non-local filamentation growth rates calculated by Epperlein \cite{Epperlein1990a} show the kinetic thermal mechanism growth rate (a) is much higher than the classical thermal mechanism rate (b) and ponderomotive mechanism (c) rates. Reproduced from Epperlein \cite{Epperlein1990a}, with permission of AIP Publishing.}
+    \label{fig:eppgrow}
+\end{figure}
+
+Furthermore, energy deposition by a laser into a plasma is dominated by inverse bremsstrahlung, which has also been shown to skew the electron distribution away from a Maxwellian towards a flat-topped `super-Gaussian' distribution \cite{Langdon1980NonlinearDistributions,Ridgers2008MagneticPlasmas}. This is a Gaussian distribution
+\begin{equation}
+    f(v)\propto \exp(-c v^m),
+\end{equation}
+but with $m>2$. This is caused by inverse bremmsstrahlung preferentially heating electrons close to the quiver speed of the laser field. This will also change the transport away from the classical calculation, adding yet another source of non-Maxwellian behaviour in laser-plasma experiments. 

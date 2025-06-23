@@ -1,3 +1,5 @@
+# Applications
+
 
 \section{Inertial Confinement Fusion}
 

@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Henry Watkins">
-<meta name="dcterms.date" content="2025-06-10">
-<meta name="description" content="Uncovering semantic structures in neurological language using graph-based techniques">
+<meta name="dcterms.date" content="2025-01-13">
+<meta name="description" content="Approaches to research">
 
-<title>Graphs of Neurological Terminology – Henry Watkins</title>
+<title>The two scientists: hammers and nails – Henry Watkins</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,27 +23,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -143,10 +123,10 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Graphs of Neurological Terminology</h1>
+      <h1 class="title">The two scientists: hammers and nails</h1>
                   <div>
         <div class="description">
-          Uncovering semantic structures in neurological language using graph-based techniques
+          Approaches to research
         </div>
       </div>
                 </div>
@@ -165,7 +145,7 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 10, 2025</p>
+        <p class="date">January 13, 2025</p>
       </div>
     </div>
     
@@ -184,95 +164,15 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 
 
 
-<p>Understanding how neurological conditions are described in medical literature is critical for improving communication, advancing research, and enhancing patient care. Neurological descriptions often involve complex, nuanced language, which can obscure underlying relationships between conditions and treatments. By leveraging computational approaches to analyse these descriptions, we can uncover semantic patterns that enhance our understanding of neurological discourse. In this post I am going to describe some work I completed as part of a fellowship project this year. The aim is to build a network of terms from neurological descriptions using point-wise mutual information (PMI) and applies graphical modelling to identify key semantic structures. I isolate an ontological structure from reporting in an unsupervised manner, find key patterns of presentation, and find the key correlates of disorders with their description.</p>
-<p>Unstructured text in radiological reports poses significant barriers to effective diagnosis and clinical standardisation. Neurological radiological reports, in particular, contain diverse terminology and data linked to complex conditions such as strokes and epilepsy. Despite their richness, these reports lack standardised frameworks for terminology usage, making it difficult to extract actionable insights or ensure consistency across clinical settings. Advances in natural language processing, particularly transformer-based models like BERT have shown promise in analysing medical texts. However while these approaches have been applied to general radiology or specific imaging modalities like chest X-rays, their application to neurological radiological reports remains limited.</p>
-<p>A large part of the Guarantors of Brain project involved building tools for analysing and understanding the language used in neurological reports. A small part of which builds on prior work by integrating language model-derived embeddings with graph-based analytical techniques to uncover latent structures within neurological radiological reports. By identifying clusters of terms and analysing their relationships through co-occurrence graphs, we can reveal diagnostic patterns and terminology usage variations that can inform clinical practice and standardisation efforts. In this project, I find the distinct meta-language of neuroradiology. It aims to uncover diagnostic patterns and terminology usage in neurology by analysing co-occurrence graphs and clustering neurological terms.</p>
-<p>In short, understanding latent structures in radiological reports can:</p>
-<ul>
-<li>Improve diagnostic accuracy by identifying patterns in terminology usage.</li>
-<li>Standardise medical language, reducing inconsistencies across clinical settings.</li>
-<li>Enhance knowledge representation for electronic health records (EHRs), enabling better decision-making tools for clinicians.</li>
-</ul>
-<p>The approach begins with the extraction of terms and phrases from a corpus of neurological texts, followed by the computation of PMI to identify statistically significant co-occurrences of terms. These co-occurrences are represented as a weighted graph, where nodes are terms and weighted edges reflect their mutual information. A graph model is trained on this graph to identify higher-order structures and patterns. Semantic sub-networks can be extracted and analysed, focusing on the relationships between conditions, interventions, and descriptors. We extracted terms and phrases from a large corpus of neurological texts—including over 300,000 MRI head scans collected during 25 years of clinical practice at Queen Square—to capture the diverse language used in radiological reports. High PMI values might indicate meaningful relationships, such as common co-morbidities or symptom-disease relationships.</p>
-<p>With the graph constructed, we can then move onto applying node clustering algorithms. I used soft Louvain clustering to identify communities within the network, allowing for the detection of non-exclusive thematic groups. Unlike traditional Louvain clustering, soft Louvain clustering ascribes a probability of membership to each node in the graph, therefore I can use this parameter to find non-exclusive communities of nodes in the graph. The value of non-exclusive community detection is that it allows each node to belong to more than one community. This is certainly the case for non-specific terminology such as “inflammation” that can co-occur alongside multiple different conditions or diagnoses. These communities might correspond to thematic areas within a corpus, such as specific branches of medicine or research clusters. Investigating these communities can reveal how different topics are interconnected and identify potential interdisciplinary research areas. A threshold was applied to aggregate nodes for clarity, while Eigenvector Centrality was used to pinpoint the most influential terms within each cluster. These high-centrality primary nodes served as the “head” terms in an ontology, with the associated clusters forming templates that describe pathological conditions, imaging presentations, and key anatomical locations.</p>
-<p>In addition to community detection, other graph metrics such as the clustering coefficient can be applied to the terminology graph to uncover structure. High clustering coefficients suggest the presence of specialised subtopics or highly focused areas within the medical texts. These cliques could represent highly interconnected fields, such as specific diseases with multiple associated symptoms or treatments.</p>
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>The analysis reveals distinct semantic clusters corresponding to different neurological conditions, such as oncological and degenerative diseases. Sub-networks highlight how oncological conditions are interrelated through shared descriptors, suggesting potential overlaps in diagnostic and therapeutic approaches. Here I show four example sub-graphs extracted from the larger terminology graph.</p>
-<div id="fig-meningioma" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-meningioma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Meningioma_group.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-meningioma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Here we take the semantic sub-graph identified with the Meningioma term. This sub-graph represents the semantic network of terminology co-occurrent with meningiomas and their associated description and locations.
-</figcaption>
-</figure>
-</div>
-<p><a href="#fig-meningioma" class="quarto-xref">Figure&nbsp;1</a> shows a large semantic sub-graph identified with the Meningioma term. The blue, red and pink nodes represent pathological, descriptive and location terms respectively. With this layout, we can identify the primary terminology concurrent with meningiomas (the direct connections to meningioma terms) and also the second-order terminology. <a href="#fig-encephalitis" class="quarto-xref">Figure&nbsp;2</a> shows the encephalitis group, which is a cluster of terms related to encephalitis, a condition characterised by inflammation of the brain.</p>
-<div id="fig-encephalitis" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-encephalitis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Encephalitis_group.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-encephalitis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: This encephalitis group shows the key terminology that co-occurs alongside encephalitis. Note the key locations of the limbic system and cingulate gyri, both anatomical locations consistent with common presentations of this pathology.
-</figcaption>
-</figure>
-</div>
-<p><a href="#fig-aneurysm" class="quarto-xref">Figure&nbsp;3</a> shows the aneurysm sub-graph. This sub-graph is smaller and was extracted using a higher probability threshold in the Louvain community detection routine. As such, this group represents a much tighter terminology set associated with aneurysms. <a href="#fig-taxonomy" class="quarto-xref">Figure&nbsp;4</a> shows a small subset of the whole ontology created by identifying the high-centrality terms (which define sub-specialities) and their constituent terminology that defines their wider presentation. This method provides an entirely data-driven approach to creating ontologies directly from medical text, without the need for manual curation or a-priori input.</p>
-<div id="fig-aneurysm" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-aneurysm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Aneurysm_group.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-aneurysm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: This aneurysm sub-graph shows the key terminology associated with the presentation of aneurysms in practice. One can see that coiling, a primary intervention used in the treatment of aneurysms, features prominently in the network.
-</figcaption>
-</figure>
-</div>
-<div id="fig-taxonomy" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-taxonomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="taxonomy_tree.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-taxonomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: The clustering and graphical structure allow us to create an automated ontology based on the structure and centrality terms. Here a subset of the clusters, identified by their most important term, shows the sub-nodes that exemplify their presentation.
-</figcaption>
-</figure>
-</div>
-<div id="fig-demyelination" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-demyelination-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Demyelination_group.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demyelination-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: The demyelination group shows a short graph distance to terms involved in small vessel disease and ischaemia, this is not unsuprising given their similar appearances on imaging.
-</figcaption>
-</figure>
-</div>
-<div id="fig-stroke" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-stroke-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Stroke_group.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stroke-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: The stroke group shows the key terminology in the centre, in this case ‘infarction’ and ‘haemorrhage’, with the associated descriptive and anatomical terms.
-</figcaption>
-</figure>
-</div>
-<p>By identifying key semantic structures in neurological descriptions, this approach provides insights into medical language that can improve patient care and support research. This method is also flexible enough to be applied to other domains of medical and scientific text, bridging the gap between unstructured data and actionable knowledge. With this approach, I can (1) identify clusters of related terms and provide insights into diagnostic patterns that can aid clinicians in recognising complex conditions more effectively. (2) The observed inconsistencies underscore the need for standardised medical language across clinical settings. Standardization could improve communication among healthcare professionals and reduce diagnostic variability. (3) Insights from co-occurrence graphs can inform better knowledge representation within EHR systems by highlighting key terms and their relationships. (4) Variations in terminology usage across demographics suggest potential biases that should be addressed to ensure equitable care. (5) Expanding this approach to other medical domains or integrating multimodal data (e.g., imaging features) could further enhance its applicability. Additionally, exploring advanced graph neural networks could provide deeper insights into term interconnections.</p>
-<p>The full report and further details can be found in our <a href="https://arxiv.org/abs/2506.06208">preprint</a>, <span class="citation" data-cites="watkins2025buildingmodelsneurologicallanguage">(<a href="#ref-watkins2025buildingmodelsneurologicallanguage" role="doc-biblioref">Watkins 2025</a>)</span>.</p>
+<p>I’ve recently come across an interesting proposition: scientists can be broadly classed hammers or nails. What I mean by this is that hammers are defined primarily by their tools, or the approaches they use to tackle a problem or question. The nails have a very specific problem (or set of problems) and try to bring a broad range approaches to solve them. A good example of someone who optimized the hammer approach is John Von Neumann, the mathematician who played a role in many of the most influential scientific projects of mid-century physics. He was a mathematician and brought is unique talent to bear in a range of problems, from the Manhattan project to the foundations of computer science. The prototypical nail is perhaps Charles Darwin, who spent much of his life investigating the diversity of life, developing the theory of evolution through decades spent breeding and cataloguing the plethora of life he encountered.</p>
+<p>Of course this is not so clear cut and one can be a mixture of the two, rather this is a way of thinking about the way you approach scientific problems (or indeed any research project). Consider how you yourself start new projects. It is a valuable exercise to see how your own habits shape your research, because there are pitfalls to be aware of in both paradigms. The concern primarily is about not being bogged down; one can spend too long learning new things for the sake of it, thinking one is making progress because learning a new tool. Concurrently, one could also flit from one problem to another frequently, never settling on one long enough to actually make a dent in it. This is the value of thinking about research in this way, to be cognizant of the errors in process that just lead to a waste of time. There is a comparison we can make with Aristotle’s law of the golden mean - excess in either direction can be detrimental. Too much hammer and one is holding a solution and constantly looking for a problem. Too much nail and one never solves anything, because one is so wedded to a particular problem you can’t move on, even if it is the right thing to do. Just leave aside and move on to greener pastures.</p>
+<p>A question might be when to apply each paradigm? Is it reasonable to to stick to one throughout your career? I would hazard to say that early in your career it might be worth learning a range of different methods, and this would imply the ‘nail’ approach, particularly as you are finding your niche, the subfield in which you build your reputation and scientific ‘portfolio’. Most researchers begin their career in a PhD program where we are provided with a problem, or at least sat within a larger group in which we have limited freedom to choose our problems. In this sense it is advantageous to begin in the ‘nail’ paradigm at the start. Once we leave our PhD and start as a post-doc we are generally then expected to be capable at certain key skills within a larger scientific program, but now we are experts in a particular technique. Often this is why we were hired to that new group as a post-doc in the first place. This is where the hammer-style of research comes in. Later on, when one has obtained a grant or more independence the freedom that comes from this enables you to pursue your own approach.</p>
+<p>The question now however is the relative merits of both approaches. The severe expectations of a modern scientific career require a considerable output of grants, papers and talks to build a reputation and find a permanent position. There is a very real emphasis on quantity in modern science. Being a hammer or nail is thus refracted through the need for productivity to the detriment of originality or creativity. Perhaps I am pessimistic; experiences vary considerably across fields and countries. In this position the ‘hammer’ paradigm might be advantageous. You can apply yourself to many different projects, potentially building a large and impressive portfolio of results. On the other hand, the complexity of modern science and the interdiciplinary nature of advanced research projects favours those that can build a novel approach to hard problems. Here the ‘nail’ approach is at an advantage, because one can pull several techniques towards a well defined goal. A underemphasised virtue of a well defined problem is how it plays in grant writing. If you can clearly define your project goals then funders may be more ameanable to opening the purse strings.</p>
+<p>A final question then. What do you think you are? Is your current approach to research questions suited to your skills and experience? Would aligning youself to one or other of these paradigms help you?</p>
 
 
 
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-watkins2025buildingmodelsneurologicallanguage" class="csl-entry" role="listitem">
-Watkins, Henry. 2025. <span>“Building Models of Neurological Language.”</span> <a href="https://arxiv.org/abs/2506.06208">https://arxiv.org/abs/2506.06208</a>.
-</div>
-</div></section></div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

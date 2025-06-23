@@ -1,3 +1,5 @@
+# Laser Theory
+
 The results of successive chapters rely heavily on the theory of long-pulse laser propagation and coupling to the plasma. This chapter will introduce the primary assumptions that allows the analysis of laser propagation, before deriving the unidirectional - or paraxial - laser model. The plasma coupling mechanisms of inverse bremmsstrahlung and the ponderomotive force will then be introduced before concluding with a brief description of some of the important laser-plasma interactions that occur in the regimes of interest to this thesis.  
 
 \section{The Helmholtz Equation}

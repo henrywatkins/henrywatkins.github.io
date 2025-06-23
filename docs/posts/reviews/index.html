@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Henry Watkins">
-<meta name="dcterms.date" content="2025-01-18">
-<meta name="description" content="Keeping your scientific projects organized">
+<meta name="dcterms.date" content="2024-12-04">
+<meta name="description" content="Crafting a literature review for your research project">
 
-<title>A Scientific Project Template – Henry Watkins</title>
+<title>What is a literature review for? – Henry Watkins</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,41 +22,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -158,10 +123,10 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">A Scientific Project Template</h1>
+      <h1 class="title">What is a literature review for?</h1>
                   <div>
         <div class="description">
-          Keeping your scientific projects organized
+          Crafting a literature review for your research project
         </div>
       </div>
                 </div>
@@ -180,7 +145,7 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 18, 2025</p>
+        <p class="date">December 4, 2024</p>
       </div>
     </div>
     
@@ -199,93 +164,59 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 
 
 
-<section id="a-scientific-project-template" class="level1">
-<h1>A Scientific Project Template</h1>
-<p>I have found it helpful to have a standard template with which to start my projects; knowing where to start is the hardest part of any research project. I have created a simple science project template that I hope others might find useful. The <a href="https://github.com/henrywatkins/scientific_project_template">scientific project template</a> provides a structured starting point for organizing your project. It emphasizes keeping all files in one place and using version control with Git and GitHub for backup management. Embarking on a programming-based science project, or indeed any modern research project, requires good management of sources. The key to success lies in proper organization. Feel free to fork or clone the repository, changing it for your own needs. This template is for a python project, but the structure can be easily adapted to other popular scientific programming languages like MATLAB. Below I will go through the structure and workflow, including how I use git and Github to backup my work.</p>
-<p>I have worked on different kinds of programming and research projects in the past; I have found the conventional project structure used in programming projects is ill-suited to scientific projects. Even if the project is heavily programming-based, science projects still need a way of tracking data, literature, plots, a labbook, and the eventual writeup.</p>
-<section id="organization" class="level2">
-<h2 class="anchored" data-anchor-id="organization">Organization</h2>
-<p>Let’s start with a look at the folder organization. The key is to keep everything you need in one repository, with all code, plots, lab-books, notes and Jupyter notebooks together for easy reference. Keep all related files—data, scripts, documentation, and results—in a single folder or repository. This ensures everything is easily accessible and reduces the risk of losing important components.</p>
-<ul>
-<li>Use clear naming conventions for files and folders to make navigation intuitive.</li>
-<li>Maintain a clear directory structure that separates raw data, processed data, scripts, and outputs.</li>
-</ul>
-<p>The template had the structure listed below. I will go through each part and explain the workflow, but feel free to delete or add whatever you need.</p>
-<pre><code>.
-├── README.md
-├── env.yaml
-├── labbook_template.md
-├── lit_rev.md
-├── paper_skeleton.md
-├── plots
-├── run_project.sh
-└── src
-    ├── __init__.py
-    ├── lib.py
-    ├── notebook.py
-    └── script.py</code></pre>
-<p>Firstly, all code projects should have a basic README file. This is a simple file describing the repository - what it’s for, who wrote it and the most important information for starting to use the repository. This is the information you see when looking at repositories on GitHub, and are standard practice for all programming projects.</p>
-<p>The <code>env.yml</code> file is an anaconda environment file which describes the dependences and anaconda environment setup for the project. Programming-based science projects often involve numerous dependencies. Using environments can help you manage these effectively. For Python projects, Anaconda environments are highly recommended as they allow you to isolate dependencies for each project. While Python is the standard in scientific programming, tools like MATLAB or Julia may also be used depending on your field. Anaconda environments are the standard in scientific fields, particularly for those working in python. Python has certainly become the standard for all scientific programming and analysis tasks in recent years. Although MATLAB is still very popular and Julia has a lot of fans. Environments are your friend, and although one does not expect most scientist to be experienced software engineers, they can be a lifesaver when dealing with a plethora of competing dependencies.</p>
-<p>The <code>labbook_template.md</code> is a simple markdown - formatted labbook to record your research as you go. There are a range of electronic labbooks available that you can use instead, but I still prefer a simple text-based file. The key is as always to keep a record of your work for yourself more than anything. The <code>lit-rev.md</code> is a template I use for reviewing preliminary literature. The <code>paper_skeleton.md</code> is a template for outlining the project and eventually helping to draft the resulting paper. The <code>plots</code> directory is self-explanatory, a place to keep all the important plots for your paper.</p>
-<p>The <code>src</code> folder contains all the python code you write for your project. This includes Jupyter notebooks, python scripts and python library modules. These can be structured however you need, but in general I have found it is unnecessary to hew too close to proper programming practices when doing scientific projects. A final useful addition is a data folder in which you can keep raw data, processed data and results.</p>
+<p>A literature review forms the foundation of any research project, serving as both a learning tool and a roadmap for your academic journey. This is true for researchers and students of any level, but this is particularly true for graduate students starting off on their research career. Remember that it is primarily through reading the literature of a field that we become experts not only in the most recent results, but also the methods, trends and the academic community. Furthermore, by taking a step back and getting an expansive view of the key problems before jumping into your investigation, you prevent wasting your own time chasing false leads and unnecessary research directions. The literature review process helps researchers develop a deep understanding of their field before conducting original research. This critical step ensures your work builds upon existing knowledge while identifying genuine research gaps. Your review should demonstrate both breadth of knowledge and depth of understanding in your chosen area. Let’s explore each aspect in detail.</p>
+<section id="consider-your-question" class="level2">
+<h2 class="anchored" data-anchor-id="consider-your-question">Consider your question</h2>
+<p>Your research question serves as the compass for your literature review. Possibly you have been provided with a central task, question or objective for your work, or perhaps you have been given free rein to come up with the subject of your thesis yourself. Either way it is paramount to firmly define what your work is about. Before diving into the literature, you need to frame your research question.</p>
+<p>Firstly, consider whether you are solving a specific problem. Many fields have converged on particular problems; some will be famous with a history of defeating even the most ardent attempts at a solution. Others-and these are perhaps the more intriguing-lie unloved and somewhat orphaned, despite potentially showing the way to fertile pastures. The second type is investigating to discover something new. This is particularly true of ‘blue skies’ or exploratory research. Simply trying something out because you think it might be interesting or playing around in a less serious logic than the supposed coldness that people ascribe to the sciences. These last two paradigms represent what the mathematician Sir Michael Atiyah in <em>Advice to a Young Mathematician</em> called “problem solvers” or “theorists”. The former are motivated by the task of proving conjectures while the latter dedicate themselves to the development of theory. The third type I will identify is creating or developing something novel. This might be a technique, technology or tool. In truth most research is a mixture, and rarely does the initial question stay the same throughout a project.</p>
+<p>In each case you should be able to write down a sentence describing your question, and indeed it helps to be in the form of a question, for the form of a question invites a kind of internal dialectic helpful when planning a project.</p>
 </section>
-<section id="workflow" class="level2">
-<h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
-<p>Start with the literature; as you go through the relevant literature, fill in a short entry for each article.</p>
-<p>REFERENCE</p>
+<section id="searching-for-literature" class="level2">
+<h2 class="anchored" data-anchor-id="searching-for-literature">Searching for literature</h2>
+<p>The first stage is to hit the literature. Collect papers on the topic, especially review articles and the latest research. Another underused source is PhD theses and dissertations; these contain the results of previous graduate students’ attempts at chewing through the literature of a field. As such they are an invaluable source of references and background.</p>
+<p>These days the field of helpful tools has expanded far beyond trawling through archives. Aside from Google scholar, there are many AI-powered services you can use to power your search. A few favourites are:</p>
 <ul>
-<li>objective</li>
-<li>methods</li>
-<li>key results</li>
-<li>conclusions</li>
+<li><a href="https://elicit.com/">Elicit</a>: Helps search and synthesize research findings and identify patterns across papers</li>
+<li><a href="https://consensus.app/">Consensus</a>: Search and aggregates scientific results on specific topics</li>
+<li><a href="https://www.futurehouse.org/">PaperQA</a>: Enables targeted questions about research papers</li>
+<li><a href="https://www.connectedpapers.com/">ConnectedPapers</a>: Visualizes relationships between publications, including the most relevant and heavily cited works.</li>
+<li><a href="https://www.mendeley.com/">Mendeley</a>: Reference manager and library for your collected articles</li>
+<li><a href="https://www.zotero.org/">Zotero</a>: Similar to Mendeley. Zotero, Mendeley and Google scholar allow one to export bibtex for reference management and writing. Scientific writing tools like latex require bibtex format references and it can be helpful to auto generate your project-specific references.</li>
 </ul>
-<p>Finally write a short summary of the literature you have reviewed to give yourself an overview of the most important references.</p>
-<p>Once you have a plan and have a good view of the literature you can start with a few simple questions, I have included these in the <code>paper_skeleton.md</code> file.</p>
+<p>All of these can help you find and filter the most relevant literature for your problem. To filter the set of papers you have collected, first read the title and the abstract; if this seems promising and relevant, then read the conclusions and the figures. The sad reality is there has been an explosion in literature in the sciences, and keeping up with developments is a difficult task. One does not have the time to read every article in the field, even less to understand each fully. The key is filtering and selecting those upon which you can build an interesting and insightful research project of your own. The key object of the review exercise is to build an argument, not a library. For this purpose one must be selective and filter out only those articles that are most relevant. When you have selected your corpus, consider the following:</p>
 <ul>
-<li>What are you doing?</li>
-<li>What is the context for this work?</li>
-<li>Why is it interesting?</li>
-<li>Where does this work follow from?</li>
-<li>What are the key references of this work? (e.g.&nbsp;Smith et al.&nbsp;2017)</li>
-<li>What does the field need?</li>
-<li>How does this improve on previous work?</li>
-<li>What methods are being used?</li>
-<li>Describe the data you are using</li>
-<li>What are your results?</li>
-<li>What do your results mean in context?</li>
-<li>What are your conclusions?</li>
-<li>How has your work fulfilled what the field needs?</li>
-<li>How would you describe the narrative of this work?</li>
-<li>What is a possible title of this work?</li>
-<li>Write an abstract for your work</li>
-<li>What possible journals are there for this work?</li>
+<li>What has been left out?</li>
+<li>Where does it lead?</li>
+<li>What is/could be the next step?</li>
+<li>What is the kernel of unevaluated science in this paper?</li>
 </ul>
-<p>As the project proceeds fill each of these questions. Eventually you should be able to quickly write up a draft of you results. On the programming front, keep all your scripts and jupyter notebooks together, keeping track of all your plots and keeping everything in a simple logbook to track the progress of your project.</p>
-<p>Any project will involve running and rerunning scripts, analyses and plotting functions as you go on. For this purpose I use a simple bash file. This bash file of terminal commands is helpful for multi-step processing and analyses. This is particularly important with regard to reproducibility; the ability to quickly repeat the whole analysis pipeline from the raw data is valuable for anyone trying to recreate your work. For example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> old_data data</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> script1.py</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> analyse_data.py</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_output.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Also don’t forget the quality of the studies themselves, in particular consider the</p>
+<ul>
+<li>Methodological strengths and limitations</li>
+<li>Underlying assumptions</li>
+<li>Potential applications to your research</li>
+<li>Unexplored implications.</li>
+</ul>
+<p>The rapid expansion of AI in recent years is a case in point. Some successful papers in the field have been the result of successfully expanding on appendices and ‘side’ experiments of previous papers. Consider that which one author might condemn to an appendix may be an incredibly insightful result with just some extra thought and effort.</p>
+<p>You should at this stage have a set of key papers of interest to you. Briefly describe the background and context of these; after all, this context is also that of your work too. Define the objectives and key methods of these papers. What approaches did they use? Could you adopt or adapt them for your project too? Finally consider a small summary of the literature itself, with a paragraph for each of the main papers and how they contribute to your work. The review should have a narrative thread that leads to your research being a good idea. Again AI tools can help you with this, take full advantage of them, but remember this exercise is for your own benefit. It is for you to understand the state of the field.</p>
+<p>Consider the people too, look at the various groups and individuals who are publishing relevant work. By reviewing literature we also come to know who are the ‘movers and shakers’ and the most influential labs. This is important because this is where you can find potential collaborators, reviewers, and possibly even your future colleagues.</p>
 </section>
-<section id="version-control-and-collaboration" class="level2">
-<h2 class="anchored" data-anchor-id="version-control-and-collaboration">Version control and collaboration</h2>
-<p>Git is a tool for managing changes in your project, while GitHub provides an online platform for hosting repositories. It might be a little unnecessary for scientific projects, but the ability to backup you work and version control long projects is incredibility valuable. The key value however is in collaborative projects; if you are in a team working on a large project, the branching and cloud backup ability of git and Github is no less useful for scientists than it is for programmers. You can take a look at the Github website or any of the online resources if you want to find out how it works. Version control systems like Git can be essential for scientific projects because they:</p>
+<section id="writing-the-review" class="level2">
+<h2 class="anchored" data-anchor-id="writing-the-review">Writing the review</h2>
+<p>Once you have compiled your corpus of literature it is time to put it all together. A basic introduction-body-conclusion structure will suffice. The introduction should establish your review’s focus, outline the scope of literature covered, and highlight the significance of your topic. Include your research question and briefly explain how you’ve broken down the review. In the body, for each key paper, provide:</p>
 <ul>
-<li>Track every change made to your files, ensuring transparency and reproducibility.</li>
-<li>Facilitate collaboration by allowing multiple contributors to work on the same project simultaneously.</li>
-<li>Provide a safety net by enabling you to revert to previous versions if errors occur.</li>
+<li>Background and contextual information</li>
+<li>Clear objectives and methodological approaches</li>
+<li>Potential adaptations for your research</li>
+<li>Critically evaluate the strengths and weaknesses of research method</li>
 </ul>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>Starting a programming-based science project requires careful planning, organization, and the right tools. By following these steps—organizing files, utilizing version control, documenting thoroughly, managing dependencies with environments, automating tasks, backing up regularly, and fostering collaboration—you can streamline your workflow and ensure the success of your project. With these practices in place, you’ll be well-equipped to tackle complex scientific challenges while maintaining reproducibility and efficiency.</p>
+<p>The conclusion should synthesize the key findings, discuss their implications, and identify research gaps that justify your own study. Don’t worry about writing a comprehensive review of the whole field, and don’t spend too long describing the minutiae of competing methods. If all is well you will pick and choose parts of previous work to assemble your own approach.</p>
+<p>A well-structured literature review for a scientific research project should follow a clear organizational framework that effectively synthesizes and analyses existing research. A well-crafted literature review does more than summarize existing research—it builds a compelling argument for your research direction while demonstrating your thorough understanding of the field’s current state. Lastly, and most importantly, it builds your own understanding and helps you devise your project’s direction.</p>
 
 
 </section>
-</section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

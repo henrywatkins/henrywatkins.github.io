@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Henry Watkins">
+<meta name="dcterms.date" content="2025-01-18">
+<meta name="description" content="Keeping your scientific projects organized">
 
-<title>Posts – Henry Watkins</title>
+<title>A Scientific Project Template – Henry Watkins</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dae3192f81785cf0e6fe7ca13257d296.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-dae3192f81785cf0e6fe7ca13257d296.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,35 +105,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4KRLE15B5S"></script>
 
 <script type="text/javascript">
@@ -108,46 +115,17 @@ gtag('js', new Date());
 gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Henry Watkins</span>
     </a>
   </div>
@@ -158,15 +136,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./../book/index.html"> 
+    <a class="nav-link" href="../../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
   </li>  
 </ul>
@@ -179,167 +157,135 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Posts</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">A Scientific Project Template</h1>
+                  <div>
+        <div class="description">
+          Keeping your scientific projects organized
+        </div>
+      </div>
+                </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Henry Watkins </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 18, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<section id="a-scientific-project-template" class="level1">
+<h1>A Scientific Project Template</h1>
+<p>I have found it helpful to have a standard template with which to start my projects; knowing where to start is the hardest part of any research project. I have created a simple science project template that I hope others might find useful. The <a href="https://github.com/henrywatkins/scientific_project_template">scientific project template</a> provides a structured starting point for organizing your project. It emphasizes keeping all files in one place and using version control with Git and GitHub for backup management. Embarking on a programming-based science project, or indeed any modern research project, requires good management of sources. The key to success lies in proper organization. Feel free to fork or clone the repository, changing it for your own needs. This template is for a python project, but the structure can be easily adapted to other popular scientific programming languages like MATLAB. Below I will go through the structure and workflow, including how I use git and Github to backup my work.</p>
+<p>I have worked on different kinds of programming and research projects in the past; I have found the conventional project structure used in programming projects is ill-suited to scientific projects. Even if the project is heavily programming-based, science projects still need a way of tracking data, literature, plots, a labbook, and the eventual writeup.</p>
+<section id="organization" class="level2">
+<h2 class="anchored" data-anchor-id="organization">Organization</h2>
+<p>Let’s start with a look at the folder organization. The key is to keep everything you need in one repository, with all code, plots, lab-books, notes and Jupyter notebooks together for easy reference. Keep all related files—data, scripts, documentation, and results—in a single folder or repository. This ensures everything is easily accessible and reduces the risk of losing important components.</p>
+<ul>
+<li>Use clear naming conventions for files and folders to make navigation intuitive.</li>
+<li>Maintain a clear directory structure that separates raw data, processed data, scripts, and outputs.</li>
+</ul>
+<p>The template had the structure listed below. I will go through each part and explain the workflow, but feel free to delete or add whatever you need.</p>
+<pre><code>.
+├── README.md
+├── env.yaml
+├── labbook_template.md
+├── lit_rev.md
+├── paper_skeleton.md
+├── plots
+├── run_project.sh
+└── src
+    ├── __init__.py
+    ├── lib.py
+    ├── notebook.py
+    └── script.py</code></pre>
+<p>Firstly, all code projects should have a basic README file. This is a simple file describing the repository - what it’s for, who wrote it and the most important information for starting to use the repository. This is the information you see when looking at repositories on GitHub, and are standard practice for all programming projects.</p>
+<p>The <code>env.yml</code> file is an anaconda environment file which describes the dependences and anaconda environment setup for the project. Programming-based science projects often involve numerous dependencies. Using environments can help you manage these effectively. For Python projects, Anaconda environments are highly recommended as they allow you to isolate dependencies for each project. While Python is the standard in scientific programming, tools like MATLAB or Julia may also be used depending on your field. Anaconda environments are the standard in scientific fields, particularly for those working in python. Python has certainly become the standard for all scientific programming and analysis tasks in recent years. Although MATLAB is still very popular and Julia has a lot of fans. Environments are your friend, and although one does not expect most scientist to be experienced software engineers, they can be a lifesaver when dealing with a plethora of competing dependencies.</p>
+<p>The <code>labbook_template.md</code> is a simple markdown - formatted labbook to record your research as you go. There are a range of electronic labbooks available that you can use instead, but I still prefer a simple text-based file. The key is as always to keep a record of your work for yourself more than anything. The <code>lit-rev.md</code> is a template I use for reviewing preliminary literature. The <code>paper_skeleton.md</code> is a template for outlining the project and eventually helping to draft the resulting paper. The <code>plots</code> directory is self-explanatory, a place to keep all the important plots for your paper.</p>
+<p>The <code>src</code> folder contains all the python code you write for your project. This includes Jupyter notebooks, python scripts and python library modules. These can be structured however you need, but in general I have found it is unnecessary to hew too close to proper programming practices when doing scientific projects. A final useful addition is a data folder in which you can keep raw data, processed data and results.</p>
+</section>
+<section id="workflow" class="level2">
+<h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
+<p>Start with the literature; as you go through the relevant literature, fill in a short entry for each article.</p>
+<p>REFERENCE</p>
+<ul>
+<li>objective</li>
+<li>methods</li>
+<li>key results</li>
+<li>conclusions</li>
+</ul>
+<p>Finally write a short summary of the literature you have reviewed to give yourself an overview of the most important references.</p>
+<p>Once you have a plan and have a good view of the literature you can start with a few simple questions, I have included these in the <code>paper_skeleton.md</code> file.</p>
+<ul>
+<li>What are you doing?</li>
+<li>What is the context for this work?</li>
+<li>Why is it interesting?</li>
+<li>Where does this work follow from?</li>
+<li>What are the key references of this work? (e.g.&nbsp;Smith et al.&nbsp;2017)</li>
+<li>What does the field need?</li>
+<li>How does this improve on previous work?</li>
+<li>What methods are being used?</li>
+<li>Describe the data you are using</li>
+<li>What are your results?</li>
+<li>What do your results mean in context?</li>
+<li>What are your conclusions?</li>
+<li>How has your work fulfilled what the field needs?</li>
+<li>How would you describe the narrative of this work?</li>
+<li>What is a possible title of this work?</li>
+<li>Write an abstract for your work</li>
+<li>What possible journals are there for this work?</li>
+</ul>
+<p>As the project proceeds fill each of these questions. Eventually you should be able to quickly write up a draft of you results. On the programming front, keep all your scripts and jupyter notebooks together, keeping track of all your plots and keeping everything in a simple logbook to track the progress of your project.</p>
+<p>Any project will involve running and rerunning scripts, analyses and plotting functions as you go on. For this purpose I use a simple bash file. This bash file of terminal commands is helpful for multi-step processing and analyses. This is particularly important with regard to reproducibility; the ability to quickly repeat the whole analysis pipeline from the raw data is valuable for anyone trying to recreate your work. For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> old_data data</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> script1.py</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> analyse_data.py</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_output.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="version-control-and-collaboration" class="level2">
+<h2 class="anchored" data-anchor-id="version-control-and-collaboration">Version control and collaboration</h2>
+<p>Git is a tool for managing changes in your project, while GitHub provides an online platform for hosting repositories. It might be a little unnecessary for scientific projects, but the ability to backup you work and version control long projects is incredibility valuable. The key value however is in collaborative projects; if you are in a team working on a large project, the branching and cloud backup ability of git and Github is no less useful for scientists than it is for programmers. You can take a look at the Github website or any of the online resources if you want to find out how it works. Version control systems like Git can be essential for scientific projects because they:</p>
+<ul>
+<li>Track every change made to your files, ensuring transparency and reproducibility.</li>
+<li>Facilitate collaboration by allowing multiple contributors to work on the same project simultaneously.</li>
+<li>Provide a safety net by enabling you to revert to previous versions if errors occur.</li>
+</ul>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Starting a programming-based science project requires careful planning, organization, and the right tools. By following these steps—organizing files, utilizing version control, documenting thoroughly, managing dependencies with environments, automating tasks, backing up regularly, and fostering collaboration—you can streamline your workflow and ensure the success of your project. With these practices in place, you’ll be well-equipped to tackle complex scientific challenges while maintaining reproducibility and efficiency.</p>
 
 
+</section>
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1749942000000" data-listing-file-modified-sort="1750341796816" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1647">
-<div class="thumbnail"><a href="./posts/intro2qft/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/intro2qft/paths.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/intro2qft/index.html" class="no-external">Path Integrals in Quantum Field Theory</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/intro2qft/index.html" class="no-external">
-<p>An brief introduction</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/intro2qft/index.html" class="no-external">
-<div class="listing-date">
-Jun 15, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1749510000000" data-listing-file-modified-sort="1749807694337" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1303">
-<div class="thumbnail"><a href="./posts/termgraph/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/termgraph/Tumour_Group.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/termgraph/index.html" class="no-external">Graphs of Neurological Terminology</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/termgraph/index.html" class="no-external">
-<p>Uncovering semantic structures in neurological language using graph-based techniques</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/termgraph/index.html" class="no-external">
-<div class="listing-date">
-Jun 10, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1737158400000" data-listing-file-modified-sort="1737228506000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1264">
-<div class="thumbnail"><a href="./posts/projects/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/projects/folder.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/projects/index.html" class="no-external">A Scientific Project Template</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/projects/index.html" class="no-external">
-<p>Keeping your scientific projects organized</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/projects/index.html" class="no-external">
-<div class="listing-date">
-Jan 18, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1736726400000" data-listing-file-modified-sort="1736800278000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="803">
-<div class="thumbnail"><a href="./posts/twoscientists/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/twoscientists/twoscientists.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/twoscientists/index.html" class="no-external">The two scientists: hammers and nails</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/twoscientists/index.html" class="no-external">
-<p>Approaches to research</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/twoscientists/index.html" class="no-external">
-<div class="listing-date">
-Jan 13, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1733270400000" data-listing-file-modified-sort="1733417451000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1292">
-<div class="thumbnail"><a href="./posts/reviews/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/reviews/articles.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reviews/index.html" class="no-external">What is a literature review for?</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/reviews/index.html" class="no-external">
-<p>Crafting a literature review for your research project</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/reviews/index.html" class="no-external">
-<div class="listing-date">
-Dec 4, 2024
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

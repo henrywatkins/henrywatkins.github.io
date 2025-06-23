@@ -6,6 +6,8 @@ date: "06/10/2025"
 draft: false
 image: Tumour_Group.png
 bibliography: references.bib
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
 ---
 
 Understanding how neurological conditions are described in medical literature is critical for improving communication, advancing research, and enhancing patient care. Neurological descriptions often involve complex, nuanced language, which can obscure underlying relationships between conditions and treatments. By leveraging computational approaches to analyse these descriptions, we can uncover semantic patterns that enhance our understanding of neurological discourse. In this post I am going to describe some work I completed as part of a fellowship project this year. The aim is to build a network of terms from neurological descriptions using point-wise mutual information (PMI) and applies graphical modelling to identify key semantic structures. I isolate an ontological structure from reporting in an unsupervised manner, find key patterns of presentation, and find the key correlates of disorders with their description.

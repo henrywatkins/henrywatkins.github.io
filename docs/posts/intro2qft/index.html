@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Henry Watkins">
-<meta name="dcterms.date" content="2024-12-04">
-<meta name="description" content="Crafting a literature review for your research project">
+<meta name="dcterms.date" content="2025-06-15">
+<meta name="description" content="An brief introduction">
 
-<title>What is a literature review for? – Henry Watkins</title>
+<title>Path Integrals in Quantum Field Theory – Henry Watkins</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,7 +23,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -80,10 +100,39 @@ gtag('js', new Date());
 gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -123,10 +172,10 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">What is a literature review for?</h1>
+      <h1 class="title">Path Integrals in Quantum Field Theory</h1>
                   <div>
         <div class="description">
-          Crafting a literature review for your research project
+          An brief introduction
         </div>
       </div>
                 </div>
@@ -145,7 +194,7 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 4, 2024</p>
+        <p class="date">June 15, 2025</p>
       </div>
     </div>
     
@@ -156,7 +205,19 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#path-integrals-in-quantum-mechanics" id="toc-path-integrals-in-quantum-mechanics" class="nav-link active" data-scroll-target="#path-integrals-in-quantum-mechanics">Path Integrals in Quantum Mechanics</a></li>
+  <li><a href="#path-integrals-in-quantum-field-theory" id="toc-path-integrals-in-quantum-field-theory" class="nav-link" data-scroll-target="#path-integrals-in-quantum-field-theory">Path Integrals in Quantum Field Theory</a></li>
+  <li><a href="#the-propagator" id="toc-the-propagator" class="nav-link" data-scroll-target="#the-propagator">The Propagator</a></li>
+  <li><a href="#the-potential" id="toc-the-potential" class="nav-link" data-scroll-target="#the-potential">The Potential</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -164,59 +225,173 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 
 
 
-<p>A literature review forms the foundation of any research project, serving as both a learning tool and a roadmap for your academic journey. This is true for researchers and students of any level, but this is particularly true for graduate students starting off on their research career. Remember that it is primarily through reading the literature of a field that we become experts not only in the most recent results, but also the methods, trends and the academic community. Furthermore, by taking a step back and getting an expansive view of the key problems before jumping into your investigation, you prevent wasting your own time chasing false leads and unnecessary research directions. The literature review process helps researchers develop a deep understanding of their field before conducting original research. This critical step ensures your work builds upon existing knowledge while identifying genuine research gaps. Your review should demonstrate both breadth of knowledge and depth of understanding in your chosen area. Let’s explore each aspect in detail.</p>
-<section id="consider-your-question" class="level2">
-<h2 class="anchored" data-anchor-id="consider-your-question">Consider your question</h2>
-<p>Your research question serves as the compass for your literature review. Possibly you have been provided with a central task, question or objective for your work, or perhaps you have been given free rein to come up with the subject of your thesis yourself. Either way it is paramount to firmly define what your work is about. Before diving into the literature, you need to frame your research question.</p>
-<p>Firstly, consider whether you are solving a specific problem. Many fields have converged on particular problems; some will be famous with a history of defeating even the most ardent attempts at a solution. Others-and these are perhaps the more intriguing-lie unloved and somewhat orphaned, despite potentially showing the way to fertile pastures. The second type is investigating to discover something new. This is particularly true of ‘blue skies’ or exploratory research. Simply trying something out because you think it might be interesting or playing around in a less serious logic than the supposed coldness that people ascribe to the sciences. These last two paradigms represent what the mathematician Sir Michael Atiyah in <em>Advice to a Young Mathematician</em> called “problem solvers” or “theorists”. The former are motivated by the task of proving conjectures while the latter dedicate themselves to the development of theory. The third type I will identify is creating or developing something novel. This might be a technique, technology or tool. In truth most research is a mixture, and rarely does the initial question stay the same throughout a project.</p>
-<p>In each case you should be able to write down a sentence describing your question, and indeed it helps to be in the form of a question, for the form of a question invites a kind of internal dialectic helpful when planning a project.</p>
+<p>In this post I am going to give a brief introduction to one of the central ideas in theoretical physics. quantum field theory might seem a daunting subject, but behind the intimidating mathematical formulation lies an approachable interpretation for describing physics processes. Like most physicists, I was first taught field theory in the form of canonical quantization. However, I find the alternative approach of the path integral formalism to much more approachable and intuitive. Path integral formulations also exist for statistical mechanics applications, but here I will describe how it is used in quantum mechanics.</p>
+<p>Initially, quantum field theory grew out of an attempt to reconcile special relativity with Quantum Mechanics. While Quantum Mechanics describes quantum <em>states</em> and their evolution and interaction, central to Quantum Field Theory are the <em>fields</em> whose behavior are described by the Lagrangian and the Euler-Lagrange field equations. These fields then act on states, possibly creating and annihilating quanta (or particles) of the field. Using the path integral of the field it is possible to calculate probabilities for processes that can be observed. Quantum field theories are able to explain particle interaction and the creation and annihilation of particles that does not occur in standard quantum mechanics making such theories much more flexible. The Standard Model is built in terms of quantum field theories, where each fundamental particle is described by a field.</p>
+<p>There are plenty of good resources for learning about quantum field theory and path integrals, but I will rely heavily on the book by <span class="citation" data-cites="zee2010quantum">Zee (<a href="#ref-zee2010quantum" role="doc-biblioref">2010</a>)</span>. It is an excellent introduction to the subject and I highly recommend it.</p>
+<section id="path-integrals-in-quantum-mechanics" class="level2">
+<h2 class="anchored" data-anchor-id="path-integrals-in-quantum-mechanics">Path Integrals in Quantum Mechanics</h2>
+<p>The underlying principle of the path integral approach is that all possible paths of evolution from the initial to final state are considered. When a quantum state evolves from one state to another, we consider and incorporate all contributions from all possible paths into a final amplitude that describes the process. The advantage of the path integral method in quantum mechanical calculations is that it provides a simpler method of calculating certain processes, and in particular it gives a much more elegant way of approaching field theory. I will start by following <span class="citation" data-cites="mackenzie2000path">MacKenzie (<a href="#ref-mackenzie2000path" role="doc-biblioref">2000</a>)</span>. The path integral determines the amplitude of evolving from one state to another. Quantum mechanically, the amplitude for this is</p>
+<p><span class="math display">\[
+M=\bra{q'}e^{-iHT}\ket{q}.
+\]</span></p>
+<p>Where I have used the notation <span class="math inline">\(\bra{q'}\)</span> to signify the state at time <span class="math inline">\(T\)</span> and <span class="math inline">\(\ket{q}\)</span> to signify the state at time <span class="math inline">\(0\)</span>. The Hamiltonian <span class="math inline">\(H\)</span> is the operator that governs the evolution of the system. The amplitude <span class="math inline">\(M\)</span> is a complex number that gives the probability of evolving from state <span class="math inline">\(\ket{q}\)</span> to state <span class="math inline">\(\bra{q'}\)</span> in time <span class="math inline">\(T\)</span>. Now the aim is to derive this amplitude as a sum over histories of all paths between q and q’. This is done by separating the time period into a small <span class="math inline">\(\delta t=T/N\)</span>.</p>
+<p><span class="math display">\[
+M=\bra{q'}e^{-iH\delta t}e^{-iH\delta t}e^{-iH\delta t}...e^{-iH\delta t}\ket{q}
+\]</span></p>
+<p>Then the intervening states are included by using the completeness condition</p>
+<p><span class="math display">\[
+1=\int\ket{q}\bra{q}dq
+\]</span></p>
+<p>so it is possible to write</p>
+<p><span class="math display">\[
+M=\int dq_1dq_2..dq_{N-1} \bra{q'}e^{-iH\delta t}\ket{q_{N-1}}\bra{q_{N-1}}e^{-iH\delta t}\ket{q_{N-2}}\\
+\bra{q_{N-2}}e^{-iH\delta t}\ket{q_{N-3}}...\bra{q_1}e^{-iH\delta t}\ket{q}
+\]</span></p>
+<p>which is just a sum over a product of all possible possibilities. This is reminiscent of the double slit experiment in which light is fed through two slits. If there are two slits (<a href="#fig-doubleslit" class="quarto-xref">Figure&nbsp;1</a>), there are two possible paths, and two corresponding factors, but as extra slits are added the number increases.</p>
+<div id="fig-doubleslit" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-doubleslit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="doubleslit1.png" class="img-fluid figure-img" style="width:2in"></p>
+<figcaption>one barrier</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="doubleslit2.png" class="img-fluid figure-img" style="width:5in"></p>
+<figcaption>two barriers</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="doubleslit3.png" class="img-fluid figure-img" style="width:3in"></p>
+<figcaption>three barriers</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-doubleslit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The double slit experiment with one, two and three barriers. The number of paths increases with the number of barriers.
+</figcaption>
+</figure>
+</div>
+<p>We can extend the analogy of barriers in a double slit experiment to time steps in an evolution from one state to another. Now that the time steps are small, the exponents in the individual factors can be expanded using a Taylor series and taken to first order. Taking one of the factors</p>
+<p><span class="math display">\[
+M_{j,j+1}=\braket{q_{j+1} | q_j}-i\delta t\bra{q_{j+1}}H\ket{q_j}+O(\delta t^2).
+\]</span></p>
+<p>And using the completeness relation in momentum space <span class="math inline">\(\int\dfrac{dp}{2\pi}\ket{p}\bra{p}=1\)</span> we can retrieve</p>
+<p><span class="math display">\[
+\begin{aligned}
+M_{j,j+1}&amp;=\braket{q_{j+1} | q_j}-i\delta t\bra{q_{j+1}}H\int\dfrac{dp_j}{2\pi}\ket{p_j}\braket{p_j |q_j}\\
+&amp;=\int\dfrac{dp_j}{2\pi} e^{ip_j (q_{j+1}-q_j)}e^{-i\delta t H}\\
+&amp;=\int\dfrac{dp_j}{2\pi} e^{i\delta t( p_j \dot{q_j}- H)}
+\end{aligned}
+\]</span></p>
+<p>When this is taken over all the factors j up to N then the total propagator is</p>
+<p><span class="math display">\[
+M=\int \prod_{j=1}^{N-1}dq_j \int\prod_{j=0}^{N-1}\dfrac{dp_j}{2\pi} \exp{ i\delta t\sum_{j=0}^{N-1}.
+( p_j \dot{q_j}- H)}
+\]</span></p>
+<p>Now let N tend to infinity so there are an infinite number of paths. This gives the phase-space integral</p>
+<p><span class="math display">\[
+M=\int Dp Dq \exp{(iS)}.
+\]</span></p>
+<p>Which can be transformed into the configuration space path integral by performing the integral over the momenta</p>
+<p><span class="math display">\[
+\begin{aligned}
+M &amp;=\lim_{N\rightarrow\infty} \left(\frac{-im}{2\pi \delta t}  \right)^{N/2} \left( \prod_{j=1}^{N-1}\int dq_j\right) e^{iS}\\
+M &amp;=\int Dq e^{iS}
+\end{aligned}
+\]</span></p>
+<p>Where the definition of the Hamiltonian has been used to replace the factor in the exponent with the Lagrangian and then the action.</p>
 </section>
-<section id="searching-for-literature" class="level2">
-<h2 class="anchored" data-anchor-id="searching-for-literature">Searching for literature</h2>
-<p>The first stage is to hit the literature. Collect papers on the topic, especially review articles and the latest research. Another underused source is PhD theses and dissertations; these contain the results of previous graduate students’ attempts at chewing through the literature of a field. As such they are an invaluable source of references and background.</p>
-<p>These days the field of helpful tools has expanded far beyond trawling through archives. Aside from Google scholar, there are many AI-powered services you can use to power your search. A few favourites are:</p>
-<ul>
-<li><a href="https://elicit.com/">Elicit</a>: Helps search and synthesize research findings and identify patterns across papers</li>
-<li><a href="https://consensus.app/">Consensus</a>: Search and aggregates scientific results on specific topics</li>
-<li><a href="https://www.futurehouse.org/">PaperQA</a>: Enables targeted questions about research papers</li>
-<li><a href="https://www.connectedpapers.com/">ConnectedPapers</a>: Visualizes relationships between publications, including the most relevant and heavily cited works.</li>
-<li><a href="https://www.mendeley.com/">Mendeley</a>: Reference manager and library for your collected articles</li>
-<li><a href="https://www.zotero.org/">Zotero</a>: Similar to Mendeley. Zotero, Mendeley and Google scholar allow one to export bibtex for reference management and writing. Scientific writing tools like latex require bibtex format references and it can be helpful to auto generate your project-specific references.</li>
-</ul>
-<p>All of these can help you find and filter the most relevant literature for your problem. To filter the set of papers you have collected, first read the title and the abstract; if this seems promising and relevant, then read the conclusions and the figures. The sad reality is there has been an explosion in literature in the sciences, and keeping up with developments is a difficult task. One does not have the time to read every article in the field, even less to understand each fully. The key is filtering and selecting those upon which you can build an interesting and insightful research project of your own. The key object of the review exercise is to build an argument, not a library. For this purpose one must be selective and filter out only those articles that are most relevant. When you have selected your corpus, consider the following:</p>
-<ul>
-<li>What has been left out?</li>
-<li>Where does it lead?</li>
-<li>What is/could be the next step?</li>
-<li>What is the kernel of unevaluated science in this paper?</li>
-</ul>
-<p>Also don’t forget the quality of the studies themselves, in particular consider the</p>
-<ul>
-<li>Methodological strengths and limitations</li>
-<li>Underlying assumptions</li>
-<li>Potential applications to your research</li>
-<li>Unexplored implications.</li>
-</ul>
-<p>The rapid expansion of AI in recent years is a case in point. Some successful papers in the field have been the result of successfully expanding on appendices and ‘side’ experiments of previous papers. Consider that which one author might condemn to an appendix may be an incredibly insightful result with just some extra thought and effort.</p>
-<p>You should at this stage have a set of key papers of interest to you. Briefly describe the background and context of these; after all, this context is also that of your work too. Define the objectives and key methods of these papers. What approaches did they use? Could you adopt or adapt them for your project too? Finally consider a small summary of the literature itself, with a paragraph for each of the main papers and how they contribute to your work. The review should have a narrative thread that leads to your research being a good idea. Again AI tools can help you with this, take full advantage of them, but remember this exercise is for your own benefit. It is for you to understand the state of the field.</p>
-<p>Consider the people too, look at the various groups and individuals who are publishing relevant work. By reviewing literature we also come to know who are the ‘movers and shakers’ and the most influential labs. This is important because this is where you can find potential collaborators, reviewers, and possibly even your future colleagues.</p>
+<section id="path-integrals-in-quantum-field-theory" class="level2">
+<h2 class="anchored" data-anchor-id="path-integrals-in-quantum-field-theory">Path Integrals in Quantum Field Theory</h2>
+<p>To move from quantum mechanics the quantum field theory, only a small change is needed to the path integral. In quantum field theory the states are no longer the basic objects; they are replaced by fields that act on vacuum states to create particles.</p>
+<p>It is now the Lagrangian density that appears in the action. The Lagrangian density is a function of the field and its derivatives rather than the position and momentum of a particle as in the quantum mechanical case. The variable q in the path integral is replaced by the field <span class="math inline">\(\phi\)</span>, the index j becomes a continuum and the path integral is no longer taken as the evolution between two states <span class="math inline">\(\ket{q},\ket{q'}\)</span> but between two vacuum states, <span class="math inline">\(\ket{0}\)</span>. This is only convention and represents the fact it is possible to create any state by acting the field operator on the vacuum. So the path integral becomes</p>
+<p><span class="math display">\[
+Z=\int D\phi e^{i\int \mathcal{L}d^4 x}
+\]</span></p>
+<p>The question now with the path integral in quantum field theory is how to use it to find observables. The key component one can find from the path integral is the propagator, which gives the probability of a particle moving from one point to another. The propagator is derived from the action and is a central object in quantum field theory.</p>
 </section>
-<section id="writing-the-review" class="level2">
-<h2 class="anchored" data-anchor-id="writing-the-review">Writing the review</h2>
-<p>Once you have compiled your corpus of literature it is time to put it all together. A basic introduction-body-conclusion structure will suffice. The introduction should establish your review’s focus, outline the scope of literature covered, and highlight the significance of your topic. Include your research question and briefly explain how you’ve broken down the review. In the body, for each key paper, provide:</p>
-<ul>
-<li>Background and contextual information</li>
-<li>Clear objectives and methodological approaches</li>
-<li>Potential adaptations for your research</li>
-<li>Critically evaluate the strengths and weaknesses of research method</li>
-</ul>
-<p>The conclusion should synthesize the key findings, discuss their implications, and identify research gaps that justify your own study. Don’t worry about writing a comprehensive review of the whole field, and don’t spend too long describing the minutiae of competing methods. If all is well you will pick and choose parts of previous work to assemble your own approach.</p>
-<p>A well-structured literature review for a scientific research project should follow a clear organizational framework that effectively synthesizes and analyses existing research. A well-crafted literature review does more than summarize existing research—it builds a compelling argument for your research direction while demonstrating your thorough understanding of the field’s current state. Lastly, and most importantly, it builds your own understanding and helps you devise your project’s direction.</p>
+<section id="the-propagator" class="level2">
+<h2 class="anchored" data-anchor-id="the-propagator">The Propagator</h2>
+<p>The square of the absolute value of the propagator gives us the probability of a particle moving from one place to another (hence <em>propagation</em>) and is derived from the governing equation of the field. The path integral for a scalar field theory is (lower case letters like x, y signify 4-vectors)</p>
+<p><span class="math display">\[
+Z=\int D\phi e^{iS}
+\]</span></p>
+<p>where D signifies the integration measure that includes the product, limit etc. S is the action given by</p>
+<p><span class="math display">\[
+S=\int d^4 x \dfrac{1}{2} (\partial_\mu \phi \partial^\mu \phi -m^2\phi^2)+J\phi.
+\]</span></p>
+<p>Where J is some source function and <span class="math inline">\(\mu \in(0,1,2,3,4)\)</span>. To calculate the propagator first one must focus on the action and integrate by parts to get</p>
+<p><span class="math display">\[
+\int d^4 x \left[ -\phi\frac{1}{2}(\partial_\mu \partial^\mu +m^2)\phi +J\phi\right].
+\]</span></p>
+<p>Then use the Green’s function form</p>
+<p><span class="math display">\[
+(\partial_\mu \partial^\mu +m^2)D(x-y)=-\delta^{(4)}(x-y)
+\]</span></p>
+<p>such that the field satisfies</p>
+<p><span class="math display">\[
+\phi(x)=\int d^4 y D(x-y)J(y)
+\]</span></p>
+<p>and putting this form into the action above, the result is</p>
+<p><span class="math display">\[
+\frac{1}{2}\int d^4 x \int d^4 y J(x) D(x-y) J(y)
+\]</span></p>
+<p>and using Fourier transforms shows the explicit appearance of the propagator</p>
+<p><span class="math display">\[
+\tilde{D}(k)=\dfrac{1}{k^2-m^2}
+\]</span></p>
+<p>where the denominator can be replaced by whatever dispersion relation that follows the simple scalar field in Minkowski space form i.e just add extra positive terms for time-like dimensions and negative ones for space-like dimensions.</p>
+</section>
+<section id="the-potential" class="level2">
+<h2 class="anchored" data-anchor-id="the-potential">The Potential</h2>
+<p>A simple application of the propagator is to calculate the potential between two particles. The potential is a measure of the interaction between particles and can be derived from the propagator. In quantum field theory, the potential is not a fundamental quantity but rather an emergent one that arises from the interactions of particles. The potential can be found by taking the spatial Fourier transform of the propagator. The hardest and perhaps most important part is how the sources and sinks are set up in the calculation of a potential. In the path integral formulation this must be done to allow a potential to appear, after all there can be no propagator and hence no potential without anything to propagate between.</p>
+<p>As a first example the potential will derived in 3+1 dimensions using a source function that consists of two Dirac delta sources <span class="math inline">\(J(x)=\delta^{(3)}(\vec{x}-\vec{x_1})+ \delta^{(3)}(\vec{x}-\vec{x_2})\)</span>. These are fixed at the spatial positions <span class="math inline">\(\vec{x_1}\)</span> and <span class="math inline">\(\vec{x_2}\)</span>. There will be a number of terms in the action arising from the product of the two source functions but since the only interesting one is where a particle is created at 1 and annihilated at 2 the only one that is considered is</p>
+<p><span class="math display">\[
+S=-\dfrac{1}{(2\pi)^4} \int d^4 x' \int d^4 x \int d^4 k \dfrac{\delta(\vec{x}-\vec{x_1}) e^{ik\cdot(x-x')} \delta(\vec{x'}-\vec{x'_2})}{\omega^2-k^2-m^2}
+\]</span></p>
+<p>Where the sources are placed at a particular position in space but have no fixed time coordinate. This leads to</p>
+<p><span class="math display">\[
+\begin{aligned}
+S&amp;=-\dfrac{1}{(2\pi)^4} \int dt' \int dt \int d\omega e^{i\omega(t-t')} \int d^3 k \dfrac{e^{-i\vec{k}(\vec{x_1}-\vec{x'_2})}}{\omega^2-k^2-m^2}\\
+&amp;=-\dfrac{1}{(2\pi)^3}\int dt \int d\omega \delta(\omega) \int d^3 k \dfrac{e^{-i\vec{k}(\vec{x_1}-\vec{x'_2})}}{\omega^2-k^2-m^2}\\
+&amp;=\dfrac{1}{(2\pi)^3}\int dt \int d^3 k \dfrac{e^{i\vec{k}(\vec{x_1}-\vec{x'_2})}}{k^2+m^2}
+\end{aligned}
+\]</span></p>
+<p>Letting the time integral be <span class="math inline">\(\int dt=T\)</span> to make the association with the T in <span class="math inline">\(\bra{0} e^{-iHT}\ket{0}=e^{-iET}\)</span> so the potential is (and writing <span class="math inline">\(\vec{x}=\vec{x_1}-\vec{x'_2}\)</span>)</p>
+<p><span class="math display">\[
+\int \dfrac{d^3 k}{(2\pi)^3}\dfrac{e^{i\vec{k}.\vec{x}}}{k^2+m^2}=\frac{1}{4 \pi r}e^{-mr}
+\]</span></p>
+<p>Another important point is the validity of fixing the source and sink in space but not in time. When this was done is was clear that a Dirac delta function appeared in <span class="math inline">\(\omega\)</span> that cut out the time-term from the propagator. From the path integral approach as described in <span class="citation" data-cites="zee2010quantum">Zee (<a href="#ref-zee2010quantum" role="doc-biblioref">2010</a>)</span> the specification of the sources and sinks is essential to correctly calculate the potential arising from particle propagation from source to sink.</p>
+<p>This form of potential between two particles is called the Yukawa potential. It acts as the familiar Coulomb potential for massless particles, but for massive particles the potential is exponentially suppressed at large distances.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>In this brief intro I have mentioned some high-level concepts such as Green’s functions, four-vectors and the Lagrangian density. These are all important concepts in quantum field theory and this post shouldn’t be seen as a comprehensive guide, but rather a jumping off point to explore these ideas further. The path integral approach to quantum field theory is a powerful tool that allows for the calculation of probabilities and potentials in a way that is I think is more intuitive than the canonical quantization approach. It is a central part of the modern understanding of particle physics and is essential for understanding the Standard Model.</p>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-mackenzie2000path" class="csl-entry" role="listitem">
+MacKenzie, Richard. 2000. <span>“Path Integral Methods and Applications.”</span> <em>arXiv Preprint Quant-Ph/0004090</em>.
+</div>
+<div id="ref-zee2010quantum" class="csl-entry" role="listitem">
+Zee, Anthony. 2010. <em>Quantum Field Theory in a Nutshell</em>. Princeton university press.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

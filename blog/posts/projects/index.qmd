@@ -5,6 +5,8 @@ author: "Henry Watkins"
 date: "01/18/2025"
 image: folder.jpg
 draft: false
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
 ---
 # A Scientific Project Template
 
