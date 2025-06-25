@@ -1,8 +1,8 @@
 # Magneto-Hydrodynamics {#sec-mhd}
 
-This chapter will introduce the important theoretical background and equations lying at the foundation of this thesis. The plasma state is characterised by being a macroscopically quasi-neutral ensemble of charged particles. As such the electromagnetic interactions between the charged particles lead to long-range electromagnetic forces, alongside the short range collisional forces. 
+This chapter will introduce the important theoretical background and equations lying at the foundation of plasma physics. The plasma state, often referred to as the fourth state of matter, is characterised as a macroscopically quasi-neutral ensemble of charged particles; this is an ionised gas of freely moving electrons and ions where local charge imbalances are rapidly neutralised due to high mobility of charges, maintaining overall electrical neutrality on large scales. As such the electromagnetic interactions between the charged particles lead to long-range electromagnetic forces as well as the short range collisional forces. These interactions give rise to collective behaviour, which is central to many phenomena observed in laboratory, space, and astrophysical plasmas.
 
-Kinetic theory will be the framework used to describe the dynamics of this state of matter. The starting point of this chapter will be the Vlasov-Fokker-Planck equation and an introduction to the kinetic theory of plasmas, following with the derivation of the single fluid model of Magneto-Hydrodynamics. Alongside the basics of collisions and transport phenomena, this chapter will include an introduction to magnetised and non-local transport, focusing on the processes relevant to results of later chapters. This chapter will end with the closure of the Magneto-Hydrodynamic equation set used in this thesis.
+Kinetic theory will be the framework used to describe the dynamics of this state of matter; this theory describes the evolution of distribution functions in phase space. The starting point of this chapter will be the Vlasov-Fokker-Planck (VFP) equation and an introduction to the kinetic theory of plasmas, following with the derivation of the single fluid model of magneto-hydrodynamics (MHD). The VFP equation bridges the microscopic particle dynamics with macroscopic fluid models, providing a rigorous basis for deriving fluid equations through appropriate moment hierarchies and closure approximations. The MHD framework is especially useful for modelling large-scale, low-frequency phenomena such as magnetic confinement, plasma instabilities, and wave propagation. However, it neglects kinetic effects such as Landau damping, velocity-space instabilities, and collisionless wave-particle interactions, which can be critical in weakly collisional or high-frequency regimes. For these cases, kinetic models or extended fluid models (such as two-fluid or Hall-MHD models) are more appropriate.
 
 ## The Kinetic Theory of Plasmas
 
@@ -10,39 +10,33 @@ A plasma is a statistical ensemble of ions and electrons that undergo long-range
 $$
 \textbf{F}=q(\textbf{E}+\textbf{v}\times\textbf{B}),
 $$
-for some particle of charge $q$. 
-
-Though the electrostatic force of a single particle has an infinite range, the collective nature of an ensemble of charged particles means any charge imbalance will experience shielding from oppositely - charged particles. Considering the thermal motion of charged particles in the electric potential of a charge imbalance, this effect defines a characteristic length scale over which shielding occurs known as the *Debye length*
+for some particle of charge $q$. Though the electrostatic force of a single particle has an infinite range, the collective nature of an ensemble of charged particles means any charge imbalance will experience shielding from oppositely-charged particles. Considering the thermal motion of charged particles in the electric potential of a charge imbalance, this effect defines a characteristic length scale over which shielding occurs known as the *Debye length*
 $$
 \lambda_D=\left(\frac{\epsilon_0 k_b T_e}{n_e e^2}\right)^{1/2},
 $$
-where the electron number density $n_e$ is in $m^{-3}$ and the electron temperature $T_e$ is expressed in units of Kelvin. Physically the Debye length can be considered the length scale of the screening of bare charges in plasma. Beyond a sphere of radius $\lambda_D$, the Debye sphere, the plasma can be considered quasi-neutral.  
+where the electron number density $n_e$ is in $m^{-3}$ and the electron temperature $T_e$ is expressed in units of Kelvin. Physically the Debye length can be considered the length scale of the screening of bare charges in plasma. Beyond a sphere of radius $\lambda_D$, the Debye sphere, the plasma can be considered quasi-neutral.
 
-The electric fields of this ensemble self-consistently adapt to the charge environment of the collection of particles. As a result imbalances in charge excite plasma oscillations with a characteristic frequency that act to re-establish quasi-neutrality. This frequency is known as the *plasma frequency*
+The electric fields of this ensemble self-consistently adapt to the charge environment of the collection of particles. As a result, imbalances in charge excite plasma oscillations with a characteristic frequency that act to re-establish quasi-neutrality. This frequency is known as the *plasma frequency*
 $$
 \omega_p=\left(\frac{n_e e^2}{m_e \epsilon_0}\right)^{1/2}.
 $$
-The plasma frequency defines a timescale above which the plasma can be considered quasi-neutral.   
+where $n_e$ is the electron number density, $e$ is the elementary charge, $m$ is the electron mass, and $\epsilon_0$ is the vacuum permittivity. The plasma frequency defines a timescale above which the plasma can be considered quasi-neutral. This frequency sets a fundamental timescale for charge separation dynamics in the plasma. For timescales longer than $\omega_p^{-1}$, charge imbalances tend to be rapidly smoothed out due to the collective response of the electrons, restoring quasi-neutrality—a state in which the densities of positive and negative charges are nearly equal on macroscopic scales. Therefore, in many practical scenarios, especially in low-frequency or large-scale plasma behaviour, the plasma can be effectively treated as a quasi-neutral medium.
 
-These two parameters define the length and timescales above which we can define the collective statistical state called a plasma. The most accurate model to describe this N-particle system would be the Louiville equation under the action of a self-consistent electromagnetic field. However, the requirements to solve a system in $6N$ dimensional phase space is not necessary or possible. Instead this collective behaviour is best described in terms of the $\textit{distribution function}$, $f(\textbf{x},\textbf{v},t)$, which represents the particle density in the 6-dimensional single-particle phase space. The evolution of distribution functions is the subject of kinetic theory. A plasma is described kinetically by the *Vlasov-Fokker-Planck* (VFP) equation
+These two parameters define the length and timescales above which we can define the collective statistical state called a plasma. The most accurate model to describe this N-particle system would be the Liouville equation under the action of a self-consistent electromagnetic field. However, the requirements to solve a system in $6N$ dimensional phase space is not necessary or possible. Instead this collective behaviour is best described in terms of the *distribution function*, $f(\textbf{x},\textbf{v},t)$, which represents the particle density in the 6-dimensional single-particle phase space. The evolution of distribution functions is the subject of kinetic theory. A plasma is described kinetically by the *Vlasov-Fokker-Planck* (VFP) equation
 $$
 \frac{\partial f_\alpha}{\partial t} + \textbf{v}_\alpha\cdot\nabla f_\alpha + \frac{q_\alpha}{m_\alpha}(\textbf{E}+\textbf{v}_\alpha\times \textbf{B})\cdot\nabla_v f_\alpha = \left( \frac{\partial f_\alpha}{\partial t} \right)_{coll}
 $$
-for a species $\alpha$. The collision operator on the right-hand-side is the Fokker-Planck operator which will be introduced in section 2.3. There is a VFP equation for each species present in the plasma, and represents the conservation of probability in phase space. The collision term on the right-hand-side takes the form of the Fokker-Planck operator, which determines how the Coulomb collisions between particles in the plasma influence the evolution of the distribution function. Intuitively while one would think the electric fields of every particle should influence the evolution of the plasma, Debye shielding allows the separation of the electromagnetic field into a microscopic, fluctuating component that forms part of the collision term, and macroscopic fields that sit in the left hand side of the VFP equation.  
+for a species $\alpha$. The collision operator on the right-hand-side is the Fokker-Planck operator which will be introduced in @sec-collisions. There is a VFP equation for each species present in the plasma, and represents the conservation of probability in phase space. The collision term on the right-hand-side takes the form of the Fokker-Planck operator, which determines how the Coulomb collisions between particles in the plasma influence the evolution of the distribution function. Intuitively while one would think the electric fields of every particle should influence the evolution of the plasma, Debye shielding allows the separation of the electromagnetic field into a microscopic, fluctuating component that forms part of the collision term, and macroscopic fields that sit in the left hand side of the VFP equation.
 
-The most accurate approach would be to start straight from the VFP model of a plasma and solve for the electron and ion distribution functions. However one can start with a simpler hydrodynamic approximation. Very collisional plasmas can be assumed to have a distribution function close to a Maxwell-Boltzmann distribution, which for electrons is
+The most accurate approach starts straight from the VFP model of a plasma and solves for the electron and ion distribution functions. However, one often resorts to reduced models that retain essential physics while offering computational or analytical tractability. One can start with a simpler hydrodynamic approximation where instead of tracking the full distribution function, one models the plasma using macroscopic moments such as density, velocity, and pressure. Very collisional plasmas can be assumed to have a distribution function close to a Maxwell-Boltzmann distribution, which for electrons is
 $$
 f_m=n_e\left(\frac{1}{2\pi v_{th}^2}\right)^{3/2}\exp{\left(-\frac{v^2}{2 v_{th}^2}\right)},
 $$
-with the standard deviation being the thermal speed defined as $v_{th}=\sqrt{k_b T_e/m_e}$. This allows the use of a fluid description which can be derived by considering a small deviation from equilibrium, this fluid model is known as Magneto-Hydrodynamics. 
+with the standard deviation being the thermal speed defined as $v_{th}=\sqrt{k_b T_e/m_e}$. Given this near-equilibrium form, one can derive a set of fluid equations by taking moments of the VFP equation. This allows the use of a fluid description which can be derived by considering a small deviation from equilibrium, this fluid model is known as magneto-hydrodynamics. 
 
-## From Kinetic Theory to Magneto-Hydrodynamics
+## Moments of the Vlasov-Fokker-Planck Equation
 
-Deriving Magneto-Hydrodynamics (MHD) from kinetic theory consists of taking moments of the VFP equation. These moments are the macroscopic quantities found from taking averages over the distribution; in particular the conserved quantities or mass, momentum and energy. However in taking successive moments, each moment equation couples to the next. To create a closed system of equations, transport relations must be found that couple to a lower-order moment; in MHD this is achieved with the Fokker-Planck collision term.
-
-### Moments of the Vlasov-Fokker-Planck Equation
-
-For a macroscopic fluid model the equations must describe the relationships between macroscopic quantities. The moments are found by multiplying the distribution function by successive velocity variables $v_i$ and integrating over the whole of velocity space. The first few moments below are number density, fluid velocity, total energy density, heat and enthalpy flux and the stress tensor, respectively
+Deriving MHD from kinetic theory consists of taking moments of the VFP equation. These moments are the macroscopic quantities found by taking averages over the distribution function; in particular the conserved quantities or mass, momentum and energy. However in taking successive moments, each moment equation couples to the next. To create a closed system of equations, transport relations must be found that couple to a lower-order moment; in MHD this is achieved with the Fokker-Planck collision term. For a macroscopic fluid model the equations must describe the relationships between macroscopic quantities. The moments are found by multiplying the distribution function by successive velocity variables $v_i$ and integrating over the whole of velocity space. The first few moments below are number density, fluid velocity, total energy density, heat and enthalpy flux and the stress tensor, respectively
 $$
 \begin{align}
 &n(\textbf{r},t) =\int f(\textbf{r},\textbf{v},t)d^3 v, \\
@@ -52,11 +46,10 @@ $$
 &\sigma_{ij}= m n\langle w_i w_j\rangle = m \int w_i w_j f(\textbf{r},\textbf{v},t)d^3 v,
 \end{align}
 $$
-where $w$ is the `anomalous velocity', the deviation from the mean velocity, $\textbf{w}=\textbf{v}-\textbf{V}$. In general the $n^{th}$ moment of the distribution function is
+where $w$ is the 'anomalous velocity', the deviation from the mean velocity, $\textbf{w}=\textbf{v}-\textbf{V}$. In general the $n^{th}$ moment of the distribution function is
 $$
 \langle \textbf{v}^n\rangle = \frac{1}{n}\int \textbf{v}^n f(\textbf{r},\textbf{v},t)d^3 v.
 $$
-
 Taking the first moment of the VFP equation for species $\alpha$ yields the continuity equation
 $$
 \frac{\partial n}{\partial t}+\nabla \cdot (n \textbf{V})=\int \left( \frac{\partial f_\alpha}{\partial t} \right)_{coll} d^3v.
@@ -84,8 +77,7 @@ The stress tensor can be written in terms of the isotropic pressure $p$ and anis
 $$
 \sigma_{ij}=p\delta_{ij}+\pi_{ij}.
 $$
-
-If the plasma is inviscid the anisotropic part is ignored and what is left is the momentum equation,
+If the plasma is inviscid the anisotropic part ($\pi_{ij}$) is ignored and what is left is the momentum equation,
 $$
 mn\frac{\partial \textbf{V}}{\partial t} + mn \textbf{V}\cdot\nabla \textbf{V} - qn(\textbf{E}+\textbf{V}\times\textbf{B})=-\nabla p+\textbf{R}.
 $$
@@ -101,7 +93,7 @@ $$
 $$
 since there are collisions with all other species. Also note self-collisions conserve momentum, hence $\textbf{R}_{\alpha \alpha}=0$.
 
-The third equation to be derived is the energy equation. However for this thesis the energy equation will be transformed so that the subject is instead temperature. Since Boltzmann's constant $k_b$ is always associated with the temperature $T$, we shall for the remainder of this thesis absorb it into the definition of $T$, which is thereby measured in units of energy rather than degrees (thus $k_b T \rightarrow T$ from here on). Using the following definitions of thermal energy density, kinetic energy density and thermal heat flow,
+The third equation to be derived is the energy equation. One can formulate the energy equation in terms to the total thermal energy, but here we will derive the energy equation in terms of temperature. This is an arbitrary choice, and one taken because heat flow is expressed in terms of temperature gradients. Since Boltzmann's constant $k_b$ is always associated with the temperature $T$, a change of units for temperature allows one to absorb it into the definition of $T$, so it now appears in units of energy rather than degrees Kelvin (thus $k_b T \rightarrow T$ from here on). Using the following definitions of thermal energy density, kinetic energy density and thermal heat flow,
 $$
 \begin{align}
 &\mathcal{E_T} = \frac{1}{2}mn\langle w^2\rangle = \frac{3}{2}nT, \\
@@ -109,8 +101,7 @@ $$
 &\textbf{q}'= \frac{1}{2}m n \langle w^2 \textbf{w}\rangle = \frac{1}{2}m \int w^2 \textbf{w} f(\textbf{r},\textbf{v},t)d^3 v,
 \end{align}
 $$
-
-and the ideal gas law
+and the ideal gas law equation of state
 $$
 p=nT.
 $$
@@ -125,7 +116,6 @@ Q=\frac{1}{2}m\int v^2 \left( \frac{\partial f_\alpha}{\partial t} \right)_{coll
 \end{align}
 $$
 If this analysis is done for both the electron and ion VFP equations the result is a set of six transport equations, three each for the electrons and ions.
-
 $$
 \begin{gather}
 \frac{\partial n_e}{\partial t}+\nabla \cdot (n_e \textbf{V}_e)=0, \\
@@ -137,11 +127,11 @@ m_i n_i\frac{\partial \textbf{V}_i}{\partial t} + m_i n_i \textbf{V}_i\cdot\nabl
 \end{gather}
 $$
 
-### The Single Fluid Model
+These transport equations, derived from the moments of the Vlasov-Fokker-Planck equation, form the foundation of the two-fluid plasma model, where electrons and ions are treated as separate interacting fluids. This approach retains more kinetic information than single-fluid MHD and is capable of capturing important effects such as electron-ion temperature differences, charge separation on small scales, and species-specific transport phenomena. Notably, the momentum equations for each species include both electromagnetic forces and collisional momentum exchange, represented by $R_e$ and $R_i$, which ensure conservation of total momentum across the system. Similarly, the energy equations include heat flux terms $q_e'$ and $q_i'$, which account for non-local transport of thermal energy due to the random motion of particles—effects that are especially important in weakly collisional or magnetised plasmas. The collision source terms $Q_e$ and $Q_i$ represent both energy exchange between species and dissipative heating mechanisms. In the limit of high collisionality and scale separation, these equations reduce to the single-fluid MHD model through a series of asymptotic approximations, but retaining them in full is crucial for modelling high-frequency dynamics, small-scale structures, or plasmas with low collisionality such as those found in the solar wind or magnetic fusion devices.
 
-Thusfar the plasma can be seen as two inter-penetrating fluids. Using the fact that the mass of the electron is much lower than that of a proton, it is justifiable to ignore the electron inertia and define a simpler single fluid model with fluid velocity $\textbf{V}$ and density $\rho$.
+## The Single Fluid Model
 
-Since $m_i>>m_e$, the total plasma density is dominated by the ion density,
+Thus far the plasma can be treated as two inter-penetrating fluids. Using the fact that the mass of the electron is much lower than that of a proton, it is justifiable to ignore the electron inertia and define a simpler single fluid model with fluid velocity $\textbf{V}$ and density $\rho$. Since $m_i>>m_e$, the total plasma density is dominated by the ion density,
 $$
 \rho=m_i n_i+m_e n_e \approx m_i n_i.
 $$
@@ -177,8 +167,7 @@ which gives the quasi-neutrality condition
 $$
 \nabla\cdot\textbf{j}=0.
 $$
-
-The single fluid momentum equation is found by taking the sum of the fluid momentum equations. This equation can be simplified by first applying quasi-neutrality, which removes the electric field term. Momentum is conserved in collisions, and so the collision terms cancel because they satisfy
+The single fluid momentum equation is found by taking the sum of the fluid momentum equations. This equation can be simplified by first applying quasi-neutrality which removes the electric field term. Momentum is conserved in collisions, so the collision terms cancel because they satisfy
 $$
 \textbf{R}_e=-\textbf{R}_i.
 $$
@@ -187,21 +176,23 @@ $$
 \rho\frac{\partial \textbf{V}}{\partial t} + \rho \textbf{V}\cdot\nabla \textbf{V} =-\nabla p+\textbf{j}\times\textbf{B}.
 $$
 
-### The Energy Equation
+An important aspect of this single-fluid approximation is that it still captures the essential electromagnetic coupling through the Lorentz force term $\textbf{j} \times \textbf{B}$, despite having neglected electron inertia and simplified the multi-species dynamics. This term governs how magnetic fields influence plasma motion and is central to many MHD phenomena such as Alfvén waves, magnetic pressure, magnetic tension, and magnetic reconnection. The simplification of the current density $\textbf{j}=−en_e\textbf{U}$ also implicitly retains information about the relative drift between electrons and ions, which is critical for resistive effects and Hall currents. While the electric field disappears from the momentum equation under quasi-neutrality, it re-emerges through Ohm's law, which is derived separately and determines the evolution of the electric field in terms of macroscopic fluid quantities. Therefore, even though the two-fluid model has been reduced to a single-fluid form, key physics related to charge transport, magnetic field evolution, and force balance remain embedded in the resulting MHD equations.
 
-To find the appropriate energy equation one must begin with the electron energy equation eq. 2.27 and use the current definition, eq. 2.36, to remove the electron velocity. Then one uses the heat flow in the ion frame
+## The Energy Equation
+
+For this single fluid model the energy equation can be derived by summing the energy equations for the electrons and ions. The total thermal energy density is given by the sum of the electron and ion thermal energy densities. However the ion thermal energy density is negligible compared to the electron thermal energy density in these plasma regimes. The electron temperature dominates the thermal energy in and the heat flow is dominated by the electron heat flow. Thus ion temperature can be ignored. To find the appropriate energy equation one begins with the electron energy equation and restate the current definition to remove the electron velocity. Then one uses the heat flow in the ion frame
 $$
 \textbf{q}=\textbf{q}'-\frac{5}{2en_e}p_e\textbf{j}.
 $$
-
-To find a total energy equation for the plasma, the cold ion assumption will be employed where $T_i\approx 0$. The cold ion approximation is used throughout this thesis because in laser-plasma regimes the thermal energy is dominated by the electron temperature, and the heat flow dominated by the electron heat flow. While ions are also heated in the presence of shocks [@Drake2006IntroductionPhysics], the simulations presented in this thesis do not enter the shock regime. In this approximation the ion pressure can be ignored $p_i\approx 0$ and the ion energy equation is removed. In this case the total thermal energy of the plasma is held by the electron temperature. The energy equation is then
+The total energy equation for the plasma relies on the cold ion approximation. The cold ion approximation (where $T_i\approx 0$) can be used  because in high-energy-density plasmas the thermal energy is dominated by the electron temperature, and the heat flow dominated by the electron heat flow. In this approximation the ion pressure can also be ignored $p_i\approx 0$ and the ion energy equation is removed. In this case the total thermal energy of the plasma is held by the electrons. The energy equation is then
 $$
 \frac{3}{2}n_e\left(\frac{\partial T_e}{\partial t}+\textbf{V}\cdot\nabla T_e\right)+p\nabla \cdot\textbf{V}+\nabla \cdot \textbf{q}=\textbf{R}_e\cdot\textbf{j}/e n_e.
 $$
+This simplified energy equation reflects a common and practical assumption in modelling high-energy-density or laser-produced plasmas, where electrons are rapidly heated (e.g., via laser absorption or collisional processes) while ions remain comparatively cold due to their larger mass and slower thermal response. The cold ion approximation significantly reduces model complexity without sacrificing accuracy in regimes where electron thermodynamics dominate energy transport and pressure forces. The heat flux vector, corrected for the frame shift to the ion rest frame, captures the non-ideal transport of thermal energy due to electron thermal conduction which is the dominant mechanism for energy redistribution in such plasmas. The right-hand side term $\textbf{R}_e\cdot\textbf{j}/e n_e$ represents collisional heating of electrons by resistive dissipation, sometimes referred to as Ohmic heating, where electron-ion collisions convert electromagnetic energy into thermal energy. This coupling is crucial in understanding energy deposition in plasma. Despite its simplicity, this energy equation retains essential physics necessary for modelling thermal evolution and energy transport in many laboratory and astrophysical plasmas.
 
-### Maxwell's Equations
+## Maxwell's Equations
 
-The evolution of electromagnetic fields in the plasma is determined by Maxwell's equations
+The defining property of plasmas relative to other fluids is their response to electromagnetic fields. Plasmas act as both a medium carrying fields and as a source of fields through the motion of charged particles. The electromagnetic fields in a plasma are governed by Maxwell's equations, which describe how electric and magnetic fields interact with charges and currents. In the context of plasmas, these equations must be modified to account for coupling the fields and the plasma dynamics. Maxwell's equations in differential form are given by
 $$
 \begin{align}
 &\nabla \cdot \textbf{E}=\frac{\rho_c}{\epsilon_0}, \\
@@ -210,7 +201,7 @@ $$
 &\nabla \times \textbf{B}=\mu_0 \textbf{j}+\mu_0\epsilon_0\frac{\partial \textbf{E}}{\partial t}.
 \end{align}
 $$
-As the plasma is quasi-neutral, the charge density on a scale above that of the Debye length will be zero, $\rho_c =0$. The temporal regime of interest in this thesis is that described by \textit{low-frequency} phenomena, where the characteristic timescale is much longer than the plasma period, i.e $\partial_t<<\omega_p$. The displacement field in the Ampere-Maxwell law can be ignored since the timescale of the plasma dynamics is far below the fast electron plasma period ($1/\omega_p$) timescale. This means Maxwell's equations in plasmas become
+As the plasma is quasi-neutral, the charge density on a scale above that of the Debye length will be zero, $\rho_c =0$. In addition, the temporal regime of interest in single-fluid plasma models is that described by *low-frequency* phenomena, where the characteristic timescale is much longer than the plasma period, i.e $\partial_t<<\omega_p$. This means the displacement field in the Ampere-Maxwell law can be ignored since the timescale of the plasma dynamics is far below the fast electron plasma period ($1/\omega_p$) timescale. Under these simplifying assumptions Maxwell's equations in plasmas become
 $$
 \begin{align}
 &\nabla \cdot \textbf{B}=0, \\
@@ -218,3 +209,4 @@ $$
 &\nabla \times \textbf{B}=\mu_0 \textbf{j}.
 \end{align}
 $$
+However, it is important to note that this approximation breaks down at small scales near the Debye length, or in phenomena involving double layers, sheaths, or fast electromagnetic waves, where full Maxwell-Vlasov or two-fluid treatments become necessary. In the MHD context, these reduced equations still capture essential magnetic dynamics such as flux freezing, inductive field generation, and magnetic pressure/tension forces, making them a cornerstone of plasma fluid modelling.

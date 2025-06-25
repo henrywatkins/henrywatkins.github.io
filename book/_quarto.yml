@@ -3,18 +3,18 @@ project:
   output-dir: ../docs/book
 
 book:
-  title: "Practical Plasma Physics: Lasers, Transport, and Magnetic Effects"
+  title: "Practical Plasma Physics: Lasers, Transport, and Magnetisation"
   author: "Henry Watkins"
   chapters:
     - index.qmd
     - mhd.qmd
-    - collisions.qmd
-    - transport.qmd
-    - nonlocal_transport.qmd
-    - lasers.qmd
-    - laserplasma.qmd
-    - applications.qmd
-    - summary.qmd
+    #- collisions.qmd
+    #- transport.qmd
+    #- nonlocal_transport.qmd
+    #- lasers.qmd
+    #- laserplasma.qmd
+    #- applications.qmd
+    #- summary.qmd
 
 bibliography: references.bib
 
