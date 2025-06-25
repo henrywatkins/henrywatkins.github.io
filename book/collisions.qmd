@@ -1,5 +1,4 @@
-
-# Closure and Collisions
+# Closure and Collisions {#sec-collisions}
 
 So far the system of equations is not closed as there is no equation that could be used to eliminate heat flow $\textbf{q}$ or the electric field $\textbf{E}$ or the collision term $\textbf{R}_e$ from the system. The conventional approach to close the system of equations is to use the Chapman-Enskog expansion. In this approach the distribution function is assumed to be approximately Maxwellian with only a small deviation. This approximation holds very well in very collisional plasmas because collisions drive the distribution towards equilibrium. In calculating collision terms, closure relations will be found that complete the model.
 

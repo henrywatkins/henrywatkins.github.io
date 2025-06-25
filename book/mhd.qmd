@@ -1,4 +1,4 @@
-# Magneto-Hydrodynamics
+# Magneto-Hydrodynamics {#sec-mhd}
 
 This chapter will introduce the important theoretical background and equations lying at the foundation of this thesis. The plasma state is characterised by being a macroscopically quasi-neutral ensemble of charged particles. As such the electromagnetic interactions between the charged particles lead to long-range electromagnetic forces, alongside the short range collisional forces. 
 

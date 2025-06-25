@@ -1,5 +1,4 @@
-
-# Magnetised Transport
+# Magnetised Transport {#sec-transport}
 
 ## The Transport Coefficients
 

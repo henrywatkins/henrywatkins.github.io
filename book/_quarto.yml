@@ -3,9 +3,8 @@ project:
   output-dir: ../docs/book
 
 book:
-  title: "Plasma Physics: An Outline"
+  title: "Practical Plasma Physics: Lasers, Transport, and Magnetic Effects"
   author: "Henry Watkins"
-  date: "6/19/2025"
   chapters:
     - index.qmd
     - mhd.qmd
