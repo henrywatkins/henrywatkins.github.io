@@ -1,4 +1,4 @@
-# Non-Local Transport
+# Non-Local Transport {#sec-nonlocal}
 
 The conventional derivation of fluid theory relies on the truncation of the spherical harmonic expansion of the electron distribution function in velocity space and the assumption that the isotropic part $f_0$ is Maxwellian \cite{Shkarofsky1966ThePlasmas}. This local approximation holds in the regime $L_T>>\lambda_{ei}$, where the electron-ion collision mean-free-path $\lambda_{ei} (\propto T_e^2)$ is much smaller than the temperature scale length $L_T$, defined as
 \begin{equation}

@@ -1,4 +1,4 @@
-# Applications
+# Applications {#sec-applications}
 
 
 \section{Inertial Confinement Fusion}

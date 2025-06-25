@@ -1,13 +1,12 @@
+# Closure and Collisions {#sec-collisions}
 
-# Closure and Collisions
-
-So far the system of equations is not closed as there is no equation that could be used to eliminate heat flow $\textbf{q}$ or the electric field $\textbf{E}$ or the collision term $\textbf{R}_e$ from the system. The conventional approach to close the system of equations is to use the Chapman-Enskog expansion. In this approach the distribution function is assumed to be approximately Maxwellian with only a small deviation. This approximation holds very well in very collisional plasmas because collisions drive the distribution towards equilibrium. In calculating collision terms, closure relations will be found that complete the model.
+In the previous chapter we derived a set of fluid equations for a plasma; however, the system of equations is not closed because there is no equation coupling the heat flow $\textbf{q}$ to a lower-order moment, or an expression for the collision term $\textbf{R}_e$. The conventional approach to close the system of equations is to use the Chapman-Enskog expansion. In this approach the distribution function is assumed to be approximately Maxwellian with only a small deviation; this approximation holds very well in strongly collisional plasmas because collisions drive the distribution towards equilibrium. This closure problem arises because the moment hierarchy derived from the Vlasov-Fokker-Planck equation is infinite: each moment equation depends on the next higher-order moment, preventing a self-contained solution without additional assumptions. The Chapman-Enskog expansion provides a systematic method to truncate this hierarchy by expressing higher-order moments (such as heat flux and stress) as functions of lower-order quantities (like density, velocity, and temperature gradients). Physically, this corresponds to modelling the effects of irreversible transport processes in terms of macroscopic gradients and plasma parameters, such as viscous momentum transport, thermal conduction, and resistive dissipation. The resulting closure relations allow the introduction of classical transport coefficients, such as electrical conductivity, thermal conductivity, and viscosity, which are fundamentally governed by collisional dynamics.
 
 ## Collisions in Plasmas
 
-The collisions between charged particles in a plasma are **Coulomb collisions**, where a charged particle is scattered by the electrostatic field of another charged particle. Considering the single-particle motion of an electron in an electrostatic field, the collision frequency of an electron with speed $v$ from ions in a plasma is [@Helander2005CollisionalPlasmas; @S.I.Braginskii1965]
+The collisions between charged particles in a plasma are **Coulomb collisions**, where a charged particle is scattered by the electrostatic field of another charged particle. Considering the single-particle motion of an electron in an electrostatic field, the collision frequency of an electron with speed $v$ from ions in a plasma is
 $$
-    \nu_{ei}(v)=\frac{n_i\Gamma_{ei}}{v^3}=\frac{3 \sqrt{\pi}}{4 \tau_{ei}} \left(\frac{v_{th}}{v}\right)^3,
+\nu_{ei}(v)=\frac{n_i\Gamma_{ei}}{v^3}=\frac{3 \sqrt{\pi}}{4 \tau_{ei}} \left(\frac{v_{th}}{v}\right)^3,
 $$
 with the factor $\Gamma_{ei}$, collision time $\tau_{ei}$, Coulomb logarithm $\ln \Lambda$ and thermal speed $v_{th}$ defined as 
 $$
@@ -18,24 +17,24 @@ $$
     v_{th}&=\sqrt{\frac{T_e}{m_e}}.
 \end{align}
 $$
-The velocity dependence of the collision frequency is of the order $v^{-3}$ and so slow, low energy particles are highly collisional whereas fast particles are collisionless. At the thermal speed one can also see from this definition the temperature dependence of the collision frequency is of the order $T_e^{-3/2}$. One can also define the mean free path of e-i collisions $\lambda_{ei}$ to be 
+These expressions can be derived by considering the elastic scattering of an electron in the presence of electrostatic field from a static ion. The full calculation of the collision frequency will be omitted here, but can be found in any good description of the Rutherford scattering model. The velocity dependence of the collision frequency is of the order $v^{-3}$; this means slow, low energy particles are highly collisional whereas fast particles are effectively collisionless. At the thermal speed, the temperature dependence of the collision frequency is of the order $T_e^{-3/2}$. One can also define the mean free path of e-i collisions $\lambda_{ei}$ to be 
 $$
     \lambda_{ei}=v_{th}\tau_{ei}.
 $$
-
-Comparing the collision frequencies of ion-ion, electron-electron and ion-electron collisions one can find they approximately follow the scaling [@Helander2005CollisionalPlasmas]
+The collision frequencies for different species can be ordered by considering the masses of the particles, leading to a scaling that allows us to simplify our analysis of the collision operator. Comparing the collision frequencies of ion-ion, electron-electron and ion-electron collisions one can find they approximately follow the scaling
 $$
     \nu_{ee}\sim\nu_{ei}/\sqrt{2}>>\nu_{ii}\sim\sqrt{\frac{m_e}{m_i}}\nu_{ei}>>\nu_{ie}\sim\frac{m_e}{m_i}\nu_{ei}.
 $$
-Since i-i and i-e collisions have a frequency much lower than e-i collisions (by factors $\sqrt{m_e/m_i}$ and $m_e/m_i$ respectively) it is possible to safely ignore them in approximations of transport and collisional effects on the distribution function. This argument cannot however be applied to electron-electron collisions and so the e-e operator must be included. 
+Since i-i and i-e collisions have a frequency much lower than e-i collisions (by factors $\sqrt{m_e/m_i}$ and $m_e/m_i$ respectively) it is possible to safely ignore them in approximations of transport and collisional effects on the distribution function. This argument cannot however be applied to electron-electron collisions so the e-e operator must be included.
+
+The fact that electron-ion collisions dominate over ion-ion or ion-electron collisions justifies modelling collisional transport primarily through the electron dynamics, while treating ions as nearly collisionless for the purpose of heat and momentum transport. However, because electron-electron collisions efficiently redistribute energy among electrons and maintain a Maxwellian core distribution, their inclusion is essential for establishing valid closure relations and defining well-behaved macroscopic quantities like temperature and conductivity. This underlines the importance of using an accurate collision operator which properly captures the small-angle, cumulative nature of Coulomb interactions while distinguishing between self-collisions (e-e) and cross-species (e-i) collisions.
 
 ## The Fokker-Planck Collision Operator
 
-The starting point to derive collision terms is first to derive the form of the collision operator alluded to in eq. 2.4. For the plasmas in this thesis, Coulomb collisions are small-angle, glancing collisions and the operator that very accurately models such collisions in this regime is the Fokker-Planck operator 
+For the plasmas in the regimes covered in this book, Coulomb collisions are considered to be small-angle, glancing collisions. This approximation is equivalent to Brownian motion because they represent stochastic corrections that drive the total distribution towards a Gaussian distribution. The operator that very accurately models such collisions in this regime is the Fokker-Planck operator 
 $$
 \left(\frac{\partial f}{\partial t}\right)_{coll}=-\frac{\partial}{\partial \textbf{v}}\left(\frac{\langle\Delta \textbf{v}\rangle f}{\Delta t}\right)+\frac{1}{2}\frac{\partial^2}{\partial\textbf{v}\partial\textbf{v}}\left(\frac{\langle \Delta \textbf{v}\Delta \textbf{v}\rangle f}{\Delta t}\right).
 $$
-
 This operator is split into two terms that represent drift and diffusion of the distribution function through velocity space. To transform the Fokker-Planck operator into explicitly Coulomb-collision form, the Rosenbluth potentials $H_\beta$ and $G_\beta$ are used for species $\beta$. The expressions $\frac{\langle \Delta \textbf{v}\Delta \textbf{v}\rangle}{\Delta t}$ and $\frac{\langle \Delta \textbf{v}\rangle}{\Delta t}$ are written in terms of these potentials thus
 $$
 \begin{align}
@@ -50,7 +49,7 @@ $$
 \left( \frac{\partial f_\alpha}{\partial t} \right)_{coll}= \Gamma_{\alpha\beta}\left[ - \frac{\partial}{\partial v_i}\left(f_\alpha \frac{\partial}{\partial v_j} H_\beta \right) + \frac{1}{2}\frac{\partial}{\partial v_i}\frac{\partial}{\partial v_j}\left( f_\alpha \frac{\partial}{\partial v_i}\frac{\partial}{\partial v_j}G_\beta \right) \right].
 $$
 
-Furthermore, the cold ion approximation means a Maxwellian ion distribution is taken to be a Dirac delta $f_i=n_i\delta(\textbf{v}_i)$ because the variance of the ion distribution vanishes. The Rosenbluth potentials reduce to
+Furthermore, the cold ion approximation means a Maxwellian ion distribution is replaced with a Dirac delta $f_i=n_i\delta(\textbf{v}_i)$ as the temperature (and thus the variance of the Maxwellian) of the ion distribution vanishes. The Rosenbluth potentials reduce to
 $$
 \begin{align}
     &G_i(\textbf{v})=n_i v,\\
@@ -61,54 +60,85 @@ The Fokker-Planck operator for electron-ion collisions reduces to the Lorentz sc
 $$
     \left( \frac{\partial f_e}{\partial t} \right)_{coll}= \frac{n_i\Gamma_{ei}}{2}\frac{\partial}{\partial v_i}\left[\left( \frac{v^2\delta_{ij}-v_i v_j}{v^3}\right) \frac{\partial f_e}{\partial v_j} \right].
 $$
+This final form of the collision operator, known as the Lorentz operator, describes pitch-angle scattering representing the random deflection of electron velocities due to encounters with much heavier, stationary ions. It captures the dominant effect of electron-ion collisions in the cold-ion limit, where momentum transfer is primarily angular. Importantly, the Lorentz operator conserves particle number and respects the isotropy of the background ion distribution while driving the electron distribution function toward isotropy in velocity space.
 
-## Closure using a near-Maxwellian distribution
+## Closure
 
-Closure is achieved via the Chapman-Enskog method [@Helander2005CollisionalPlasmas], whereby the distribution function is assumed to be approximately Maxwellian,
+We now have everything required to close the system of equations. The Chapman-Enskog method proceeds with an approximately Maxwellian electron distribution function,
 $$
     f_e(\textbf{x},\textbf{v},t)=f_m+\delta f.
 $$
-Spherical harmonics can be used to take advantage of the form of the Lorentz scattering operator. This operator is linear and has  spherical harmonic eigenfunctions and so expanding the distribution function in terms of spherical harmonics will simplify the collision term.
+Spherical harmonics are used to take advantage of the form of the Lorentz scattering operator. This operator is linear and from Sturm-Liouville theory one can show it has spherical harmonic eigenfunctions. Expanding the distribution function in terms of spherical harmonics will simplify the collision term by replacing the velocity derivatives with angular derivatives. The spherical harmonics are defined as
 $$
     f_e(\textbf{x},\textbf{v},t)=\sum^\infty_{l=0}\sum^l_{m=-l}f_l^m(\textbf{x},v,t)P^m_l(\cos \theta)e^{im\phi},
 $$
-
-Of particular importance to this thesis will be the use of the *diffusive approximation*. In this approximation the expansion of the distribution function expansion is truncated after $l=1$ such that the terms $l>1$ are ignored. If $f_0$ is further assumed to be Maxwellian $f_m$, this becomes the *local approximation*. Using this local approximation in the VFP equation, the expressions for the collisional force terms $\textbf{R}$ and the heat flow $\textbf{q}$ are obtained from the moment definitions eq. 2.18 and 2.9 respectively.
-
-## The Collision Terms
+The *diffusive approximation* truncates the spherical harmonic expansion after the $l=1$ term such that the terms $l>1$ are ignored. If $f_0$ is further assumed to be a Maxwellian $f_m$, this becomes the *local approximation*. Using this local approximation in the VFP equation, the expressions for the collisional force terms $\textbf{R}$ and the heat flow $\textbf{q}$ can be obtained from the moment definitions.
 
 The momentum exchange terms $\textbf{R}_e$ can be split into thermal and friction components
 $$
 \textbf{R}=\textbf{R}_T + \textbf{R}_u.
 $$ 
-Following @S.I.Braginskii1965, these components are proportional to the temperature gradient and current respectively
+these components are taken to be proportional to the temperature gradient and current respectively
 $$
 \begin{align}
 \textbf{R}_T &= - n_e \underline{\underline{\boldsymbol{\beta}}}\cdot \nabla T, \\
 \textbf{R}_u &= \underline{\underline{\boldsymbol{\alpha}}}\cdot \textbf{j} \frac{1}{e n_e}.
 \end{align}
 $$
-The transport coefficients $\underline{\underline{\boldsymbol{\beta}}}$ and $\underline{\underline{\boldsymbol{\alpha}}}$ are the thermoelectric tensor and the resistivity tensor respectively. These coefficients are tensors because transport parallel and perpendicular to a magnetic field is not equal and so the transport becomes anisotropic.
+The transport coefficients $\underline{\underline{\boldsymbol{\beta}}}$ and $\underline{\underline{\boldsymbol{\alpha}}}$ are the thermoelectric tensor and the resistivity tensor respectively. These coefficients are tensors because transport parallel and perpendicular to a magnetic field is not equal, leading to anisotropic transport.
 
-## Ohm's Law
-
-Ohm's law is derived from the momentum equation for the electrons eq. 2.26. Ignoring electron inertia and inputting the form of the collision term $\textbf{R}_e$ above yields the full generalised Ohm's law
-$$
-e n_e(\textbf{E}+\textbf{V}\times\textbf{B})= -\nabla p_e+ \textbf{j}\times\textbf{B} +\frac{1}{en_e}\underline{\underline{\boldsymbol{\alpha}}}\cdot\textbf{j}-n_e\underline{\underline{\boldsymbol{\beta}}}\cdot \nabla T_e.
-$$
-
-## The Heat Flow Equation
-
-The electron heat flux is found from the moment definition eq. 2.9 and considering the difference between intrinsic and extrinsic heat flow, eq. 2.40. Like the collision term $\textbf{R}_e$ it is made up of two parts corresponding to thermal and frictional components 
+The electron heat flux is defined in the moment definitions in @sec-mhd, but the closure must consider the difference between intrinsic and extrinsic heat flow. Like the collision term $\textbf{R}_e$ it is made up of two parts corresponding to thermal and frictional components 
 $$
     \textbf{q}_e=\textbf{q}_u+\textbf{q}_T,
 $$
 where
-
 $$
 \begin{align}
     &\textbf{q}_u= - \underline{\underline{\mathbf{\beta}}}\cdot\textbf{j} \frac{T_e}{e},\\
     &\textbf{q}_T=-\underline{\underline{\mathbf{\kappa}}}\cdot\nabla T_e.
 \end{align}
 $$
-These expressions close the system of equations, however the exact forms of the magnetised transport coefficients $\underline{\underline{\mathbf{\alpha}}},\underline{\underline{\mathbf{\beta}}},\underline{\underline{\mathbf{\kappa}}}$ must now be specified. Alternative descriptions of the derivation of the transport terms can also be found in @Helander2005CollisionalPlasmas or @Boyd2003ThePlasmas. 
+
+The closure relations for $\textbf{R}_e$ and $\textbf{q}_e$ not only reflect the anisotropic nature of transport in a magnetised plasma, but are chosen based on symmetry properties rooted in thermodynamic theory. In particular, the structure of these relations is governed by the Onsager reciprocal relations, which state that the matrix of linear transport coefficients relating thermodynamic fluxes (like current and heat flow) to their conjugate forces (like electric field and temperature gradient) must be symmetric under time-reversal invariance, provided the microscopic dynamics obey that symmetry. This implies that the cross-coupling terms between current and temperature gradient must satisfy $\underline{\underline{\mathbf{\beta}}}=\underline{\underline{\mathbf{\beta}}}^T$, and similarly for the other transport tensors. Physically, this symmetry means that the same mechanism responsible for generating a current by a thermal gradient (the thermoelectric effect) also produces a heat flux in response to an electric current (the Peltier effect), with equal efficiency in linear response. In a magnetised plasma, the tensors take on a more complicated tensorial form, but Onsager symmetry still applies if the magnetic field. These properties not only constrain the allowed forms of the transport tensors but also ensure thermodynamic consistency and energy conservation in the resulting fluid model.
+
+These expressions close the system of equations, however the exact forms of the magnetised transport coefficients $\underline{\underline{\mathbf{\alpha}}},\underline{\underline{\mathbf{\beta}}},\underline{\underline{\mathbf{\kappa}}}$ must now be specified. The introduction of the transport tensors marks the final step in closing the fluid system, but their full specification depends critically on the magnetic field strength and orientation.
+
+## Ohm's Law
+
+The final component for a fully-closed system of equations is an equation linking the electric field to the rest of the plasma parameters. This is known as Ohm's law, which plays the role of the electron momentum equation, but is derived by ignoring electron inertia and incorporating the form of the collision term $\textbf{R}_e$. The result is the generalised Ohm's law
+$$
+e n_e(\textbf{E}+\textbf{V}\times\textbf{B})= -\nabla p_e+ \textbf{j}\times\textbf{B} +\frac{1}{en_e}\underline{\underline{\boldsymbol{\alpha}}}\cdot\textbf{j}-n_e\underline{\underline{\boldsymbol{\beta}}}\cdot \nabla T_e.
+$$
+Each term on the right-hand side corresponds to a distinct physical effect that contributes to the electric field experienced in the fluid (ion) frame. The pressure gradient term $-\nabla p_e$ represents the electron pressure drive, often important in regions of strong compression or expansion, such as in shocks or reconnection layers. The Hall term $\textbf{j}\times\textbf{B}$ captures two-fluid effects arising from the relative motion between electrons and ions, and becomes significant in regimes where the current varies on length scales comparable to or smaller than the ion skin depth. The resistive term involving $\underline{\underline{\boldsymbol{\alpha}}}\cdot\textbf{j}$  accounts for Ohmic dissipation, which converts kinetic energy into heat via electron-ion collisions, and dominates in dense, cold, or weakly magnetised plasmas. Lastly, the thermoelectric term $\underline{\underline{\boldsymbol{\beta}}}\cdot \nabla T_e$ describes the Nernst effect and other related phenomena where temperature gradients drive electric fields or currents. In strongly magnetised plasmas, anisotropy in these tensor coefficients can lead to complex behaviours such as cross-field currents and magnetic field advection by electron heat flux. Ohm’s law thus serves not only to determine $\textbf{E}$ for Faraday’s law, but also introduces the necessary coupling between the electric field, current density, and plasma parameters that is essential for a self-consistent description of magnetised plasma dynamics.
+
+## The Single-Fluid Model
+
+Finally, bringing together the results of the previous sections together, the set of equations that describe a single-fluid magnetised plasma is thus:
+
+The Continuity Equation
+$$
+\frac{\partial \rho}{\partial t}+\nabla \cdot (\rho\textbf{V})=0 
+$$
+The Momentum Equation
+$$
+\rho\frac{\partial \textbf{V}}{\partial t} +\rho\textbf{V}\cdot\nabla\textbf{V} =-\nabla p_e +\textbf{j}\times\textbf{B}
+$$
+Ohm's Law
+$$
+e n_e(\textbf{E}+\textbf{V}\times\textbf{B})= -\nabla p_e+ \textbf{j}\times\textbf{B} +\frac{1}{en_e}\underline{\underline{\mathbf{\alpha}}}\cdot\textbf{j}-n_e\underline{\underline{\mathbf{\beta}}}\cdot \nabla T_e
+$$
+The Heat Flow Equation
+$$
+\mathbf{q}_e=-\underline{\underline{\mathbf{\kappa}}}\cdot\nabla T_e - \underline{\underline{\mathbf{\beta}}}\cdot\textbf{j} \frac{T_e}{e}
+$$
+The Energy Equation
+$$
+\frac{3}{2}n_e\left(\frac{\partial T_e}{\partial t}+\textbf{V}\cdot\nabla T_e\right)+p_e\nabla \cdot\textbf{V}+\nabla \cdot \textbf{q}=\textbf{E}\cdot\textbf{j}
+$$
+Maxwell's Equations
+$$
+\nabla \times \textbf{E}=-\frac{\partial \textbf{B}}{\partial t}
+$$
+$$
+\nabla \times \textbf{B}=\mu_0 \textbf{j}
+$$

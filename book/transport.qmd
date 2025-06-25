@@ -1,5 +1,4 @@
-
-# Magnetised Transport
+# Magnetised Transport {#sec-transport}
 
 ## The Transport Coefficients
 
@@ -133,52 +132,6 @@ $$
 $$
 
 From this expression one can see if the electron density and electron temperature fields have non-parallel gradients, a magnetic field will be induced via the Biermann battery effect. In laser-generated plasmas, energy deposition via a laser heating mechanism will locally heat a region of the plasma. With a very non-uniform density profile - as is common in laser-plasma interactions - magnetic field generation via this mechanism is one of the most significant sources of magnetic fields in experiments. Even if a magnetic field has not been imposed externally, this mechanism can magnetise the plasma, leading to magnetised transport terms.
-
-
-## The Single-Fluid Model
-
-Finally, bringing together the results of the previous sections together, the set of equations that describe a single-fluid magnetised plasma, and which will be used as the core set in this thesis is thus:
-\\
-\subsubsection*{The Continuity Equation}
-
-$$
-\frac{\partial \rho}{\partial t}+\nabla \cdot (\rho\textbf{V})=0 
-$$
-
-\subsubsection*{The Momentum Equation}
-
-$$
-\rho\frac{\partial \textbf{V}}{\partial t} +\rho\textbf{V}\cdot\nabla\textbf{V} =-\nabla p_e +\textbf{j}\times\textbf{B}
-$$
-
-\subsubsection*{Ohm's Law}
-
-$$
-e n_e(\textbf{E}+\textbf{V}\times\textbf{B})= -\nabla p_e+ \textbf{j}\times\textbf{B} +\frac{1}{en_e}\underline{\underline{\mathbf{\alpha}}}\cdot\textbf{j}-n_e\underline{\underline{\mathbf{\beta}}}\cdot \nabla T_e
-$$
-
-\subsubsection*{Heat Flow Equation}
-
-$$
-\mathbf{q}_e=-\underline{\underline{\mathbf{\kappa}}}\cdot\nabla T_e - \underline{\underline{\mathbf{\beta}}}\cdot\textbf{j} \frac{T_e}{e}
-$$
-
-\subsubsection*{The Energy Equation}
-
-$$
-\frac{3}{2}n_e\left(\frac{\partial T_e}{\partial t}+\textbf{V}\cdot\nabla T_e\right)+p_e\nabla \cdot\textbf{V}+\nabla \cdot \textbf{q}=\textbf{E}\cdot\textbf{j}
-$$
-
-\subsubsection*{Maxwell's Equations}
-$$
-\nabla \times \textbf{E}=-\frac{\partial \textbf{B}}{\partial t}
-$$
-
-$$
-\nabla \times \textbf{B}=\mu_0 \textbf{j}
-$$
-
-\newpage
 
 
 

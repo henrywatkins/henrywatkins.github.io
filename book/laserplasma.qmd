@@ -1,5 +1,4 @@
-
-# Plasma-Laser Coupling
+# Plasma-Laser Coupling {#sec-laserplasma}
 
 As the core of this thesis is an investigation of laser-plasma interactions, it is necessary to introduce the interaction processes. The plasmas of interest here are all produced by long pulse lasers with a laser wavelength of $\lambda_l= 1 \mu m$. As such the laser intensity is moderate, with a peak intensity around $10^{15} W cm^{-2}$ and a laser-plasma coupling parameter $I\lambda_l^2$ in the region of $10^7 W$. To get a measure for the importance of special relativistic effects in laser-plasma coupling, one can consider the magnitude of the electron quiver speed $v_{osc}$, this is the speed of oscillation of an electron in the electric field of the laser. With intensities this low, relativistic effects can be ignored since the electron quiver speed relative to the speed of light
 \begin{equation}

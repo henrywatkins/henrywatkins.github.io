@@ -1,3 +1,7 @@
-# Summary
+# Summary {#sec-summary}
 
 
+
+Further reading and resources:
+
+There are lots of excellent resources and textbooks for learning about plasma physics. Textbooks such as @Boyd2003ThePlasmas are a great comprehensive introduction to plasma theory. Online lecture notes such as those of @tong2012kinetic on kinetic theory provide a deep dive on the topic, but @Swanson2008PlasmaTheory is the best in-depth source for plasma kinetic theory. Additionally there is also @Shkarofsky1966ThePlasmas, the venerable classic reference for plasma kinetics. For a textbook focused on collisions in plasmas, @Helander2005CollisionalPlasmas is an excellent resource, And for an introduciton to inertial confinement fusion and laser-plasma interactions, @Atzeni2004, @Pfalzner2006AnFusion and @Kruer1988 are the best books on the subject. @Stix1992 has a wonderful short book on plasma waves, and @Biskamp1997NonlinearMagnetohydrodynamics provides a more advanced treatment of MHD and nonlinear plasma physics. @drake2006introduction is a good introduction to high-energy-density physics, covering plasmas at extreme conditions such as those found in inertial confinement fusion experiments. Finally, a good desk-side referecne book is the well-loved NRL Plasma Formulary [@richardson20192019] wichi lists many useful plasma formulas and parameters.

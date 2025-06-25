@@ -3,19 +3,18 @@ project:
   output-dir: ../docs/book
 
 book:
-  title: "Plasma Physics: An Outline"
+  title: "Practical Plasma Physics: Lasers, Transport, and Magnetisation"
   author: "Henry Watkins"
-  date: "6/19/2025"
   chapters:
     - index.qmd
     - mhd.qmd
     - collisions.qmd
-    - transport.qmd
-    - nonlocal_transport.qmd
-    - lasers.qmd
-    - laserplasma.qmd
-    - applications.qmd
-    - summary.qmd
+    #- transport.qmd
+    #- nonlocal_transport.qmd
+    #- lasers.qmd
+    #- laserplasma.qmd
+    #- applications.qmd
+    #- summary.qmd
 
 bibliography: references.bib
 
@@ -26,8 +25,8 @@ format:
       - brand
     toc: true
     toc-location: left
-  #pdf:
-  #  documentclass: scrreprt
+  pdf:
+    documentclass: scrreprt
   #epub:
   #  cover-image: cover.png
 
