@@ -39,11 +39,11 @@ with the standard deviation being the thermal speed defined as $v_{th}=\sqrt{k_b
 Deriving MHD from kinetic theory consists of taking moments of the VFP equation. These moments are the macroscopic quantities found by taking averages over the distribution function; in particular the conserved quantities or mass, momentum and energy. However in taking successive moments, each moment equation couples to the next. To create a closed system of equations, transport relations must be found that couple to a lower-order moment; in MHD this is achieved with the Fokker-Planck collision term. For a macroscopic fluid model the equations must describe the relationships between macroscopic quantities. The moments are found by multiplying the distribution function by successive velocity variables $v_i$ and integrating over the whole of velocity space. The first few moments below are number density, fluid velocity, total energy density, heat and enthalpy flux and the stress tensor, respectively
 $$
 \begin{align}
-&n(\textbf{r},t) =\int f(\textbf{r},\textbf{v},t)d^3 v, \\
-&\textbf{V}(\textbf{r},t)=\langle\textbf{v}\rangle =\frac{1}{n} \int \textbf{v} f(\textbf{r},\textbf{v},t)d^3 v, \\
-&\mathcal{E}(\textbf{r},t)= \frac{1}{2} m n \langle v^2\rangle= \frac{1}{2}m\int v^2 f(\textbf{r},\textbf{v},t)d^3 v, \\
-&\textbf{q}(\textbf{r},t)= \frac{1}{2}m n \langle w^2 \textbf{v}\rangle = \frac{1}{2}m \int w^2 \textbf{v} f(\textbf{r},\textbf{v},t)d^3 v, \\
-&\sigma_{ij}= m n\langle w_i w_j\rangle = m \int w_i w_j f(\textbf{r},\textbf{v},t)d^3 v,
+n(\textbf{r},t) &=\int f(\textbf{r},\textbf{v},t)d^3 v, \\
+\textbf{V}(\textbf{r},t)&=\langle\textbf{v}\rangle =\frac{1}{n} \int \textbf{v} f(\textbf{r},\textbf{v},t)d^3 v, \\
+\mathcal{E}(\textbf{r},t)&= \frac{1}{2} m n \langle v^2\rangle= \frac{1}{2}m\int v^2 f(\textbf{r},\textbf{v},t)d^3 v, \\
+\textbf{q}(\textbf{r},t)&= \frac{1}{2}m n \langle w^2 \textbf{v}\rangle = \frac{1}{2}m \int w^2 \textbf{v} f(\textbf{r},\textbf{v},t)d^3 v, \\
+\sigma_{ij}&= m n\langle w_i w_j\rangle = m \int w_i w_j f(\textbf{r},\textbf{v},t)d^3 v,
 \end{align}
 $$
 where $w$ is the 'anomalous velocity', the deviation from the mean velocity, $\textbf{w}=\textbf{v}-\textbf{V}$. In general the $n^{th}$ moment of the distribution function is
@@ -64,10 +64,10 @@ $$
 $$
 To put this equation into a more familiar form note that the velocity $\textbf{V}$ is the sum of the average ($\textbf{V}$) and `anomalous' ($\textbf{w}$) parts $\textbf{v}=\textbf{w}+\textbf{V}$, therefore
 $$
-\begin{align*}
+\begin{align}
 \langle v_i v_j\rangle &= \langle (V_i + w_i)(V_j+w_j)\rangle \\
 &= V_iV_j + \langle w_i w_j\rangle, 
-\end{align*}
+\end{align}
 $$
 remembering $\langle w_i\rangle=0$ as it is an anomalous, random fluctuation. Putting this into the equation and invoking the continuity equation allows the equation to be written
 $$
@@ -87,9 +87,9 @@ $$
 $$
 Which satisfies 
 $$
-\begin{align*}
+\begin{align}
     \textbf{R}=\sum_\beta \textbf{R}_{\alpha \beta},
-\end{align*}
+\end{align}
 $$
 since there are collisions with all other species. Also note self-collisions conserve momentum, hence $\textbf{R}_{\alpha \alpha}=0$.
 
