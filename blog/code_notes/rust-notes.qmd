@@ -1,0 +1,474 @@
+---
+title: "Rust Notes"
+description: "Basic Rust reference and syntax"
+author: "Henry Watkins"
+draft: false
+toc: true
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+---
+
+## Online resources
+
+[Introduction - A Gentle Introduction to Rust](https://stevedonovan.github.io/rust-gentle-intro/)
+
+[Rust Language Cheat Sheet](https://cheats.rs/)
+
+[Rust in 7 Programs](https://aml3.github.io/RustTutorial/)
+
+[Tour of Rust - Table of Contents](https://tourofrust.com/TOC_en.html)
+
+[Rust Data Types Tutorial | KoderHQ](https://www.koderhq.com/tutorial/rust/data-types/)
+
+[Introduction - Rust By Example](https://doc.rust-lang.org/stable/rust-by-example/)
+
+[Table of Contents - Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/intro.html)
+
+## running rust
+
+- update rust with `rustup update`
+- build your project with `cargo build`
+- run your project with `cargo run`
+- test your project with `cargo test`
+- check you project compiles without producing and executable with `cargo check`
+- build documentation for your project with `cargo doc`
+- publish a library to crates.io with `cargo publish`
+- lookup rust documentation with `rustup doc`
+
+## creating a project
+`cargo new hello-rust`
+
+dependencies go in the `.toml` file. packages in rust are called crates
+
+## debug/format/profile
+- format with `rustfmt`. automatic idiomatic formatter also use `cargo fmt`
+- Clippy for idiomatic style `cargo clippy`
+
+## useful libraries
+- clap - CLI
+- rayon - parallelism
+- ndarray - numpy-like array datastructure
+- nalgebra - linear algebra
+- pyO3 - rust bindings for python 
+
+## Syntax
+
+import packages and their consituent functions/classes with `use package::function;`. for external (non standard library) crates, one must use `extern crate <>` at the very start 
+
+
+use double slash for comments
+
+use snake case for variable and function names
+### variables & dtypes
+
+variables are set with `let`, they are immutable by default and one must use the `mut` to allow them to be mutable. type inference does happen but one can define the variable data type with `let variablename : type = value;`
+
+basic types include integers (signed and unsigned), floats, chars (single quotes) and strings (double quotes) and booleans.
+
+when possible use the `String` tyoe instead of `str` as it is a std lib type and has more functionality. `&str` is a string slice. one creates a `String` from a `str` using `String::from(str)`, or `"string".to_string()`
+
+Rust has tuple and array compound types which allow groups of data. tuples are of fixed length but allow different types. tuples are defined with `(parentheses)`. data are accessed with indices `array.i`. one can destructure tuples to assign names to values like
+```
+let cat = ("Furry McFurson", 3.5);
+let (name, age) = cat;
+```
+
+arrays must have the same type and are also of fixed length. arrays are defined with `[square brackets]`. you can define them with a specific length like `x : [type; length] = [0; length]`. data are accessed using square brackets `x[5]`. slicing of arrays is done with a pointer and double stops `slice = &array[1..4]` 
+
+constants are always immutable and are set with `const`. they must be set with a type.
+
+pointers: pointers to array, tuple and string types are specified with &, when these compund types are passed as arguments, one must pass the pointer to the compound variable `&str, &tuple`
+
+in rust varibles have traits specific to their type, accessed as one would a method. 
+
+Aliasing: You can use the `type` keyword to define more complicated types out of simple ones e.g. 
+
+```
+type Grid = Vec<Vec<i32>>;
+```
+
+
+
+### control flow 
+
+```rust
+if val == 3 {
+    output
+} else if {
+    out2
+} else {
+   out3
+}
+```
+
+### pattern matches
+Formally, match expressions are defined as the keyword match, a value to match on, and one or more match arms that consist of a pattern and an expression to run if the value matches that arm’s pattern. This is essentially equivalent to C `switch`
+
+```rust
+match VALUE {
+    PATTERN => EXPRESSION,
+    PATTERN => EXPRESSION,
+    PATTERN => EXPRESSION,
+}
+```
+### loops
+
+There are several loop types, similar to C type loops
+- while
+- for
+- loop
+```rust
+let mut i = 0;
+while i < 10 { 
+	println("Hi there");
+	i += 1; // Rust doesn't support ++ or --
+}
+```
+
+```rust
+for i in range(0, 10) {
+	foo(i);
+}
+```
+loop is equivalent to while true`
+
+we can use `break` to get out of the loop and `continue` to skip to the next iteration. 
+
+one can iterate over a collection using the `collection.iter()` method in the loop
+### functions
+
+define functions with `fn` and C-like syntax. arguments must be defined along with their type and the output type specified with and arrow. The last expression in the function body is the value to be returned - must not have a semi-colon 
+
+```rust
+fn function(x : i32) -> i32 {
+    body1;
+    body2;
+    output
+}
+```
+
+when passing data as arguments to a function, consider passing as a reference (with `&`) for returning (possibly modified) copies (with `.clone()`) or changing the input in-place with `mut`. 
+
+e.g. passing by reference, making a copy and changing
+```rust
+fn fill_vec(vec: &Vec<i32>) -> Vec<i32> {
+    let mut new_vec = vec.clone();
+
+    new_vec.push(22);
+    new_vec.push(44);
+    new_vec.push(66);
+
+    new_vec
+}
+```
+passing by mutable value
+```rust
+fn fill_vec(mut vec: Vec<i32>) -> Vec<i32> {
+    vec.push(22);
+    vec.push(44);
+    vec.push(66);
+
+    vec
+}
+```
+
+we can also have generic functions where types are defined at compile time
+```rust
+fn my_function<T>(foo: T)
+where
+    T:Foo
+{
+    ...
+}
+```
+
+### closures
+
+closures are like lambda functions
+
+`let func = |var| var * var;`
+
+### casting
+cast variable to different type using the as operator
+```rust
+sum += i as f64;
+```
+
+one super valuable method is `.collect()`. This method converts collections of one type to another, 
+
+```rust
+let x : Vec<i32> = (0..10).collect()
+```
+converts a range to a vector
+
+Collections
+
+Vec<> all indexing must be done with `usize` integers.
+
+## Borrowing
+
+```
+let ref ref_c1 = c;
+let ref_c2 = &c;
+```
+
+When doing assignments (`let x = y`) or passing function arguments by value (`foo(x)`), the *ownership* of the resources is transferred. In Rust-speak,  this is known as a *move*. Once a variable goes out of scope, it is destroyed. 
+
+Mutability of data can be changed when ownership is transferred.
+
+Most of the time, we'd like to access data without taking ownership over it. To accomplish this, Rust uses a *borrowing* mechanism. Instead of passing objects by value (`T`), objects can be passed by reference (`&T`).
+
+You can also dereference with the star operator, `*r`  to access the data r points to. 
+
+## structs
+
+classes C-like data strucures are created like
+```
+struct Point {
+  x : i32,
+	y : i32,
+}
+```
+instantiated with `object = Point {x:3, y:4}`the data is accessed with `object.x`
+
+for variable-length data (like strings or arrays), one must use the lifetime parameter `<'a>` in your structs
+
+structs can act like classes in that they have logic associated with them, to append a method to a struct, one needs the `impl` (implementations). this wraps a set of functions that are bound to the struct and act on its data.
+
+use `&self` as arguments to these functions to access member variables, like in python
+
+one can create generic structs, where the type is specified when it is called by using the 'turbofish'
+```rust
+struct BagOfHolding<T> {
+    item: T,
+}
+```
+`let i32_bag = BagOfHolding::<i32> { item: 42 };`
+
+## enums
+Enums allow you to define a type by enumerating its possible variants.
+```rust
+enum IpAddrKind {
+    V4,
+    V6,
+}
+```
+here there are two types of IP address, and we can do something like sub-typing with enums like `type1 = IpAddrKind::V4`. this is a type not a variable, but we can use is as a data structure where the kind holds data like
+```rust
+enum IpAddr {
+    V4(String),
+    V6(String),
+}
+```
+you can put any kind of data inside an enum variant: strings, numeric types, or structs.
+
+we can also define methods on enums in the same wa y as structs, using the `impl` keyword
+
+### Option
+the option type is a standard library enum used as a replacement for NULL values
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+```
+
+to get the output, use `.unwrap()` however it is best practice to avoid unwrap, prefer the `?` operator instead
+
+### Result
+Result is a built-in enum type that allows us to return a value that has the possibility of failing. It is the idiomatic way in which the language does error handling.
+```rust
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+```
+used like 
+
+```rust
+fn do_something_that_might_fail(i:i32) -> Result<f32,String> {
+    if i == 42 {
+        Ok(13.0)
+    } else {
+        Err(String::from("this is not the right number"))   
+    }
+}
+```
+
+the combination of result and match to do error handling is made easier with the `?` key, which automatically combines the Result with the error-handling match
+
+## Cli's with Clap
+
+clap is the crate for command line interfaces, it is possible to define the arguments in the source or via a config file
+
+e.g.
+
+```
+use clap::Parser;
+
+/// Simple program to greet a person
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+   /// Name of the person to greet
+   #[arg(short, long)]
+   name: String,
+
+   /// Number of times to greet
+   #[arg(short, long, default_value_t = 1)]
+   count: u8,
+}
+
+fn main() {
+   let args = Args::parse();
+}
+```
+
+
+
+## testing
+
+- use `cargo check` to see if everything will compile without having to build the whole thing
+- use `cargo test` to run all the tests, use `cargo test name` to run a specific test
+tests are demarcated by the `#[test]` decorator, and are run with `cargo test`. Rust builds a test runner binary that runs the functions annotated with the test attribute and reports on whether each test function passes or fails.
+
+very useful macros for running tests are the `assert!` and `assert_eq!` macro. 
+
+one usually has several test cases (as functions) defined within the test module, the test case has some laogic ending in an `assert!` macro or one of its variants
+
+```
+#[test]
+fn two_is_two() {
+    assert_eq!(2, 2);
+}
+```
+
+
+
+## modules
+functionality in a crate is directory-ed by using modules. one can access the items in a module using `::`
+```rust
+mod front_of_house {
+    mod hosting {
+        fn add_to_waitlist() {}
+
+        fn seat_at_table() {}
+    }
+
+    mod serving {
+        fn take_order() {}
+
+        fn serve_order() {}
+
+        fn take_payment() {}
+    }
+}
+```
+e.g. `front_of_house::hosting::add_to_waitlist()`
+
+- however all functions in rust are private by default, so you must use the `pub` keyword
+- one can shorten the paths to functions/data in a module by using the `use <> as <>` construct, similar to the `import <> as <>` in python
+- to separate functions and things in a separate file, use the `pub` keyword on functions/structs to expose them outside the file, and use `mod name;` to import the file with the utilities, with `name::func()` to use the exact function 
+- We need to explicitly build the module tree in Rust, there’s no implicit mapping to file system/directory structure
+## Macros
+
+macros are specified with the bang operator `!` and represent metaprogramming, where the input creates a block of code. a way of writing code that writes other code. a way of reducing the amount of code written.
+
+they act a little like function/data decorators. we can create declarative macros using the `macro_rules!` keyword. they must be defined above where they are used, unlike functions that can be defined and used anywhere in the file.
+
+```rust
+macro_rules! my_macro {
+    () => {
+        println!("Check out my macro!");
+    };
+}
+```
+
+if a macro is defined in a module, one can use the `#[macro_export]` above the `macro_rules!` to expose it from the module and use it in your code
+
+there must be at least one rule, of the format `($rule)=>{$};`, the semi colon can be ommmitted after the last rule
+
+## OOP with rust
+rust has no inheritance, preferring composition. 
+
+objects can be created with a `struct` and accompanying methods defined in a `impl` block. note for methods and fields to be accessed externally, one must use the `pub` keyword.
+
+```rust
+struct SeaCreature {
+    noise: String,
+}
+
+impl SeaCreature {
+    fn get_sound(&self) -> &str {
+        &self.noise
+    }
+}
+```
+### polymorphism with traits
+Rust supports polymorphism with traits. Traits allow us to associate a set of methods with a struct type. 
+
+we declare the trait separatley of any struct, then implement it for a particular struct with `impl <traitname> for <structname>`.
+
+traits can be inherited from other traits like `trait child: parent`
+
+```
+trait Length {
+   fn length(&self) -> int;
+}
+
+impl Length for LinkedList {
+   fn length(&self) -> int {
+      match self {
+        &Some(ref node) => { 1 + node.tail.length() }
+        &None => 0
+      }
+   }
+}
+```
+
+
+
+## Error handling
+using the result type and match we can handle errors, for example, trying to open a file
+```rust
+use std::fs::File;
+
+fn main() {
+    let f = File::open("hello.txt");
+
+    let f = match f {
+        Ok(file) => file,
+        Err(error) => panic!("Problem opening the file: {:?}", error),
+    };
+}
+```
+the standard library functions all return `Result` enums and all your should too
+
+---
+## Python 2 Rust
+Rust code with vaguely similar python equivalents
+
+- pydoc/sphinx -> rustdoc
+- virtualenv/pip/setuptools -> rustup/cargo
+- special methods (double underscore) -> traits
+e.g.
+`__del__`-> `Drop::drop`
+`__add__`-> `Add::add`, as well as other arithmetic operations
+`__str__`/`__repr__`-> `Display::fmt`
+`__getitem__`->`Index::index`
+
+Errors:
+```python
+try:
+  x=foo()
+except SomeError as e:
+  raise NewError(e)
+```
+in rust
+```rust
+let x = foo()?
+```
+Loop:
+`for i in range(n):` -> `for i in 0..n {}`
+iterable loop:
+`for i in iterable:` -> `for i in iterable.iter() {}`

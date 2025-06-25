@@ -1,0 +1,255 @@
+---
+title: "Bash Notes"
+description: "Useful command line utlities and programs with Bash"
+author: "Henry Watkins"
+draft: false
+toc: true
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+---
+
+## Basic commands
+
+`ls`  - list contents of directory
+
+`pwd` - present working directory
+
+`cd` - change directory
+
+`cp` - copy a file (-r recursive for whole directories)
+
+`mv` - move file, also used to rename
+
+`rename` - batch rename files, using the `sed` style patterns
+
+`rm` - delete a file (-r recursive for directories)
+
+`touch` - create an empty file
+
+`mkdir` - create a directory
+
+`less` - print out the scrolling contents of a file
+
+`cat` - print out the whole contents of a file, for multiple files, it concatenates them together
+
+`head -n X` - display the first X lines of a file.
+
+`tail` - same for the end lines
+
+`sudo` - run with root privileges
+
+`date` - prints out date and time
+
+`time` - time the execution time of a program
+
+`echo` - display a line of text, or the value of an environment variable
+
+`chmod` - change permissions of a file or program, +x useful for making scripts executable.
+
+`reboot` - reboot the computer, after an interval
+
+`shutdown` - shutdown the computer, after an interval
+
+`ps` ,`top` and `htop` - list processes 
+
+`tree` - display the constituent files and folders of this directory in a tree structure.
+
+`tee` display output and also write to file
+
+## Command line extras
+
+`|` - pipeline key, feed output from one command to another, e.g. `ls | grep "filename" `
+
+`;` - successive commands, in a simple line join multiple commands together e.g. `cmd1 ; cmd2; cmd3`
+
+`>` - send output to a file, e.g. `ls > contents.txt`, doubling it `>>`  means appending it to the end of a file 
+
+`<` - send file to stdin e.g. `grep "hello" < hello_world.txt`
+
+`*` - wildcard, matches any pattern. Useful for searching for filetypes, removing multiple files etc.
+
+`-h` - a very common option for almost all commands, dsiplays help info and the manual for a command e.g. `grep --help`
+
+`=` - define variables e.g. `VAR1=/path/to/file`
+
+`$` - access predefined variables e.g. `$VAR1`
+
+You can also use brackets with `$`  to define more complicated, calculated variables e.g. `$(wc -l file.txt)`
+
+## Useful programs
+
+`grep` - regex search utility, search for a regex pattern in plain text
+
+`nano` - simple terminal-based text editor
+
+`shred` - completely destroy file
+
+`wget` - download a file from the internet, supply with the path
+
+`gdb` - simple debugger
+
+`gprof` - simple profiler
+
+`uniq` - find the unique rows in some output. filters out matching lines from input. 
+
+`sort` - sort the output 
+
+`join` - concatenate two files together
+
+`curl` - curl is useful for transferring data to and from servers using URLs. Its is particularly useful for interacting with REST APIs and SQL queries.
+
+`bash`  - use to run command-lines .sh scripts. particularly useful if you need more than a single line for you operation. Can be added as as shebang `#!/usr/bin/env bash`
+
+`wc` - counter, counts the number of things, line lines, words, bytes, chars.
+
+`seq` - print out a sequence of numbers
+
+`nl` - given a sequence of lines, add line numbers
+
+`jq` - simple interface to json files, use to quickly explore and process json files. e.g. `cat test.json | jq '.["key"]'`
+
+`yq` - similar to jq, but for yaml, toml files
+
+`diff` - compare two files, printing out lines where they differ, useful for debugging and error analysis.
+
+`man` - display the manual for a program
+
+`cut` - print/select selected lines from input
+
+`history` - display last few commands you used
+
+`grex` - create regex patterns from a set of examples you wish to capture
+
+`tar` - used to create tarball files. This is an archive file that sticks a group of files together and compresses them for long term storage and transfer. e.g. `tar  -czvf output_tarball.tar.gz diretory_to_compress`
+
+`tqdm` - the python tqdm library for progress bars but in terminal
+
+`aspell` - command line spell checker
+
+`proselint` - command line linter for grose/grammar
+
+`xclip` - post things to clipboard to copy/paste easily e.g. `cat file | xclip` then paste to stdout with `xclip -o`
+
+## Not so useful programs
+
+`factor` - find the prime factors of some integers
+
+`shuf` - random permutation of input lines
+
+`du` - disk usage, print out the files, directories and their memory usage
+
+`fold` - wrap input lines of a file
+
+`split` - split up a file into separate files of some length 
+
+`fmt` - simple text formatter, squishes everything into lines of some specified length
+
+## awk
+
+Useful for command-line exploration and basic processing of datasets. Use is to quickly view tables of data and basic processing in combination with `grep` , `cat`  and `|` `>` operators.
+
+Basic usage is of the form
+
+```
+awk [options] 'selection-criteria {action}' file
+```
+
+Some useful examples and options
+
+`awk -F ',' 'NR<10 {print $2}' data.csv` 
+
+Print out the second column of the first 10 rows of a comma-separated-value dataset.
+
+awk is especially powerful when used in combination with `grep` `sort` `uniq` . For example we can find the unique values in a column using
+
+```
+awk -F -F ',' '{print $2}' | sort | uniq
+```
+
+Awk is particularly well suited to simple operations that one could do using pandas, but without needing to write a script or open jupyter
+
+## sed
+
+`sed` is a stream editor, it can be used to modify piped in streams or files of text. You can use it for selecting,  printing (p), substituting (s), adding lines (a, i), deleting lines (d) and modifying files. It relies on pattern matches with regex, much like grep.
+
+Follows the general pattern
+
+```
+sed -n 'selection action' file
+```
+
+select lines 1-4 and print to terminal
+
+```
+sed -n '1,4p' file
+```
+
+substitution
+
+```
+echo helloworld | sed 's/world/city'
+```
+
+```
+sed '7,9 s/day/week/gip' file
+```
+
+for lines 7 to 9, replace 'day' with 'week', in case-insensitive manner (i), globally (g) so we perform the match-replace more than once, and print (p) the output.
+
+cut entire lines that match the pattern
+
+```
+sed '/pattern/c replacement_text' file
+```
+
+append after lines that match pattern
+
+```
+sed '/pattern/a text_to_append' file
+```
+
+insert before lines that match
+
+```
+sed '/pattern/i text_to_insert' file
+```
+
+delete lines
+
+```
+sed '3d' file
+```
+
+use the `-n` option to quietly perform operation, only print out the lines selected, particularly useful for long files.
+
+Save you changes by outputting to a new file with `>` or by performing operations in place with `-i` option.
+
+A super useful application is in converting CSVs to TSVs for use with awk
+
+```
+sed -E 's/("([^"]*)")?,/\2\t/g' file
+```
+
+You can create sed scripts to perform more complicated and saved tasks. `script.sed` e.g.
+
+```
+4i\ 
+s/,/\t\t/
+s/,/ /
+```
+
+And run with `sed -i -f script.sed filename`
+
+## ssh
+
+`ssh` - open secure connection between hosts on a network
+
+`sshfs` - mount a remote filesystem securely
+
+`scp` - secure copy between hosts on a network
+
+## llm
+
+The llm library is now a good CLI for tasks
+
+https://llm.datasette.io

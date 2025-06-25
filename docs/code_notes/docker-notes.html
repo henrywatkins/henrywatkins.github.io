@@ -7,10 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Henry Watkins">
-<meta name="dcterms.date" content="2025-01-13">
-<meta name="description" content="Approaches to research">
+<meta name="description" content="Basic Docker reference">
 
-<title>The two scientists: hammers and nails – Henry Watkins</title>
+<title>Docker Notes – Henry Watkins</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,23 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-8d098c67b86569c0e6e7f31e509e225b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8d098c67b86569c0e6e7f31e509e225b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -83,14 +82,14 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Henry Watkins</span>
     </a>
   </div>
@@ -101,15 +100,15 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog.html"> 
+    <a class="nav-link" href="../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../book/index.html"> 
+    <a class="nav-link" href="../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -118,35 +117,35 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-code-notes">    
         <li>
-    <a class="dropdown-item" href="../../code_notes/python-notes.html">
+    <a class="dropdown-item" href="../code_notes/python-notes.html">
  <span class="dropdown-text">Python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/bash-notes.html">
+    <a class="dropdown-item" href="../code_notes/bash-notes.html">
  <span class="dropdown-text">Bash</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/git-notes.html">
+    <a class="dropdown-item" href="../code_notes/git-notes.html">
  <span class="dropdown-text">Git</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/sql-notes.html">
+    <a class="dropdown-item" href="../code_notes/sql-notes.html">
  <span class="dropdown-text">SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/cython-notes.html">
+    <a class="dropdown-item" href="../code_notes/cython-notes.html">
  <span class="dropdown-text">Cython</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/cpp-notes.html">
+    <a class="dropdown-item" href="../code_notes/cpp-notes.html">
  <span class="dropdown-text">C++</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/docker-notes.html">
+    <a class="dropdown-item" href="../code_notes/docker-notes.html">
  <span class="dropdown-text">Docker</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/rust-notes.html">
+    <a class="dropdown-item" href="../code_notes/rust-notes.html">
  <span class="dropdown-text">Rust</span></a>
   </li>  
     </ul>
@@ -159,57 +158,109 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">The two scientists: hammers and nails</h1>
-                  <div>
-        <div class="description">
-          Approaches to research
-        </div>
-      </div>
-                </div>
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#docker-files" id="toc-docker-files" class="nav-link active" data-scroll-target="#docker-files">Docker files</a></li>
+  <li><a href="#docker-images" id="toc-docker-images" class="nav-link" data-scroll-target="#docker-images">Docker images</a></li>
+  <li><a href="#docker-containers" id="toc-docker-containers" class="nav-link" data-scroll-target="#docker-containers">Docker containers</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Docker Notes</h1>
+</div>
+
+<div>
+  <div class="description">
+    Basic Docker reference
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Henry Watkins </p>
+          </div>
   </div>
     
   
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Henry Watkins </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">January 13, 2025</p>
-      </div>
-    </div>
     
-      
-    </div>
-    
+  </div>
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    
-<!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
+</header>
 
 
+<ul>
+<li>Docker image: An executable package that contains everything needed to run an application</li>
+<li>Docker container: A running docker image</li>
+<li>Docker file: a file that describes the build of a docker image. Describes what goes on inside the environment of the container</li>
+<li>Docker registry: a collection of docker repositories where we store docker images. We can push/pull images from the docker registry</li>
+<li>Virtual machines load a guest OS on the machine. Each virtual machine has its own guest OS. Docker images by contrast use the docker daemon to interact with the host OS, and as such are much smaller and startup faster.</li>
+</ul>
+<p>Docker file -&gt; builds -&gt; Docker image -&gt; runs -&gt; docker container</p>
+<p>Key docker commands are</p>
+<ol type="1">
+<li><code>build</code> : build an image from a dockerfile</li>
+<li><code>push</code>/<code>pull</code> : pushes, pulls images from a docker registry</li>
+<li><code>image</code>: commands for dealing with docker images</li>
+<li><code>container</code>: commands for dealing with docker containers (running instances for docker images)</li>
+<li><code>login</code> login to a docker registry</li>
+</ol>
+<section id="docker-files" class="level3">
+<h3 class="anchored" data-anchor-id="docker-files">Docker files</h3>
+<p>Docker builds images by reading the instructions from a docker file in order. Docker files have several standard commands</p>
+<ol type="1">
+<li><code>FROM</code>: build a docker image starting with another image, this is particularly useful for starting with an ubuntu distribution docker image as a basis and adding stuff on top.</li>
+<li><code>EXPOSE</code> indicates the ports on which the container listens for instructions</li>
+<li><code>LABEL</code> add information and useful metadata to the image.</li>
+<li><code>WORKDIR</code> specify the working directory for the following commands</li>
+<li><code>COPY</code> copies over files from the source to the filesystem of the container</li>
+<li><code>RUN</code> : run command-line commands. Usually we start with installing python libraries</li>
+<li><code>CMD</code>: tells the container what to do after launching. This defines a default. There can only be one CMD line in a dockerfile</li>
+<li><code>ENTRYPOINT</code>: An <code>ENTRYPOINT</code> allows you to configure a container that will run as an executable.</li>
+</ol>
+<p>For example</p>
+<pre><code>FROM ubuntu:18.10
+LABEL version="0.1"
+WORKDIR /data
+COPY . /data
+RUN pip install pandas jupyter
+EXPOSE 8888
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser"]</code></pre>
+</section>
+<section id="docker-images" class="level3">
+<h3 class="anchored" data-anchor-id="docker-images">Docker images</h3>
+<p>We build an image out of a dockerfile using</p>
+<pre><code>docker build -t imagename dockerfile</code></pre>
+<p>With images we can run commands like <code>ls</code>, <code>rm</code>. e.g.&nbsp;<code>docker image ls -a</code></p>
+<p>You can save docker images using <code>docker save</code> to a tar file. But the ideal senario is to share images using push/pull to the registry. to load a tarball image, use <code>docker load &lt; image.tar</code></p>
+</section>
+<section id="docker-containers" class="level3">
+<h3 class="anchored" data-anchor-id="docker-containers">Docker containers</h3>
+<p>We run a container using the command</p>
+<pre><code>docker container run -it imagename</code></pre>
+<p>The <code>-it</code> runs it interactively.</p>
+<p>With containers we can also use commands like like <code>ls</code>, <code>run</code>, <code>stop</code>, <code>kill</code>, <code>rm</code></p>
+<p>We can also mount databases using docker volumes. These are bound to a docker container filesystem using the -v flag in <code>container run</code>.</p>
+<p>We bind ports to a docker container using -p flag in <code>container run</code></p>
 
-<p>I’ve recently come across an interesting proposition: scientists can be broadly classed hammers or nails. What I mean by this is that hammers are defined primarily by their tools, or the approaches they use to tackle a problem or question. The nails have a very specific problem (or set of problems) and try to bring a broad range approaches to solve them. A good example of someone who optimized the hammer approach is John Von Neumann, the mathematician who played a role in many of the most influential scientific projects of mid-century physics. He was a mathematician and brought is unique talent to bear in a range of problems, from the Manhattan project to the foundations of computer science. The prototypical nail is perhaps Charles Darwin, who spent much of his life investigating the diversity of life, developing the theory of evolution through decades spent breeding and cataloguing the plethora of life he encountered.</p>
-<p>Of course this is not so clear cut and one can be a mixture of the two, rather this is a way of thinking about the way you approach scientific problems (or indeed any research project). Consider how you yourself start new projects. It is a valuable exercise to see how your own habits shape your research, because there are pitfalls to be aware of in both paradigms. The concern primarily is about not being bogged down; one can spend too long learning new things for the sake of it, thinking one is making progress because learning a new tool. Concurrently, one could also flit from one problem to another frequently, never settling on one long enough to actually make a dent in it. This is the value of thinking about research in this way, to be cognizant of the errors in process that just lead to a waste of time. There is a comparison we can make with Aristotle’s law of the golden mean - excess in either direction can be detrimental. Too much hammer and one is holding a solution and constantly looking for a problem. Too much nail and one never solves anything, because one is so wedded to a particular problem you can’t move on, even if it is the right thing to do. Just leave aside and move on to greener pastures.</p>
-<p>A question might be when to apply each paradigm? Is it reasonable to to stick to one throughout your career? I would hazard to say that early in your career it might be worth learning a range of different methods, and this would imply the ‘nail’ approach, particularly as you are finding your niche, the subfield in which you build your reputation and scientific ‘portfolio’. Most researchers begin their career in a PhD program where we are provided with a problem, or at least sat within a larger group in which we have limited freedom to choose our problems. In this sense it is advantageous to begin in the ‘nail’ paradigm at the start. Once we leave our PhD and start as a post-doc we are generally then expected to be capable at certain key skills within a larger scientific program, but now we are experts in a particular technique. Often this is why we were hired to that new group as a post-doc in the first place. This is where the hammer-style of research comes in. Later on, when one has obtained a grant or more independence the freedom that comes from this enables you to pursue your own approach.</p>
-<p>The question now however is the relative merits of both approaches. The severe expectations of a modern scientific career require a considerable output of grants, papers and talks to build a reputation and find a permanent position. There is a very real emphasis on quantity in modern science. Being a hammer or nail is thus refracted through the need for productivity to the detriment of originality or creativity. Perhaps I am pessimistic; experiences vary considerably across fields and countries. In this position the ‘hammer’ paradigm might be advantageous. You can apply yourself to many different projects, potentially building a large and impressive portfolio of results. On the other hand, the complexity of modern science and the interdiciplinary nature of advanced research projects favours those that can build a novel approach to hard problems. Here the ‘nail’ approach is at an advantage, because one can pull several techniques towards a well defined goal. A underemphasised virtue of a well defined problem is how it plays in grant writing. If you can clearly define your project goals then funders may be more ameanable to opening the purse strings.</p>
-<p>A final question then. What do you think you are? Is your current approach to research questions suited to your skills and experience? Would aligning youself to one or other of these paradigms help you?</p>
 
-
+</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

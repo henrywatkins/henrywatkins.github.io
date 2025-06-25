@@ -1,0 +1,554 @@
+---
+title: "C++ Notes"
+description: "Basic C++ syntax and usage"
+author: "Henry Watkins"
+draft: false
+toc: true
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+---
+
+## Types
+
+### Basic types
+- numbers: `int`, `float`,`double`,`long`,`short`
+- boolean: `bool`
+- characters: `char` - must use single quotes to declare! (double quotes for C-style strings)
+Also `signed`, `unsigned`.
+
+### Auto
+use `auto` to get the compiler to deduce the type. Useful for really ugly iterator delcarations and very complicated types.
+
+When you instantiate an `auto` variable you must declare what it is equal to, so that it can infer the type.
+
+### STL types
+- `string` 
+- `complex`
+- containers
+
+### Casts
+
+when you put some data of one type into another, this is a cast. The compiler will do this automatically for several basic types but will throw a warning.
+
+NEVER USE ROUND BRACKET CAST e.g `(int)var`
+
+To safely cast the c++ way, use `type var = static_cast<type>(old_var)`
+
+## User-defined types
+`struct` and `class`
+
+Use a separate file for each class. You have a header (.h) file for the declaration of the class and its methods/variables, and a separate source (.cpp) file for the implementation of the methods. Remember to `#include` the header in every source that uses the class.
+
+### class
+in Person.h I implement the constructor, destructor and getName methods.
+
+```c++
+#include <string>
+
+class Person{
+  private:
+    std::string firstName;
+    std::string lastName;
+    int age;
+  public:
+    Person(std::string first, std::string last, int num);
+    ~Person();
+    std::string getName();
+};
+```
+
+in Person.cpp
+```c++
+#include "Person.h"
+
+Person::Person(std::string first, std::string last, int num):firstName(first),lastName(last),age(num)
+{
+}
+
+Person::~Person()
+{
+}
+
+std::sting Person::getName(){
+  return firstName + " " + lastName;
+}
+```
+
+### struct
+basically only used for classes with all-public data and no significant methods.  
+
+### namespace
+used to separate user-defined functions and classes and types from the default.
+
+`using` can be used to import the whole namespace or just sinlge members of the namespace, e.g 
+```c++
+using namespace std; //pulls in all members
+using std::cout; // only pulls in cout
+```
+
+### Inheritance
+derived classes inherit the methods and variables of the parent class. On can also override those members.
+e.g
+```c++
+class Man : public Person{
+  //only add stuff that is different from person
+};
+```
+
+### enum
+enum is like a type where we assign a name to a set of constants
+```c++
+enum class Status{
+  Pending,
+  Approved,
+  Cancelled
+};
+```
+The compiler will then give each of these numerical values.
+
+```
+Status p = Status::Pending;
+p = Status::Approved;
+```
+
+## Pointers & Reference
+
+
+## Modern C++
+- Expressive: choose keywords and constructs that suit specific needs
+- FUlly C++: don't reject lambdas, const, templates ot other additions to the language, use the full range available
+- readable
+- stack semantics: pointers not you first choice; avoid manual memory management
+
+### Smart pointers
+Dont use raw pointers in modern C++, you should never be using new/delete.
+`shared_ptr`
+`weak_ptr`
+`unique_ptr`
+
+### Const
+`const` - I wont be changing a variable's value, also used as modifier on member function.
+
+It's a good idea to make things const as you write if you don't want them to change, and only remove the const later on as necessary.
+
+
+
+
+## Basic containers
+
+- declaration
+- size
+- insert
+- delete
+- find element
+
+### vector - default sequence container
+
+### map - default associative container
+
+### list - linked list container
+
+### set - stores unique elements following a specific order
+
+
+## Basic algorithms
+
+
+## Pointers
+
+
+### Style and Compilers
+
+For development, use `clang` as the compiler, it is optimized and it works with CUDA as well and also comes with a set of tools for checking syntax and style (linter) and diagnostics. It also has tools for converting to c++14/17.
+make with CMake
+
+### debugging, linting, profiling
+
+use `clang-format` to automatically format your code to a specified style
+
+### unit tests
+
+### Input/Output: 
+
+   use the `<iostream>` header for c++ standard input and output to the console. use functions `cin` `cout` followed by the stream operator `>>` or `<<`. One can input/output multiple variables (separated by a single space) using a chain of stream operators.  For very long strings of input/output (on the same line):
+
+   `while(cin>>array[i++]);`
+
+   `while(cout<<array[--n]<<" " && n);` 
+
+```c++
+cin>> length;
+while(--length>=0){
+  cin>>val;
+  v.push_back(val);
+}
+```
+
+Watch for multiple conditions in a while loop, especially with cin, as the variable could be read *before* the loop exits.
+
+### Strings
+
+   C++ also has the string datatype provided by `<string>` that makes string manipulation easier. Useful methods include
+
+   ```c++
+   string a="abcd";
+   a.size(); //length of string
+   string c=a+b;//concatenation
+   a[3]//access elements as you would an array
+   ```
+
+### Stringstream `<sstream>`
+
+   A class to operate on strings, useful in parsing string input into data such as a comma-separated list of ints.  Essentially it allows you to use a string as a i/o device. This is used in a similar way to cin/cout e.g
+
+   ```c++
+   stringstream str(string)
+   str>>a>>b>>c
+   ```
+
+### Basic data types: 
+
+   The basic data types are `int long char float double `. When outputting with some precision, one can use `fixed<<setprecision(n)` from the `<iomanip>` library.
+
+### How do pointers work?
+
+   `x` is variable
+
+   `&x` is the memory address of the variable
+
+   `*y` is a pointer that stores an address, note `*` declares that it is a pointer, the pointer itself is `y`
+
+   We can set the pointer by `y=&x` and then get the value held at that address with `*y`. 
+
+### Structs
+
+   a data structure that can combine multiple fields together with the standard structure 
+
+   ```c++
+   struct Name{
+   	type1 data1;
+   	type2 data2
+   };
+   ```
+
+### Classes 
+
+   Combines together both methods and data. the methods act on data, and has the standard structure
+
+   ```c++
+   class SampleClass {
+       private:
+           int val;
+       public:
+           void set(int a) {
+               val = a;
+           }
+           int get() {
+               return val;
+           }
+   };
+   ```
+
+### Constructors
+
+   The constructor is the function that is called when the class is instantiated. A *copy constructor* is a constructor function that takes an instance of the class as an argument and copies it. These look like
+
+   ```c++
+   class name{
+   	name(const name& A){
+   		//something
+   	}
+   }
+   ```
+
+   
+
+### Overloading
+
+    Methods in a class can *overload* operations that already exist in the C++ language. To overload an operator use the format
+
+```c++
+type operator <operation> (){
+
+}
+//e.g
+int operator+(classname& A ){
+    return something
+}
+```
+
+​    
+
+### What is an access specifier?
+
+In a class, this is whether a variable is public or private, i.e the keywords `public` and `private` define the sections of the class. In general, one should implement get/set methods to access private data. 
+
+### What does the `this`keyword do?
+
+`this` is a pointer to the object to which the function belongs. It is used in class methods to refer to the object itself  
+
+### What is inheritance?
+
+### What is polymorphism?
+
+### How do you overload operations?
+
+### Rule of five
+
+To have exception safe classes, if one of the following exists in a class, all 5 should exist
+- destructor
+- copy constructor
+- copy assignment operator
+- move constructor
+- move assignment operator
+
+### What is a `lambda` function?
+
+Best used for simple functions, a lambda function is anonymous (no name definition). They are often used alongside `for_each`. They are defined: `[flags](type argument){function_definition}`
+
+E.g to add two numbers `auto f1 = [](int x, int y){return x + y}`
+
+### What is a `friend` class/function?
+
+by using the keyword `friend` before a function, we turn the function into a Friend. This means it can be used by other classes. A function declared `friend` is granted access to the implementation of a class just like a member function but is otherwise independent of that class.
+
+### What does `static` do?
+
+The `static` keyword can be applied to variables as well as classes. For a static variable, memory is allocated for the entirety of the program. Even if the function is called multiple times, space for the static variable is allocated only once and the value of variable in the previous call gets carried through the next function call. This also means they can be shared between objects, since they have the same memory address.
+
+### What does `inline` do?
+
+Declares an inline function, that is, when the inline function is called the whole code of the inline function gets inserted or substituted at the point of inline function call. Often used for defining small functions in header files
+
+### What is a `namespace`?
+
+If you have a set of facilities that belong together, (e.g a library) it is best to put them in one namespace. It will prevent name clashes with other functions that have the same name and all members of a namespace have the same scope. One can hold together class definitions, functions, variables etc. They are used as such: `namespace::memberName`
+
+### What is a `virtual` function?
+
+A method within a class can be made virtual by use of the virtual keyword, this allows any child class (that inherits the method) to redefine the method.
+
+### What are generators?
+
+A generator function acts like an iterator, whereby we can produce the values of a sequence only when they are needed. These are create with the `yield` keyword. They hold the state until it is called again. Most useful when used within for loops.
+
+### What are smart pointers?
+
+Act like normal pointers but automatically deal with memory management. Defined in include <memory> of the STL.  `unique_ptr` is a container for pointers, and cannot be copied (hence unique). It can however be moved using `move`. 
+E.g
+
+```c++
+unique_ptr<A> ptr1 (new A);
+// Error: can't copy unique_ptr
+unique_ptr<A> ptr2 = ptr1; 
+// Works, resource now stored in ptr2
+unique_ptr<A> ptr2 = move(ptr1); 
+```
+
+A `shared_ptr` can be copied and in essence, allows automatic garbage collection via reference counting. 
+
+### What is the difference between `move`and `forward`? How would you implement the move constructor?
+
+`move` returns an argument as an rvalue reference while `forward` returns either an lvalue reference or an rvalue reference based on how the argument was passed in to the current function. *lvalue* is an object reference and an *rvalue* is a value.
+
+### What is the difference between C++11 and C++14?
+
+Adds generic lambda functions
+
+
+## Program design
+
+### Documentation
+
+### Repo structure
+
+# C++ Interview Syntax Questions
+
+Complete C++ course on [HackerRank](www.hackerrank.com) 
+
+1. Style and Compilers
+
+   For development, use `clang` as the compiler, it is optimized and it works with CUDA as well and also comes with a set of tools for checking syntax and style (linter) and diagnostics. It also has tools for converting to c++14/17.
+
+2. Input/Output: 
+
+   use the `<iostream>` header for c++ standard input and output to the console. use functions `cin` `cout` followed by the stream operator `>>` or `<<`. One can input/output multiple variables (separated by a single space) using a chain of stream operators.  For very long strings of input/output (on the same line):
+
+   `while(cin>>array[i++]);`
+
+   `while(cout<<array[--n]<<" " && n);` 
+
+   Watch for multiple conditions in a while loop, especially with cin, as the variable could be read *before* the loop exits.
+
+3. Strings
+
+   C++ also has the string datatype provided by `<string>` that makes string manipulation easier. Useful methods include
+
+   ```c++
+   string a="abcd";
+   a.size(); //length of string
+   string c=a+b;//concatenation
+   a[3]//access elements as you would an array
+   ```
+
+4. Stringstream `<sstream>`
+
+   A class to operate on strings, useful in parsing string input into data such as a comma-separated list of ints.  Essentially it allows you to use a string as a i/o device. This is used in a similar way to cin/cout e.g
+
+   ```c++
+   stringstream str(string)
+   str>>a>>b>>c
+   ```
+
+5. Basic data types: 
+
+   The basic data types are `int long char float double `. When outputting with some precision, one can use `fixed<<setprecision(n)` from the `<iomanip>` library.
+
+6. How do pointers work?
+
+   `x` is variable
+
+   `&x` is the memory address of the variable
+
+   `*y` is a pointer that stores an address, note `*` declares that it is a pointer, the pointer itself is `y`
+
+   We can set the pointer by `y=&x` and then get the value held at that address with `*y`. 
+
+7. Structs
+
+   a data structure that can combine multiple fields together with the standard structure 
+
+   ```c++
+   struct Name{
+   	type1 data1;
+   	type2 data2
+   };
+   ```
+
+8. Classes 
+
+   Combines together both methods and data. the methods act on data, and has the standard structure
+
+   ```c++
+   class SampleClass {
+       private:
+           int val;
+       public:
+           void set(int a) {
+               val = a;
+           }
+           int get() {
+               return val;
+           }
+   };
+   ```
+
+9. Constructors
+
+   The constructor is the function that is called when the class is instantiated. A *copy constructor* is a constructor function that takes an instance of the class as an argument and copies it. These look like
+
+   ```c++
+   class name{
+   	name(const name& A){
+   		//something
+   	}
+   }
+   ```
+
+   
+
+10. Overloading
+
+    Methods in a class can *overload* operations that already exist in the C++ language. To overload an operator use the format
+
+    ```c++
+    type operator <operation> (){
+    
+    }
+    //e.g
+    int operator+(classname& A ){
+        return something
+    }
+    ```
+
+    
+
+11. What is an access specifier?
+
+    In a class, this is whether a variable is public or private, i.e the keywords `public` and `private` define the sections of the class. In general, one should implement get/set methods to access private data. 
+
+12. What does the `this`keyword do?
+
+    `this` is a pointer to the object to which the function belongs. It is used in class methods to refer to the object itself  
+
+13. What is inheritance?
+
+14. What is polymorphism?
+
+15. How do you overload operations?
+
+16. Rule of five
+
+    To have exception safe classes, if one of the following exists in a class, all 5 should exist
+
+    * destructor
+
+    - copy constructor
+    - copy assignment operator
+    - move constructor
+    - move assignment operator
+
+17. What is a `lambda` function?
+
+    Best used for simple functions, a lambda function is anonymous (no name definition). They are often used alongside `for_each`. They are defined: `[flags](type argument){function_definition}`
+
+    E.g to add two numbers `auto f1 = [](int x, int y){return x + y}`
+
+18. What is a `friend` class/function?
+
+    by using the keyword `friend` before a function, we turn the function into a Friend. This means it can be used by other classes. A function declared `friend` is granted access to the implementation of a class just like a member function but is otherwise independent of that class.
+
+19. What does `static` do?
+
+    The `static` keyword can be applied to variables as well as classes. For a static variable, memory is allocated for the entirety of the program. Even if the function is called multiple times, space for the static variable is allocated only once and the value of variable in the previous call gets carried through the next function call. This also means they can be shared between objects, since they have the same memory address.
+
+20. What does `inline` do?
+
+    Declares an inline function, that is, when the inline function is called the whole code of the inline function gets inserted or substituted at the point of inline function call. Often used for defining small functions in header files
+
+21. What is a `namespace`?
+
+    If you have a set of facilities that belong together, (e.g a library) it is best to put them in one namespace. It will prevent name clashes with other functions that have the same name and all members of a namespace have the same scope. One can hold together class definitions, functions, variables etc. They are used as such: `namespace::memberName`
+
+22. What is a `virtual` function?
+
+    A method within a class can be made virtual by use of the virtual keyword, this allows any child class (that inherits the method) to redefine the method.
+
+23. What are generators?
+
+    A generator function acts like an iterator, whereby we can produce the values of a sequence only when they are needed. These are create with the `yield` keyword. They hold the state until it is called again. Most useful when used within for loops.
+
+24. What are smart pointers?
+
+    Act like normal pointers but automatically deal with memory management. Defined in include <memory> of the STL.  `unique_ptr` is a container for pointers, and cannot be copied (hence unique). It can however be moved using `move` . E.g
+
+    ```
+    unique_ptr<A> ptr1 (new A);
+     // Error: can't copy unique_ptr
+     unique_ptr<A> ptr2 = ptr1; 
+     // Works, resource now stored in ptr2
+    unique_ptr<A> ptr2 = move(ptr1); 
+    ```
+
+    A `shared_ptr` can be copied and in essence, allows automatic garbage collection via reference counting. 
+
+25. What is the difference between `move`and `forward`? How would you implement the move constructor?
+
+    `move` returns an argument as an rvalue reference while `forward` returns either an lvalue reference or an rvalue reference based on how the argument was passed in to the current function. *lvalue* is an object reference and an *rvalue* is a value.
+
+26. What is the difference between C++11 and C++14?
+
+    Adds generic lambda functions
+
+    
+

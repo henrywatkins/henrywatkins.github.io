@@ -1,0 +1,183 @@
+---
+title: "Git Notes"
+description: "Basic Git reference"
+author: "Henry Watkins"
+draft: false
+toc: true
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+---
+
+`git init`  - initialize repository
+
+`git status` - view repo status
+
+`git add <name>` - add ("stage") file/change to project
+
+`git commit -m "comment"` - commit change to repo 
+
+`git log` - view log of all changes/commits
+
+ `git remote add <name> <repo_url>`  - add remote github repository to local repo 
+
+`git push ` - push commits to remote repo
+
+`git pull <repo_name> master` - pull down master branch from remote repo
+
+`git diff` - compare differences between commits
+
+`git reset <name>` - unstage file "name"
+
+`git checkout <name>` - change current branch to "name"
+
+`git branch <name>` - create new branch called "name"
+
+`git merge <name>` - merge branch into current branch, usually used for merging a branch of development into the master when testing is complete
+
+`git branch -d <name>` - delete branch
+
+`git revert <id>` - revert to a previous commit
+
+`git reset --hard <id>` - reset repo to previous state defined by commit with "id". WARNING: this will delete everything from the state onwards, use with caution.
+
+### Dev process
+
+- Never mess with the master branch
+- When starting new features, create a branch, commit changes regularly when a 'unit' of work has been completed. Commit also when you have made changes you may want to undo.
+- Once you are happy with the changes and all tests pass, then merge the branch with the master.
+- Push to remote at the end of the day or after major commit.
+- When undoing changes, prefer to use `revert` , this will create a new commit that restores a previous state.
+- When viewing a previous state, use `checkout <commit-id> . ` to restore an old revision.
+- A good commit message will provide context 
+
+> Though not required, it’s a good idea to begin the commit message with a single short (less than 50 character) line summarizing the change,  followed by a blank line and then a more thorough description. The text  up to the first blank line in a commit message is treated as the commit  title, and that title is used throughout Git.
+
+```
+Summarize changes in around 50 characters or less
+
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so. In some contexts, the first line is treated as the
+subject of the commit and the rest of the text as the body. The
+blank line separating the summary from the body is critical (unless
+you omit the body entirely); various tools like `log`, `shortlog`
+and `rebase` can get confused if you run the two together.
+
+Explain the problem that this commit is solving. Focus on why you
+are making this change as opposed to how (the code explains that).
+Are there side effects or other unintuitive consequences of this
+change? Here's the place to explain them.
+
+Further paragraphs come after blank lines.
+
+ - Bullet points are okay, too
+
+ - Typically a hyphen or asterisk is used for the bullet, preceded
+   by a single space, with blank lines in between, but conventions
+   vary here
+
+If you use an issue tracker, put references to them at the bottom,
+like this:
+
+Resolves: #123
+See also: #456, #789
+```
+
+### Starting a project
+
+```
+mkdir project-name
+cd project-name
+git init
+echo 'project-name' > README.md
+touch .gitignore
+git add .
+git commit -m "initial commit"
+```
+
+Some package managers like poetry will auto-generate the repo structure.
+
+Connecting to a remote repo
+
+```
+git remote add origin remote-url
+git push -u origin master
+```
+
+## DVC
+
+Data version control. DVC is useful for tracking data and models for a reproducible machine learning workflow, Git for ML. An alternative is MLFLOW.
+
+Setting up a data repository
+
+```
+mkdir data-repo
+cd data-repo
+git init
+echo 'project-name' > README.md
+touch .gitignore
+git add .
+git commit -m "initial commit"
+git remote add origin remote-url
+git push -u origin master
+dvc init
+touch data/example-data.txt
+dvc add data/example-data.txt
+dvc remote add storage remote-storage-location
+git add . 
+git commit -m "config dvc"
+dvc push
+git push origin master
+```
+
+when getting data elsewhere, clone the git repo from gitlab, then download data with dvc get or dvc import. You will need access to dvc remote location to do this.
+
+- can list data available in registry with `dvc list repo-name` 
+
+- update data in downloaded registry with `dvc update`
+
+To pull down data and models stored remotely,
+
+```
+git pull
+dvc pull
+```
+
+When making changes to a file
+
+```
+dvc add data/changed-file.txt
+git add .
+git commit -m "changed file"
+dvc push
+```
+
+Switching
+
+```
+git checkout version
+dvc checkout version
+```
+
+### Pipelines
+
+You can create DVC pipelines for easily reproducible ML workflows. 
+
+- `dvc stage add` to create a stage, defined by a python script and dependencies and outputs. This includes the input parameters, metrics and plots
+- Use the yaml file produced to keep track
+- reproduce with `dvc repro`
+- use `dvc dag` to visualize workflow
+- `dvc metrics show` to visualize tracked metrics
+- use `dvc exp` to run different experiments
+
+You can hold several different models or tasks in the same git repo, each with its own DVC repo.
+
+The process for DVC pipelines is like this
+
+- create a git and dvc repo
+- add you initial raw data to the repo with `dvc add` 
+- create a git branch for your new model/experiment
+- create scripts with will defined inputs and outputs for the different stages of the pipeline
+- add these to the dvc pipeline with `dvc stage` - fill out the dvc.yaml file as necessary
+- run experiments with `dvc exp` comparing the results with `dvc metrics`
+- upgrade a run you are happy with to a git branch with `dvc exp branch` then commit the result
+

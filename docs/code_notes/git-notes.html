@@ -7,10 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Henry Watkins">
-<meta name="dcterms.date" content="2025-01-13">
-<meta name="description" content="Approaches to research">
+<meta name="description" content="Basic Git reference">
 
-<title>The two scientists: hammers and nails – Henry Watkins</title>
+<title>Git Notes – Henry Watkins</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,23 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-8d098c67b86569c0e6e7f31e509e225b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8d098c67b86569c0e6e7f31e509e225b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -83,14 +82,14 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Henry Watkins</span>
     </a>
   </div>
@@ -101,15 +100,15 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog.html"> 
+    <a class="nav-link" href="../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../book/index.html"> 
+    <a class="nav-link" href="../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -118,35 +117,35 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-code-notes">    
         <li>
-    <a class="dropdown-item" href="../../code_notes/python-notes.html">
+    <a class="dropdown-item" href="../code_notes/python-notes.html">
  <span class="dropdown-text">Python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/bash-notes.html">
+    <a class="dropdown-item" href="../code_notes/bash-notes.html">
  <span class="dropdown-text">Bash</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/git-notes.html">
+    <a class="dropdown-item" href="../code_notes/git-notes.html">
  <span class="dropdown-text">Git</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/sql-notes.html">
+    <a class="dropdown-item" href="../code_notes/sql-notes.html">
  <span class="dropdown-text">SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/cython-notes.html">
+    <a class="dropdown-item" href="../code_notes/cython-notes.html">
  <span class="dropdown-text">Cython</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/cpp-notes.html">
+    <a class="dropdown-item" href="../code_notes/cpp-notes.html">
  <span class="dropdown-text">C++</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/docker-notes.html">
+    <a class="dropdown-item" href="../code_notes/docker-notes.html">
  <span class="dropdown-text">Docker</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/rust-notes.html">
+    <a class="dropdown-item" href="../code_notes/rust-notes.html">
  <span class="dropdown-text">Rust</span></a>
   </li>  
     </ul>
@@ -159,57 +158,191 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">The two scientists: hammers and nails</h1>
-                  <div>
-        <div class="description">
-          Approaches to research
-        </div>
-      </div>
-                </div>
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#dev-process" id="toc-dev-process" class="nav-link active" data-scroll-target="#dev-process">Dev process</a></li>
+  <li><a href="#starting-a-project" id="toc-starting-a-project" class="nav-link" data-scroll-target="#starting-a-project">Starting a project</a></li>
+  <li><a href="#dvc" id="toc-dvc" class="nav-link" data-scroll-target="#dvc">DVC</a>
+  <ul class="collapse">
+  <li><a href="#pipelines" id="toc-pipelines" class="nav-link" data-scroll-target="#pipelines">Pipelines</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Git Notes</h1>
+</div>
+
+<div>
+  <div class="description">
+    Basic Git reference
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Henry Watkins </p>
+          </div>
   </div>
     
   
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Henry Watkins </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">January 13, 2025</p>
-      </div>
-    </div>
     
-      
-    </div>
-    
+  </div>
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    
-<!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
+</header>
 
 
+<p><code>git init</code> - initialize repository</p>
+<p><code>git status</code> - view repo status</p>
+<p><code>git add &lt;name&gt;</code> - add (“stage”) file/change to project</p>
+<p><code>git commit -m "comment"</code> - commit change to repo</p>
+<p><code>git log</code> - view log of all changes/commits</p>
+<p><code>git remote add &lt;name&gt; &lt;repo_url&gt;</code> - add remote github repository to local repo</p>
+<p><code>git push</code> - push commits to remote repo</p>
+<p><code>git pull &lt;repo_name&gt; master</code> - pull down master branch from remote repo</p>
+<p><code>git diff</code> - compare differences between commits</p>
+<p><code>git reset &lt;name&gt;</code> - unstage file “name”</p>
+<p><code>git checkout &lt;name&gt;</code> - change current branch to “name”</p>
+<p><code>git branch &lt;name&gt;</code> - create new branch called “name”</p>
+<p><code>git merge &lt;name&gt;</code> - merge branch into current branch, usually used for merging a branch of development into the master when testing is complete</p>
+<p><code>git branch -d &lt;name&gt;</code> - delete branch</p>
+<p><code>git revert &lt;id&gt;</code> - revert to a previous commit</p>
+<p><code>git reset --hard &lt;id&gt;</code> - reset repo to previous state defined by commit with “id”. WARNING: this will delete everything from the state onwards, use with caution.</p>
+<section id="dev-process" class="level3">
+<h3 class="anchored" data-anchor-id="dev-process">Dev process</h3>
+<ul>
+<li>Never mess with the master branch</li>
+<li>When starting new features, create a branch, commit changes regularly when a ‘unit’ of work has been completed. Commit also when you have made changes you may want to undo.</li>
+<li>Once you are happy with the changes and all tests pass, then merge the branch with the master.</li>
+<li>Push to remote at the end of the day or after major commit.</li>
+<li>When undoing changes, prefer to use <code>revert</code> , this will create a new commit that restores a previous state.</li>
+<li>When viewing a previous state, use <code>checkout &lt;commit-id&gt; .</code> to restore an old revision.</li>
+<li>A good commit message will provide context</li>
+</ul>
+<blockquote class="blockquote">
+<p>Though not required, it’s a good idea to begin the commit message with a single short (less than 50 character) line summarizing the change, followed by a blank line and then a more thorough description. The text up to the first blank line in a commit message is treated as the commit title, and that title is used throughout Git.</p>
+</blockquote>
+<pre><code>Summarize changes in around 50 characters or less
 
-<p>I’ve recently come across an interesting proposition: scientists can be broadly classed hammers or nails. What I mean by this is that hammers are defined primarily by their tools, or the approaches they use to tackle a problem or question. The nails have a very specific problem (or set of problems) and try to bring a broad range approaches to solve them. A good example of someone who optimized the hammer approach is John Von Neumann, the mathematician who played a role in many of the most influential scientific projects of mid-century physics. He was a mathematician and brought is unique talent to bear in a range of problems, from the Manhattan project to the foundations of computer science. The prototypical nail is perhaps Charles Darwin, who spent much of his life investigating the diversity of life, developing the theory of evolution through decades spent breeding and cataloguing the plethora of life he encountered.</p>
-<p>Of course this is not so clear cut and one can be a mixture of the two, rather this is a way of thinking about the way you approach scientific problems (or indeed any research project). Consider how you yourself start new projects. It is a valuable exercise to see how your own habits shape your research, because there are pitfalls to be aware of in both paradigms. The concern primarily is about not being bogged down; one can spend too long learning new things for the sake of it, thinking one is making progress because learning a new tool. Concurrently, one could also flit from one problem to another frequently, never settling on one long enough to actually make a dent in it. This is the value of thinking about research in this way, to be cognizant of the errors in process that just lead to a waste of time. There is a comparison we can make with Aristotle’s law of the golden mean - excess in either direction can be detrimental. Too much hammer and one is holding a solution and constantly looking for a problem. Too much nail and one never solves anything, because one is so wedded to a particular problem you can’t move on, even if it is the right thing to do. Just leave aside and move on to greener pastures.</p>
-<p>A question might be when to apply each paradigm? Is it reasonable to to stick to one throughout your career? I would hazard to say that early in your career it might be worth learning a range of different methods, and this would imply the ‘nail’ approach, particularly as you are finding your niche, the subfield in which you build your reputation and scientific ‘portfolio’. Most researchers begin their career in a PhD program where we are provided with a problem, or at least sat within a larger group in which we have limited freedom to choose our problems. In this sense it is advantageous to begin in the ‘nail’ paradigm at the start. Once we leave our PhD and start as a post-doc we are generally then expected to be capable at certain key skills within a larger scientific program, but now we are experts in a particular technique. Often this is why we were hired to that new group as a post-doc in the first place. This is where the hammer-style of research comes in. Later on, when one has obtained a grant or more independence the freedom that comes from this enables you to pursue your own approach.</p>
-<p>The question now however is the relative merits of both approaches. The severe expectations of a modern scientific career require a considerable output of grants, papers and talks to build a reputation and find a permanent position. There is a very real emphasis on quantity in modern science. Being a hammer or nail is thus refracted through the need for productivity to the detriment of originality or creativity. Perhaps I am pessimistic; experiences vary considerably across fields and countries. In this position the ‘hammer’ paradigm might be advantageous. You can apply yourself to many different projects, potentially building a large and impressive portfolio of results. On the other hand, the complexity of modern science and the interdiciplinary nature of advanced research projects favours those that can build a novel approach to hard problems. Here the ‘nail’ approach is at an advantage, because one can pull several techniques towards a well defined goal. A underemphasised virtue of a well defined problem is how it plays in grant writing. If you can clearly define your project goals then funders may be more ameanable to opening the purse strings.</p>
-<p>A final question then. What do you think you are? Is your current approach to research questions suited to your skills and experience? Would aligning youself to one or other of these paradigms help you?</p>
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so. In some contexts, the first line is treated as the
+subject of the commit and the rest of the text as the body. The
+blank line separating the summary from the body is critical (unless
+you omit the body entirely); various tools like `log`, `shortlog`
+and `rebase` can get confused if you run the two together.
+
+Explain the problem that this commit is solving. Focus on why you
+are making this change as opposed to how (the code explains that).
+Are there side effects or other unintuitive consequences of this
+change? Here's the place to explain them.
+
+Further paragraphs come after blank lines.
+
+ - Bullet points are okay, too
+
+ - Typically a hyphen or asterisk is used for the bullet, preceded
+   by a single space, with blank lines in between, but conventions
+   vary here
+
+If you use an issue tracker, put references to them at the bottom,
+like this:
+
+Resolves: #123
+See also: #456, #789</code></pre>
+</section>
+<section id="starting-a-project" class="level3">
+<h3 class="anchored" data-anchor-id="starting-a-project">Starting a project</h3>
+<pre><code>mkdir project-name
+cd project-name
+git init
+echo 'project-name' &gt; README.md
+touch .gitignore
+git add .
+git commit -m "initial commit"</code></pre>
+<p>Some package managers like poetry will auto-generate the repo structure.</p>
+<p>Connecting to a remote repo</p>
+<pre><code>git remote add origin remote-url
+git push -u origin master</code></pre>
+</section>
+<section id="dvc" class="level2">
+<h2 class="anchored" data-anchor-id="dvc">DVC</h2>
+<p>Data version control. DVC is useful for tracking data and models for a reproducible machine learning workflow, Git for ML. An alternative is MLFLOW.</p>
+<p>Setting up a data repository</p>
+<pre><code>mkdir data-repo
+cd data-repo
+git init
+echo 'project-name' &gt; README.md
+touch .gitignore
+git add .
+git commit -m "initial commit"
+git remote add origin remote-url
+git push -u origin master
+dvc init
+touch data/example-data.txt
+dvc add data/example-data.txt
+dvc remote add storage remote-storage-location
+git add . 
+git commit -m "config dvc"
+dvc push
+git push origin master</code></pre>
+<p>when getting data elsewhere, clone the git repo from gitlab, then download data with dvc get or dvc import. You will need access to dvc remote location to do this.</p>
+<ul>
+<li><p>can list data available in registry with <code>dvc list repo-name</code></p></li>
+<li><p>update data in downloaded registry with <code>dvc update</code></p></li>
+</ul>
+<p>To pull down data and models stored remotely,</p>
+<pre><code>git pull
+dvc pull</code></pre>
+<p>When making changes to a file</p>
+<pre><code>dvc add data/changed-file.txt
+git add .
+git commit -m "changed file"
+dvc push</code></pre>
+<p>Switching</p>
+<pre><code>git checkout version
+dvc checkout version</code></pre>
+<section id="pipelines" class="level3">
+<h3 class="anchored" data-anchor-id="pipelines">Pipelines</h3>
+<p>You can create DVC pipelines for easily reproducible ML workflows.</p>
+<ul>
+<li><code>dvc stage add</code> to create a stage, defined by a python script and dependencies and outputs. This includes the input parameters, metrics and plots</li>
+<li>Use the yaml file produced to keep track</li>
+<li>reproduce with <code>dvc repro</code></li>
+<li>use <code>dvc dag</code> to visualize workflow</li>
+<li><code>dvc metrics show</code> to visualize tracked metrics</li>
+<li>use <code>dvc exp</code> to run different experiments</li>
+</ul>
+<p>You can hold several different models or tasks in the same git repo, each with its own DVC repo.</p>
+<p>The process for DVC pipelines is like this</p>
+<ul>
+<li>create a git and dvc repo</li>
+<li>add you initial raw data to the repo with <code>dvc add</code></li>
+<li>create a git branch for your new model/experiment</li>
+<li>create scripts with will defined inputs and outputs for the different stages of the pipeline</li>
+<li>add these to the dvc pipeline with <code>dvc stage</code> - fill out the dvc.yaml file as necessary</li>
+<li>run experiments with <code>dvc exp</code> comparing the results with <code>dvc metrics</code></li>
+<li>upgrade a run you are happy with to a git branch with <code>dvc exp branch</code> then commit the result</li>
+</ul>
 
 
+</section>
+</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

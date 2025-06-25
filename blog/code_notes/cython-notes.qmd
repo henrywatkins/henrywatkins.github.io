@@ -1,0 +1,90 @@
+---
+title: "Cython Notes"
+description: "Basic Cython syntax and usage"
+author: "Henry Watkins"
+draft: false
+toc: true
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+---
+
+Cython is python with C data types, and so is much faster because the variables are all statically typed. Cython files have the .pyx extension, which is then compiled to a .c file. The C file is then compiled to .so which is imported directly into a python session. One can also use C++ and the STL. To use typing, one must make use of the different def's 
+
+1. def - regular python function, calls from Python only.
+2. cdef - cython only functions, can't access these from python-only code, must access within Cython, since there will be no C translation to Python for these.
+3. cpdef - C and Python. Will create a C function and a wrapper for Python. Why not *always* use cpdef? In some cases, you might have C only pointer, like a C array. We'll be mostly using cpdef, however.
+
+An example function
+
+```
+#example_cython.pyx
+cpdef int test(int x):
+    cdef int y = 0
+    cdef int i
+    for i in range(x):
+        y += i
+    return y
+```
+
+Compile to .c with 
+
+```
+cython -a example_cython.pyx
+```
+
+this will produce example_cython.c which can then be compiled with gcc or other standard c compiler or 
+
+```
+cythonize -b example_cython.pyx
+```
+
+```python
+#compiled with cythonize -i cfactors.pyx
+
+from libc.stdint cimport uint32_t, uint64_t
+
+cpdef list prime_factors( uint64_t n):
+    """Calculate prime factors of integer"""
+    cdef list factorization = []
+    cdef uint64_t i = 2
+    while i * i <= n:
+        while n % i == 0:
+            factorization.append(i)
+            n //= i
+        i += 1
+
+    if n > 1:
+        factorization.append(n)
+
+    return factorization
+```
+
+## Comparison with numba
+
+```python
+import time
+
+from cfactors import prime_factors
+from factors import py_prime_factors, jit_prime_factors
+
+n = 198641726235
+
+t1 = time.perf_counter()
+facs = py_prime_factors(n)
+print(f"python function eval time: {time.perf_counter() - t1}")
+
+t1 = time.perf_counter()
+facs = prime_factors(n)
+print(f"Cython function eval time: {time.perf_counter() - t1}")
+
+t1 = time.perf_counter()
+facs = jit_prime_factors(n)
+print(f"numba function eval time: {time.perf_counter() - t1}")
+
+```
+
+```python
+
+```
+
+

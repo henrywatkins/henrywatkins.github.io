@@ -7,10 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Henry Watkins">
-<meta name="dcterms.date" content="2025-01-13">
-<meta name="description" content="Approaches to research">
+<meta name="description" content="Basic Cython syntax and usage">
 
-<title>The two scientists: hammers and nails – Henry Watkins</title>
+<title>Cython Notes – Henry Watkins</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +22,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-8d098c67b86569c0e6e7f31e509e225b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8d098c67b86569c0e6e7f31e509e225b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -83,14 +117,14 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Henry Watkins</span>
     </a>
   </div>
@@ -101,15 +135,15 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog.html"> 
+    <a class="nav-link" href="../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../book/index.html"> 
+    <a class="nav-link" href="../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -118,35 +152,35 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-code-notes">    
         <li>
-    <a class="dropdown-item" href="../../code_notes/python-notes.html">
+    <a class="dropdown-item" href="../code_notes/python-notes.html">
  <span class="dropdown-text">Python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/bash-notes.html">
+    <a class="dropdown-item" href="../code_notes/bash-notes.html">
  <span class="dropdown-text">Bash</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/git-notes.html">
+    <a class="dropdown-item" href="../code_notes/git-notes.html">
  <span class="dropdown-text">Git</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/sql-notes.html">
+    <a class="dropdown-item" href="../code_notes/sql-notes.html">
  <span class="dropdown-text">SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/cython-notes.html">
+    <a class="dropdown-item" href="../code_notes/cython-notes.html">
  <span class="dropdown-text">Cython</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/cpp-notes.html">
+    <a class="dropdown-item" href="../code_notes/cpp-notes.html">
  <span class="dropdown-text">C++</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/docker-notes.html">
+    <a class="dropdown-item" href="../code_notes/docker-notes.html">
  <span class="dropdown-text">Docker</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/rust-notes.html">
+    <a class="dropdown-item" href="../code_notes/rust-notes.html">
  <span class="dropdown-text">Rust</span></a>
   </li>  
     </ul>
@@ -159,57 +193,111 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">The two scientists: hammers and nails</h1>
-                  <div>
-        <div class="description">
-          Approaches to research
-        </div>
-      </div>
-                </div>
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#comparison-with-numba" id="toc-comparison-with-numba" class="nav-link active" data-scroll-target="#comparison-with-numba">Comparison with numba</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Cython Notes</h1>
+</div>
+
+<div>
+  <div class="description">
+    Basic Cython syntax and usage
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Henry Watkins </p>
+          </div>
   </div>
     
   
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Henry Watkins </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">January 13, 2025</p>
-      </div>
-    </div>
     
-      
-    </div>
-    
+  </div>
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    
-<!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
+</header>
 
 
+<p>Cython is python with C data types, and so is much faster because the variables are all statically typed. Cython files have the .pyx extension, which is then compiled to a .c file. The C file is then compiled to .so which is imported directly into a python session. One can also use C++ and the STL. To use typing, one must make use of the different def’s</p>
+<ol type="1">
+<li>def - regular python function, calls from Python only.</li>
+<li>cdef - cython only functions, can’t access these from python-only code, must access within Cython, since there will be no C translation to Python for these.</li>
+<li>cpdef - C and Python. Will create a C function and a wrapper for Python. Why not <em>always</em> use cpdef? In some cases, you might have C only pointer, like a C array. We’ll be mostly using cpdef, however.</li>
+</ol>
+<p>An example function</p>
+<pre><code>#example_cython.pyx
+cpdef int test(int x):
+    cdef int y = 0
+    cdef int i
+    for i in range(x):
+        y += i
+    return y</code></pre>
+<p>Compile to .c with</p>
+<pre><code>cython -a example_cython.pyx</code></pre>
+<p>this will produce example_cython.c which can then be compiled with gcc or other standard c compiler or</p>
+<pre><code>cythonize -b example_cython.pyx</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#compiled with cythonize -i cfactors.pyx</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> libc.stdint cimport uint32_t, uint64_t</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>cpdef <span class="bu">list</span> prime_factors( uint64_t n):</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate prime factors of integer"""</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    cdef <span class="bu">list</span> factorization <span class="op">=</span> []</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    cdef uint64_t i <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">*</span> i <span class="op">&lt;=</span> n:</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> n <span class="op">%</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            factorization.append(i)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            n <span class="op">//=</span> i</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        factorization.append(n)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> factorization</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="comparison-with-numba" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-with-numba">Comparison with numba</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cfactors <span class="im">import</span> prime_factors</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> factors <span class="im">import</span> py_prime_factors, jit_prime_factors</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">198641726235</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.perf_counter()</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>facs <span class="op">=</span> py_prime_factors(n)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"python function eval time: </span><span class="sc">{</span>time<span class="sc">.</span>perf_counter() <span class="op">-</span> t1<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.perf_counter()</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>facs <span class="op">=</span> prime_factors(n)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cython function eval time: </span><span class="sc">{</span>time<span class="sc">.</span>perf_counter() <span class="op">-</span> t1<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time.perf_counter()</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>facs <span class="op">=</span> jit_prime_factors(n)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"numba function eval time: </span><span class="sc">{</span>time<span class="sc">.</span>perf_counter() <span class="op">-</span> t1<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<p>I’ve recently come across an interesting proposition: scientists can be broadly classed hammers or nails. What I mean by this is that hammers are defined primarily by their tools, or the approaches they use to tackle a problem or question. The nails have a very specific problem (or set of problems) and try to bring a broad range approaches to solve them. A good example of someone who optimized the hammer approach is John Von Neumann, the mathematician who played a role in many of the most influential scientific projects of mid-century physics. He was a mathematician and brought is unique talent to bear in a range of problems, from the Manhattan project to the foundations of computer science. The prototypical nail is perhaps Charles Darwin, who spent much of his life investigating the diversity of life, developing the theory of evolution through decades spent breeding and cataloguing the plethora of life he encountered.</p>
-<p>Of course this is not so clear cut and one can be a mixture of the two, rather this is a way of thinking about the way you approach scientific problems (or indeed any research project). Consider how you yourself start new projects. It is a valuable exercise to see how your own habits shape your research, because there are pitfalls to be aware of in both paradigms. The concern primarily is about not being bogged down; one can spend too long learning new things for the sake of it, thinking one is making progress because learning a new tool. Concurrently, one could also flit from one problem to another frequently, never settling on one long enough to actually make a dent in it. This is the value of thinking about research in this way, to be cognizant of the errors in process that just lead to a waste of time. There is a comparison we can make with Aristotle’s law of the golden mean - excess in either direction can be detrimental. Too much hammer and one is holding a solution and constantly looking for a problem. Too much nail and one never solves anything, because one is so wedded to a particular problem you can’t move on, even if it is the right thing to do. Just leave aside and move on to greener pastures.</p>
-<p>A question might be when to apply each paradigm? Is it reasonable to to stick to one throughout your career? I would hazard to say that early in your career it might be worth learning a range of different methods, and this would imply the ‘nail’ approach, particularly as you are finding your niche, the subfield in which you build your reputation and scientific ‘portfolio’. Most researchers begin their career in a PhD program where we are provided with a problem, or at least sat within a larger group in which we have limited freedom to choose our problems. In this sense it is advantageous to begin in the ‘nail’ paradigm at the start. Once we leave our PhD and start as a post-doc we are generally then expected to be capable at certain key skills within a larger scientific program, but now we are experts in a particular technique. Often this is why we were hired to that new group as a post-doc in the first place. This is where the hammer-style of research comes in. Later on, when one has obtained a grant or more independence the freedom that comes from this enables you to pursue your own approach.</p>
-<p>The question now however is the relative merits of both approaches. The severe expectations of a modern scientific career require a considerable output of grants, papers and talks to build a reputation and find a permanent position. There is a very real emphasis on quantity in modern science. Being a hammer or nail is thus refracted through the need for productivity to the detriment of originality or creativity. Perhaps I am pessimistic; experiences vary considerably across fields and countries. In this position the ‘hammer’ paradigm might be advantageous. You can apply yourself to many different projects, potentially building a large and impressive portfolio of results. On the other hand, the complexity of modern science and the interdiciplinary nature of advanced research projects favours those that can build a novel approach to hard problems. Here the ‘nail’ approach is at an advantage, because one can pull several techniques towards a well defined goal. A underemphasised virtue of a well defined problem is how it plays in grant writing. If you can clearly define your project goals then funders may be more ameanable to opening the purse strings.</p>
-<p>A final question then. What do you think you are? Is your current approach to research questions suited to your skills and experience? Would aligning youself to one or other of these paradigms help you?</p>
 
-
+</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

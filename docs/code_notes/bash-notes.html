@@ -7,10 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Henry Watkins">
-<meta name="dcterms.date" content="2025-01-13">
-<meta name="description" content="Approaches to research">
+<meta name="description" content="Useful command line utlities and programs with Bash">
 
-<title>The two scientists: hammers and nails – Henry Watkins</title>
+<title>Bash Notes – Henry Watkins</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,23 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-8d098c67b86569c0e6e7f31e509e225b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8d098c67b86569c0e6e7f31e509e225b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -83,14 +82,14 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Henry Watkins</span>
     </a>
   </div>
@@ -101,15 +100,15 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog.html"> 
+    <a class="nav-link" href="../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../book/index.html"> 
+    <a class="nav-link" href="../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -118,35 +117,35 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-code-notes">    
         <li>
-    <a class="dropdown-item" href="../../code_notes/python-notes.html">
+    <a class="dropdown-item" href="../code_notes/python-notes.html">
  <span class="dropdown-text">Python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/bash-notes.html">
+    <a class="dropdown-item" href="../code_notes/bash-notes.html">
  <span class="dropdown-text">Bash</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/git-notes.html">
+    <a class="dropdown-item" href="../code_notes/git-notes.html">
  <span class="dropdown-text">Git</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/sql-notes.html">
+    <a class="dropdown-item" href="../code_notes/sql-notes.html">
  <span class="dropdown-text">SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/cython-notes.html">
+    <a class="dropdown-item" href="../code_notes/cython-notes.html">
  <span class="dropdown-text">Cython</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/cpp-notes.html">
+    <a class="dropdown-item" href="../code_notes/cpp-notes.html">
  <span class="dropdown-text">C++</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/docker-notes.html">
+    <a class="dropdown-item" href="../code_notes/docker-notes.html">
  <span class="dropdown-text">Docker</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../code_notes/rust-notes.html">
+    <a class="dropdown-item" href="../code_notes/rust-notes.html">
  <span class="dropdown-text">Rust</span></a>
   </li>  
     </ul>
@@ -159,57 +158,188 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">The two scientists: hammers and nails</h1>
-                  <div>
-        <div class="description">
-          Approaches to research
-        </div>
-      </div>
-                </div>
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#basic-commands" id="toc-basic-commands" class="nav-link active" data-scroll-target="#basic-commands">Basic commands</a></li>
+  <li><a href="#command-line-extras" id="toc-command-line-extras" class="nav-link" data-scroll-target="#command-line-extras">Command line extras</a></li>
+  <li><a href="#useful-programs" id="toc-useful-programs" class="nav-link" data-scroll-target="#useful-programs">Useful programs</a></li>
+  <li><a href="#not-so-useful-programs" id="toc-not-so-useful-programs" class="nav-link" data-scroll-target="#not-so-useful-programs">Not so useful programs</a></li>
+  <li><a href="#awk" id="toc-awk" class="nav-link" data-scroll-target="#awk">awk</a></li>
+  <li><a href="#sed" id="toc-sed" class="nav-link" data-scroll-target="#sed">sed</a></li>
+  <li><a href="#ssh" id="toc-ssh" class="nav-link" data-scroll-target="#ssh">ssh</a></li>
+  <li><a href="#llm" id="toc-llm" class="nav-link" data-scroll-target="#llm">llm</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Bash Notes</h1>
+</div>
+
+<div>
+  <div class="description">
+    Useful command line utlities and programs with Bash
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Henry Watkins </p>
+          </div>
   </div>
     
   
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Henry Watkins </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">January 13, 2025</p>
-      </div>
-    </div>
     
-      
-    </div>
-    
+  </div>
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    
-<!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
+</header>
 
 
+<section id="basic-commands" class="level2">
+<h2 class="anchored" data-anchor-id="basic-commands">Basic commands</h2>
+<p><code>ls</code> - list contents of directory</p>
+<p><code>pwd</code> - present working directory</p>
+<p><code>cd</code> - change directory</p>
+<p><code>cp</code> - copy a file (-r recursive for whole directories)</p>
+<p><code>mv</code> - move file, also used to rename</p>
+<p><code>rename</code> - batch rename files, using the <code>sed</code> style patterns</p>
+<p><code>rm</code> - delete a file (-r recursive for directories)</p>
+<p><code>touch</code> - create an empty file</p>
+<p><code>mkdir</code> - create a directory</p>
+<p><code>less</code> - print out the scrolling contents of a file</p>
+<p><code>cat</code> - print out the whole contents of a file, for multiple files, it concatenates them together</p>
+<p><code>head -n X</code> - display the first X lines of a file.</p>
+<p><code>tail</code> - same for the end lines</p>
+<p><code>sudo</code> - run with root privileges</p>
+<p><code>date</code> - prints out date and time</p>
+<p><code>time</code> - time the execution time of a program</p>
+<p><code>echo</code> - display a line of text, or the value of an environment variable</p>
+<p><code>chmod</code> - change permissions of a file or program, +x useful for making scripts executable.</p>
+<p><code>reboot</code> - reboot the computer, after an interval</p>
+<p><code>shutdown</code> - shutdown the computer, after an interval</p>
+<p><code>ps</code> ,<code>top</code> and <code>htop</code> - list processes</p>
+<p><code>tree</code> - display the constituent files and folders of this directory in a tree structure.</p>
+<p><code>tee</code> display output and also write to file</p>
+</section>
+<section id="command-line-extras" class="level2">
+<h2 class="anchored" data-anchor-id="command-line-extras">Command line extras</h2>
+<p><code>|</code> - pipeline key, feed output from one command to another, e.g.&nbsp;<code>ls | grep "filename"</code></p>
+<p><code>;</code> - successive commands, in a simple line join multiple commands together e.g.&nbsp;<code>cmd1 ; cmd2; cmd3</code></p>
+<p><code>&gt;</code> - send output to a file, e.g.&nbsp;<code>ls &gt; contents.txt</code>, doubling it <code>&gt;&gt;</code> means appending it to the end of a file</p>
+<p><code>&lt;</code> - send file to stdin e.g.&nbsp;<code>grep "hello" &lt; hello_world.txt</code></p>
+<p><code>*</code> - wildcard, matches any pattern. Useful for searching for filetypes, removing multiple files etc.</p>
+<p><code>-h</code> - a very common option for almost all commands, dsiplays help info and the manual for a command e.g.&nbsp;<code>grep --help</code></p>
+<p><code>=</code> - define variables e.g.&nbsp;<code>VAR1=/path/to/file</code></p>
+<p><code>$</code> - access predefined variables e.g.&nbsp;<code>$VAR1</code></p>
+<p>You can also use brackets with <code>$</code> to define more complicated, calculated variables e.g.&nbsp;<code>$(wc -l file.txt)</code></p>
+</section>
+<section id="useful-programs" class="level2">
+<h2 class="anchored" data-anchor-id="useful-programs">Useful programs</h2>
+<p><code>grep</code> - regex search utility, search for a regex pattern in plain text</p>
+<p><code>nano</code> - simple terminal-based text editor</p>
+<p><code>shred</code> - completely destroy file</p>
+<p><code>wget</code> - download a file from the internet, supply with the path</p>
+<p><code>gdb</code> - simple debugger</p>
+<p><code>gprof</code> - simple profiler</p>
+<p><code>uniq</code> - find the unique rows in some output. filters out matching lines from input.</p>
+<p><code>sort</code> - sort the output</p>
+<p><code>join</code> - concatenate two files together</p>
+<p><code>curl</code> - curl is useful for transferring data to and from servers using URLs. Its is particularly useful for interacting with REST APIs and SQL queries.</p>
+<p><code>bash</code> - use to run command-lines .sh scripts. particularly useful if you need more than a single line for you operation. Can be added as as shebang <code>#!/usr/bin/env bash</code></p>
+<p><code>wc</code> - counter, counts the number of things, line lines, words, bytes, chars.</p>
+<p><code>seq</code> - print out a sequence of numbers</p>
+<p><code>nl</code> - given a sequence of lines, add line numbers</p>
+<p><code>jq</code> - simple interface to json files, use to quickly explore and process json files. e.g.&nbsp;<code>cat test.json | jq '.["key"]'</code></p>
+<p><code>yq</code> - similar to jq, but for yaml, toml files</p>
+<p><code>diff</code> - compare two files, printing out lines where they differ, useful for debugging and error analysis.</p>
+<p><code>man</code> - display the manual for a program</p>
+<p><code>cut</code> - print/select selected lines from input</p>
+<p><code>history</code> - display last few commands you used</p>
+<p><code>grex</code> - create regex patterns from a set of examples you wish to capture</p>
+<p><code>tar</code> - used to create tarball files. This is an archive file that sticks a group of files together and compresses them for long term storage and transfer. e.g.&nbsp;<code>tar  -czvf output_tarball.tar.gz diretory_to_compress</code></p>
+<p><code>tqdm</code> - the python tqdm library for progress bars but in terminal</p>
+<p><code>aspell</code> - command line spell checker</p>
+<p><code>proselint</code> - command line linter for grose/grammar</p>
+<p><code>xclip</code> - post things to clipboard to copy/paste easily e.g.&nbsp;<code>cat file | xclip</code> then paste to stdout with <code>xclip -o</code></p>
+</section>
+<section id="not-so-useful-programs" class="level2">
+<h2 class="anchored" data-anchor-id="not-so-useful-programs">Not so useful programs</h2>
+<p><code>factor</code> - find the prime factors of some integers</p>
+<p><code>shuf</code> - random permutation of input lines</p>
+<p><code>du</code> - disk usage, print out the files, directories and their memory usage</p>
+<p><code>fold</code> - wrap input lines of a file</p>
+<p><code>split</code> - split up a file into separate files of some length</p>
+<p><code>fmt</code> - simple text formatter, squishes everything into lines of some specified length</p>
+</section>
+<section id="awk" class="level2">
+<h2 class="anchored" data-anchor-id="awk">awk</h2>
+<p>Useful for command-line exploration and basic processing of datasets. Use is to quickly view tables of data and basic processing in combination with <code>grep</code> , <code>cat</code> and <code>|</code> <code>&gt;</code> operators.</p>
+<p>Basic usage is of the form</p>
+<pre><code>awk [options] 'selection-criteria {action}' file</code></pre>
+<p>Some useful examples and options</p>
+<p><code>awk -F ',' 'NR&lt;10 {print $2}' data.csv</code></p>
+<p>Print out the second column of the first 10 rows of a comma-separated-value dataset.</p>
+<p>awk is especially powerful when used in combination with <code>grep</code> <code>sort</code> <code>uniq</code> . For example we can find the unique values in a column using</p>
+<pre><code>awk -F -F ',' '{print $2}' | sort | uniq</code></pre>
+<p>Awk is particularly well suited to simple operations that one could do using pandas, but without needing to write a script or open jupyter</p>
+</section>
+<section id="sed" class="level2">
+<h2 class="anchored" data-anchor-id="sed">sed</h2>
+<p><code>sed</code> is a stream editor, it can be used to modify piped in streams or files of text. You can use it for selecting, printing (p), substituting (s), adding lines (a, i), deleting lines (d) and modifying files. It relies on pattern matches with regex, much like grep.</p>
+<p>Follows the general pattern</p>
+<pre><code>sed -n 'selection action' file</code></pre>
+<p>select lines 1-4 and print to terminal</p>
+<pre><code>sed -n '1,4p' file</code></pre>
+<p>substitution</p>
+<pre><code>echo helloworld | sed 's/world/city'</code></pre>
+<pre><code>sed '7,9 s/day/week/gip' file</code></pre>
+<p>for lines 7 to 9, replace ‘day’ with ‘week’, in case-insensitive manner (i), globally (g) so we perform the match-replace more than once, and print (p) the output.</p>
+<p>cut entire lines that match the pattern</p>
+<pre><code>sed '/pattern/c replacement_text' file</code></pre>
+<p>append after lines that match pattern</p>
+<pre><code>sed '/pattern/a text_to_append' file</code></pre>
+<p>insert before lines that match</p>
+<pre><code>sed '/pattern/i text_to_insert' file</code></pre>
+<p>delete lines</p>
+<pre><code>sed '3d' file</code></pre>
+<p>use the <code>-n</code> option to quietly perform operation, only print out the lines selected, particularly useful for long files.</p>
+<p>Save you changes by outputting to a new file with <code>&gt;</code> or by performing operations in place with <code>-i</code> option.</p>
+<p>A super useful application is in converting CSVs to TSVs for use with awk</p>
+<pre><code>sed -E 's/("([^"]*)")?,/\2\t/g' file</code></pre>
+<p>You can create sed scripts to perform more complicated and saved tasks. <code>script.sed</code> e.g.</p>
+<pre><code>4i\ 
+s/,/\t\t/
+s/,/ /</code></pre>
+<p>And run with <code>sed -i -f script.sed filename</code></p>
+</section>
+<section id="ssh" class="level2">
+<h2 class="anchored" data-anchor-id="ssh">ssh</h2>
+<p><code>ssh</code> - open secure connection between hosts on a network</p>
+<p><code>sshfs</code> - mount a remote filesystem securely</p>
+<p><code>scp</code> - secure copy between hosts on a network</p>
+</section>
+<section id="llm" class="level2">
+<h2 class="anchored" data-anchor-id="llm">llm</h2>
+<p>The llm library is now a good CLI for tasks</p>
+<p>https://llm.datasette.io</p>
 
-<p>I’ve recently come across an interesting proposition: scientists can be broadly classed hammers or nails. What I mean by this is that hammers are defined primarily by their tools, or the approaches they use to tackle a problem or question. The nails have a very specific problem (or set of problems) and try to bring a broad range approaches to solve them. A good example of someone who optimized the hammer approach is John Von Neumann, the mathematician who played a role in many of the most influential scientific projects of mid-century physics. He was a mathematician and brought is unique talent to bear in a range of problems, from the Manhattan project to the foundations of computer science. The prototypical nail is perhaps Charles Darwin, who spent much of his life investigating the diversity of life, developing the theory of evolution through decades spent breeding and cataloguing the plethora of life he encountered.</p>
-<p>Of course this is not so clear cut and one can be a mixture of the two, rather this is a way of thinking about the way you approach scientific problems (or indeed any research project). Consider how you yourself start new projects. It is a valuable exercise to see how your own habits shape your research, because there are pitfalls to be aware of in both paradigms. The concern primarily is about not being bogged down; one can spend too long learning new things for the sake of it, thinking one is making progress because learning a new tool. Concurrently, one could also flit from one problem to another frequently, never settling on one long enough to actually make a dent in it. This is the value of thinking about research in this way, to be cognizant of the errors in process that just lead to a waste of time. There is a comparison we can make with Aristotle’s law of the golden mean - excess in either direction can be detrimental. Too much hammer and one is holding a solution and constantly looking for a problem. Too much nail and one never solves anything, because one is so wedded to a particular problem you can’t move on, even if it is the right thing to do. Just leave aside and move on to greener pastures.</p>
-<p>A question might be when to apply each paradigm? Is it reasonable to to stick to one throughout your career? I would hazard to say that early in your career it might be worth learning a range of different methods, and this would imply the ‘nail’ approach, particularly as you are finding your niche, the subfield in which you build your reputation and scientific ‘portfolio’. Most researchers begin their career in a PhD program where we are provided with a problem, or at least sat within a larger group in which we have limited freedom to choose our problems. In this sense it is advantageous to begin in the ‘nail’ paradigm at the start. Once we leave our PhD and start as a post-doc we are generally then expected to be capable at certain key skills within a larger scientific program, but now we are experts in a particular technique. Often this is why we were hired to that new group as a post-doc in the first place. This is where the hammer-style of research comes in. Later on, when one has obtained a grant or more independence the freedom that comes from this enables you to pursue your own approach.</p>
-<p>The question now however is the relative merits of both approaches. The severe expectations of a modern scientific career require a considerable output of grants, papers and talks to build a reputation and find a permanent position. There is a very real emphasis on quantity in modern science. Being a hammer or nail is thus refracted through the need for productivity to the detriment of originality or creativity. Perhaps I am pessimistic; experiences vary considerably across fields and countries. In this position the ‘hammer’ paradigm might be advantageous. You can apply yourself to many different projects, potentially building a large and impressive portfolio of results. On the other hand, the complexity of modern science and the interdiciplinary nature of advanced research projects favours those that can build a novel approach to hard problems. Here the ‘nail’ approach is at an advantage, because one can pull several techniques towards a well defined goal. A underemphasised virtue of a well defined problem is how it plays in grant writing. If you can clearly define your project goals then funders may be more ameanable to opening the purse strings.</p>
-<p>A final question then. What do you think you are? Is your current approach to research questions suited to your skills and experience? Would aligning youself to one or other of these paradigms help you?</p>
 
-
+</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

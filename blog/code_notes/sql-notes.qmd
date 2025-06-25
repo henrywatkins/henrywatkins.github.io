@@ -1,0 +1,435 @@
+---
+title: "SQL Notes"
+description: "Basic SQL reference"
+author: "Henry Watkins"
+draft: false
+toc: true
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+---
+
+Access and manipulate relational databases. These organise data into tables. Each datum has a type, usually INTEGER, TEXT, DATE, REAL, NULL
+
+We run queries against the database. Usually in a script.sqlite file
+
+Creation/manipulation keywords
+
+- CREATE TABLE
+
+- INSERT INTO
+
+- ALTER TABLE
+
+- DROP TABLE
+
+- UPDATE
+
+- DELETE FROM
+
+- VALUES
+
+- SET
+
+- ADD COLUMN
+
+Query Keywords
+
+- SELECT FROM
+
+- WHERE
+
+- IS
+
+- AS
+
+- LIKE
+
+- AND OR NOT
+
+- BETWEEN
+
+- ORDER BY
+
+- LIMIT
+
+- CASE/WHEN/THEN/END
+
+- GROUP BY
+
+- HAVING
+
+Multi-table commands
+
+- JOIN ON
+
+- LEFT JOIN 
+
+- CROSS JOIN
+
+- UNION
+
+- WITH
+
+## Syntax & creating/manipulating tables
+
+statements end with semi-colon
+
+We create tables with CREATE
+
+```sql
+CREATE TABLE celebs (
+  id INTEGER,
+  name TEXT,
+  age INTEGER
+ );
+```
+
+create a table with column names and their type
+
+We add data to the table with INSERT
+
+```sql
+INSERT INTO celebs (id, name, age) 
+VALUES (1, 'Justin Bieber', 29);
+```
+
+We select data from a table with SELECT
+
+```sql
+SELECT name FROM celebs;
+```
+
+We can change a table with the ALTER command, here we add a new column
+
+```sql
+ALTER TABLE celebs 
+ADD COLUMN twitter_handle TEXT;
+```
+
+We can edit rows using the UPDATE statement, here we update the table celebs at locations defined by WHERE
+
+```sql
+UPDATE celebs 
+SET twitter_handle = '@taylorswift13' 
+WHERE id = 4; 
+```
+
+We can remove data with the DELETE statement
+
+```sql
+DELETE FROM celebs 
+WHERE twitter_handle IS NULL;
+```
+
+Constraints that add information about how a column can be used are invoked after specifying the data type for a column. They can be used to tell the database to reject inserted data that does not adhere to a certain restriction. Here we define constraints on columns so that there is 
+
+- PRIMARY KEY so that this row is unique and any rows with duplicate ids are rejected
+
+- UNIQUE columns are those where each row in the column for forced to be unique
+
+- NOT NULL ensures data with NULL values rejected in insertion
+
+- DEFAULT ensures rows have a default value if new data does not specify value
+
+```sql
+CREATE TABLE celebs (
+   id INTEGER PRIMARY KEY, 
+   name TEXT UNIQUE,
+   date_of_birth TEXT NOT NULL,
+   date_of_death TEXT DEFAULT 'Not Applicable'
+);
+```
+
+Using these basic statements we can create tables, add data, remove data and manipulate tables in a way subject to contraints
+
+## Querying a database
+
+We select particular columns 
+
+```sql
+SELECT column1, column2 
+FROM table_name;
+```
+
+We can select columns under an alias using the AS keyword
+
+```sql
+SELECT name AS 'Titles'
+FROM movies;
+```
+
+The DISTICT keyword can be used to find all the unique values of a column
+
+```sql
+SELECT DISTINCT tools 
+FROM inventory;
+```
+
+We can extract data according to conditions using the WHERE keyword and boolean operators
+
+```sql
+SELECT *
+FROM movies
+WHERE imdb_rating > 8;
+```
+
+Standard operators operators are AND, OR, NOT alongside = > < <= != >=
+
+We can use the LIKE keyword to apply regex or wildcard style filters to the data
+
+```sql
+SELECT * 
+FROM movies
+WHERE name LIKE 'Se_en';
+```
+
+Useful wildcards are '_' '%'
+
+```sql
+SELECT * 
+FROM movies 
+WHERE name LIKE '%man%';
+```
+
+We identify NULL values not by using = or != but rather with IS NULL IS NOT NULL
+
+We can select date in a range using the BETWEEN keyword. This works with numbers (INTERGER, REAL, FLOAT), dates and TEXT.
+
+We can create complex conditions by combining operators and boolean operators AND OR NOT
+
+```sql
+SELECT * 
+FROM movies
+WHERE year BETWEEN 1990 AND 1999
+   AND genre = 'romance';
+```
+
+We can sort the resulting query using the ORDER BY keyword (ASC, DESC can be used to get ascending or deceasing order)
+
+```sql
+SELECT name, year
+FROM movies
+ORDER BY name DESC;
+```
+
+We can limit the size of the resulting output with the LIMIT keyword - useful for very big tables
+
+```sql
+SELECT * FROM movies
+ORDER BY imdb_rating DESC
+LIMIT 3
+```
+
+The CASE keyword allows us to perform if/then logic, possibly returning the result under an alias. Here we select name and a new revew column that maps values of the rating column into a new review column based on if/then logic (WHEN/THEN)
+
+```sql
+SELECT name,
+ CASE
+  WHEN imdb_rating > 8 THEN 'Fantastic'
+  WHEN imdb_rating > 6 THEN 'Poorly Received'
+  ELSE 'Avoid at All Costs'
+ END AS 'Review'
+FROM movies;
+```
+
+## Aggregation
+
+We can apply standard aggregation functions like
+
+- COUNT
+
+- SUM
+
+- MAX
+
+- MIN
+
+- AVG
+
+- ROUND
+
+Count the number of rows in a table, possibly with optional selection logic
+
+```sql
+SELECT COUNT(*)
+FROM table_name;
+```
+
+Sum the values of a particular column
+
+```sql
+SELECT SUM(downloads)
+FROM fake_apps;
+```
+
+MIN/MAX/AVG work in a similar way
+
+Rounding is performed by specifiying the column and number of decimal places
+
+```sql
+SELECT name, ROUND(price, 0)
+FROM fake_apps;
+```
+
+## Group by
+
+Group by can be used with aggregation functions to arrage identical data into groups before performing an operation. For example, we can find the average rating grouped by each year.
+
+```sql
+SELECT year,
+   AVG(imdb_rating)
+FROM movies
+GROUP BY year
+ORDER BY year;
+```
+
+We can group by a result of a calculation, and we can also refer to selected columns using indices e.g
+
+```sql
+SELECT ROUND(imdb_rating),
+   COUNT(name)
+FROM movies
+GROUP BY 1
+ORDER BY 1;
+```
+
+It is possible to do a double group by. Here we find the average downloads for each categrory and price level
+
+```sql
+SELECT category, 
+   price,
+   AVG(downloads)
+FROM fake_apps
+GROUP BY 1, 2;
+```
+
+We can filter groups by using the HAVING keyword - it acts as a filter for groups, whereas WHERE acted as a filter for rows
+
+```sql
+SELECT category, 
+   price,
+   AVG(downloads)
+FROM fake_apps
+GROUP BY 1, 2
+HAVING AVG(downloads) > 10;
+```
+
+## Multi tables
+
+We can split our data across multiple tables in the database, while maintaining the ability to cross-reference the data across tables. We look at data across tables by joining two or more tables. This is done with the JOIN keyword. This performs an *inner* join, only connecting values that exist in both.
+
+```sql
+SELECT *
+FROM orders
+JOIN subscriptions
+  ON orders.subscription_id = subscriptions.subscription_id;
+```
+
+Here we selected all columns and joined the two tables absed on the subscription_id column. We could run further selection logic with WHERE or GROUP BY etc.
+
+We perform a *left* join where we keep all the rows of the left table. We can also as usual perform some selection/group logic on the results.
+
+```sql
+SELECT *
+FROM table1
+LEFT JOIN table2
+  ON table1.c2 = table2.c2;
+```
+
+```sql
+SELECT month,
+  COUNT(*)
+FROM newspaper
+CROSS JOIN months
+WHERE start_month <=month AND end_month>=month
+GROUP BY month;
+```
+
+Here we cross-joined newspaper subscriber info on months, the counted the number of monthly subscribers using groupby
+
+We can wholesale join two tables together using UNION
+
+```sql
+SELECT *
+FROM newspaper
+UNION
+SELECT *
+FROM online;
+```
+
+We can join a table to the result of a calculation query using the WITH keyword. This essentially creates a temporary table from a calculation result, with which we can join to our other table/
+
+```sql
+WITH previous_results AS (
+   SELECT ...
+   ...
+   ...
+   ...
+)
+SELECT *
+FROM previous_results
+JOIN customers
+  ON _____ = _____;
+```
+
+Here we create a temporary previous_query table and join it to the customers table based on the id
+
+```sql
+WITH previous_query AS (
+SELECT customer_id,
+   COUNT(subscription_id) AS 'subscriptions'
+FROM orders
+GROUP BY customer_id
+)
+SELECT customers.customer_name, previous_query.subscriptions
+FROM customers
+JOIN previous_query
+  ON customers.customer_id = previous_query.customer_id;
+
+```
+
+## Using a SQLite database
+
+In SQLite, a database is stored in a single file — a trait that distinguishes it from other database engines. This fact allows for a great deal of accessibility: copying a database is no more complicated than copying the file that stores the data, sharing a database can mean sending an email attachment. It is most useful if you don't need to use a server - where everything is local
+
+SQLite does not enforce schema, so datatypes can be wrong and contraints will not be enforced
+
+This works via a CLI `sqlite3`, e.g. `sqlite3 newdb.sqlite`
+
+Create a new local database `sqlite3 new.db`
+
+Export to a file by '.output filename.txt'
+
+Run scripts with '.read script.sql', this will run the commands in the script as a normal interpreter
+
+Import data from a file with '.import --csv --schema schema-name file.csv table_1'
+
+Export
+
+```bash
+sqlite3 -header -csv your_database.db "SELECT * FROM your_table;" > filename.csv
+```
+
+Import
+
+```bash
+sqlite3 your_database.db ".mode csv" ".import /path/to/your_file.csv table_name"
+```
+
+Run scripts
+
+```bash
+sqlite3 your_database.db < /path/to/your_script.sql
+```
+
+creation
+    sqlite3 data.db < make_db.sql
+
+querying
+    sqlite3 -header -table data.db < query.sql
+
+importing csv
+    sqlite3 data.db ".mode csv" ".import extra_data.csv wardens"
+
+export
+    sqlite3 -header -csv data.db "SELECT date, AVG(temperature) FROM observations GROUP BY date;" > export.csv

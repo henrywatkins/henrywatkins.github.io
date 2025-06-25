@@ -13,6 +13,27 @@ website:
         href: blog.qmd    # Links to the blog page
       - text: "Plasma Book"
         href: ../book/index.html #chapters/index.qmd
+      - text: "Code Notes"
+        menu:
+          - text: "Python"
+            href: code_notes/python-notes.qmd
+          - text: "Bash"
+            href: code_notes/bash-notes.qmd
+          - text: "Git"
+            href: code_notes/git-notes.qmd
+          - text: "SQL"
+            href: code_notes/sql-notes.qmd
+          - text: "Cython"
+            href: code_notes/cython-notes.qmd
+          - text: "C++"
+            href: code_notes/cpp-notes.qmd
+          - text: "Docker"
+            href: code_notes/docker-notes.qmd
+          - text: "Rust"
+            href: code_notes/rust-notes.qmd 
+
+
+
 
 #format:
 #  html:

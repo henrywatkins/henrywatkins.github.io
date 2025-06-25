@@ -1,0 +1,78 @@
+---
+title: "Docker Notes"
+description: "Basic Docker reference"
+author: "Henry Watkins"
+draft: false
+toc: true
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+---
+
+- Docker image: An executable package that contains everything needed to run an application
+- Docker container: A running docker image
+- Docker file: a file that describes the build of a docker image. Describes what goes on inside the environment of the container
+- Docker registry: a collection of docker repositories where we store docker images. We can push/pull images from the docker registry
+- Virtual machines load a guest OS on the machine. Each virtual machine has its own guest OS. Docker images by contrast use the docker daemon to interact with the host OS, and as such are much smaller and startup faster.
+
+Docker file -> builds -> Docker image -> runs -> docker container
+
+Key docker commands are
+
+1. `build` : build an image from a dockerfile
+2. `push`/`pull` : pushes, pulls images from a docker registry
+3. `image`: commands for dealing with docker images
+4. `container`: commands for dealing with docker containers (running instances for docker images)
+5. `login` login to a docker registry
+
+### Docker files
+
+Docker builds images by reading the instructions from a docker file in order. Docker files have several standard commands
+
+1. `FROM`: build a docker image starting with another image, this is particularly useful for starting with an ubuntu distribution docker image as a basis and adding stuff on top.
+2. `EXPOSE` indicates the ports on which the container listens for instructions
+3. `LABEL` add information and useful metadata to the image.
+4. `WORKDIR` specify the working directory for the following commands
+5. `COPY` copies over files from the source to the filesystem of the container 
+6. `RUN` : run command-line commands. Usually we start with installing python libraries 
+7. `CMD`: tells the container what to do after launching. This defines a default. There can only be one CMD line in a dockerfile
+8. `ENTRYPOINT`: An `ENTRYPOINT` allows you to configure a container that will run as an executable.
+
+For example
+
+```
+FROM ubuntu:18.10
+LABEL version="0.1"
+WORKDIR /data
+COPY . /data
+RUN pip install pandas jupyter
+EXPOSE 8888
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser"]
+```
+
+### Docker images
+
+We build an image out of a dockerfile using 
+
+```
+docker build -t imagename dockerfile
+```
+
+With images we can run commands like  `ls`, `rm`. e.g. `docker image ls -a`
+
+You can save docker images using `docker save` to a tar file. But the ideal senario is to share images using push/pull to the registry. to load a tarball image, use `docker load < image.tar`
+
+### Docker containers
+
+We run a container using the command
+
+```
+docker container run -it imagename
+```
+
+The `-it` runs it interactively.
+
+With containers we can also use commands like like `ls`, `run`, `stop`, `kill`, `rm`
+
+We can also mount databases using docker volumes. These are bound to a docker container filesystem using the -v flag in `container run`.
+
+We bind ports to a docker container using -p flag in `container run`
