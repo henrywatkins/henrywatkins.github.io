@@ -9,6 +9,8 @@ toc: true
 bibliography: references.bib
 license: "CC BY"
 copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+categories:
+  - physics
 ---
 
 In this post I am going to give a brief introduction to one of the central ideas in theoretical physics.

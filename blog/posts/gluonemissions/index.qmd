@@ -9,6 +9,8 @@ toc: true
 bibliography: references.bib
 license: "CC BY"
 copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+categories:
+  - physics
 ---
 
 Particle colliders investigate the fundamental structure of matter using collisions of particles at high energies. These collisions produce jets of particles that spray out into the detector, and the structure of these jets is determined by the interactions of the particles involved. The physics of jets and their production is of particular importance in hadron colliders like the Large Hadron Collider (LHC) at CERN, where protons are collided at very high energies.

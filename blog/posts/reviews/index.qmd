@@ -7,6 +7,8 @@ image: articles.png
 draft: false
 license: "CC BY"
 copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+categories:
+  - metascience
 ---
 
 A literature review forms the foundation of any research project, serving as both a learning tool and a roadmap for your academic journey. This is true for researchers and students of any level, but this is particularly true for graduate students starting off on their research career. Remember that it is primarily through reading the literature of a field that we become experts not only in the most recent results, but also the methods, trends and the academic community. Furthermore, by taking a step back and getting an expansive view of the key problems before jumping into your investigation, you prevent wasting your own time chasing false leads and unnecessary research directions. The literature review process helps researchers develop a deep understanding of their field before conducting original research. This critical step ensures your work builds upon existing knowledge while identifying genuine research gaps. Your review should demonstrate both breadth of knowledge and depth of understanding in your chosen area. Let's explore each aspect in detail.
