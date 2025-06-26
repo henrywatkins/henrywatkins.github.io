@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Henry Watkins">
 
-<title>Practical Plasma Physics: Lasers, Transport, and Magnetisation</title>
+<title>7&nbsp; Plasma-Laser Coupling – Practical Plasma Physics: Lasers, Transport, and Magnetisation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./mhd.html" rel="next">
+<link href="./applications.html" rel="next">
+<link href="./lasers.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -82,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./laserplasma.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plasma-Laser Coupling</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -109,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -145,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./laserplasma.html" class="sidebar-item-text sidebar-link">
+  <a href="./laserplasma.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plasma-Laser Coupling</span></span></a>
   </div>
 </li>
@@ -171,7 +200,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#the-ponderomotive-force" id="toc-the-ponderomotive-force" class="nav-link active" data-scroll-target="#the-ponderomotive-force"><span class="header-section-number">7.1</span> The Ponderomotive Force</a></li>
+  <li><a href="#inverse-bremsstrahlung" id="toc-inverse-bremsstrahlung" class="nav-link" data-scroll-target="#inverse-bremsstrahlung"><span class="header-section-number">7.2</span> Inverse Bremsstrahlung</a></li>
+  <li><a href="#parametric-laser-plasma-instabilities" id="toc-parametric-laser-plasma-instabilities" class="nav-link" data-scroll-target="#parametric-laser-plasma-instabilities"><span class="header-section-number">7.3</span> Parametric Laser-Plasma Instabilities</a>
+  <ul class="collapse">
+  <li><a href="#stimulated-raman-scattering" id="toc-stimulated-raman-scattering" class="nav-link" data-scroll-target="#stimulated-raman-scattering"><span class="header-section-number">7.3.1</span> Stimulated Raman Scattering</a></li>
+  <li><a href="#stimulated-brillouin-scattering" id="toc-stimulated-brillouin-scattering" class="nav-link" data-scroll-target="#stimulated-brillouin-scattering"><span class="header-section-number">7.3.2</span> Stimulated Brillouin Scattering</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -180,19 +215,13 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practical Plasma Physics: Lasers, Transport, and Magnetisation</h1>
+<h1 class="title"><span id="sec-laserplasma" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plasma-Laser Coupling</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Henry Watkins </p>
-          </div>
-  </div>
     
   
     
@@ -203,15 +232,77 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>Plasma physics sits at the crossroads of kinetic theory, electromagnetism, fluid dynamics, and statistical mechanics. Nearly 99 % of the visible universe is in the plasma state, and laboratory plasmas underpin technologies ranging from fluorescent lighting to next‑generation accelerators and fusion‑energy concepts. This online book is an introduction to plasma physics from the point of view of transport, lasers and non-local theory. While there are many good introductory textbooks on plasma physics theory, herein the focus is on the practical aspects of plasma physics, with an emphasis on transport phenomena and the use of lasers in plasma experiments: the regimes of high-energy-density physics (HED). Such conditions are routinely accessed at facilities like the National Ignition Facility (NIF), OMEGA, and the Laser Mégajoule (LMJ), where nanosecond laser pulses generate plasmas exceeding tens of mega‑kelvin and magnetic fields of several tens of Tesla. It is therefore not a comprehensive textbook on plasma physics, but rather a resource for those interested in the applications of plasma physics in the context of laser-plasma interactions and transport phenomena.</p>
-<p>The book is structured to provide a comprehensive overview of the key concepts and applications in plasma physics. The material is intended for senior undergraduates, graduate students, and early‑career researchers in physics or engineering who have a working knowledge of electrodynamics, statistical mechanics, and vector calculus. The content is designed to be accessible to students and researchers who may not have a deep background in plasma physics but are interested in its applications in the regime of collisional and magnetised plasmas, particularly in the context of HED physics.</p>
-<p>In <a href="mhd.html" class="quarto-xref"><span>Chapter 2</span></a> we introduce the basic concepts of plasma kinetic theory and the Vlasov-Fokker-Planck equation, from which we derive the equations of magneto-hydrodynamics (MHD): the theory of electrically conducting fluids in the presence of magnetic fields. This is a fundamental aspect of plasma physics, as it describes how plasmas interact with magnetic fields and how these interactions can lead to various phenomena such as magnetic confinement and plasma instabilities. In <a href="collisions.html" class="quarto-xref"><span>Chapter 3</span></a> we derive the collision operator for plasmas, and how this operator can be used to describe the transport of particles, momentum and energy in plasmas. Collisional processes in plasmas also allow us to introduce the closure of the fluid equations and derive the expressions for thermal transport and Ohm’s law. <a href="transport.html" class="quarto-xref"><span>Chapter 4</span></a> builds on the previous chapter to introduce the transport coefficients and how they can be used to describe the anisotropic transport of particles, momentum and energy in plasmas in the presence of magnetic fields. This chapter further discusses important transport processes and phenomena that occur in the collisional and magnetised regime. When the electron distribution in a plasma is significantly far from a Maxwell-Boltzmann distribution, the local transport approximation breaks down and one must incorporate new models to explain non-local transport. When collisional mean‑free paths approach macroscopic scale‑lengths, classical transport fails. <a href="nonlocal_transport.html" class="quarto-xref"><span>Chapter 5</span></a> introduces non-local transport theory and several models that implement corrections to standard local MHD. This chapter also discusses the limitations of the local transport approximation and how non-local transport theory can provide a more accurate description of plasma behaviour in certain regimes.</p>
-<p>The focus of this book is also the application of plasma physics in the context of laser-plasma interactions. In <a href="lasers.html" class="quarto-xref"><span>Chapter 6</span></a> we introduce some of the basic principles of laser propagation relevant to their interactions with plasmas. <a href="laserplasma.html" class="quarto-xref"><span>Chapter 7</span></a> will then discuss the interaction of lasers with plasmas, including the mechanisms of energy transfer and the effects of laser-plasma interactions on plasma behaviour. This chapter will also cover some of the important instabilities and phenomena that can arise in laser-plasma interactions, such as stimulated Raman scattering. In <a href="applications.html" class="quarto-xref"><span>Chapter 8</span></a>, we will explore some of the practical applications of plasma physics in the context of laser-plasma interactions, including inertial confinement fusion. This chapter will highlight the importance of plasma physics in advancing our understanding of fundamental physical processes.</p>
-<p>I hope this focused approach helps readers build a familiarity with the background and physics required for understanding laser‑driven plasma physics. If you want to go further, there is a list of additional resources and books in <a href="summary.html" class="quarto-xref"><span>Chapter 9</span></a>. Plasma physics is a field that covers a wide range of phenomena, processes and theoretical and computational challenges that still remain relevant and exciting today. What begins as a simple kinetic theory of charged particles can lead to a rich and complex description of this remarkable state of matter.</p>
+<p>The interaction between a laser field and a plasma exhibits a stunning array of complex phenomena across a range of length and time scales. The laser-plasma coupling processes are crucial for understanding how energy and momentum are transferred from the laser to the plasma, which in turn affects the dynamics of the plasma and the efficiency of energy deposition. In this chapter we will discuss the fundamental processes of laser-plasma coupling, including the ponderomotive force and inverse bremsstrahlung, as well as the parametric instabilities that can arise in these interactions. We will also explore how non-locality and magnetisation affect laser propagation and energy deposition in plasmas. These are only a small subset of the wide range of processes that can occur in laser-plasma interactions, but they are the most relevant to the regimes of interest of this book.</p>
+<p>The plasmas of interest here are all produced by long pulse lasers with a laser wavelength of <span class="math inline">\(\lambda_l= 1 \mu m\)</span>. As such the laser intensity is moderate, with a peak intensity around <span class="math inline">\(10^{15} W cm^{-2}\)</span> and a laser-plasma coupling parameter <span class="math inline">\(I\lambda_l^2\)</span> in the region of <span class="math inline">\(10^7 W\)</span>. To get a measure for the importance of special relativistic effects in laser-plasma coupling, one can consider the magnitude of the electron quiver speed <span class="math inline">\(v_{osc}\)</span>, this is the speed of oscillation of an electron in the electric field of the laser. With intensities this low, relativistic effects can be ignored since the electron quiver speed relative to the speed of light <span class="math display">\[
+\frac{v_{osc}}{c}=\frac{eE}{m_e \omega_l c} = a_0,
+\]</span> is of the order <span class="math inline">\(O(10^{-2})\)</span>, so the electron motion is firmly non-relativistic. The term <span class="math inline">\(a_0\)</span> is known as the normalised vector potential, and is commonly used in the theory of laser-plasma interactions.</p>
+<p><a href="mhd.html" class="quarto-xref"><span>Chapter 2</span></a> introduced the concept of the plasma frequency <span class="math inline">\(\omega_p\)</span>, which is the characteristic frequency at which the electron fluid restores quasi-neutrality in a plasma. This provides a lower limit to the frequencies of electromagnetic radiation can propagate through a plasma. When the laser frequency <span class="math inline">\(\omega_l\)</span> equals <span class="math inline">\(\omega_p\)</span>, the electron current in the plasma can cancel the displacement current in Ampere’s law, effectively quenching the electric field of the laser. The length scale of this attenuation is called the <em>skin depth</em> and is defined <span class="math display">\[
+\delta =\frac{c}{\omega_p}
+\]</span> The limit on frequency also defines an important parameter of laser-plasma interactions, the critical density <span class="math inline">\(n_c\)</span>. This is the cut-off electron density at which the plasma frequency equals the laser frequency. Using the definition of the plasma frequency, this density is defined <span class="math display">\[
+n_c=\frac{\epsilon_0 m_e \omega_l^2}{e^2}.
+\]</span></p>
+<p>While there are other mechanisms by which lasers can couple to a plasma and exchange energy, the parameter space of interest in this thesis limits the coupling to the most significant processes in ICF regimes.</p>
+<p>An additional and important consideration in laser-plasma coupling is the gradient scale length near the critical surface, often characterised by the ratio <span class="math inline">\(L_n/\lambda_l\)</span>​, where <span class="math inline">\(L_n=|\nabla n_e/n_e|^{-1}\)</span> is the density scale length. This gradient strongly influences absorption efficiency and laser beam propagation. For example, when the scale length is long compared to the laser wavelength, laser energy can penetrate deeper into the plasma before being reflected or absorbed—a regime conducive to inverse bremsstrahlung heating. In contrast, sharp gradients near the critical surface enhance reflection and can seed parametric instabilities like stimulated Raman or Brillouin scattering, which redirect laser energy into plasma waves or backscatter it out of the target. These processes are highly sensitive to laser intensity, polarisation, and the spatial profile of both the plasma and the laser beam. Additionally, laser filamentation and self-focusing can occur when small fluctuations in the refractive index (linked to <span class="math inline">\(n_e\)</span> ​) cause parts of the beam to intensify and locally modify the plasma, creating nonlinear feedback. Understanding these scale-dependent and nonlinear mechanisms is essential for predicting how much laser energy is deposited in the plasma and where, which in turn affects ablation pressure and shock formation.</p>
+<section id="the-ponderomotive-force" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="the-ponderomotive-force"><span class="header-section-number">7.1</span> The Ponderomotive Force</h2>
+<p>The ponderomotive force is the result of the collective oscillation of the electrons in the oscillating electric field of the laser. A spatially varying laser electric field envelope drives electrons from regions of high intensity to regions of lower intensity. The timescale of the laser oscillation period is so much higher than the timescale of the dynamics of the plasma, so one can temporally integrate over this collective motion to obtain a ponderomotive potential. Gradients in this potential act as a force in the momentum equation.</p>
+<p>The form of the ponderomotive force can be obtained from the second order terms of the electron fluid momentum equation <span class="math display">\[
+m_e n_e \frac{\partial \textbf{V}_e}{\partial t}=-m_e n_e\textbf{V}_e\cdot \nabla\textbf{V}_e-e n_e(\textbf{V}_e \times\textbf{B}).
+\]</span> Using the magnetic vector potential <span class="math inline">\(\textbf{B}=\nabla\times\textbf{A}\)</span>, and the first order oscillating field (quiver) approximation <span class="math inline">\(\textbf{V}_e=-\frac{e \textbf{E}}{m_e \omega}=\frac{e\textbf{A}}{m_e}\)</span>, the momentum equation becomes <span class="math display">\[
+    m_e n_e \frac{\partial \textbf{V}_e}{\partial t}=-\frac{1}{2}\frac{e^2 n_e}{m_e \omega_l^2}\nabla A^2.
+\]</span> By integrating out the fast oscillation, this expression yields the ponderomotive force density, which can be written in terms of the laser field envelope <span class="math inline">\(\psi\)</span>, <span class="math display">\[
+\textbf{F}_p=-\frac{\omega_p^2}{\omega_l^2}\nabla \langle\frac{1}{2}\epsilon_0 E^2\rangle=-\frac{n_e}{n_c}\frac{1}{2}\epsilon_0\nabla|\psi|^2.
+\]</span> This form shows the force as a negative gradient of a potential; on timescales much longer than the laser oscillation period, the ponderomotive force can be thought of as an electric field pressure on the electron fluid. In practice this term is added to the momentum equation of the electron fluid, and acts as a source term for the electron momentum density.</p>
+</section>
+<section id="inverse-bremsstrahlung" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="inverse-bremsstrahlung"><span class="header-section-number">7.2</span> Inverse Bremsstrahlung</h2>
+<p>Inverse bremsstrahlung (IB) is the inverse of the bremstrahlung emission process. This is a collisional absorption process, whereby an electron-ion Coulomb collision is caused by the oscillating electric field of the laser forcing the electrons to quiver. In this process a photon of laser light is absorbed by an electron scattered in the field of an ion. IB acts as a source term in the plasma energy equation with energy from the laser light absorbed by the plasma. For underdense plasmas, IB is the primary heating process from laser interactions.</p>
+<p>To derive the form of the IB operator, consider the Langdon operator for the <span class="math inline">\(f_0\)</span> equation, defined as <span class="math display">\[
+\left( \frac{\partial f_0}{\partial t}\right)_{IB}=\frac{A v^2_{osc}}{3 v^2}\frac{\partial}{\partial v}\left(\frac{g(v)}{v} \frac{\partial f_0}{\partial v}\right).
+\]</span> With <span class="math inline">\(A= \frac{2 \pi n_e Z e^4}{m_e^2}\)</span> and <span class="math inline">\(v_{osc} = \frac{e E_0}{m_e \omega_l}\)</span>, where <span class="math inline">\(E_0\)</span> is the laser field. In this model, the oscillating laser field acts as a source term for the isotropic part of electron distribution function.</p>
+<p>The IB heating term in the energy equation can then be derived in the same way as the rest of the energy equation, by taking the correct moment of the Landgon IB operator and using a Maxwellian distribution for <span class="math inline">\(f_0\)</span>. The factor <span class="math inline">\(g(v)\)</span> can be assumed to be 1 in the regime within which these equations are derived (where <span class="math inline">\(v_{osc}&lt;&lt;v_{th}\)</span>). Therefore, using the definition of the electron-ion collision time <span class="math inline">\(\tau_{ei}\)</span>, the laser heating term is <span class="math display">\[
+\left( \frac{\partial \mathcal{E}}{\partial t}\right)_{laser}= \frac{\omega_p^2}{\omega_l^2}\nu_{ei}\langle\frac{1}{2}\epsilon_0 E^2\rangle=\frac{n_e}{n_c}\frac{1}{2}\epsilon_0\nu_{ei}|\psi|^2,
+\]</span> where it has been put in terms of the laser field envelope <span class="math inline">\(\psi\)</span>.</p>
+<p>These two laser-plasma coupling terms allow the laser to deposit energy and momentum in the plasma, while other laser-plasma interactions do exist, on the long-pulse, <span class="math inline">\(1ns\)</span> timescales they are negligible. The above forms also allow the direct use of the slowly-varying laser field envelope <span class="math inline">\(\psi\)</span>, calculated from the paraxial equation, in the plasma coupling terms.</p>
+</section>
+<section id="parametric-laser-plasma-instabilities" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="parametric-laser-plasma-instabilities"><span class="header-section-number">7.3</span> Parametric Laser-Plasma Instabilities</h2>
+<p>Parametric instabilities are caused by the non-linear interactions between intense laser light and the plasma. The refractive index of a plasma is dependent on the electron number density, as such, light will refract in regions of inhomogeneous electron density. In particular laser light finds itself refracted into electron density channels. Small density fluctuations scatter laser light, with the intense laser pump wave decaying into two new waves. Depending on the kind of waves that are excited, these instabilities can enhance laser absorption or enhance laser backscatter.</p>
+<div id="fig-LPI" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-LPI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/parametric.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-LPI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: Diagram of a 3-wave parametric process. Diagram of a 3-wave parametric process, an intense laser photon decays into two new waves.
+</figcaption>
+</figure>
+</div>
+<p>This three-wave decay process is illustrated in figure <span class="math inline">\(\ref{fig:LPI}\)</span>. Because energy and momentum must be conserved, the incident <span class="math inline">\((\omega_0, \textbf{k}_0)\)</span> and scattered <span class="math inline">\((\omega_1,\textbf{k}_1),( \omega_2,\textbf{k}_2)\)</span> waves must satisfy the wavenumber and frequency matching relations <span class="math display">\[
+\begin{align}
+    \omega_0&amp;=\omega_1+\omega_2,\\
+    \textbf{k}_0&amp;=\textbf{k}_1+\textbf{k}_2.
+\end{align}
+\]</span> The intensity of the incident wave (i.e the laser) has to exceed a certain threshold in order for the parametric instability to occur, because collisional or collisionless damping will act to damp the growth of an unstable mode. If the laser intensity is higher than this limit, the amplitude of the parametric decay mode grows exponentially with a characteristic growth rate. A high-power pump laser in an ICF or laser-plasma experiment can decay via a number of different parametric instabilities. The processes of interest in the underdense moderate-intensity laser interactions are stimulated Raman scattering and stimulated Brillouin scattering.</p>
+<section id="stimulated-raman-scattering" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="stimulated-raman-scattering"><span class="header-section-number">7.3.1</span> Stimulated Raman Scattering</h3>
+<p>Stimulated Raman scattering (SRS) is the parametric process where the incident pump wave (with frequency <span class="math inline">\(\omega_0\)</span>) decays into an electron plasma wave (with frequency <span class="math inline">\(\omega_p\)</span>, the plasma frequency) and lower-energy scattered electromagnetic wave (with frequency <span class="math inline">\(\omega_s\)</span>). It is the parametric resonance between the incident laser light with the normal modes of the plasma. The frequency matching relation <span class="math display">\[
+    \omega_0=\omega_s+\omega_p
+\]</span> implies this instability can only occur if the initial pump frequency satisfies <span class="math inline">\(\omega_0&gt;2\omega_p\)</span>. The dependence on the local plasma density (via the plasma frequency) also limits this instability to the region in the plasma where <span class="math inline">\(n_e \approx n_c/4\)</span> and below.</p>
+<p>SRS is unstable because it acts as a feedback loop; small changes in electron density <span class="math inline">\(\delta n_e\)</span> oscillate, generating currents in the plasma which excite electromagnetic radiation with frequency <span class="math inline">\(\omega_0\pm\omega_p\)</span>. The combination of the incident and scattered electromagnetic wave reinforce the density fluctuations through the ponderomotive force, completing the loop. SRS can scatter light forward or backward, with backscattering the most important for laser-plasma experiments. SRS has a peak growth rate at <span class="math display">\[
+\gamma_{max}= \frac{\omega_0}{2\sqrt{2}}\frac{v_{osc}}{c}\frac{n_e}{n_c}.
+\]</span> This instability is problematic not only because it is detrimental to laser absorption, but also because it generates hot electrons which can cause pre-heating and non-local transport in the plasma. The hot electrons generated by SRS can also lead to further instabilities, such as two-plasmon decay, which can further degrade the laser-plasma coupling.</p>
+</section>
+<section id="stimulated-brillouin-scattering" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="stimulated-brillouin-scattering"><span class="header-section-number">7.3.2</span> Stimulated Brillouin Scattering</h3>
+<p>Stimulated Brillouin scattering (SBS) is another resonant parametric instability. In this process, the pump wave decays into an ion-acoustic wave and lower energy electromagnetic wave with the matching condition <span class="math display">\[
+    \omega_0=\omega_s+\omega_{ia},
+\]</span> where the ion-acoustic frequency <span class="math inline">\(\omega_{ia}=v_s k_{ia}\)</span> is defined via the ion-acoustic sound speed <span class="math inline">\(v_s\)</span>. In this mechanism the density fluctuation is associated with a low-frequency ion-acoustic wave. This scattering off ion-acoustic modes is limited to the region where <span class="math inline">\(n_e \leq n_c\)</span> and has a peak growth rate (for backscattering) <span class="math display">\[
+\gamma_{max}=\frac{1}{2\sqrt{2}}\frac{k_0 v_{osc}\omega_{ia}}{\sqrt{\omega_0 k_0 v_s}}.
+\]</span> For high-energy-density plasma conditions the backscatter from both SBS and SRS is large enough to reflect a significant portion of the laser light.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -616,10 +707,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./lasers.html" class="pagination-link" aria-label="Laser Theory">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Laser Theory</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./mhd.html" class="pagination-link" aria-label="Magneto-Hydrodynamics">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Magneto-Hydrodynamics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./applications.html" class="pagination-link" aria-label="Inertial Confinement Fusion">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inertial Confinement Fusion</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

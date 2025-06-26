@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Henry Watkins">
 
-<title>Practical Plasma Physics: Lasers, Transport, and Magnetisation</title>
+<title>5&nbsp; Non-Local Transport – Practical Plasma Physics: Lasers, Transport, and Magnetisation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./mhd.html" rel="next">
+<link href="./lasers.html" rel="next">
+<link href="./transport.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -82,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./nonlocal_transport.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Non-Local Transport</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -109,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -133,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./nonlocal_transport.html" class="sidebar-item-text sidebar-link">
+  <a href="./nonlocal_transport.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Non-Local Transport</span></span></a>
   </div>
 </li>
@@ -166,33 +195,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practical Plasma Physics: Lasers, Transport, and Magnetisation</h1>
+<h1 class="title"><span id="sec-nonlocal" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Non-Local Transport</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Henry Watkins </p>
-          </div>
-  </div>
     
   
     
@@ -203,16 +220,31 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>Plasma physics sits at the crossroads of kinetic theory, electromagnetism, fluid dynamics, and statistical mechanics. Nearly 99 % of the visible universe is in the plasma state, and laboratory plasmas underpin technologies ranging from fluorescent lighting to next‑generation accelerators and fusion‑energy concepts. This online book is an introduction to plasma physics from the point of view of transport, lasers and non-local theory. While there are many good introductory textbooks on plasma physics theory, herein the focus is on the practical aspects of plasma physics, with an emphasis on transport phenomena and the use of lasers in plasma experiments: the regimes of high-energy-density physics (HED). Such conditions are routinely accessed at facilities like the National Ignition Facility (NIF), OMEGA, and the Laser Mégajoule (LMJ), where nanosecond laser pulses generate plasmas exceeding tens of mega‑kelvin and magnetic fields of several tens of Tesla. It is therefore not a comprehensive textbook on plasma physics, but rather a resource for those interested in the applications of plasma physics in the context of laser-plasma interactions and transport phenomena.</p>
-<p>The book is structured to provide a comprehensive overview of the key concepts and applications in plasma physics. The material is intended for senior undergraduates, graduate students, and early‑career researchers in physics or engineering who have a working knowledge of electrodynamics, statistical mechanics, and vector calculus. The content is designed to be accessible to students and researchers who may not have a deep background in plasma physics but are interested in its applications in the regime of collisional and magnetised plasmas, particularly in the context of HED physics.</p>
-<p>In <a href="mhd.html" class="quarto-xref"><span>Chapter 2</span></a> we introduce the basic concepts of plasma kinetic theory and the Vlasov-Fokker-Planck equation, from which we derive the equations of magneto-hydrodynamics (MHD): the theory of electrically conducting fluids in the presence of magnetic fields. This is a fundamental aspect of plasma physics, as it describes how plasmas interact with magnetic fields and how these interactions can lead to various phenomena such as magnetic confinement and plasma instabilities. In <a href="collisions.html" class="quarto-xref"><span>Chapter 3</span></a> we derive the collision operator for plasmas, and how this operator can be used to describe the transport of particles, momentum and energy in plasmas. Collisional processes in plasmas also allow us to introduce the closure of the fluid equations and derive the expressions for thermal transport and Ohm’s law. <a href="transport.html" class="quarto-xref"><span>Chapter 4</span></a> builds on the previous chapter to introduce the transport coefficients and how they can be used to describe the anisotropic transport of particles, momentum and energy in plasmas in the presence of magnetic fields. This chapter further discusses important transport processes and phenomena that occur in the collisional and magnetised regime. When the electron distribution in a plasma is significantly far from a Maxwell-Boltzmann distribution, the local transport approximation breaks down and one must incorporate new models to explain non-local transport. When collisional mean‑free paths approach macroscopic scale‑lengths, classical transport fails. <a href="nonlocal_transport.html" class="quarto-xref"><span>Chapter 5</span></a> introduces non-local transport theory and several models that implement corrections to standard local MHD. This chapter also discusses the limitations of the local transport approximation and how non-local transport theory can provide a more accurate description of plasma behaviour in certain regimes.</p>
-<p>The focus of this book is also the application of plasma physics in the context of laser-plasma interactions. In <a href="lasers.html" class="quarto-xref"><span>Chapter 6</span></a> we introduce some of the basic principles of laser propagation relevant to their interactions with plasmas. <a href="laserplasma.html" class="quarto-xref"><span>Chapter 7</span></a> will then discuss the interaction of lasers with plasmas, including the mechanisms of energy transfer and the effects of laser-plasma interactions on plasma behaviour. This chapter will also cover some of the important instabilities and phenomena that can arise in laser-plasma interactions, such as stimulated Raman scattering. In <a href="applications.html" class="quarto-xref"><span>Chapter 8</span></a>, we will explore some of the practical applications of plasma physics in the context of laser-plasma interactions, including inertial confinement fusion. This chapter will highlight the importance of plasma physics in advancing our understanding of fundamental physical processes.</p>
-<p>I hope this focused approach helps readers build a familiarity with the background and physics required for understanding laser‑driven plasma physics. If you want to go further, there is a list of additional resources and books in <a href="summary.html" class="quarto-xref"><span>Chapter 9</span></a>. Plasma physics is a field that covers a wide range of phenomena, processes and theoretical and computational challenges that still remain relevant and exciting today. What begins as a simple kinetic theory of charged particles can lead to a rich and complex description of this remarkable state of matter.</p>
+<p>The conventional derivation of fluid theory relies on the truncation of the spherical harmonic expansion of the electron distribution function in velocity space, and the assumption that the isotropic part <span class="math inline">\(f_0\)</span> is Maxwellian. This local approximation holds in the regime <span class="math inline">\(L_T&gt;&gt;\lambda_{ei}\)</span>, where the electron-ion collision mean-free-path <span class="math inline">\(\lambda_{ei} (\propto T_e^2)\)</span> is much smaller than the temperature scale length <span class="math inline">\(L_T\)</span>, defined as</p>
+<p><span class="math display">\[
+    \frac{1}{L_T}=\frac{1}{T}\frac{d T}{d x}.
+\]</span> From this one can define the Knudsen number, <span class="math display">\[
+    Kn=\frac{\lambda_{ei}}{L_T}.
+\]</span></p>
+<p>This number quantifies the degree of ‘non-locality’, in the regime of <span class="math inline">\(Kn&lt;&lt;1\)</span> the electrons in the plasma experience sufficient Coulomb collisions such that the distribution function is approximately Maxwellian and in local thermal equilibrium. This condition however is frequently violated in high-intensity laser-plasma interactions where the interaction can drive steep temperature gradients. Electrons with collisional mean-free paths greater than the scale length of the gradient (where <span class="math inline">\(L_T&lt;&lt;\lambda_{ei}\)</span>), stream down the temperature gradient without thermalising to the local distribution. As a result there is an increase in these hotter electrons (coming from the tail of the distribution in a high temperature region) and a depletion in another region, resulting in non-Maxwellian distribution functions and the break-down of classical transport. This depletion of hot electrons in the tail of the distribution from the region of the temperature gradient leads to a lower peak heat flux than expected from the Spitzer-Harm approximation <span class="math inline">\(\textbf{q}_{sh}\)</span>, <span class="math display">\[
+     \textbf{q}_{sh} \propto - n_e \lambda_{ei} v_{th}\nabla T_e.
+\]</span> The familiar Fourier law-type heat flow should also break down at sharp temperature gradients such as shock fronts as the heat flow would diverge. The heat flow should saturate at approximately the free streaming heat flow <span class="math inline">\(\textbf{q}_F\)</span>; the heat flow if all the electrons moved at the thermal speed in the direction of the temperature gradient <span class="math display">\[
+\textbf{q}_F=\frac{1}{2}m_e n_e v_{th}^3\frac{\nabla T_e}{|\nabla T_e|}.
+\]</span></p>
+<p>A simple method of accounting for this reduction is to use a flux limiter <span class="math inline">\(f_l\)</span>, where the classical heat flow is reduced to some fraction of the free streaming heat flow, <span class="math display">\[
+\frac{1}{q(x)}=\frac{1}{q_{sh}(x)}+\frac{1}{f_l q_{F}}.
+\]</span></p>
+<p>This however does not capture the effect of pre-heat, where heat flow is present even before the temperature gradient. Most of the heat flow is carried by fast electrons with speeds 3 to <span class="math inline">\(5 v_{th}\)</span>. Since the mean free path grows as <span class="math inline">\(\lambda_{ei}\propto v^4\)</span>, the less collisional, non-local electrons are carrying the heat flow beyond the temperature gradient. An alternative non-local thermal transport model that can capture this effect is through a convolutional kernel. In one dimension, <span class="math display">\[
+    q(x)=\int_{-\infty}^\infty W(x,x')q_{sh}(x')dx'.
+\]</span></p>
+<p>The difficulty in flux-limited or convolutional models is that the choice of limiter or kernel is arbitrary, with no real physical basis for commonly used models, and some choosing them to fit experimental data. While these models are simple, a VFP approach is necessary to get correct results.</p>
+<p>The reduction in thermal conductivity can also be cast in Fourier space for a temperature perturbation mode with wavenumber <span class="math inline">\(k\)</span>. This effectively recasts the peak thermal flux reduction as a reduction of thermal conductivity for small length scale structures. One such model uses a non-local conductivity suppression factor relating the Spitzer-Harm thermal conductivity <span class="math inline">\(\kappa_{sh}\)</span> to the non-local thermal conductivity <span class="math inline">\(\kappa_{nonlocal}\)</span> of the form <span class="math display">\[
+\frac{\kappa_{nonlocal}}{\kappa_{sh}}=\frac{1}{1+a (\sqrt{Z} k\lambda_{ei})^b},
+\]</span> with the parameters <span class="math inline">\(a,b\)</span> obtained by fitting this function to a numerical VFP simulation. The result is a reduction in thermal conductivity for higher modes (high <span class="math inline">\(k\lambda_{ei}\)</span>) meaning short-wavelength scale structures saw reduced conductivity.</p>
+<p>When magnetic fields are present in a plasma, the Larmor radius can become comparable to the mean free path. In this highly magnetised regime the Larmor radius becomes the characteristic step-length of diffusive transport. Given that the Larmor radius grows as <span class="math inline">\(r_L \propto v\)</span> and <span class="math inline">\(\lambda_{ei} \propto v^4\)</span>, the hotter electrons in the tail (with higher <span class="math inline">\(v\)</span>) of the electron distribution can be relatively unmagnetised while the bulk electrons are magnetised. Under a sufficiently strong magnetic field the transport is localised in the plane perpendicular to the field, no matter how large <span class="math inline">\(\lambda_{mfp}\)</span>. This quenching of non-locality is borne out in a magnetised gas-jet experiments and kinetic simulations.</p>
+<p>An important conceptual insight from non-local transport theory is that heat flow in plasmas is inherently non-diffusive when the characteristic electron path lengths approach or exceed macroscopic gradient scale lengths. In this regime, kinetic effects dominate, and classical transport theories like Spitzer-Härm become invalid. This leads to phenomena such as preheat, where heat energy arrives in colder regions before the arrival of the thermal front predicted by local models. Additionally, the shape of the electron distribution function becomes skewed, with an enhanced suprathermal tail and lower mid-range velocities which are a feature that strongly affects heat flux and electric field generation. These kinetic effects have downstream effects on hydrodynamic evolution, changing shock profiles, instability growth, and magnetic field dynamics. As such, accurate modeling of non-local transport is not merely a refinement but a necessity in systems with steep gradients, such as laser-produced plasmas, hohlraums, or astrophysical shocks. While reduced models like flux-limiters or convolution-based corrections are often used in hydrodynamic simulations due to their simplicity, they lack the self-consistency and predictive power of full kinetic treatments. Ultimately, the inclusion of non-local transport remains one of the key motivations for incorporating Vlasov-Fokker-Planck solvers or hybrid kinetic-fluid approaches in high-fidelity plasma simulation tools.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -616,10 +648,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./transport.html" class="pagination-link" aria-label="Magnetised Transport">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Magnetised Transport</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./mhd.html" class="pagination-link" aria-label="Magneto-Hydrodynamics">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Magneto-Hydrodynamics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./lasers.html" class="pagination-link" aria-label="Laser Theory">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Laser Theory</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

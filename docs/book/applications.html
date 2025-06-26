@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Henry Watkins">
 
-<title>Practical Plasma Physics: Lasers, Transport, and Magnetisation</title>
+<title>8&nbsp; Inertial Confinement Fusion – Practical Plasma Physics: Lasers, Transport, and Magnetisation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./mhd.html" rel="next">
+<link href="./summary.html" rel="next">
+<link href="./laserplasma.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -82,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./applications.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inertial Confinement Fusion</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -109,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -151,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./applications.html" class="sidebar-item-text sidebar-link">
+  <a href="./applications.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inertial Confinement Fusion</span></span></a>
   </div>
 </li>
@@ -171,7 +200,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#inertial-fusion-schemes" id="toc-inertial-fusion-schemes" class="nav-link active" data-scroll-target="#inertial-fusion-schemes"><span class="header-section-number">8.1</span> Inertial Fusion Schemes</a></li>
   </ul>
 </nav>
     </div>
@@ -180,19 +209,13 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practical Plasma Physics: Lasers, Transport, and Magnetisation</h1>
+<h1 class="title"><span id="sec-applications" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inertial Confinement Fusion</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Henry Watkins </p>
-          </div>
-  </div>
     
   
     
@@ -203,13 +226,21 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>Plasma physics sits at the crossroads of kinetic theory, electromagnetism, fluid dynamics, and statistical mechanics. Nearly 99 % of the visible universe is in the plasma state, and laboratory plasmas underpin technologies ranging from fluorescent lighting to next‑generation accelerators and fusion‑energy concepts. This online book is an introduction to plasma physics from the point of view of transport, lasers and non-local theory. While there are many good introductory textbooks on plasma physics theory, herein the focus is on the practical aspects of plasma physics, with an emphasis on transport phenomena and the use of lasers in plasma experiments: the regimes of high-energy-density physics (HED). Such conditions are routinely accessed at facilities like the National Ignition Facility (NIF), OMEGA, and the Laser Mégajoule (LMJ), where nanosecond laser pulses generate plasmas exceeding tens of mega‑kelvin and magnetic fields of several tens of Tesla. It is therefore not a comprehensive textbook on plasma physics, but rather a resource for those interested in the applications of plasma physics in the context of laser-plasma interactions and transport phenomena.</p>
-<p>The book is structured to provide a comprehensive overview of the key concepts and applications in plasma physics. The material is intended for senior undergraduates, graduate students, and early‑career researchers in physics or engineering who have a working knowledge of electrodynamics, statistical mechanics, and vector calculus. The content is designed to be accessible to students and researchers who may not have a deep background in plasma physics but are interested in its applications in the regime of collisional and magnetised plasmas, particularly in the context of HED physics.</p>
-<p>In <a href="mhd.html" class="quarto-xref"><span>Chapter 2</span></a> we introduce the basic concepts of plasma kinetic theory and the Vlasov-Fokker-Planck equation, from which we derive the equations of magneto-hydrodynamics (MHD): the theory of electrically conducting fluids in the presence of magnetic fields. This is a fundamental aspect of plasma physics, as it describes how plasmas interact with magnetic fields and how these interactions can lead to various phenomena such as magnetic confinement and plasma instabilities. In <a href="collisions.html" class="quarto-xref"><span>Chapter 3</span></a> we derive the collision operator for plasmas, and how this operator can be used to describe the transport of particles, momentum and energy in plasmas. Collisional processes in plasmas also allow us to introduce the closure of the fluid equations and derive the expressions for thermal transport and Ohm’s law. <a href="transport.html" class="quarto-xref"><span>Chapter 4</span></a> builds on the previous chapter to introduce the transport coefficients and how they can be used to describe the anisotropic transport of particles, momentum and energy in plasmas in the presence of magnetic fields. This chapter further discusses important transport processes and phenomena that occur in the collisional and magnetised regime. When the electron distribution in a plasma is significantly far from a Maxwell-Boltzmann distribution, the local transport approximation breaks down and one must incorporate new models to explain non-local transport. When collisional mean‑free paths approach macroscopic scale‑lengths, classical transport fails. <a href="nonlocal_transport.html" class="quarto-xref"><span>Chapter 5</span></a> introduces non-local transport theory and several models that implement corrections to standard local MHD. This chapter also discusses the limitations of the local transport approximation and how non-local transport theory can provide a more accurate description of plasma behaviour in certain regimes.</p>
-<p>The focus of this book is also the application of plasma physics in the context of laser-plasma interactions. In <a href="lasers.html" class="quarto-xref"><span>Chapter 6</span></a> we introduce some of the basic principles of laser propagation relevant to their interactions with plasmas. <a href="laserplasma.html" class="quarto-xref"><span>Chapter 7</span></a> will then discuss the interaction of lasers with plasmas, including the mechanisms of energy transfer and the effects of laser-plasma interactions on plasma behaviour. This chapter will also cover some of the important instabilities and phenomena that can arise in laser-plasma interactions, such as stimulated Raman scattering. In <a href="applications.html" class="quarto-xref"><span>Chapter 8</span></a>, we will explore some of the practical applications of plasma physics in the context of laser-plasma interactions, including inertial confinement fusion. This chapter will highlight the importance of plasma physics in advancing our understanding of fundamental physical processes.</p>
-<p>I hope this focused approach helps readers build a familiarity with the background and physics required for understanding laser‑driven plasma physics. If you want to go further, there is a list of additional resources and books in <a href="summary.html" class="quarto-xref"><span>Chapter 9</span></a>. Plasma physics is a field that covers a wide range of phenomena, processes and theoretical and computational challenges that still remain relevant and exciting today. What begins as a simple kinetic theory of charged particles can lead to a rich and complex description of this remarkable state of matter.</p>
+<p>With this in mind, what do we use the physics we have covered for? The primary application of plasma physics research is fusion energy devices like magnetic confinement fusion and inertial confinement fusion, the latter of which also incorporates laser physics and the science of laser-plasma interactions.</p>
+<p>The fusion of two nuclei occurs when they collide with the energy to overcome the Coulomb barrier between the particles, allowing the attractive strong nuclear force to bind a set of the constituent nucleons into a more energetically stable daughter product. The rate of this process is significantly increased by quantum tunnelling, whereby the incoming particles can tunnel through the Coulomb barrier, reducing the amount of energy required by each particle. Nuclear fusion in the sun is dominated by two processes, the proton-proton chain reaction and the carbon-nitrogen-oxygen cycle. Unfortunately for physicists, the conditions in the core of the sun where these processes occur are not replicable in laboratories on Earth.</p>
+<p>While the processes that power the sun are out of reach, other fusion processes have much higher cross-sections for conditions achievable on Earth. The reaction most amenable to laboratory fusion is the reaction of a deuterium and a tritium nucleus into an <span class="math inline">\(\alpha-\)</span>particle and a neutron <span class="math display">\[
+    {}_1^2 D + {}_1^3 T \rightarrow {}_2^4 He + n.
+\]</span> This reaction has a very high cross-section relative to other light nuclei and so is the chosen reaction in all potential fusion schemes. By considering the fusion energy gain versus energy losses in a hypothetical power plant, the requirements for a viable fusion plant is given by the Lawson Criterion. It requires the product of fuel number density <span class="math inline">\(n\)</span> and energy confinement time <span class="math inline">\(\tau\)</span> to be above a critical value, <span class="math display">\[
+    n\tau &gt; \frac{12 k_b T}{\langle \sigma v\rangle E_{\alpha}}.
+\]</span> Here <span class="math inline">\(E_{\alpha}\)</span> is the energy of the alpha particle product, <span class="math inline">\(T\)</span> is the fuel temperature and <span class="math inline">\(\langle \sigma v\rangle\)</span> comes from the D-T fusion reaction rate <span class="math inline">\(W=n_t n_d \langle \sigma v\rangle\)</span>, with deuterium and tritium number densities <span class="math inline">\(n_d, n_t\)</span>, respectively.</p>
+<p>Inertial confinement fusion attempts to reach the density and confinement time requirements of the Lawson Criterion by confining a plasma with its own inertia, such that it converges to a central ‘hotspot’ surrounded by cooler, denser fuel with the density and temperature required for nuclear fusion to occur. This confinement can be performed using several approaches including Z pinches and high-power lasers. Whilst numerous inertial fusion schemes exist, this thesis will remain in the context of direct-drive inertial confinement fusion, indirect-drive inertial confinement fusion and magnetised liner inertial fusion (MagLIF).</p>
+<section id="inertial-fusion-schemes" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="inertial-fusion-schemes"><span class="header-section-number">8.1</span> Inertial Fusion Schemes</h2>
+<p>In direct-drive inertial confinement fusion a fuel capsule filled with a mixture of deuterium and tritium is illuminated directly by an array of high-power <span class="math inline">\(~10^{15}Wcm^{-2}\)</span> nanosecond laser pulses. The energy is absorbed at the surface of the capsule, ablating material off the surface and forming a plasma corona. In order to conserve momentum, the inner material is compressed by a ‘rocket effect’, driving the fuel to a high temperature hotspot, surrounded by a cooler, denser region. When the fuel ignites in the centre, the subsequent production of alpha particles spread out, causing a `burn-wave’ through the rest of the fuel. In this scheme, lasers propagate directly through the corona, imprinting the laser heating profile onto the surface of the capsule. As such this method is susceptible to hydrodynamic instabilities such as the Rayleigh-Taylor instability, seeded by the non-uniform laser imprint and capsule surface roughness, which mix up the plasma and cause non-uniform compression. This degrades confinement and can lead to high-Z material from the shell mixing deep into the fuel, radiating away energy from the core.</p>
+<p>Indirect drive inertial confinement fusion instead has the high-power lasers illuminate the interior of a gold ‘hohlraum’. This process creates soft X-rays that drive the compression of the fuel capsule held in the centre of the hohlraum. The benefit of X-ray driven compression over direct-drive is the uniformity of the radiation incident on the capsule surface, reducing the impact of laser-seeded hydrodynamic instabilities. However by using a X-ray bath the energy coupling to the capsule is much lower than direct-drive since the conversion of laser energy to X-rays by the hohlraum is not perfectly efficient, with only a fraction (a conversion efficiency of <span class="math inline">\(\sim 15 \%\)</span> is normal) of the incident laser energy eventually driving the capsule compression. In addition, in this process the laser is propagating through a plasma within the hohlraum, a result of a gas-fill or from the ablation of the hohlraum wall. This means the laser can be further susceptible to laser-plasma interactions (LPIs), focusing and backscatter as the beam enters the hohlraum.</p>
+<p>High-power lasers are not the only way to compress a fuel capsule however. A Z-pinch is a pulse power device that drives a very large current, with the Sandia National Laboratory - based Z accelerator producing peak drive currents of 18MA. When this current is passed through a cylindrical liner, it induces a very strong magnetic field. The magnetic pressure of this field implodes the liner, compressing the fuel within to fusion conditions (via <span class="math inline">\(PdV\)</span> work). This convergence process lies at the heart of the MagLIF scheme. Unlike the laser-driven methods described above, the convergence is cylindrical, with a density that changes with <span class="math inline">\(\sim (R_i/R_f)^2\)</span>; by comparison in spherical convergence the density changes as <span class="math inline">\(\sim (R_i/R_f)^3\)</span>. To account for this less efficient compression, a pre-heat laser is used to heat the fuel in the capsule, pushing it onto a higher adiabat. This entails laser propagation through a `window’ into the fuel, exciting similar laser-plasma interactions and requiring a thorough understanding of thermal transport in the core.</p>
+<p>Inertial fusion experiments were initially invented to create burning thermonuclear fuel; however, these experimental setups have also found uses in creating exotic forms of matter such as warm dense matter, studying astrophysical analogues in laboratory astrophysics and testing equations of state. The understanding of the physics of high-energy-density plasmas goes beyond nuclear fusion.</p>
+<p>Given the large and complex nature of these experiments - with a great deal of different physics operating at different time and length scales - theory and numerical simulation is paramount in understanding and designing such experiments. The accurate simulation of high-energy-density physics on the world’s largest supercomputers is a rich area of science. With the advent of exascale computing, computational physics methods and the design of codes will only become more important in plasma physics.</p>
 
 
 </section>
@@ -616,10 +647,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./laserplasma.html" class="pagination-link" aria-label="Plasma-Laser Coupling">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plasma-Laser Coupling</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./mhd.html" class="pagination-link" aria-label="Magneto-Hydrodynamics">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Magneto-Hydrodynamics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./summary.html" class="pagination-link" aria-label="Further reading">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Further reading</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

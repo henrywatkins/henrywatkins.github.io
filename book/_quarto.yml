@@ -9,12 +9,12 @@ book:
     - index.qmd
     - mhd.qmd
     - collisions.qmd
-    #- transport.qmd
-    #- nonlocal_transport.qmd
-    #- lasers.qmd
-    #- laserplasma.qmd
-    #- applications.qmd
-    #- summary.qmd
+    - transport.qmd
+    - nonlocal_transport.qmd
+    - lasers.qmd
+    - laserplasma.qmd
+    - applications.qmd
+    - summary.qmd
 
 bibliography: references.bib
 
@@ -24,7 +24,7 @@ format:
       - cosmo
       - brand
     toc: true
-    toc-location: left
+    toc-location: right
   pdf:
     documentclass: scrreprt
   #epub:

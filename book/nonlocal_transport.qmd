@@ -1,76 +1,43 @@
 # Non-Local Transport {#sec-nonlocal}
 
-The conventional derivation of fluid theory relies on the truncation of the spherical harmonic expansion of the electron distribution function in velocity space and the assumption that the isotropic part $f_0$ is Maxwellian \cite{Shkarofsky1966ThePlasmas}. This local approximation holds in the regime $L_T>>\lambda_{ei}$, where the electron-ion collision mean-free-path $\lambda_{ei} (\propto T_e^2)$ is much smaller than the temperature scale length $L_T$, defined as
-\begin{equation}
+The conventional derivation of fluid theory relies on the truncation of the spherical harmonic expansion of the electron distribution function in velocity space, and the assumption that the isotropic part $f_0$ is Maxwellian. This local approximation holds in the regime $L_T>>\lambda_{ei}$, where the electron-ion collision mean-free-path $\lambda_{ei} (\propto T_e^2)$ is much smaller than the temperature scale length $L_T$, defined as
+
+$$
     \frac{1}{L_T}=\frac{1}{T}\frac{d T}{d x}.
-\end{equation}
+$$
 From this one can define the Knudsen number, 
-\begin{equation}
+$$
     Kn=\frac{\lambda_{ei}}{L_T}.
-\end{equation}
+$$
 
-This number quantifies the degree of `non-locality', in the regime of $Kn<<1$ the electrons in the plasma experience sufficient Coulomb collisions such that the distribution function is approximately Maxwellian and therefore in local thermal equilibrium. This condition however is frequently violated in high-intensity laser-plasma interactions \cite{Bell1981ElecronPlasmas,Bell1983ElectronPlasmas}, where the interaction can drive steep temperature gradients. Electrons with collisional mean-free paths greater than the scale length of the gradient (where $L_T<<\lambda_{ei}$), stream down the temperature gradient without thermalising to the local distribution. As a result there is an increase in these hotter electrons (coming from the tail of the distribution in a high temperature region) and a depletion in another region, resulting in non-Maxwellian distribution functions and the break-down of classical transport. This depletion of hot electrons in the tail of the distribution from the region of the temperature gradient leads to a lower peak heat flux than expected from the Spitzer-H{\"a}rm approximation $\textbf{q}_{sh}$, \cite{Bell1985Non-SpitzerPlasma},
-\begin{equation}
+This number quantifies the degree of 'non-locality', in the regime of $Kn<<1$ the electrons in the plasma experience sufficient Coulomb collisions such that the distribution function is approximately Maxwellian and in local thermal equilibrium. This condition however is frequently violated in high-intensity laser-plasma interactions where the interaction can drive steep temperature gradients. Electrons with collisional mean-free paths greater than the scale length of the gradient (where $L_T<<\lambda_{ei}$), stream down the temperature gradient without thermalising to the local distribution. As a result there is an increase in these hotter electrons (coming from the tail of the distribution in a high temperature region) and a depletion in another region, resulting in non-Maxwellian distribution functions and the break-down of classical transport. This depletion of hot electrons in the tail of the distribution from the region of the temperature gradient leads to a lower peak heat flux than expected from the Spitzer-Harm approximation $\textbf{q}_{sh}$,
+$$
      \textbf{q}_{sh} \propto - n_e \lambda_{ei} v_{th}\nabla T_e.
-\end{equation}
-The familiar Fourier law-type heat flow should also break down at sharp temperature gradients such as shock fronts, as the heat flow would diverge. The heat flow should saturate at approximately the free streaming heat flow $\textbf{q}_F$ ; the heat flow if all the electrons moved at the thermal speed in the direction of the temperature gradient
-\begin{equation}
-    \textbf{q}_F=\frac{1}{2}m_e n_e v_{th}^3\frac{\nabla T_e}{|\nabla T_e|}.
-\end{equation}
+$$
+The familiar Fourier law-type heat flow should also break down at sharp temperature gradients such as shock fronts as the heat flow would diverge. The heat flow should saturate at approximately the free streaming heat flow $\textbf{q}_F$; the heat flow if all the electrons moved at the thermal speed in the direction of the temperature gradient
+$$
+\textbf{q}_F=\frac{1}{2}m_e n_e v_{th}^3\frac{\nabla T_e}{|\nabla T_e|}.
+$$
 
-A simple method of accounting for this reduction is to use a flux limiter $f_l$, where the classical heat flow is reduced to some fraction of the free streaming heat flow \cite{Haines1979},
-\begin{equation}
-    \frac{1}{q(x)}=\frac{1}{q_{sh}(x)}+\frac{1}{f_l q_{F}}.
-\end{equation}
+A simple method of accounting for this reduction is to use a flux limiter $f_l$, where the classical heat flow is reduced to some fraction of the free streaming heat flow,
+$$
+\frac{1}{q(x)}=\frac{1}{q_{sh}(x)}+\frac{1}{f_l q_{F}}.
+$$
 
-This however does not capture the effect of pre-heat, where heat flow is present even before the temperature gradient. Most of the heat flow is carried by fast electrons with speeds 3 to $5 v_{th}$. Since the mean free path grows as $\lambda_{ei}\propto v^4$, the less collisional, non-local electrons are carrying the heat flow beyond the temperature gradient. An alternative non-local thermal transport model that can capture this effect is through a convolutional kernel \cite{Luciani1985QuasistaticFlux}. In one dimension,
-\begin{equation}
+This however does not capture the effect of pre-heat, where heat flow is present even before the temperature gradient. Most of the heat flow is carried by fast electrons with speeds 3 to $5 v_{th}$. Since the mean free path grows as $\lambda_{ei}\propto v^4$, the less collisional, non-local electrons are carrying the heat flow beyond the temperature gradient. An alternative non-local thermal transport model that can capture this effect is through a convolutional kernel. In one dimension,
+$$
     q(x)=\int_{-\infty}^\infty W(x,x')q_{sh}(x')dx'.
-\end{equation}
+$$
 
 The difficulty in flux-limited or convolutional models is that the choice of limiter or kernel is arbitrary, with no real physical basis for commonly used models, and some choosing them to fit experimental data. While these models are simple, a VFP approach is necessary to get correct results.
 
-The reduction in thermal conductivity can also be cast in Fourier space for a temperature perturbation mode with wavenumber $k$. This effectively recasts the peak thermal flux reduction as a reduction of thermal conductivity for small length scale structures. Epperlein and Short \cite{Epperlein1991APlasmas} found a non-local conductivity suppression factor relating the Spitzer-H{\"a}rm thermal conductivity $\kappa_{sh}$ to the non-local thermal conductivity $\kappa_{nonlocal}$ of the form
-\begin{equation}
-    \frac{\kappa_{nonlocal}}{\kappa_{sh}}=\frac{1}{1+a (\sqrt{Z} k\lambda_{ei})^b},
-\end{equation}
+The reduction in thermal conductivity can also be cast in Fourier space for a temperature perturbation mode with wavenumber $k$. This effectively recasts the peak thermal flux reduction as a reduction of thermal conductivity for small length scale structures. One such model uses a  non-local conductivity suppression factor relating the Spitzer-Harm thermal conductivity $\kappa_{sh}$ to the non-local thermal conductivity $\kappa_{nonlocal}$ of the form
+$$
+\frac{\kappa_{nonlocal}}{\kappa_{sh}}=\frac{1}{1+a (\sqrt{Z} k\lambda_{ei})^b},
+$$
 with the parameters $a,b$ obtained by fitting this function to a numerical VFP simulation. The result is a reduction in thermal conductivity for higher modes (high $k\lambda_{ei}$) meaning short-wavelength scale structures saw reduced conductivity. 
 
-When magnetic fields are present in a plasma, the Larmor radius can become comparable to the mean free path. In this highly magnetised regime the Larmor radius becomes the characteristic step-length of diffusive transport. Given that the Larmor radius grows as $r_L \propto v$ and $\lambda_{ei} \propto v^4$, the hotter electrons in the tail (with higher $v$) of the electron distribution can be relatively unmagnetised while the bulk electrons are magnetised. 
+When magnetic fields are present in a plasma, the Larmor radius can become comparable to the mean free path. In this highly magnetised regime the Larmor radius becomes the characteristic step-length of diffusive transport. Given that the Larmor radius grows as $r_L \propto v$ and $\lambda_{ei} \propto v^4$, the hotter electrons in the tail (with higher $v$) of the electron distribution can be relatively unmagnetised while the bulk electrons are magnetised. Under a sufficiently strong magnetic field the transport is localised in the plane perpendicular to the field, no matter how large $\lambda_{mfp}$. This quenching of non-locality is borne out in a magnetised gas-jet experiments and kinetic simulations.
 
-Under a sufficiently strong magnetic field the transport is localised in the plane perpendicular to the field, no matter how large $\lambda_{mfp}$. This quenching of non-locality is borne out in a magnetised gas-jet experiment performed by Froula \cite{Froula2007LaserPlasmas} and seen in kinetic simulations performed by Ridgers \cite{Ridgers2008MagneticPlasmas}. The regime where non-locality and magnetisation are both significant is poorly understood.
+An important conceptual insight from non-local transport theory is that heat flow in plasmas is inherently non-diffusive when the characteristic electron path lengths approach or exceed macroscopic gradient scale lengths. In this regime, kinetic effects dominate, and classical transport theories like Spitzer-Härm become invalid. This leads to phenomena such as preheat, where heat energy arrives in colder regions before the arrival of the thermal front predicted by local models. Additionally, the shape of the electron distribution function becomes skewed, with an enhanced suprathermal tail and lower mid-range velocities which are a feature that strongly affects heat flux and electric field generation. These kinetic effects have downstream effects on hydrodynamic evolution, changing shock profiles, instability growth, and magnetic field dynamics. As such, accurate modeling of non-local transport is not merely a refinement but a necessity in systems with steep gradients, such as laser-produced plasmas, hohlraums, or astrophysical shocks. While reduced models like flux-limiters or convolution-based corrections are often used in hydrodynamic simulations due to their simplicity, they lack the self-consistency and predictive power of full kinetic treatments. Ultimately, the inclusion of non-local transport remains one of the key motivations for incorporating Vlasov-Fokker-Planck solvers or hybrid kinetic-fluid approaches in high-fidelity plasma simulation tools.
 
-\section{Non-Local Transport and Magnetisation}
-
-Problems with the aforementioned fusion schemes remain, one notable problem is in the difficulty of correctly calculating thermal transport in a laser-driven plasma. The non-Maxwellian deviation of thermal transport from the classical Spitzer-H{\"a}rm approximation has been known for many years, with work by Bell \cite{Bell1981ElecronPlasmas,Bell1983ElectronPlasmas} and Albritton \cite{Albritton1983LaserDistributions,Albritton1986NonlocalDistributions} providing some of the first theoretical work. The electron distribution function is generally assumed be Maxwellian with only small deviations from local thermal equilibrium. This local approximation holds in the regime $L_T>>\lambda_{ei}$, where the electron-ion collision mean-free-path $\lambda_{ei}$ is much smaller than the temperature scale length $L_T$ defined as 
-\begin{equation}
-    \frac{1}{L_T}=\frac{1}{T} \frac{d T}{dx}. 
-\end{equation}
-More details on non-locality can be found in section 2.7.
-
-In high-energy-density physics and ICF experiments this condition is broken \cite{Bell1985Non-SpitzerPlasma}, with evidence of non-Spitzer-H{\"a}rm heat flux limitation dating back to the 1970's \cite{Malone1975IndicationsExperiments}. Experiments performed at the OMEGA facility found the non-local effect to be so significant as to require an extra simulation model package to replicate the results of measured non-Spitzer-H{\"a}rm thermal conductivity \cite{Hu2008ValidationOMEGA, Michel2015MeasurementsOMEGA}.
-Gregori $\textit{et al.}$ provided direct experimental evidence of non-local transport in an ICF-like gas-jet experiment driven by a nanosecond $1.5 \times10^{14} W cm^{-2}$ laser \cite{Gregori2004EffectPropagation}, the temperature and density profiles showed very good agreement with a VFP numerical model but replicated poorly by a flux-limited fluid model. Altogether these results imply non-locality is of paramount importance in understanding long-pulse laser plasma interactions. 
-
-One approach to incorporate the a more accurate kinetic model into the analysis of transport is the so called \textit{diffusion approximation}. This approximates the  full kinetic problem by considering an expansion of the VFP equation in terms a Cartesian tensor expansion and truncating the expansion after only the first term. 
-
-\begin{equation}
-    f_e(\textbf{x},\textbf{v}, t)= f_0(\textbf{x},v, t)+\textbf{f}_1(\textbf{x},v, t)\cdot \frac{\textbf{v}}{v}
-\end{equation}
-
-In doing so the 6-dimensional partial differential equation becomes a simpler 4-dimensional pair of equations that model the evolution of the isotropic and anisotropic contributions to the electron distribution function. More details on this approximation can be found in section 2.7 and 6.3. The diffusion approximation is commonly used in the analysis of non-equilibrium plasmas because of the relative simplicity of the equation set.
-
-\subsection*{Non-Local Transport Models}
-
-Simulations of plasmas in non-local regimes such as ICF hohlraums and Tokamak scrape-off layers cannot accurately predict the heat flow due to this non-local nature. While numerous models have been create to account for non-locality, advances in high-energy-density physics are required to better understand how to close the hydrodynamic equations in systems far from equilibrium. Kinetic simulation codes such as KALOS, OSHUN and IMPACT \cite{Bell2006, Tzoufras2011APhysics,Kingham2004} can accurately reproduce this non-local transport, with and without the presence of a magnetic fields. Incorporating their calculations into the fluid codes that are the workhorses of experimental design and interpretation is difficult because of the large computational requirements of kinetic simulations.
-
-Non-local models based on convolutions of the local thermal transport were the first attempt at avoiding solving the full VFP while reproducing thermal transport \cite{Luciani1985QuasistaticFlux, Epperlein1988Two-DimensionalPlasmas, Epperlein1991APlasmas}. These models require convolution over a large domain and have been found difficult to generalise to 3D problems. Figure \ref{fig:eppnonloc} shows the convolutional kernel used by Epperlein, derived as a correction factor to Spitzer-H{\"a}rm conductivity. While simpler than a full VFP calculation, the convolutional kernel is chosen somewhat arbitrarily and there is little insight into the physical mechanism.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\textwidth]{Figures/Introduction/epp1992prlnonloc.png}
-    \caption[The non-local dependence of thermal conductivity]{The non-local (encapsulated in the parameter $k\lambda_{ei}$) dependence of thermal conductivity calculated by Epperlein \cite{Epperlein1992DampingCollisions}. Note the gradient of the drop compared to previous models by Bell (dashed line a) \cite{Bell1983ElectronPlasmas} and Hammett and Perkins (dashed line b)\cite{PhysRevLett.64.3019}. Reproduced from Epperlein \textit{et al.} \cite{Epperlein1992DampingCollisions}, with permission of the American Physical Society.}
-    \label{fig:eppnonloc}
-\end{figure}
-
-Transport models derived from the simplified VFP equation such as the SNB model \cite{Schurtz2000ACodes,Schurtz2007RevisitingConditions}, the M1  model \cite{DelSorbo2016ExtensionPlasmas} and the CMB model \cite{Manheimer2015FokkerPlasma,Manheimer2008TheTheory,Manheimer2008TheTheoryb} are
-more readily incorporated into fluid codes \cite{Hu2008ValidationOMEGA}. The SNB model has also been readily extended to include magnetic fields \cite{Nicolai2006APlasmas}. Comparisons of these models with fully kinetic codes, in both the magnetised and unmagnetised cases, have however found errors. Detailed comparisons performed by Sherlock $\textit{et al.}$ \cite{Sherlock2017AFusion} and Marocchino $\textit{et al.}$ \cite{Marocchino2013ComparisonModels} found these reduced models could replicate the characteristic flux limitation but significantly over-estimated the precursor heating in front of the temperature gradient. Further tests performed by Brodrick $\textit{et al.}$ \cite{Brodrick2017TestingApplications} showed the SNB model to be more accurate than the eigenvector integral closure (EIC) \cite{Ji2009MomentCollisionality} and Landau fluid (NFLF) \cite{Dimits2014AOperators} models; however even when the heat flux is correctly calculated, the underlying distribution function is far from accurate. These models are also all reliant on the diffusion approximation, the validity of which is questionable in the face of evidence found by Feugeas $\textit{et al.}$ \cite{Feugeas2008ModelingPlasmas}. In this work,  2D hotspot simulations showed the diffusion approximation breaks down, and more terms in the polynomial expansion are required to match an exact kinetic model.

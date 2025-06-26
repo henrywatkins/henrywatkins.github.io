@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Henry Watkins">
 
-<title>Practical Plasma Physics: Lasers, Transport, and Magnetisation</title>
+<title>6&nbsp; Laser Theory – Practical Plasma Physics: Lasers, Transport, and Magnetisation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./mhd.html" rel="next">
+<link href="./laserplasma.html" rel="next">
+<link href="./nonlocal_transport.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -82,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lasers.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Laser Theory</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -109,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -139,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lasers.html" class="sidebar-item-text sidebar-link">
+  <a href="./lasers.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Laser Theory</span></span></a>
   </div>
 </li>
@@ -171,7 +200,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#the-helmholtz-equation" id="toc-the-helmholtz-equation" class="nav-link active" data-scroll-target="#the-helmholtz-equation"><span class="header-section-number">6.1</span> The Helmholtz Equation</a></li>
+  <li><a href="#the-paraxial-laser-model" id="toc-the-paraxial-laser-model" class="nav-link" data-scroll-target="#the-paraxial-laser-model"><span class="header-section-number">6.2</span> The Paraxial Laser Model</a></li>
+  <li><a href="#gaussian-optics" id="toc-gaussian-optics" class="nav-link" data-scroll-target="#gaussian-optics"><span class="header-section-number">6.3</span> Gaussian Optics</a></li>
   </ul>
 </nav>
     </div>
@@ -180,19 +211,13 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practical Plasma Physics: Lasers, Transport, and Magnetisation</h1>
+<h1 class="title"><span id="sec-lasers" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Laser Theory</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Henry Watkins </p>
-          </div>
-  </div>
     
   
     
@@ -203,13 +228,77 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>Plasma physics sits at the crossroads of kinetic theory, electromagnetism, fluid dynamics, and statistical mechanics. Nearly 99 % of the visible universe is in the plasma state, and laboratory plasmas underpin technologies ranging from fluorescent lighting to next‑generation accelerators and fusion‑energy concepts. This online book is an introduction to plasma physics from the point of view of transport, lasers and non-local theory. While there are many good introductory textbooks on plasma physics theory, herein the focus is on the practical aspects of plasma physics, with an emphasis on transport phenomena and the use of lasers in plasma experiments: the regimes of high-energy-density physics (HED). Such conditions are routinely accessed at facilities like the National Ignition Facility (NIF), OMEGA, and the Laser Mégajoule (LMJ), where nanosecond laser pulses generate plasmas exceeding tens of mega‑kelvin and magnetic fields of several tens of Tesla. It is therefore not a comprehensive textbook on plasma physics, but rather a resource for those interested in the applications of plasma physics in the context of laser-plasma interactions and transport phenomena.</p>
-<p>The book is structured to provide a comprehensive overview of the key concepts and applications in plasma physics. The material is intended for senior undergraduates, graduate students, and early‑career researchers in physics or engineering who have a working knowledge of electrodynamics, statistical mechanics, and vector calculus. The content is designed to be accessible to students and researchers who may not have a deep background in plasma physics but are interested in its applications in the regime of collisional and magnetised plasmas, particularly in the context of HED physics.</p>
-<p>In <a href="mhd.html" class="quarto-xref"><span>Chapter 2</span></a> we introduce the basic concepts of plasma kinetic theory and the Vlasov-Fokker-Planck equation, from which we derive the equations of magneto-hydrodynamics (MHD): the theory of electrically conducting fluids in the presence of magnetic fields. This is a fundamental aspect of plasma physics, as it describes how plasmas interact with magnetic fields and how these interactions can lead to various phenomena such as magnetic confinement and plasma instabilities. In <a href="collisions.html" class="quarto-xref"><span>Chapter 3</span></a> we derive the collision operator for plasmas, and how this operator can be used to describe the transport of particles, momentum and energy in plasmas. Collisional processes in plasmas also allow us to introduce the closure of the fluid equations and derive the expressions for thermal transport and Ohm’s law. <a href="transport.html" class="quarto-xref"><span>Chapter 4</span></a> builds on the previous chapter to introduce the transport coefficients and how they can be used to describe the anisotropic transport of particles, momentum and energy in plasmas in the presence of magnetic fields. This chapter further discusses important transport processes and phenomena that occur in the collisional and magnetised regime. When the electron distribution in a plasma is significantly far from a Maxwell-Boltzmann distribution, the local transport approximation breaks down and one must incorporate new models to explain non-local transport. When collisional mean‑free paths approach macroscopic scale‑lengths, classical transport fails. <a href="nonlocal_transport.html" class="quarto-xref"><span>Chapter 5</span></a> introduces non-local transport theory and several models that implement corrections to standard local MHD. This chapter also discusses the limitations of the local transport approximation and how non-local transport theory can provide a more accurate description of plasma behaviour in certain regimes.</p>
-<p>The focus of this book is also the application of plasma physics in the context of laser-plasma interactions. In <a href="lasers.html" class="quarto-xref"><span>Chapter 6</span></a> we introduce some of the basic principles of laser propagation relevant to their interactions with plasmas. <a href="laserplasma.html" class="quarto-xref"><span>Chapter 7</span></a> will then discuss the interaction of lasers with plasmas, including the mechanisms of energy transfer and the effects of laser-plasma interactions on plasma behaviour. This chapter will also cover some of the important instabilities and phenomena that can arise in laser-plasma interactions, such as stimulated Raman scattering. In <a href="applications.html" class="quarto-xref"><span>Chapter 8</span></a>, we will explore some of the practical applications of plasma physics in the context of laser-plasma interactions, including inertial confinement fusion. This chapter will highlight the importance of plasma physics in advancing our understanding of fundamental physical processes.</p>
-<p>I hope this focused approach helps readers build a familiarity with the background and physics required for understanding laser‑driven plasma physics. If you want to go further, there is a list of additional resources and books in <a href="summary.html" class="quarto-xref"><span>Chapter 9</span></a>. Plasma physics is a field that covers a wide range of phenomena, processes and theoretical and computational challenges that still remain relevant and exciting today. What begins as a simple kinetic theory of charged particles can lead to a rich and complex description of this remarkable state of matter.</p>
+<p>High-intensity lasers are a key tool in the field of plasma physics. They are used to create and probe plasmas, as well as to drive high-energy particle acceleration. The interaction of laser light with plasma is complex and requires a detailed understanding of both the laser propagation and the plasma response. This chapter will introduce the theory of long-pulse laser propagation and coupling to plasma, which is essential for understanding high-energy-density physics. We start with the primary assumptions and analysis of laser propagation, before deriving the unidirectional-or paraxial-laser model. The plasma coupling mechanisms of inverse bremmsstrahlung and the ponderomotive force will then be introduced before concluding with a brief description of some of the important laser-plasma interactions that occur in the regimes of interest to this plasma regime.</p>
+<section id="the-helmholtz-equation" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="the-helmholtz-equation"><span class="header-section-number">6.1</span> The Helmholtz Equation</h2>
+<p>Laser light is a monochromatic coherent electromagnetic wave. The starting point is Maxwell’s electromagnetic wave equation. <span class="math display">\[
+c^2 \nabla^2 \textbf{E}-c^2 \nabla (\nabla \cdot \textbf{E})=\frac{1}{\epsilon_0}\frac{\partial\textbf{j}}{\partial t}+\frac{\partial^2 \textbf{E}}{\partial t^2}.
+\]</span></p>
+<p>Solving this equation exactly would be numerically too demanding because the spatial and temporal resolution requirements would be too great and are unnecessary for the nanosecond pulse duration, high-power lasers used in laser-plasma physics experiments. Several simplifying assumptions can be made to reduce this equation into the paraxial laser equation. The current in a plasma is determined by the flux of the electrons. The dielectric behaviour of the plasma can thus be found from the electron equation of motion. The simplified equation of motion required for the fast electron response to the laser field is <span class="math display">\[
+m_e\frac{\partial (n_e \textbf{V}_e)}{\partial t}=-e n_e\textbf{E} - m_e\nu_{ei}n_e \textbf{V}_e.
+\]</span> The high-frequency response of a plasma to the oscillating laser fields justifies dropping the pressure gradient term. The magnetic field term is ignored because unless the plasma is relativistic, it will be much smaller than the electric field contribution due to the factor <span class="math inline">\(\sim v/c\)</span>. Using the definition of the current in terms of electron velocity this can be recast as <span class="math display">\[
+\frac{\partial \textbf{j}}{\partial t}= \frac{e^2 n_e}{m_e}\textbf{E}-\nu_{ei}\textbf{j}.
+\]</span></p>
+<p>Unfortunately, in order to have a closed set of equations the collision term must be rewritten in terms of the electric field. In order to do this the current in the collision term is approximated as <span class="math display">\[
+\textbf{j}\approx-\frac{e n_e}{m_e \omega_l^2}\frac{\partial \textbf{E}}{\partial t},
+\]</span><br>
+which only holds in the regime where the collision frequency <span class="math inline">\(\nu_{ei}\)</span> is much less than the laser angular frequency <span class="math inline">\(\omega_l\)</span>. Therefore the wave equation can be written <span class="math display">\[
+c^2 \nabla^2 \textbf{E}=\frac{e^2 n_e}{\epsilon_0 m_e}\left(\textbf{E}+\frac{\nu_{ei}}{\omega_l^2}\frac{\partial \textbf{E}}{\partial t}\right)+\frac{\partial^2 \textbf{E}}{\partial t^2}.
+\]</span></p>
+<p>Given this describes a laser field, the electric field can be considered a product of the fast temporal oscillation at the laser angular frequency <span class="math inline">\(\omega_l\)</span> and a slowly varying ‘envelope’ <span class="math inline">\(\textbf{E'}(\textbf{r})\)</span>, where in total <span class="math inline">\(\textbf{E}(\textbf{r})=\textbf{E'}(\textbf{r})e^{-i\omega_l t}\)</span>. It is not necessary to resolve the fast oscillation of the wave because the <span class="math inline">\(\omega_l\)</span> timescale is much faster than the timescale of the plasma dynamics. It is possible to integrate out the fast motion, giving an equation for the envelope of the laser field. Time derivatives of <span class="math inline">\(\textbf{E'}\)</span> are ignored as the envelope is assumed to be slowly varying.</p>
+<p>It is here we make use of the paraxial approximation, whereby <span class="math inline">\(\textbf{k}\cdot\textbf{E}=0\)</span>. This limits the validity of this model to small angle refraction from the wavevector axis (to within <span class="math inline">\(\pm 15\)</span> degrees). While large angle refraction does occur in plasmas, the setups within most experiments are securely within the small-angle regime. This approximation removes the <span class="math inline">\(\nabla \cdot \textbf{E}\)</span> term in the wave equation. This leaves the Helmholtz equation <span class="math display">\[
+\nabla^2 \textbf{E'}+\frac{\omega_l^2}{c^2}\epsilon\textbf{E'}=0.
+\]</span> Where the dielectric function <span class="math inline">\(\epsilon\)</span> is defined as <span class="math display">\[
+\epsilon=1-\frac{\omega_p^2}{\omega_l^2}+i\frac{\omega_p^2}{\omega_l^3}\nu_{ei},
+\]</span> when expressed in terms of the plasma frequency, <span class="math display">\[
+    \omega_p=\frac{e^2 n_e}{\epsilon_0 m_e}.
+\]</span></p>
+<p>This Helmholtz equation for the laser envelope provides a powerful and tractable model for simulating laser propagation in underdense and near-critical plasmas. The dielectric function <span class="math inline">\(\epsilon\)</span> encodes both dispersive and absorptive effects of the plasma on the laser field. The real part of <span class="math inline">\(\epsilon\)</span> governs wave refraction, with the index of refraction given by <span class="math inline">\(n=Re(\epsilon)\)</span>​, while the imaginary part describes absorption, often referred to as inverse bremsstrahlung. This absorption mechanism dominates in dense, low-temperature plasmas where electron-ion collisions are frequent. The frequency dependence of <span class="math inline">\(\epsilon\)</span> also reveals the cutoff condition: when <span class="math inline">\(\omega_p=\omega_l\)</span>​, the dielectric function vanishes, and the wave is unable to propagate further. This defines the critical density surface, beyond which the laser cannot penetrate. This critical surface plays a key role in laser-plasma interactions, acting as the interface where laser energy is deposited and converted into plasma motion, heat, or magnetic field generation. Despite its simplifying assumptions, the Helmholtz model captures essential physics for laser beam propagation, refraction, and absorption in inhomogeneous plasmas and is widely used in both theoretical and numerical laser-plasma modeling.</p>
+</section>
+<section id="the-paraxial-laser-model" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="the-paraxial-laser-model"><span class="header-section-number">6.2</span> The Paraxial Laser Model</h2>
+<p>The paraxial laser model is a simplification of the Helmholtz equation and it is based on the assumption that the laser beam is nearly collimated, meaning that it does not diverge significantly as it propagates. This allows us to derive a simpler equation that captures the essential physics of laser propagation while ignoring higher-order effects. This is also a form of a slowly varying envelope approximation. It is possible to write the electric field of a linearly polarised wave <span class="math inline">\(\textbf{E'}\)</span> in terms of the envelope <span class="math inline">\(\psi\)</span> (the magnitude in the axis of polarisation) and the phase <span class="math inline">\(\phi(z)\)</span>. Without loss of generality the direction of propagation is chosen to be along the <span class="math inline">\(z\)</span>-axis which gives <span class="math display">\[
+E'(r,z)=\psi(r,z)\exp i\phi(z).
+\]</span></p>
+<p>The field is linearly polarised so it can be expressed as a complex scalar field. The phase function <span class="math inline">\(\phi\)</span> is chosen such that <span class="math display">\[
+\phi(z)=\frac{\omega_l}{c}\sqrt{\epsilon_a} z.
+\]</span> The factor <span class="math inline">\(\epsilon_a\)</span> is the dielectric function at the axis (that is, <span class="math inline">\(r=0\)</span>). This expression is plugged into the Helmholtz equation and the envelope is assumed to be slowly varying such that <span class="math display">\[
+|\partial_{zz}|&lt;&lt;|k\partial_z|.
+\]</span> This is equivalent to assuming the wavevector of the laser light is directed along z axis and any variation away from this direction is small. This yields the paraxial transport equation <span class="math display">\[
+2ik\sqrt{\epsilon_a}\partial_z \psi+\nabla^2_\perp \psi+k^2\left(\epsilon-\epsilon_a\right)\psi=0,
+\]</span> where the vacuum wavenumber <span class="math inline">\(k\)</span> is <span class="math display">\[
+k^2=\frac{\omega_l^2}{c^2}.
+\]</span></p>
+<p>The paraxial transport equation allows one to use the intensity <span class="math inline">\(I\)</span> of the laser field directly, calculated from the laser envelope <span class="math inline">\(\psi\)</span> <span class="math display">\[
+    I=\frac{1}{2} c \epsilon_0 \eta |\psi|^2,
+\]</span> with the speed of light <span class="math inline">\(c\)</span>, the permitivity of a vaccum <span class="math inline">\(\epsilon_0\)</span> and <span class="math inline">\(\eta\)</span> is the refractive index, defined as <span class="math display">\[
+    \eta=\sqrt{1-\frac{\omega_p^2}{\omega_l^2}}.
+\]</span></p>
+</section>
+<section id="gaussian-optics" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="gaussian-optics"><span class="header-section-number">6.3</span> Gaussian Optics</h2>
+<p>In a vacuum the paraxial equation has a cylindrically symmetric solution known as a Gaussian beam. This solution is a valuable approximation to many real-world beam profiles for the model of the laser pulse field before it enters a plasma. This solution is <span class="math display">\[
+\psi(r,z)=\psi_0 \frac{w_0}{w(z)}\exp\left(\frac{- r^2}{ w(z)^2}\right)\exp\left(-i k z  -\frac{i r^2}{2 R}+ i \phi (z)\right).
+\]</span> This solution is defined in terms of the following parameters, the beam waist size <span class="math display">\[
+w(z)=w_0\sqrt{1+\frac{z^2}{z_r^2}},
+\]</span> the beam radius of curvature <span class="math display">\[
+R(z)=z\left(1+\frac{z_r^2}{z^2}\right),
+\]</span> the Rayleigh length, <span class="math display">\[
+z_r=\frac{ k w_0^2}{2},
+\]</span> and the Gouy phase <span class="math display">\[
+\phi(z)=\arctan (\frac{z}{z_r}).
+\]</span></p>
+<p>A map of the real part of the laser envelope <span class="math inline">\(\psi\)</span> can be found in <a href="#fig-gaussbeam" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>.</p>
+<div id="fig-gaussbeam" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gaussbeam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/gaussian_beam_plot.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gaussbeam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Plot of a Gaussian beam profile. The real part of a Gaussian beam in a vacuum illustrated here shows how the beam focuses to a focal point in the centre of the plot. The width of the beam at the focal point defines the minimum beam waist <span class="math inline">\(\omega_0\)</span>.
+</figcaption>
+</figure>
+</div>
 
 
 </section>
@@ -616,10 +705,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./nonlocal_transport.html" class="pagination-link" aria-label="Non-Local Transport">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Non-Local Transport</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./mhd.html" class="pagination-link" aria-label="Magneto-Hydrodynamics">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Magneto-Hydrodynamics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./laserplasma.html" class="pagination-link" aria-label="Plasma-Laser Coupling">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plasma-Laser Coupling</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
