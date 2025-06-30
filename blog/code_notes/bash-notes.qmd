@@ -1,12 +1,14 @@
 ---
-title: "Bash Notes"
-description: "Useful command line utlities and programs with Bash"
+title: "Command Line Notes"
+description: "Useful command line utilities and programs with Bash"
 author: "Henry Watkins"
 draft: false
 toc: true
 license: "CC BY"
 copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
 ---
+
+Command line programs and Bash scripts can be remarkably useful and flexible for a whole range of tasks. It is often easier to use the capabilities of mature command line programs and simple bash scripts than write custom python scripts.
 
 ## Basic commands
 
@@ -150,19 +152,21 @@ Useful for command-line exploration and basic processing of datasets. Use is to 
 
 Basic usage is of the form
 
-```
+```bash
 awk [options] 'selection-criteria {action}' file
 ```
 
 Some useful examples and options
 
-`awk -F ',' 'NR<10 {print $2}' data.csv` 
+```bash
+awk -F ',' 'NR<10 {print $2}' data.csv
+```
 
 Print out the second column of the first 10 rows of a comma-separated-value dataset.
 
 awk is especially powerful when used in combination with `grep` `sort` `uniq` . For example we can find the unique values in a column using
 
-```
+```bash
 awk -F -F ',' '{print $2}' | sort | uniq
 ```
 
@@ -174,23 +178,23 @@ Awk is particularly well suited to simple operations that one could do using pan
 
 Follows the general pattern
 
-```
+```bash
 sed -n 'selection action' file
 ```
 
 select lines 1-4 and print to terminal
 
-```
+```bash
 sed -n '1,4p' file
 ```
 
 substitution
 
-```
+```bash
 echo helloworld | sed 's/world/city'
 ```
 
-```
+```bash
 sed '7,9 s/day/week/gip' file
 ```
 
@@ -198,25 +202,25 @@ for lines 7 to 9, replace 'day' with 'week', in case-insensitive manner (i), glo
 
 cut entire lines that match the pattern
 
-```
+```bash
 sed '/pattern/c replacement_text' file
 ```
 
 append after lines that match pattern
 
-```
+```bash
 sed '/pattern/a text_to_append' file
 ```
 
 insert before lines that match
 
-```
+```bash
 sed '/pattern/i text_to_insert' file
 ```
 
 delete lines
 
-```
+```bash
 sed '3d' file
 ```
 
@@ -226,13 +230,13 @@ Save you changes by outputting to a new file with `>` or by performing operation
 
 A super useful application is in converting CSVs to TSVs for use with awk
 
-```
+```bash
 sed -E 's/("([^"]*)")?,/\2\t/g' file
 ```
 
 You can create sed scripts to perform more complicated and saved tasks. `script.sed` e.g.
 
-```
+```bash
 4i\ 
 s/,/\t\t/
 s/,/ /
@@ -248,8 +252,38 @@ And run with `sed -i -f script.sed filename`
 
 `scp` - secure copy between hosts on a network
 
+
 ## llm
 
-The llm library is now a good CLI for tasks
+The llm library is a good CLI for tasks querying large lanuage models. It is a fantastic addition to the aformentioned command line utilities to solve complex problems strait from the command line. 
 
-https://llm.datasette.io
+[llm library](https://llm.datasette.io)
+
+
+# Bash scripts 
+
+Bash scripts can be remarkable capable. Combining variables, simple loops and pipeing alongside mature programs like `grep` and `awk` can create sophisticated scripts. 
+
+For example, if I wants a short program to extract the phone numbers for all names starting with G, from a table of names and numbers, I can use:
+
+```bash
+#!/bin/bash
+
+# Check for input argument (file name)
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <filename>"
+    exit 1
+fi
+
+# Assign the file name to a variable
+input_file="$1"
+
+# Check if the file exists
+if [ ! -f "$input_file" ]; then
+    echo "File '$input_file' not found!"
+    exit 1
+fi
+
+# Extract lines where the name starts with G, then extract phone numbers using awk
+grep "^G" "$input_file" | awk '{print $2}'
+```

@@ -1,0 +1,60 @@
+---
+title: "Statistics: Basic Concepts"
+description: "A reference"
+author: "Henry Watkins"
+date: "01/18/2025"
+image: folder.jpg
+draft: false
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+categories:
+  - metascience
+---
+
+
+
+# Basic concepts of statistics
+
+## Probability
+
+
+Bayes' theorem
+
+$$
+P(A | B) = \frac{P(A) P(B |A)}{P(B)}
+$$
+
+
+
+## Probability distributions
+
+For a random variable $X$, we can define a distribution $f(x) = P(X=x)$ which gives the value of the probability of value $X$.
+Key properties of distributions 
+
+Expectation value 
+$$
+E[g(X)] = <g(x)> = \sum_i g_i(x_i) f(x_i)
+$$
+
+or for a continuous distribution
+
+$$
+E[g(X)] = <g(x)> = \int g(x) f(x) dx
+$$
+
+
+The mean is just the expectation value of the variable itself
+
+$$
+E[X] = <x> = 
+$$
+
+## Important distributions
+
+## Sample  statistics
+
+## Estimators
+
+## Central limit theorem
+
+## Hypothesis tests

@@ -8,6 +8,8 @@ license: "CC BY"
 copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
 ---
 
+Git is the go-to program for version control and collaborative software projects. 
+
 `git init`  - initialize repository
 
 `git status` - view repo status

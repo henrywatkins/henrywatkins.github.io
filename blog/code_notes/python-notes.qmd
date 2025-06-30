@@ -7,12 +7,12 @@ toc: true
 license: "CC BY"
 copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
 ---
+I have compiled these notes as a simple set of reference material for the python programming language.
 
 ## Online resources
 
-https://docs.python-guide.org/
-
-https://realpython.com
+[Python guide](https://docs.python-guide.org/)
+[Real python](https://realpython.com)
 
 ## Development Process
 
@@ -170,7 +170,7 @@ if __name__ == '__main__':
 
 Code coverage is the proportion of your code covered by tests. A useful tool is `coverage`
 
-```
+```bash
 coverage run -m pytest arg1 arg2
 ```
 
@@ -350,7 +350,7 @@ class Animal:
 
 Auto create API documentation with pdoc
 
-```
+```bash 
 pdoc --html ./path/to/package
 ```
 
@@ -460,26 +460,26 @@ Pickling is the serialization of a python object, that is it changes a python ob
 
 Python can be profiles with `timeit`
 
-```
+```bash
 python -m timeit script.py
 ```
 
 Python code can be profiled with **cProfile**.
 This can be used on a script like so:
 
-```
+```bash
 python -m cProfile script.py
 ```
 
 output a profile data file with 
 
-```
+```bash
 python -m cProfile -o script.profile script.py
 ```
 
 then one can use **pstats** to analyse the profile
 
-```
+```bash
 python -m pstats script.profile
 ```
 
@@ -501,7 +501,7 @@ Python logging
 - You can customize the output format using the `format` keyword to config
 - Set the log level, and the logger will only record info over and above that level, (DEBUG-INFO-WARNING-ERROR)
 
-```
+```python
 import logging
 logging.basicConfig(level=logging.WARNING)
 logging.info("starting program")
@@ -519,37 +519,33 @@ Each environment can use different versions of package dependencies and Python. 
 Package - A folder/directory that contains __init__.py file.
 Module - A valid python file with .py extension.
 
-The best tools are conda, and poetry. These tools also act as package managers and module builders.
+The best tools are conda, and uv. These tools also act as package managers and module builders.
 
-- conda
+### Conda
 
-One can use different anaconda environments for different version of software
+One can use different anaconda environments for different version of software to create an environment
 
-to create an environment
-
-```
+```bash
 conda create -n myenv software1 software2==2.2
 conda activate myenv
 ```
 
 To export the installed software for this environment 
 
-```
+```bash
 conda env export > environment.yml
 ```
 
 To create an identical environment 
 
-```
+```bash
 conda env create -f environment.yml
 ```
 
-- rye 
-  Package structure
+### UV
+Package structure: the standard python package structure is of the form 
 
-The standard python package structure should be of the form 
-
-```
+```bash
 sampleproject
 ├── LICENSE.txt
 ├── README.md
@@ -575,12 +571,12 @@ Other optional files are `data` for storing datasets, `models` for pre-trained m
 
 ### Approaches to modules, packages and projects
 
-There are three types of python project, each with a corresponding workflow and directory structure
+There are two types of python project, each with a corresponding workflow and directory structure
 
-1. rye: use rye  https://rye.astral.sh/guide/installation/
+1. uv: use uv for packageing and distribution https://docs.astral.sh/uv/
 2. Scientific project: the aim is not to do software development, and not with the aim of distributing a finished, tested software tool. The aim of these projects is running particular computations, analysis and plotting rather that a well-structured python tool. For this purpose conda is enough and building/distribution is not necessary (beyond git cloning). Instead use anaconda for all environment and packaging, define dependencies with `env.yaml` and structure the directory thus 
 
-```
+```bash
 project
 ├── README.md
 ├── docs
@@ -647,7 +643,7 @@ for i in "ABBDBBDA":
 
 - `dataclass` from `dataclasses` reduce the boilerplate code for custom data structures with named attributes. They can create init, repr, hash and eq magic functions by default.
 
-```
+```python
 @dataclasses.dataclass
 class Color:
     r : int = 0
@@ -655,14 +651,14 @@ class Color:
     b : int = 0
 ```
 
-```
 | Attributes  |  init   |  Color().r -> 0   |  __init__   |
+|-------------|---------|-------------------|-------------|
 | Representation       |  repr                |  Color() -> Color(r=0, g=0, b=0)                   |  __repr__                               |
 | Comparision*         |  eq                  |  Color() == Color(0, 0, 0) -> True                 |  __eq__    
 | Order                |  order               |  sorted([Color(0, 50, 0), Color()]) -> ...         |  __lt__, __le__, __gt__, __ge__         |
 | Hashable             |  unsafe_hash/frozen  |  {Color(), {Color()}} -> {Color(r=0, g=0, b=0)}    |  __hash__                               |
 | Immutable            |  frozen + eq         |  Color().r = 10 -> TypeError   |  __setattr__, __delattr__   
-```
+
 
 
 
@@ -955,7 +951,7 @@ class Fruit(Enum):
   1. **faster** attribute access.
   2. **space savings** in memory.
 
-```
+```python
 class Base:
     __slots__ = 'foo', 'bar'
 ```
@@ -964,7 +960,7 @@ Abstract base classes
 
 These are a way of defining templates for additional subclasses.  We can enforce what methods are required when subclassing by using the Python abc module.
 
-```
+```python
 # Implementing Different Methods for Classes
 from abc import ABC, abstractmethod
 
@@ -1012,7 +1008,7 @@ parser.add_argument("echo", help="echo the string you use here", type=str)
 args = parser.parse_args()
 ```
 
-- one can also use typer, click
+[click](https://click.palletsprojects.com/en/stable/) is also an excellent library for python arguments abd building command-line tools with python.
 
 ## Speeding up python
 
@@ -1111,11 +1107,3 @@ The `functools` module is for higher-order functions. It includes lots of useful
 
 The key sense of work in the functional paradigm is compositions of pure functions acting on iterables. A very valuable pattern is the map-reduce pattern. The map-reduce pattern is an abstract representation of many types of  computations that manipulate lists or collections of objects. The `map` stage takes the input collection and maps it to an intermediate representation. The `reduce` step takes this intermediate representation and computes a single output from it.
 
-## Pandas note
-
-- prefer `.loc` `.iloc`, for indexing and setting values. 
-- prefer method chains for dataframe operations and data processing
-  - also particularly `.assign` and `.rename`
-  - `.pipe` for custom functions applied table-wise
-  - `.apply` for column-wise operations
-  - `.applymap` for element-wise operations
