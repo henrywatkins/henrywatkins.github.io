@@ -1,0 +1,280 @@
+---
+title: "Graphs: A Primer"
+description: "The mathematics of graphs and basic models"
+author: "Henry Watkins"
+date: "07/10/2025"
+image: networkdesign.jpg
+draft: false
+license: "CC BY"
+bibliography: references.bib
+toc: true
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+categories:
+  - graphs
+---
+
+
+## Graph Theory
+
+These notes are asimple primer on the mathematical treament of graphs, particularly the spectral properties and how basic ML models incorporate graph data. The aim is to present a few notes on graph theory concepts, such as the adjacency matrix, Laplacian and incidence matrix. These will not be comprehensive, but rather a short reference. Lets start with a few definitions. A graph is a mathematical structure consisting of vertices (or nodes) and edges (connections between nodes). Graphs can be directed or undirected, weighted or unweighted, and can have various properties depending on their structure.
+
+### Simple Graphs
+
+Simple graphs are defined as follows:
+* No loops (self-connections)
+* No multi-edges
+* Undirected (symmetric adjacency)
+
+Let $\mathcal{G} = \{ \mathcal{V}, \mathcal{E} \}$, this is our graph, with:
+
+$\mathcal{V}(\mathcal{G}) = \{v_1, \ldots, v_n\}$: vertex set of graph $\mathcal{G}$, where $n = |\mathcal{V}|$
+$\mathcal{E}(\mathcal{G}) = \{e_{ij}\}$: edge set with $m = |\mathcal{E}|$
+
+Where an edge $e_{ij}$ connects $v_i$ to $v_j$
+
+### Vertex Degree
+
+The **degree** of vertex $v_i$ is the number of connections (neighbors):
+
+$$
+d(v_i) = \sum_j e_{ij}
+$$
+
+* If all vertices have the same degree, the graph is **regular**
+* If all degrees are even, the graph is **Eulerian**
+
+### Subgraph
+
+Let $\mathcal{H}$ be a **subgraph** of $\mathcal{G}$ if:
+
+$$
+\mathcal{V}(\mathcal{H}) \subseteq \mathcal{V}(\mathcal{G}), \quad \mathcal{E}(\mathcal{H}) \subseteq \mathcal{E}(\mathcal{G})
+$$
+
+### k-partite Graph
+
+A graph is **k-partite** if its vertex set admits a partition into $k$ classes such that **vertices in the same class are not adjacent**.
+
+### Adjacency Matrix
+
+Much of the mathematical treament of graphs starts with the adjacency matrix. This matrix is a way to represent the connections between vertices in a graph, where each row and column corresponds to a vertex, and the entries indicate whether there is an edge between the vertices.
+
+For a graph of $N$ vertices:
+
+Let $A \in \mathbb{R}^{N \times N}$ where
+
+$$
+  A_{ij} =
+  \begin{cases}
+  1 & \text{if there is an edge } e_{ij} \\
+  0 & \text{if no edge}
+  \end{cases}
+$$
+
+Also, $A_{ii} = 0$
+
+Note:
+$A \in \mathbb{R}^{N \times N}$ for a **weighted graph**
+$A \in \mathbb{B}^{N \times N}$ for an **unweighted graph**, where $\mathbb{B} = \{0, 1\}$
+
+Thus the adjacency matrix describes the **connections** in the graph. For an **undirected, weighted graph**, the adjacency matrix $A$ is:
+
+* A **real symmetric matrix**
+* Has $N$ **real eigenvalues**
+* $N$ **eigenvectors** form an **orthonormal basis**
+
+Let the eigenspace be:
+
+$$
+S_i = \left\{ x \in \mathbb{R}^N \ \middle| \ A x = \lambda_i x \right\}
+$$
+
+### Functions on Graphs
+
+In addition to the adjacency matrix, we can also define functions on graphs. These are mappings from a vertex to a value. Consider a **real-valued function** on a graph:
+
+$$
+  f: \mathcal{V} \rightarrow \mathbb{R}
+$$
+
+$f$ is a vector indexed by vertices: $f \in \mathbb{R}^N$
+
+* The eigenvectors can be considered as **eigenfunctions**
+* The **adjacency matrix** acts as a **linear operator**:
+
+$$
+  g = A f, \quad g_i = \sum_j A_{ij} f_j
+$$
+
+
+### Quadratic Form
+
+The adjacency operator can also be seen as a **quadratic form**:
+
+$$
+f^T A f = \sum_{e_{ij}} f_i f_j
+$$
+
+### Incidence Matrix
+
+If we let the graph edges have an **orientation**, we can define an **incidence matrix** (operator):
+
+$$
+\nabla \in \mathbb{T}^{|E| \times |V|}, \quad \mathbb{T} = \{0, 1, -1\}
+$$
+
+Define $\nabla$ as:
+
+$$
+\nabla_{ev} =
+\begin{cases}
+-1 & \text{if } v \text{ is source of } e \\
+1 & \text{if } v \text{ is sink of } e \\
+0 & \text{if no connection}
+\end{cases}
+$$
+
+Directed graphs can be represented with an incidence matrix, where each edge has a direction (source to sink). The incidence matrix $\nabla$ captures the relationship between edges and vertices in a concise way.
+
+### Coboundary Map
+
+The incidence matrix is used in the definition of the coboundary ma. The mapping $f \rightarrow \nabla f \in \mathbb{R}^{E}$ is the **coboundary map** of the graph and can be used to compute the **gradient** of a function defined on the graph.
+
+$$
+(\nabla f)(e_{ij}) = f(v_j) - f(v_i)
+$$
+
+### Graph Laplacian
+
+Spectral graph theory studies properties of graphs via the eigensystem and their associated matrices. The key concept in the spectral graph theory is the **Graph Laplacian**. The Laplacian operator is defined as:
+
+$$
+L = \nabla^T \nabla
+$$
+
+Component-wise:
+
+$$
+(Lf)(v_i) = \sum_{e_{ij}} (f(v_i) - f(v_j))
+$$
+
+Also defined as:
+
+$$
+L = D - A
+$$
+Where:
+* $D$ is the **degree matrix**: $D_{ii} = d(v_i)$
+* Diagonal matrix with degrees at each vertex
+* $A$ is the adjacency matrix
+For a **weighted graph**, each edge $e_{ij}$ has a **weight** $w_{ij}$, which modifies the Laplacian accordingly.
+Component form:
+$$
+(Lf)(v_i) = \sum_{e_{ij}} w_{ij} (f(v_i) - f(v_j))
+$$
+As a **quadratic form**:
+$$
+f^T L f = \frac{1}{2} \sum_{e_{ij}} w_{ij} (f(v_i) - f(v_j))^2
+$$
+* The Laplacian $L$ is **symmetric** and **positive-definite** (or semi-definite) and so has **non-negative, real-valued eigenvalues**
+
+The graph laplacian is a powerful tool in spectral graph theory, allowing us to analyze the structure and properties of graphs through their eigenvalues and eigenvectors. It is equivalent to the familiar laplacian operator in continuous spaces, but adapted to the discrete, arbitrarily-structured setting of graphs.
+
+### Graph Fourier Transform
+
+Just as with the Fourier transform in continuous spaces, we can define a **Graph Fourier Transform** for graphs. This allows us to analyze functions defined on the vertices of a graph in terms of the graph's spectral properties. It is this transform that defines the spectral structure of the graph and allows us to decompose functions into their frequency components.
+
+* We can project a **function** (or signal) over the space of **eigenvectors** of a graph.
+* For eigenvectors $\mu$ and eigenvalues $\lambda$ of the Laplacian $L$, the **Graph Fourier Transform** is defined as:
+
+$$
+\mathcal{F}(f)[\lambda_i] = \hat{f}(\lambda_i) = \langle f, \mu^i \rangle = \sum_{j=1}^{N} f_j \mu_j^i
+$$
+
+This gives:
+
+$$
+\hat{f} = \mu^T f \quad \text{(i.e., transform = basis projection)}
+$$
+
+## Models on Graphs
+
+Graphs are a powerful data structure for representing relationships and structures in data. In machine learning, graphs can be used to model relationships between entities, such as social networks, molecular structures, or knowledge graphs. In the rest of these notes I will briefly introduce some of the basic models that operate on graph data:
+
+### Graph Convolutional Model (GCN)
+
+Convolutional neural networks have long been the mainstay of deep learning for images and other grid-like or linear data. However, graphs present a challenge due to their irregular structure. Graph Convolutional Networks (GCNs) are a class of neural networks designed to operate on graph-structured data. First introduced by @kipf2016semi, GCNs extend the concept of convolution to graphs by leveraging the graph structure to perform local aggregations of node features.
+
+* **Approximates** the graph Fourier transform using a neural network.
+* Can be an **effective classifier** for nodes in a graph.
+
+A **single GCN layer** is:
+
+$$
+H^{(l+1)} = \sigma \left( \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} H^{(l)} W^{(l)} \right)
+$$
+
+Where:
+
+* $\tilde{A} = A + I$: adjacency matrix with self-loops
+* $\tilde{D}$: degree matrix of $\tilde{A}$
+* $H^{(l)}$: input features at layer $l$
+* $W^{(l)}$: learnable weight matrix
+* $\sigma$: activation function (e.g. ReLU)
+
+* $\tilde{A} = A + I$: adjacency matrix with **self-connections** added.
+
+* $\tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2}$: **symmetrically normalized adjacency matrix**.
+
+* $\tilde{D}$: degree matrix of $\tilde{A}$, where:
+
+  $$
+  \tilde{D}_{ii} = \sum_j \tilde{A}_{ij}
+  $$
+
+* $H^l$: activation (output) of the **l-th GCN layer**, with $H^0 = X$ (input node features).
+
+* $\sigma$: **activation function**, typically **ReLU**.
+
+Thus a two-layer GCN would be:
+
+$$
+\text{GCN}_2(X, A) = \tilde{A} \, \sigma(\tilde{A} X W^0) W^1
+$$
+
+### Graph Autoencoder (GAE)
+
+We can go furhter and build more complex models out of our GCNs. A **Graph Autoencoder (GAE)** is a type of neural network that learns to encode graph data into a lower-dimensional space and then reconstructs the graph structure from this encoding. This is particularly useful for tasks like link prediction or node classification. This model was introduced in @kipf2016variational and has found application in various domains, as well inspiring varaitional and other approaches to graph representation learning.
+
+* Goal: **learn representations** of nodes by **reconstructing the adjacency matrix**. This particular model is for binary adjacency matrices i.e. unweighted graphs. 
+* **Encoder**:
+$$
+  Z = \text{GCN}_2(X, A)
+$$
+$Z$: latent (compressed) node features.
+
+* **Decoder**:
+$$
+  \tilde{A} = \sigma(ZZ^T)
+$$
+Uses **inner product decoder** to reconstruct $A$ (assumes $\sigma$ is sigmoid).
+
+* $Z$: gives **latent space representations** of the nodes.
+* To get **graph-level representations** (for small graphs), you can apply **sum-pooling** over node vectors:
+
+$$
+\sum Z
+$$
+
+So, for an unweighted, undirected graph $G(V, E)$, with $N = |V|$, the model derives a node feature matrix:
+$$
+  X \in \mathbb{R}^{N \times F}, \quad Z \in \mathbb{R}^{N \times d}
+$$
+from the adjacency matrix:
+$$
+  A \in \mathbb{R}^{N \times N} \text{ (weighted)}, \quad A \in \mathbb{B}^{N \times N} \text{ (unweighted)}
+$$
+
+## Further Reading
+
+A few key resources I found useful for graphs is the Graph Representation Learning book [@hamilton2020graph]. This book provides a comprehensive introduction to graph representation learning, covering both theoretical foundations and practical applications. There are also some nice review articles covering machine learning with graphs, such as @zhou2020graph. In terms of software packages, the [networkx](https://networkx.org/) package in Python is a great library for working with graphs, providing tools for creating, manipulating, and analyzing graph structures. For deep learning on graphs, [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/) is the most popular library that provide implementations of various graph neural network architectures, all with a pytorch backend.

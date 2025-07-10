@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/graph/index.html",
       "/posts/gluonemissions/index.html",
       "/posts/intro2qft/index.html",
       "/posts/termgraph/index.html",

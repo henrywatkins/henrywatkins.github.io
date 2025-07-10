@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Henry Watkins">
-<meta name="dcterms.date" content="2025-06-15">
-<meta name="description" content="An brief introduction">
+<meta name="dcterms.date" content="2025-07-10">
+<meta name="description" content="The mathematics of graphs and basic models">
 
-<title>Path Integrals in Quantum Field Theory – Henry Watkins</title>
+<title>Graphs: A Primer – Henry Watkins</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -211,14 +211,14 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Path Integrals in Quantum Field Theory</h1>
+      <h1 class="title">Graphs: A Primer</h1>
                   <div>
         <div class="description">
-          An brief introduction
+          The mathematics of graphs and basic models
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">physics</div>
+                <div class="quarto-category">graphs</div>
               </div>
                   </div>
   </div>
@@ -236,7 +236,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 15, 2025</p>
+        <p class="date">July 10, 2025</p>
       </div>
     </div>
     
@@ -252,11 +252,26 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#path-integrals-in-quantum-mechanics" id="toc-path-integrals-in-quantum-mechanics" class="nav-link active" data-scroll-target="#path-integrals-in-quantum-mechanics">Path Integrals in Quantum Mechanics</a></li>
-  <li><a href="#path-integrals-in-quantum-field-theory" id="toc-path-integrals-in-quantum-field-theory" class="nav-link" data-scroll-target="#path-integrals-in-quantum-field-theory">Path Integrals in Quantum Field Theory</a></li>
-  <li><a href="#the-propagator" id="toc-the-propagator" class="nav-link" data-scroll-target="#the-propagator">The Propagator</a></li>
-  <li><a href="#the-potential" id="toc-the-potential" class="nav-link" data-scroll-target="#the-potential">The Potential</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#graph-theory" id="toc-graph-theory" class="nav-link active" data-scroll-target="#graph-theory">Graph Theory</a>
+  <ul class="collapse">
+  <li><a href="#simple-graphs" id="toc-simple-graphs" class="nav-link" data-scroll-target="#simple-graphs">Simple Graphs</a></li>
+  <li><a href="#vertex-degree" id="toc-vertex-degree" class="nav-link" data-scroll-target="#vertex-degree">Vertex Degree</a></li>
+  <li><a href="#subgraph" id="toc-subgraph" class="nav-link" data-scroll-target="#subgraph">Subgraph</a></li>
+  <li><a href="#k-partite-graph" id="toc-k-partite-graph" class="nav-link" data-scroll-target="#k-partite-graph">k-partite Graph</a></li>
+  <li><a href="#adjacency-matrix" id="toc-adjacency-matrix" class="nav-link" data-scroll-target="#adjacency-matrix">Adjacency Matrix</a></li>
+  <li><a href="#functions-on-graphs" id="toc-functions-on-graphs" class="nav-link" data-scroll-target="#functions-on-graphs">Functions on Graphs</a></li>
+  <li><a href="#quadratic-form" id="toc-quadratic-form" class="nav-link" data-scroll-target="#quadratic-form">Quadratic Form</a></li>
+  <li><a href="#incidence-matrix" id="toc-incidence-matrix" class="nav-link" data-scroll-target="#incidence-matrix">Incidence Matrix</a></li>
+  <li><a href="#coboundary-map" id="toc-coboundary-map" class="nav-link" data-scroll-target="#coboundary-map">Coboundary Map</a></li>
+  <li><a href="#graph-laplacian" id="toc-graph-laplacian" class="nav-link" data-scroll-target="#graph-laplacian">Graph Laplacian</a></li>
+  <li><a href="#graph-fourier-transform" id="toc-graph-fourier-transform" class="nav-link" data-scroll-target="#graph-fourier-transform">Graph Fourier Transform</a></li>
+  </ul></li>
+  <li><a href="#models-on-graphs" id="toc-models-on-graphs" class="nav-link" data-scroll-target="#models-on-graphs">Models on Graphs</a>
+  <ul class="collapse">
+  <li><a href="#graph-convolutional-model-gcn" id="toc-graph-convolutional-model-gcn" class="nav-link" data-scroll-target="#graph-convolutional-model-gcn">Graph Convolutional Model (GCN)</a></li>
+  <li><a href="#graph-autoencoder-gae" id="toc-graph-autoencoder-gae" class="nav-link" data-scroll-target="#graph-autoencoder-gae">Graph Autoencoder (GAE)</a></li>
+  </ul></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further Reading</a></li>
   </ul>
 </nav>
     </div>
@@ -267,171 +282,224 @@ window.Quarto = {
 
 
 
-<p>In this post I am going to give a brief introduction to one of the central ideas in theoretical physics. quantum field theory might seem a daunting subject, but behind the intimidating mathematical formulation lies an approachable interpretation for describing physics processes. Like most physicists, I was first taught field theory in the form of canonical quantization. However, I find the alternative approach of the path integral formalism to much more approachable and intuitive. Path integral formulations also exist for statistical mechanics applications, but here I will describe how it is used in quantum mechanics.</p>
-<p>Initially, quantum field theory grew out of an attempt to reconcile special relativity with Quantum Mechanics. While Quantum Mechanics describes quantum <em>states</em> and their evolution and interaction, central to Quantum Field Theory are the <em>fields</em> whose behavior are described by the Lagrangian and the Euler-Lagrange field equations. These fields then act on states, possibly creating and annihilating quanta (or particles) of the field. Using the path integral of the field it is possible to calculate probabilities for processes that can be observed. Quantum field theories are able to explain particle interaction and the creation and annihilation of particles that does not occur in standard quantum mechanics making such theories much more flexible. The Standard Model is built in terms of quantum field theories, where each fundamental particle is described by a field.</p>
-<p>There are plenty of good resources for learning about quantum field theory and path integrals, but I will rely heavily on the book by <span class="citation" data-cites="zee2010quantum">Zee (<a href="#ref-zee2010quantum" role="doc-biblioref">2010</a>)</span>. It is an excellent introduction to the subject and I highly recommend it.</p>
-<section id="path-integrals-in-quantum-mechanics" class="level2">
-<h2 class="anchored" data-anchor-id="path-integrals-in-quantum-mechanics">Path Integrals in Quantum Mechanics</h2>
-<p>The underlying principle of the path integral approach is that all possible paths of evolution from the initial to final state are considered. When a quantum state evolves from one state to another, we consider and incorporate all contributions from all possible paths into a final amplitude that describes the process. The advantage of the path integral method in quantum mechanical calculations is that it provides a simpler method of calculating certain processes, and in particular it gives a much more elegant way of approaching field theory. I will start by following <span class="citation" data-cites="mackenzie2000path">MacKenzie (<a href="#ref-mackenzie2000path" role="doc-biblioref">2000</a>)</span>. The path integral determines the amplitude of evolving from one state to another. Quantum mechanically, the amplitude for this is</p>
-<p><span class="math display">\[
-M=\bra{q'}e^{-iHT}\ket{q}.
-\]</span></p>
-<p>Where I have used the notation <span class="math inline">\(\bra{q'}\)</span> to signify the state at time <span class="math inline">\(T\)</span> and <span class="math inline">\(\ket{q}\)</span> to signify the state at time <span class="math inline">\(0\)</span>. The Hamiltonian <span class="math inline">\(H\)</span> is the operator that governs the evolution of the system. The amplitude <span class="math inline">\(M\)</span> is a complex number that gives the probability of evolving from state <span class="math inline">\(\ket{q}\)</span> to state <span class="math inline">\(\bra{q'}\)</span> in time <span class="math inline">\(T\)</span>. Now the aim is to derive this amplitude as a sum over histories of all paths between q and q’. This is done by separating the time period into a small <span class="math inline">\(\delta t=T/N\)</span>.</p>
-<p><span class="math display">\[
-M=\bra{q'}e^{-iH\delta t}e^{-iH\delta t}e^{-iH\delta t}...e^{-iH\delta t}\ket{q}
-\]</span></p>
-<p>Then the intervening states are included by using the completeness condition</p>
-<p><span class="math display">\[
-1=\int\ket{q}\bra{q}dq
-\]</span></p>
-<p>so it is possible to write</p>
-<p><span class="math display">\[
-M=\int dq_1dq_2..dq_{N-1} \bra{q'}e^{-iH\delta t}\ket{q_{N-1}}\bra{q_{N-1}}e^{-iH\delta t}\ket{q_{N-2}}\\
-\bra{q_{N-2}}e^{-iH\delta t}\ket{q_{N-3}}...\bra{q_1}e^{-iH\delta t}\ket{q}
-\]</span></p>
-<p>which is just a sum over a product of all possible possibilities. This is reminiscent of the double slit experiment in which light is fed through two slits. If there are two slits (<a href="#fig-doubleslit" class="quarto-xref">Figure&nbsp;1</a>), there are two possible paths, and two corresponding factors, but as extra slits are added the number increases.</p>
-<div id="fig-doubleslit" class="quarto-layout-panel">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-doubleslit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="doubleslit1.png" class="img-fluid figure-img" style="width:2in"></p>
-<figcaption>one barrier</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="doubleslit2.png" class="img-fluid figure-img" style="width:5in"></p>
-<figcaption>two barriers</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="doubleslit3.png" class="img-fluid figure-img" style="width:3in"></p>
-<figcaption>three barriers</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-doubleslit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: The double slit experiment with one, two and three barriers. The number of paths increases with the number of barriers.
-</figcaption>
-</figure>
-</div>
-<p>We can extend the analogy of barriers in a double slit experiment to time steps in an evolution from one state to another. Now that the time steps are small, the exponents in the individual factors can be expanded using a Taylor series and taken to first order. Taking one of the factors</p>
-<p><span class="math display">\[
-M_{j,j+1}=\braket{q_{j+1} | q_j}-i\delta t\bra{q_{j+1}}H\ket{q_j}+O(\delta t^2).
-\]</span></p>
-<p>And using the completeness relation in momentum space <span class="math inline">\(\int\dfrac{dp}{2\pi}\ket{p}\bra{p}=1\)</span> we can retrieve</p>
-<p><span class="math display">\[
-\begin{aligned}
-M_{j,j+1}&amp;=\braket{q_{j+1} | q_j}-i\delta t\bra{q_{j+1}}H\int\dfrac{dp_j}{2\pi}\ket{p_j}\braket{p_j |q_j}\\
-&amp;=\int\dfrac{dp_j}{2\pi} e^{ip_j (q_{j+1}-q_j)}e^{-i\delta t H}\\
-&amp;=\int\dfrac{dp_j}{2\pi} e^{i\delta t( p_j \dot{q_j}- H)}
-\end{aligned}
-\]</span></p>
-<p>When this is taken over all the factors j up to N then the total propagator is</p>
-<p><span class="math display">\[
-M=\int \prod_{j=1}^{N-1}dq_j \int\prod_{j=0}^{N-1}\dfrac{dp_j}{2\pi} \exp{ i\delta t\sum_{j=0}^{N-1}.
-( p_j \dot{q_j}- H)}
-\]</span></p>
-<p>Now let N tend to infinity so there are an infinite number of paths. This gives the phase-space integral</p>
-<p><span class="math display">\[
-M=\int Dp Dq \exp{(iS)}.
-\]</span></p>
-<p>Which can be transformed into the configuration space path integral by performing the integral over the momenta</p>
-<p><span class="math display">\[
-\begin{aligned}
-M &amp;=\lim_{N\rightarrow\infty} \left(\frac{-im}{2\pi \delta t}  \right)^{N/2} \left( \prod_{j=1}^{N-1}\int dq_j\right) e^{iS}\\
-M &amp;=\int Dq e^{iS}
-\end{aligned}
-\]</span></p>
-<p>Where the definition of the Hamiltonian has been used to replace the factor in the exponent with the Lagrangian and then the action.</p>
+<section id="graph-theory" class="level2">
+<h2 class="anchored" data-anchor-id="graph-theory">Graph Theory</h2>
+<p>These notes are asimple primer on the mathematical treament of graphs, particularly the spectral properties and how basic ML models incorporate graph data. The aim is to present a few notes on graph theory concepts, such as the adjacency matrix, Laplacian and incidence matrix. These will not be comprehensive, but rather a short reference. Lets start with a few definitions. A graph is a mathematical structure consisting of vertices (or nodes) and edges (connections between nodes). Graphs can be directed or undirected, weighted or unweighted, and can have various properties depending on their structure.</p>
+<section id="simple-graphs" class="level3">
+<h3 class="anchored" data-anchor-id="simple-graphs">Simple Graphs</h3>
+<p>Simple graphs are defined as follows: * No loops (self-connections) * No multi-edges * Undirected (symmetric adjacency)</p>
+<p>Let <span class="math inline">\(\mathcal{G} = \{ \mathcal{V}, \mathcal{E} \}\)</span>, this is our graph, with:</p>
+<p><span class="math inline">\(\mathcal{V}(\mathcal{G}) = \{v_1, \ldots, v_n\}\)</span>: vertex set of graph <span class="math inline">\(\mathcal{G}\)</span>, where <span class="math inline">\(n = |\mathcal{V}|\)</span> <span class="math inline">\(\mathcal{E}(\mathcal{G}) = \{e_{ij}\}\)</span>: edge set with <span class="math inline">\(m = |\mathcal{E}|\)</span></p>
+<p>Where an edge <span class="math inline">\(e_{ij}\)</span> connects <span class="math inline">\(v_i\)</span> to <span class="math inline">\(v_j\)</span></p>
 </section>
-<section id="path-integrals-in-quantum-field-theory" class="level2">
-<h2 class="anchored" data-anchor-id="path-integrals-in-quantum-field-theory">Path Integrals in Quantum Field Theory</h2>
-<p>To move from quantum mechanics the quantum field theory, only a small change is needed to the path integral. In quantum field theory the states are no longer the basic objects; they are replaced by fields that act on vacuum states to create particles.</p>
-<p>It is now the Lagrangian density that appears in the action. The Lagrangian density is a function of the field and its derivatives rather than the position and momentum of a particle as in the quantum mechanical case. The variable q in the path integral is replaced by the field <span class="math inline">\(\phi\)</span>, the index j becomes a continuum and the path integral is no longer taken as the evolution between two states <span class="math inline">\(\ket{q},\ket{q'}\)</span> but between two vacuum states, <span class="math inline">\(\ket{0}\)</span>. This is only convention and represents the fact it is possible to create any state by acting the field operator on the vacuum. So the path integral becomes</p>
+<section id="vertex-degree" class="level3">
+<h3 class="anchored" data-anchor-id="vertex-degree">Vertex Degree</h3>
+<p>The <strong>degree</strong> of vertex <span class="math inline">\(v_i\)</span> is the number of connections (neighbors):</p>
 <p><span class="math display">\[
-Z=\int D\phi e^{i\int \mathcal{L}d^4 x}
+d(v_i) = \sum_j e_{ij}
 \]</span></p>
-<p>The question now with the path integral in quantum field theory is how to use it to find observables. The key component one can find from the path integral is the propagator, which gives the probability of a particle moving from one point to another. The propagator is derived from the action and is a central object in quantum field theory.</p>
+<ul>
+<li>If all vertices have the same degree, the graph is <strong>regular</strong></li>
+<li>If all degrees are even, the graph is <strong>Eulerian</strong></li>
+</ul>
 </section>
-<section id="the-propagator" class="level2">
-<h2 class="anchored" data-anchor-id="the-propagator">The Propagator</h2>
-<p>The square of the absolute value of the propagator gives us the probability of a particle moving from one place to another (hence <em>propagation</em>) and is derived from the governing equation of the field. The path integral for a scalar field theory is (lower case letters like x, y signify 4-vectors)</p>
+<section id="subgraph" class="level3">
+<h3 class="anchored" data-anchor-id="subgraph">Subgraph</h3>
+<p>Let <span class="math inline">\(\mathcal{H}\)</span> be a <strong>subgraph</strong> of <span class="math inline">\(\mathcal{G}\)</span> if:</p>
 <p><span class="math display">\[
-Z=\int D\phi e^{iS}
+\mathcal{V}(\mathcal{H}) \subseteq \mathcal{V}(\mathcal{G}), \quad \mathcal{E}(\mathcal{H}) \subseteq \mathcal{E}(\mathcal{G})
 \]</span></p>
-<p>where D signifies the integration measure that includes the product, limit etc. S is the action given by</p>
-<p><span class="math display">\[
-S=\int d^4 x \dfrac{1}{2} (\partial_\mu \phi \partial^\mu \phi -m^2\phi^2)+J\phi.
-\]</span></p>
-<p>Where J is some source function and <span class="math inline">\(\mu \in(0,1,2,3,4)\)</span>. To calculate the propagator first one must focus on the action and integrate by parts to get</p>
-<p><span class="math display">\[
-\int d^4 x \left[ -\phi\frac{1}{2}(\partial_\mu \partial^\mu +m^2)\phi +J\phi\right].
-\]</span></p>
-<p>Then use the Green’s function form</p>
-<p><span class="math display">\[
-(\partial_\mu \partial^\mu +m^2)D(x-y)=-\delta^{(4)}(x-y)
-\]</span></p>
-<p>such that the field satisfies</p>
-<p><span class="math display">\[
-\phi(x)=\int d^4 y D(x-y)J(y)
-\]</span></p>
-<p>and putting this form into the action above, the result is</p>
-<p><span class="math display">\[
-\frac{1}{2}\int d^4 x \int d^4 y J(x) D(x-y) J(y)
-\]</span></p>
-<p>and using Fourier transforms shows the explicit appearance of the propagator</p>
-<p><span class="math display">\[
-\tilde{D}(k)=\dfrac{1}{k^2-m^2}
-\]</span></p>
-<p>where the denominator can be replaced by whatever dispersion relation that follows the simple scalar field in Minkowski space form i.e just add extra positive terms for time-like dimensions and negative ones for space-like dimensions.</p>
 </section>
-<section id="the-potential" class="level2">
-<h2 class="anchored" data-anchor-id="the-potential">The Potential</h2>
-<p>A simple application of the propagator is to calculate the potential between two particles. The potential is a measure of the interaction between particles and can be derived from the propagator. In quantum field theory, the potential is not a fundamental quantity but rather an emergent one that arises from the interactions of particles. The potential can be found by taking the spatial Fourier transform of the propagator. The hardest and perhaps most important part is how the sources and sinks are set up in the calculation of a potential. In the path integral formulation this must be done to allow a potential to appear, after all there can be no propagator and hence no potential without anything to propagate between.</p>
-<p>As a first example the potential will derived in 3+1 dimensions using a source function that consists of two Dirac delta sources <span class="math inline">\(J(x)=\delta^{(3)}(\vec{x}-\vec{x_1})+ \delta^{(3)}(\vec{x}-\vec{x_2})\)</span>. These are fixed at the spatial positions <span class="math inline">\(\vec{x_1}\)</span> and <span class="math inline">\(\vec{x_2}\)</span>. There will be a number of terms in the action arising from the product of the two source functions but since the only interesting one is where a particle is created at 1 and annihilated at 2 the only one that is considered is</p>
-<p><span class="math display">\[
-S=-\dfrac{1}{(2\pi)^4} \int d^4 x' \int d^4 x \int d^4 k \dfrac{\delta(\vec{x}-\vec{x_1}) e^{ik\cdot(x-x')} \delta(\vec{x'}-\vec{x'_2})}{\omega^2-k^2-m^2}
-\]</span></p>
-<p>Where the sources are placed at a particular position in space but have no fixed time coordinate. This leads to</p>
-<p><span class="math display">\[
-\begin{aligned}
-S&amp;=-\dfrac{1}{(2\pi)^4} \int dt' \int dt \int d\omega e^{i\omega(t-t')} \int d^3 k \dfrac{e^{-i\vec{k}(\vec{x_1}-\vec{x'_2})}}{\omega^2-k^2-m^2}\\
-&amp;=-\dfrac{1}{(2\pi)^3}\int dt \int d\omega \delta(\omega) \int d^3 k \dfrac{e^{-i\vec{k}(\vec{x_1}-\vec{x'_2})}}{\omega^2-k^2-m^2}\\
-&amp;=\dfrac{1}{(2\pi)^3}\int dt \int d^3 k \dfrac{e^{i\vec{k}(\vec{x_1}-\vec{x'_2})}}{k^2+m^2}
-\end{aligned}
-\]</span></p>
-<p>Letting the time integral be <span class="math inline">\(\int dt=T\)</span> to make the association with the T in <span class="math inline">\(\bra{0} e^{-iHT}\ket{0}=e^{-iET}\)</span> so the potential is (and writing <span class="math inline">\(\vec{x}=\vec{x_1}-\vec{x'_2}\)</span>)</p>
-<p><span class="math display">\[
-\int \dfrac{d^3 k}{(2\pi)^3}\dfrac{e^{i\vec{k}.\vec{x}}}{k^2+m^2}=\frac{1}{4 \pi r}e^{-mr}
-\]</span></p>
-<p>Another important point is the validity of fixing the source and sink in space but not in time. When this was done is was clear that a Dirac delta function appeared in <span class="math inline">\(\omega\)</span> that cut out the time-term from the propagator. From the path integral approach as described in <span class="citation" data-cites="zee2010quantum">Zee (<a href="#ref-zee2010quantum" role="doc-biblioref">2010</a>)</span> the specification of the sources and sinks is essential to correctly calculate the potential arising from particle propagation from source to sink.</p>
-<p>This form of potential between two particles is called the Yukawa potential. It acts as the familiar Coulomb potential for massless particles, but for massive particles the potential is exponentially suppressed at large distances.</p>
+<section id="k-partite-graph" class="level3">
+<h3 class="anchored" data-anchor-id="k-partite-graph">k-partite Graph</h3>
+<p>A graph is <strong>k-partite</strong> if its vertex set admits a partition into <span class="math inline">\(k\)</span> classes such that <strong>vertices in the same class are not adjacent</strong>.</p>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>In this brief intro I have mentioned some high-level concepts such as Green’s functions, four-vectors and the Lagrangian density. These are all important concepts in quantum field theory and this post shouldn’t be seen as a comprehensive guide, but rather a jumping off point to explore these ideas further. The path integral approach to quantum field theory is a powerful tool that allows for the calculation of probabilities and potentials in a way that is I think is more intuitive than the canonical quantization approach. It is a central part of the modern understanding of particle physics and is essential for understanding the Standard Model.</p>
+<section id="adjacency-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="adjacency-matrix">Adjacency Matrix</h3>
+<p>Much of the mathematical treament of graphs starts with the adjacency matrix. This matrix is a way to represent the connections between vertices in a graph, where each row and column corresponds to a vertex, and the entries indicate whether there is an edge between the vertices.</p>
+<p>For a graph of <span class="math inline">\(N\)</span> vertices:</p>
+<p>Let <span class="math inline">\(A \in \mathbb{R}^{N \times N}\)</span> where</p>
+<p><span class="math display">\[
+  A_{ij} =
+  \begin{cases}
+  1 &amp; \text{if there is an edge } e_{ij} \\
+  0 &amp; \text{if no edge}
+  \end{cases}
+\]</span></p>
+<p>Also, <span class="math inline">\(A_{ii} = 0\)</span></p>
+<p>Note: <span class="math inline">\(A \in \mathbb{R}^{N \times N}\)</span> for a <strong>weighted graph</strong> <span class="math inline">\(A \in \mathbb{B}^{N \times N}\)</span> for an <strong>unweighted graph</strong>, where <span class="math inline">\(\mathbb{B} = \{0, 1\}\)</span></p>
+<p>Thus the adjacency matrix describes the <strong>connections</strong> in the graph. For an <strong>undirected, weighted graph</strong>, the adjacency matrix <span class="math inline">\(A\)</span> is:</p>
+<ul>
+<li>A <strong>real symmetric matrix</strong></li>
+<li>Has <span class="math inline">\(N\)</span> <strong>real eigenvalues</strong></li>
+<li><span class="math inline">\(N\)</span> <strong>eigenvectors</strong> form an <strong>orthonormal basis</strong></li>
+</ul>
+<p>Let the eigenspace be:</p>
+<p><span class="math display">\[
+S_i = \left\{ x \in \mathbb{R}^N \ \middle| \ A x = \lambda_i x \right\}
+\]</span></p>
+</section>
+<section id="functions-on-graphs" class="level3">
+<h3 class="anchored" data-anchor-id="functions-on-graphs">Functions on Graphs</h3>
+<p>In addition to the adjacency matrix, we can also define functions on graphs. These are mappings from a vertex to a value. Consider a <strong>real-valued function</strong> on a graph:</p>
+<p><span class="math display">\[
+  f: \mathcal{V} \rightarrow \mathbb{R}
+\]</span></p>
+<p><span class="math inline">\(f\)</span> is a vector indexed by vertices: <span class="math inline">\(f \in \mathbb{R}^N\)</span></p>
+<ul>
+<li>The eigenvectors can be considered as <strong>eigenfunctions</strong></li>
+<li>The <strong>adjacency matrix</strong> acts as a <strong>linear operator</strong>:</li>
+</ul>
+<p><span class="math display">\[
+  g = A f, \quad g_i = \sum_j A_{ij} f_j
+\]</span></p>
+</section>
+<section id="quadratic-form" class="level3">
+<h3 class="anchored" data-anchor-id="quadratic-form">Quadratic Form</h3>
+<p>The adjacency operator can also be seen as a <strong>quadratic form</strong>:</p>
+<p><span class="math display">\[
+f^T A f = \sum_{e_{ij}} f_i f_j
+\]</span></p>
+</section>
+<section id="incidence-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="incidence-matrix">Incidence Matrix</h3>
+<p>If we let the graph edges have an <strong>orientation</strong>, we can define an <strong>incidence matrix</strong> (operator):</p>
+<p><span class="math display">\[
+\nabla \in \mathbb{T}^{|E| \times |V|}, \quad \mathbb{T} = \{0, 1, -1\}
+\]</span></p>
+<p>Define <span class="math inline">\(\nabla\)</span> as:</p>
+<p><span class="math display">\[
+\nabla_{ev} =
+\begin{cases}
+-1 &amp; \text{if } v \text{ is source of } e \\
+1 &amp; \text{if } v \text{ is sink of } e \\
+0 &amp; \text{if no connection}
+\end{cases}
+\]</span></p>
+<p>Directed graphs can be represented with an incidence matrix, where each edge has a direction (source to sink). The incidence matrix <span class="math inline">\(\nabla\)</span> captures the relationship between edges and vertices in a concise way.</p>
+</section>
+<section id="coboundary-map" class="level3">
+<h3 class="anchored" data-anchor-id="coboundary-map">Coboundary Map</h3>
+<p>The incidence matrix is used in the definition of the coboundary ma. The mapping <span class="math inline">\(f \rightarrow \nabla f \in \mathbb{R}^{E}\)</span> is the <strong>coboundary map</strong> of the graph and can be used to compute the <strong>gradient</strong> of a function defined on the graph.</p>
+<p><span class="math display">\[
+(\nabla f)(e_{ij}) = f(v_j) - f(v_i)
+\]</span></p>
+</section>
+<section id="graph-laplacian" class="level3">
+<h3 class="anchored" data-anchor-id="graph-laplacian">Graph Laplacian</h3>
+<p>Spectral graph theory studies properties of graphs via the eigensystem and their associated matrices. The key concept in the spectral graph theory is the <strong>Graph Laplacian</strong>. The Laplacian operator is defined as:</p>
+<p><span class="math display">\[
+L = \nabla^T \nabla
+\]</span></p>
+<p>Component-wise:</p>
+<p><span class="math display">\[
+(Lf)(v_i) = \sum_{e_{ij}} (f(v_i) - f(v_j))
+\]</span></p>
+<p>Also defined as:</p>
+<p><span class="math display">\[
+L = D - A
+\]</span> Where: * <span class="math inline">\(D\)</span> is the <strong>degree matrix</strong>: <span class="math inline">\(D_{ii} = d(v_i)\)</span> * Diagonal matrix with degrees at each vertex * <span class="math inline">\(A\)</span> is the adjacency matrix For a <strong>weighted graph</strong>, each edge <span class="math inline">\(e_{ij}\)</span> has a <strong>weight</strong> <span class="math inline">\(w_{ij}\)</span>, which modifies the Laplacian accordingly. Component form: <span class="math display">\[
+(Lf)(v_i) = \sum_{e_{ij}} w_{ij} (f(v_i) - f(v_j))
+\]</span> As a <strong>quadratic form</strong>: <span class="math display">\[
+f^T L f = \frac{1}{2} \sum_{e_{ij}} w_{ij} (f(v_i) - f(v_j))^2
+\]</span> * The Laplacian <span class="math inline">\(L\)</span> is <strong>symmetric</strong> and <strong>positive-definite</strong> (or semi-definite) and so has <strong>non-negative, real-valued eigenvalues</strong></p>
+<p>The graph laplacian is a powerful tool in spectral graph theory, allowing us to analyze the structure and properties of graphs through their eigenvalues and eigenvectors. It is equivalent to the familiar laplacian operator in continuous spaces, but adapted to the discrete, arbitrarily-structured setting of graphs.</p>
+</section>
+<section id="graph-fourier-transform" class="level3">
+<h3 class="anchored" data-anchor-id="graph-fourier-transform">Graph Fourier Transform</h3>
+<p>Just as with the Fourier transform in continuous spaces, we can define a <strong>Graph Fourier Transform</strong> for graphs. This allows us to analyze functions defined on the vertices of a graph in terms of the graph’s spectral properties. It is this transform that defines the spectral structure of the graph and allows us to decompose functions into their frequency components.</p>
+<ul>
+<li>We can project a <strong>function</strong> (or signal) over the space of <strong>eigenvectors</strong> of a graph.</li>
+<li>For eigenvectors <span class="math inline">\(\mu\)</span> and eigenvalues <span class="math inline">\(\lambda\)</span> of the Laplacian <span class="math inline">\(L\)</span>, the <strong>Graph Fourier Transform</strong> is defined as:</li>
+</ul>
+<p><span class="math display">\[
+\mathcal{F}(f)[\lambda_i] = \hat{f}(\lambda_i) = \langle f, \mu^i \rangle = \sum_{j=1}^{N} f_j \mu_j^i
+\]</span></p>
+<p>This gives:</p>
+<p><span class="math display">\[
+\hat{f} = \mu^T f \quad \text{(i.e., transform = basis projection)}
+\]</span></p>
+</section>
+</section>
+<section id="models-on-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="models-on-graphs">Models on Graphs</h2>
+<p>Graphs are a powerful data structure for representing relationships and structures in data. In machine learning, graphs can be used to model relationships between entities, such as social networks, molecular structures, or knowledge graphs. In the rest of these notes I will briefly introduce some of the basic models that operate on graph data:</p>
+<section id="graph-convolutional-model-gcn" class="level3">
+<h3 class="anchored" data-anchor-id="graph-convolutional-model-gcn">Graph Convolutional Model (GCN)</h3>
+<p>Convolutional neural networks have long been the mainstay of deep learning for images and other grid-like or linear data. However, graphs present a challenge due to their irregular structure. Graph Convolutional Networks (GCNs) are a class of neural networks designed to operate on graph-structured data. First introduced by <span class="citation" data-cites="kipf2016semi">Kipf and Welling (<a href="#ref-kipf2016semi" role="doc-biblioref">2016a</a>)</span>, GCNs extend the concept of convolution to graphs by leveraging the graph structure to perform local aggregations of node features.</p>
+<ul>
+<li><strong>Approximates</strong> the graph Fourier transform using a neural network.</li>
+<li>Can be an <strong>effective classifier</strong> for nodes in a graph.</li>
+</ul>
+<p>A <strong>single GCN layer</strong> is:</p>
+<p><span class="math display">\[
+H^{(l+1)} = \sigma \left( \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} H^{(l)} W^{(l)} \right)
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><p><span class="math inline">\(\tilde{A} = A + I\)</span>: adjacency matrix with self-loops</p></li>
+<li><p><span class="math inline">\(\tilde{D}\)</span>: degree matrix of <span class="math inline">\(\tilde{A}\)</span></p></li>
+<li><p><span class="math inline">\(H^{(l)}\)</span>: input features at layer <span class="math inline">\(l\)</span></p></li>
+<li><p><span class="math inline">\(W^{(l)}\)</span>: learnable weight matrix</p></li>
+<li><p><span class="math inline">\(\sigma\)</span>: activation function (e.g.&nbsp;ReLU)</p></li>
+<li><p><span class="math inline">\(\tilde{A} = A + I\)</span>: adjacency matrix with <strong>self-connections</strong> added.</p></li>
+<li><p><span class="math inline">\(\tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2}\)</span>: <strong>symmetrically normalized adjacency matrix</strong>.</p></li>
+<li><p><span class="math inline">\(\tilde{D}\)</span>: degree matrix of <span class="math inline">\(\tilde{A}\)</span>, where:</p>
+<p><span class="math display">\[
+\tilde{D}_{ii} = \sum_j \tilde{A}_{ij}
+\]</span></p></li>
+<li><p><span class="math inline">\(H^l\)</span>: activation (output) of the <strong>l-th GCN layer</strong>, with <span class="math inline">\(H^0 = X\)</span> (input node features).</p></li>
+<li><p><span class="math inline">\(\sigma\)</span>: <strong>activation function</strong>, typically <strong>ReLU</strong>.</p></li>
+</ul>
+<p>Thus a two-layer GCN would be:</p>
+<p><span class="math display">\[
+\text{GCN}_2(X, A) = \tilde{A} \, \sigma(\tilde{A} X W^0) W^1
+\]</span></p>
+</section>
+<section id="graph-autoencoder-gae" class="level3">
+<h3 class="anchored" data-anchor-id="graph-autoencoder-gae">Graph Autoencoder (GAE)</h3>
+<p>We can go furhter and build more complex models out of our GCNs. A <strong>Graph Autoencoder (GAE)</strong> is a type of neural network that learns to encode graph data into a lower-dimensional space and then reconstructs the graph structure from this encoding. This is particularly useful for tasks like link prediction or node classification. This model was introduced in <span class="citation" data-cites="kipf2016variational">Kipf and Welling (<a href="#ref-kipf2016variational" role="doc-biblioref">2016b</a>)</span> and has found application in various domains, as well inspiring varaitional and other approaches to graph representation learning.</p>
+<ul>
+<li><p>Goal: <strong>learn representations</strong> of nodes by <strong>reconstructing the adjacency matrix</strong>. This particular model is for binary adjacency matrices i.e.&nbsp;unweighted graphs.</p></li>
+<li><p><strong>Encoder</strong>: <span class="math display">\[
+Z = \text{GCN}_2(X, A)
+\]</span> <span class="math inline">\(Z\)</span>: latent (compressed) node features.</p></li>
+<li><p><strong>Decoder</strong>: <span class="math display">\[
+\tilde{A} = \sigma(ZZ^T)
+\]</span> Uses <strong>inner product decoder</strong> to reconstruct <span class="math inline">\(A\)</span> (assumes <span class="math inline">\(\sigma\)</span> is sigmoid).</p></li>
+<li><p><span class="math inline">\(Z\)</span>: gives <strong>latent space representations</strong> of the nodes.</p></li>
+<li><p>To get <strong>graph-level representations</strong> (for small graphs), you can apply <strong>sum-pooling</strong> over node vectors:</p></li>
+</ul>
+<p><span class="math display">\[
+\sum Z
+\]</span></p>
+<p>So, for an unweighted, undirected graph <span class="math inline">\(G(V, E)\)</span>, with <span class="math inline">\(N = |V|\)</span>, the model derives a node feature matrix: <span class="math display">\[
+  X \in \mathbb{R}^{N \times F}, \quad Z \in \mathbb{R}^{N \times d}
+\]</span> from the adjacency matrix: <span class="math display">\[
+  A \in \mathbb{R}^{N \times N} \text{ (weighted)}, \quad A \in \mathbb{B}^{N \times N} \text{ (unweighted)}
+\]</span></p>
+</section>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
+<p>A few key resources I found useful for graphs is the Graph Representation Learning book <span class="citation" data-cites="hamilton2020graph">(<a href="#ref-hamilton2020graph" role="doc-biblioref">Hamilton 2020</a>)</span>. This book provides a comprehensive introduction to graph representation learning, covering both theoretical foundations and practical applications. There are also some nice review articles covering machine learning with graphs, such as <span class="citation" data-cites="zhou2020graph">Zhou et al. (<a href="#ref-zhou2020graph" role="doc-biblioref">2020</a>)</span>. In terms of software packages, the <a href="https://networkx.org/">networkx</a> package in Python is a great library for working with graphs, providing tools for creating, manipulating, and analyzing graph structures. For deep learning on graphs, <a href="https://pytorch-geometric.readthedocs.io/en/latest/">PyTorch Geometric</a> is the most popular library that provide implementations of various graph neural network architectures, all with a pytorch backend.</p>
 
 
 
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-mackenzie2000path" class="csl-entry" role="listitem">
-MacKenzie, Richard. 2000. <span>“Path Integral Methods and Applications.”</span> <em>arXiv Preprint Quant-Ph/0004090</em>.
+<div id="ref-hamilton2020graph" class="csl-entry" role="listitem">
+Hamilton, William L. 2020. <em>Graph Representation Learning</em>. Morgan &amp; Claypool Publishers.
 </div>
-<div id="ref-zee2010quantum" class="csl-entry" role="listitem">
-Zee, Anthony. 2010. <em>Quantum Field Theory in a Nutshell</em>. Princeton university press.
+<div id="ref-kipf2016semi" class="csl-entry" role="listitem">
+Kipf, Thomas N, and Max Welling. 2016a. <span>“Semi-Supervised Classification with Graph Convolutional Networks.”</span> <em>arXiv Preprint arXiv:1609.02907</em>.
+</div>
+<div id="ref-kipf2016variational" class="csl-entry" role="listitem">
+———. 2016b. <span>“Variational Graph Auto-Encoders.”</span> <em>arXiv Preprint arXiv:1611.07308</em>.
+</div>
+<div id="ref-zhou2020graph" class="csl-entry" role="listitem">
+Zhou, Jie, Ganqu Cui, Shengding Hu, Zhengyan Zhang, Cheng Yang, Zhiyuan Liu, Lifeng Wang, Changcheng Li, and Maosong Sun. 2020. <span>“Graph Neural Networks: A Review of Methods and Applications.”</span> <em>AI Open</em> 1: 57–81.
 </div>
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
