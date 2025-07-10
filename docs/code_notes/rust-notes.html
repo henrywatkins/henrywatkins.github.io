@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Henry Watkins">
+<meta name="description" content="Basic Rust reference and syntax">
+
+<title>Rust Notes – Henry Watkins</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-dae3192f81785cf0e6fe7ca13257d296.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4KRLE15B5S"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
+</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Henry Watkins</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../book/index.html"> 
+<span class="menu-text">Plasma Book</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Code Notes</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-code-notes">    
+        <li>
+    <a class="dropdown-item" href="../code_notes/python-notes.html">
+ <span class="dropdown-text">Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../code_notes/bash-notes.html">
+ <span class="dropdown-text">Command Line</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../code_notes/git-notes.html">
+ <span class="dropdown-text">Git</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../code_notes/sql-notes.html">
+ <span class="dropdown-text">SQL</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../code_notes/cython-notes.html">
+ <span class="dropdown-text">Cython</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../code_notes/docker-notes.html">
+ <span class="dropdown-text">Docker</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../code_notes/rust-notes.html">
+ <span class="dropdown-text">Rust</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#online-resources" id="toc-online-resources" class="nav-link active" data-scroll-target="#online-resources">Online resources</a></li>
+  <li><a href="#running-rust" id="toc-running-rust" class="nav-link" data-scroll-target="#running-rust">running rust</a></li>
+  <li><a href="#creating-a-project" id="toc-creating-a-project" class="nav-link" data-scroll-target="#creating-a-project">creating a project</a></li>
+  <li><a href="#debugformatprofile" id="toc-debugformatprofile" class="nav-link" data-scroll-target="#debugformatprofile">debug/format/profile</a></li>
+  <li><a href="#useful-libraries" id="toc-useful-libraries" class="nav-link" data-scroll-target="#useful-libraries">useful libraries</a></li>
+  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a>
+  <ul class="collapse">
+  <li><a href="#control-flow" id="toc-control-flow" class="nav-link" data-scroll-target="#control-flow">control flow</a></li>
+  <li><a href="#pattern-matches" id="toc-pattern-matches" class="nav-link" data-scroll-target="#pattern-matches">pattern matches</a></li>
+  <li><a href="#loops" id="toc-loops" class="nav-link" data-scroll-target="#loops">loops</a></li>
+  <li><a href="#closures" id="toc-closures" class="nav-link" data-scroll-target="#closures">closures</a></li>
+  <li><a href="#casting" id="toc-casting" class="nav-link" data-scroll-target="#casting">casting</a></li>
+  </ul></li>
+  <li><a href="#borrowing" id="toc-borrowing" class="nav-link" data-scroll-target="#borrowing">Borrowing</a></li>
+  <li><a href="#structs" id="toc-structs" class="nav-link" data-scroll-target="#structs">structs</a></li>
+  <li><a href="#enums" id="toc-enums" class="nav-link" data-scroll-target="#enums">enums</a>
+  <ul class="collapse">
+  <li><a href="#option" id="toc-option" class="nav-link" data-scroll-target="#option">Option</a></li>
+  <li><a href="#result" id="toc-result" class="nav-link" data-scroll-target="#result">Result</a></li>
+  </ul></li>
+  <li><a href="#clis-with-clap" id="toc-clis-with-clap" class="nav-link" data-scroll-target="#clis-with-clap">Cli’s with Clap</a></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">testing</a></li>
+  <li><a href="#modules" id="toc-modules" class="nav-link" data-scroll-target="#modules">modules</a></li>
+  <li><a href="#oop-with-rust" id="toc-oop-with-rust" class="nav-link" data-scroll-target="#oop-with-rust">OOP with rust</a>
+  <ul class="collapse">
+  <li><a href="#polymorphism-with-traits" id="toc-polymorphism-with-traits" class="nav-link" data-scroll-target="#polymorphism-with-traits">polymorphism with traits</a></li>
+  </ul></li>
+  <li><a href="#error-handling" id="toc-error-handling" class="nav-link" data-scroll-target="#error-handling">Error handling</a></li>
+  <li><a href="#python-2-rust" id="toc-python-2-rust" class="nav-link" data-scroll-target="#python-2-rust">Python 2 Rust</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Rust Notes</h1>
+</div>
+
+<div>
+  <div class="description">
+    Basic Rust reference and syntax
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Henry Watkins </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="online-resources" class="level2">
+<h2 class="anchored" data-anchor-id="online-resources">Online resources</h2>
+<p><a href="https://stevedonovan.github.io/rust-gentle-intro/">Introduction - A Gentle Introduction to Rust</a></p>
+<p><a href="https://cheats.rs/">Rust Language Cheat Sheet</a></p>
+<p><a href="https://aml3.github.io/RustTutorial/">Rust in 7 Programs</a></p>
+<p><a href="https://tourofrust.com/TOC_en.html">Tour of Rust - Table of Contents</a></p>
+<p><a href="https://www.koderhq.com/tutorial/rust/data-types/">Rust Data Types Tutorial | KoderHQ</a></p>
+<p><a href="https://doc.rust-lang.org/stable/rust-by-example/">Introduction - Rust By Example</a></p>
+<p><a href="https://rust-lang-nursery.github.io/rust-cookbook/intro.html">Table of Contents - Rust Cookbook</a></p>
+</section>
+<section id="running-rust" class="level2">
+<h2 class="anchored" data-anchor-id="running-rust">running rust</h2>
+<ul>
+<li>update rust with <code>rustup update</code></li>
+<li>build your project with <code>cargo build</code></li>
+<li>run your project with <code>cargo run</code></li>
+<li>test your project with <code>cargo test</code></li>
+<li>check you project compiles without producing and executable with <code>cargo check</code></li>
+<li>build documentation for your project with <code>cargo doc</code></li>
+<li>publish a library to crates.io with <code>cargo publish</code></li>
+<li>lookup rust documentation with <code>rustup doc</code></li>
+</ul>
+</section>
+<section id="creating-a-project" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-project">creating a project</h2>
+<p><code>cargo new hello-rust</code></p>
+<p>dependencies go in the <code>.toml</code> file. packages in rust are called crates</p>
+</section>
+<section id="debugformatprofile" class="level2">
+<h2 class="anchored" data-anchor-id="debugformatprofile">debug/format/profile</h2>
+<ul>
+<li>format with <code>rustfmt</code>. automatic idiomatic formatter also use <code>cargo fmt</code></li>
+<li>Clippy for idiomatic style <code>cargo clippy</code></li>
+</ul>
+</section>
+<section id="useful-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="useful-libraries">useful libraries</h2>
+<ul>
+<li>clap - CLI</li>
+<li>rayon - parallelism</li>
+<li>ndarray - numpy-like array datastructure</li>
+<li>nalgebra - linear algebra</li>
+<li>pyO3 - rust bindings for python</li>
+</ul>
+</section>
+<section id="syntax" class="level2">
+<h2 class="anchored" data-anchor-id="syntax">Syntax</h2>
+<p>import packages and their consituent functions/classes with <code>use package::function;</code>. for external (non standard library) crates, one must use <code>extern crate &lt;&gt;</code> at the very start</p>
+<p>use double slash for comments</p>
+<p>use snake case for variable and function names ### variables &amp; dtypes</p>
+<p>variables are set with <code>let</code>, they are immutable by default and one must use the <code>mut</code> to allow them to be mutable. type inference does happen but one can define the variable data type with <code>let variablename : type = value;</code></p>
+<p>basic types include integers (signed and unsigned), floats, chars (single quotes) and strings (double quotes) and booleans.</p>
+<p>when possible use the <code>String</code> tyoe instead of <code>str</code> as it is a std lib type and has more functionality. <code>&amp;str</code> is a string slice. one creates a <code>String</code> from a <code>str</code> using <code>String::from(str)</code>, or <code>"string".to_string()</code></p>
+<p>Rust has tuple and array compound types which allow groups of data. tuples are of fixed length but allow different types. tuples are defined with <code>(parentheses)</code>. data are accessed with indices <code>array.i</code>. one can destructure tuples to assign names to values like</p>
+<pre><code>let cat = ("Furry McFurson", 3.5);
+let (name, age) = cat;</code></pre>
+<p>arrays must have the same type and are also of fixed length. arrays are defined with <code>[square brackets]</code>. you can define them with a specific length like <code>x : [type; length] = [0; length]</code>. data are accessed using square brackets <code>x[5]</code>. slicing of arrays is done with a pointer and double stops <code>slice = &amp;array[1..4]</code></p>
+<p>constants are always immutable and are set with <code>const</code>. they must be set with a type.</p>
+<p>pointers: pointers to array, tuple and string types are specified with &amp;, when these compund types are passed as arguments, one must pass the pointer to the compound variable <code>&amp;str, &amp;tuple</code></p>
+<p>in rust varibles have traits specific to their type, accessed as one would a method.</p>
+<p>Aliasing: You can use the <code>type</code> keyword to define more complicated types out of simple ones e.g.&nbsp;</p>
+<pre><code>type Grid = Vec&lt;Vec&lt;i32&gt;&gt;;</code></pre>
+<section id="control-flow" class="level3">
+<h3 class="anchored" data-anchor-id="control-flow">control flow</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> val <span class="op">==</span> <span class="dv">3</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    output</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    out2</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>   out3</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pattern-matches" class="level3">
+<h3 class="anchored" data-anchor-id="pattern-matches">pattern matches</h3>
+<p>Formally, match expressions are defined as the keyword match, a value to match on, and one or more match arms that consist of a pattern and an expression to run if the value matches that arm’s pattern. This is essentially equivalent to C <code>switch</code></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">match</span> VALUE <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    PATTERN <span class="op">=&gt;</span> EXPRESSION<span class="op">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    PATTERN <span class="op">=&gt;</span> EXPRESSION<span class="op">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    PATTERN <span class="op">=&gt;</span> EXPRESSION<span class="op">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="loops" class="level3">
+<h3 class="anchored" data-anchor-id="loops">loops</h3>
+<p>There are several loop types, similar to C type loops - while - for - loop</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> i <span class="op">&lt;</span> <span class="dv">10</span> <span class="op">{</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    println(<span class="st">"Hi there"</span>)<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    i <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// Rust doesn't support ++ or --</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> range(<span class="dv">0</span><span class="op">,</span> <span class="dv">10</span>) <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    foo(i)<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>loop is equivalent to while true`</p>
+<p>we can use <code>break</code> to get out of the loop and <code>continue</code> to skip to the next iteration.</p>
+<p>one can iterate over a collection using the <code>collection.iter()</code> method in the loop ### functions</p>
+<p>define functions with <code>fn</code> and C-like syntax. arguments must be defined along with their type and the output type specified with and arrow. The last expression in the function body is the value to be returned - must not have a semi-colon</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> function(x <span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    body1<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    body2<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    output</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>when passing data as arguments to a function, consider passing as a reference (with <code>&amp;</code>) for returning (possibly modified) copies (with <code>.clone()</code>) or changing the input in-place with <code>mut</code>.</p>
+<p>e.g.&nbsp;passing by reference, making a copy and changing</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> fill_vec(vec<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="kw">mut</span> new_vec <span class="op">=</span> vec<span class="op">.</span>clone()<span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    new_vec<span class="op">.</span>push(<span class="dv">22</span>)<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    new_vec<span class="op">.</span>push(<span class="dv">44</span>)<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    new_vec<span class="op">.</span>push(<span class="dv">66</span>)<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    new_vec</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>passing by mutable value</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> fill_vec(<span class="kw">mut</span> vec<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    vec<span class="op">.</span>push(<span class="dv">22</span>)<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    vec<span class="op">.</span>push(<span class="dv">44</span>)<span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    vec<span class="op">.</span>push(<span class="dv">66</span>)<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    vec</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>we can also have generic functions where types are defined at compile time</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> my_function<span class="op">&lt;</span>T<span class="op">&gt;</span>(foo<span class="op">:</span> T)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    T<span class="op">:</span>Foo</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="closures" class="level3">
+<h3 class="anchored" data-anchor-id="closures">closures</h3>
+<p>closures are like lambda functions</p>
+<p><code>let func = |var| var * var;</code></p>
+</section>
+<section id="casting" class="level3">
+<h3 class="anchored" data-anchor-id="casting">casting</h3>
+<p>cast variable to different type using the as operator</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sum <span class="op">+=</span> i <span class="kw">as</span> <span class="dt">f64</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>one super valuable method is <code>.collect()</code>. This method converts collections of one type to another,</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span> <span class="op">=</span> (<span class="dv">0</span><span class="op">..</span><span class="dv">10</span>)<span class="op">.</span>collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>converts a range to a vector</p>
+<p>Collections</p>
+<p>Vec&lt;&gt; all indexing must be done with <code>usize</code> integers.</p>
+</section>
+</section>
+<section id="borrowing" class="level2">
+<h2 class="anchored" data-anchor-id="borrowing">Borrowing</h2>
+<pre><code>let ref ref_c1 = c;
+let ref_c2 = &amp;c;</code></pre>
+<p>When doing assignments (<code>let x = y</code>) or passing function arguments by value (<code>foo(x)</code>), the <em>ownership</em> of the resources is transferred. In Rust-speak, this is known as a <em>move</em>. Once a variable goes out of scope, it is destroyed.</p>
+<p>Mutability of data can be changed when ownership is transferred.</p>
+<p>Most of the time, we’d like to access data without taking ownership over it. To accomplish this, Rust uses a <em>borrowing</em> mechanism. Instead of passing objects by value (<code>T</code>), objects can be passed by reference (<code>&amp;T</code>).</p>
+<p>You can also dereference with the star operator, <code>*r</code> to access the data r points to.</p>
+</section>
+<section id="structs" class="level2">
+<h2 class="anchored" data-anchor-id="structs">structs</h2>
+<p>classes C-like data strucures are created like</p>
+<pre><code>struct Point {
+  x : i32,
+    y : i32,
+}</code></pre>
+<p>instantiated with <code>object = Point {x:3, y:4}</code>the data is accessed with <code>object.x</code></p>
+<p>for variable-length data (like strings or arrays), one must use the lifetime parameter <code>&lt;'a&gt;</code> in your structs</p>
+<p>structs can act like classes in that they have logic associated with them, to append a method to a struct, one needs the <code>impl</code> (implementations). this wraps a set of functions that are bound to the struct and act on its data.</p>
+<p>use <code>&amp;self</code> as arguments to these functions to access member variables, like in python</p>
+<p>one can create generic structs, where the type is specified when it is called by using the ‘turbofish’</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> BagOfHolding<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    item<span class="op">:</span> T<span class="op">,</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>let i32_bag = BagOfHolding::&lt;i32&gt; { item: 42 };</code></p>
+</section>
+<section id="enums" class="level2">
+<h2 class="anchored" data-anchor-id="enums">enums</h2>
+<p>Enums allow you to define a type by enumerating its possible variants.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> IpAddrKind <span class="op">{</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    V4<span class="op">,</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    V6<span class="op">,</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>here there are two types of IP address, and we can do something like sub-typing with enums like <code>type1 = IpAddrKind::V4</code>. this is a type not a variable, but we can use is as a data structure where the kind holds data like</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> IpAddr <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    V4(<span class="dt">String</span>)<span class="op">,</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    V6(<span class="dt">String</span>)<span class="op">,</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>you can put any kind of data inside an enum variant: strings, numeric types, or structs.</p>
+<p>we can also define methods on enums in the same wa y as structs, using the <code>impl</code> keyword</p>
+<section id="option" class="level3">
+<h3 class="anchored" data-anchor-id="option">Option</h3>
+<p>the option type is a standard library enum used as a replacement for NULL values</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cn">Some</span>(T)<span class="op">,</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cn">None</span><span class="op">,</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>to get the output, use <code>.unwrap()</code> however it is best practice to avoid unwrap, prefer the <code>?</code> operator instead</p>
+</section>
+<section id="result" class="level3">
+<h3 class="anchored" data-anchor-id="result">Result</h3>
+<p>Result is a built-in enum type that allows us to return a value that has the possibility of failing. It is the idiomatic way in which the language does error handling.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> <span class="dt">Result</span><span class="op">&lt;</span>T<span class="op">,</span> E<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="cn">Ok</span>(T)<span class="op">,</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="cn">Err</span>(E)<span class="op">,</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>used like</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> do_something_that_might_fail(i<span class="op">:</span><span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">f32</span><span class="op">,</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">42</span> <span class="op">{</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>        <span class="cn">Ok</span>(<span class="dv">13.0</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        <span class="cn">Err</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"this is not the right number"</span>))   </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>the combination of result and match to do error handling is made easier with the <code>?</code> key, which automatically combines the Result with the error-handling match</p>
+</section>
+</section>
+<section id="clis-with-clap" class="level2">
+<h2 class="anchored" data-anchor-id="clis-with-clap">Cli’s with Clap</h2>
+<p>clap is the crate for command line interfaces, it is possible to define the arguments in the source or via a config file</p>
+<p>e.g.</p>
+<pre><code>use clap::Parser;
+
+/// Simple program to greet a person
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+   /// Name of the person to greet
+   #[arg(short, long)]
+   name: String,
+
+   /// Number of times to greet
+   #[arg(short, long, default_value_t = 1)]
+   count: u8,
+}
+
+fn main() {
+   let args = Args::parse();
+}</code></pre>
+</section>
+<section id="testing" class="level2">
+<h2 class="anchored" data-anchor-id="testing">testing</h2>
+<ul>
+<li>use <code>cargo check</code> to see if everything will compile without having to build the whole thing</li>
+<li>use <code>cargo test</code> to run all the tests, use <code>cargo test name</code> to run a specific test tests are demarcated by the <code>#[test]</code> decorator, and are run with <code>cargo test</code>. Rust builds a test runner binary that runs the functions annotated with the test attribute and reports on whether each test function passes or fails.</li>
+</ul>
+<p>very useful macros for running tests are the <code>assert!</code> and <code>assert_eq!</code> macro.</p>
+<p>one usually has several test cases (as functions) defined within the test module, the test case has some laogic ending in an <code>assert!</code> macro or one of its variants</p>
+<pre><code>#[test]
+fn two_is_two() {
+    assert_eq!(2, 2);
+}</code></pre>
+</section>
+<section id="modules" class="level2">
+<h2 class="anchored" data-anchor-id="modules">modules</h2>
+<p>functionality in a crate is directory-ed by using modules. one can access the items in a module using <code>::</code></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mod</span> front_of_house <span class="op">{</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">mod</span> hosting <span class="op">{</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">fn</span> add_to_waitlist() <span class="op">{}</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">fn</span> seat_at_table() <span class="op">{}</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">mod</span> serving <span class="op">{</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">fn</span> take_order() <span class="op">{}</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>        <span class="kw">fn</span> serve_order() <span class="op">{}</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>        <span class="kw">fn</span> take_payment() <span class="op">{}</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>e.g.&nbsp;<code>front_of_house::hosting::add_to_waitlist()</code></p>
+<ul>
+<li>however all functions in rust are private by default, so you must use the <code>pub</code> keyword</li>
+<li>one can shorten the paths to functions/data in a module by using the <code>use &lt;&gt; as &lt;&gt;</code> construct, similar to the <code>import &lt;&gt; as &lt;&gt;</code> in python</li>
+<li>to separate functions and things in a separate file, use the <code>pub</code> keyword on functions/structs to expose them outside the file, and use <code>mod name;</code> to import the file with the utilities, with <code>name::func()</code> to use the exact function</li>
+<li>We need to explicitly build the module tree in Rust, there’s no implicit mapping to file system/directory structure ## Macros</li>
+</ul>
+<p>macros are specified with the bang operator <code>!</code> and represent metaprogramming, where the input creates a block of code. a way of writing code that writes other code. a way of reducing the amount of code written.</p>
+<p>they act a little like function/data decorators. we can create declarative macros using the <code>macro_rules!</code> keyword. they must be defined above where they are used, unlike functions that can be defined and used anywhere in the file.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">macro_rules!</span> my_macro <span class="op">{</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    () <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        <span class="pp">println!</span>(<span class="st">"Check out my macro!"</span>)<span class="op">;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>if a macro is defined in a module, one can use the <code>#[macro_export]</code> above the <code>macro_rules!</code> to expose it from the module and use it in your code</p>
+<p>there must be at least one rule, of the format <code>($rule)=&gt;{$};</code>, the semi colon can be ommmitted after the last rule</p>
+</section>
+<section id="oop-with-rust" class="level2">
+<h2 class="anchored" data-anchor-id="oop-with-rust">OOP with rust</h2>
+<p>rust has no inheritance, preferring composition.</p>
+<p>objects can be created with a <code>struct</code> and accompanying methods defined in a <code>impl</code> block. note for methods and fields to be accessed externally, one must use the <code>pub</code> keyword.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> SeaCreature <span class="op">{</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    noise<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="kw">impl</span> SeaCreature <span class="op">{</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span> get_sound(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">{</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">&amp;</span><span class="kw">self</span><span class="op">.</span>noise</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="polymorphism-with-traits" class="level3">
+<h3 class="anchored" data-anchor-id="polymorphism-with-traits">polymorphism with traits</h3>
+<p>Rust supports polymorphism with traits. Traits allow us to associate a set of methods with a struct type.</p>
+<p>we declare the trait separatley of any struct, then implement it for a particular struct with <code>impl &lt;traitname&gt; for &lt;structname&gt;</code>.</p>
+<p>traits can be inherited from other traits like <code>trait child: parent</code></p>
+<pre><code>trait Length {
+   fn length(&amp;self) -&gt; int;
+}
+
+impl Length for LinkedList {
+   fn length(&amp;self) -&gt; int {
+      match self {
+        &amp;Some(ref node) =&gt; { 1 + node.tail.length() }
+        &amp;None =&gt; 0
+      }
+   }
+}</code></pre>
+</section>
+</section>
+<section id="error-handling" class="level2">
+<h2 class="anchored" data-anchor-id="error-handling">Error handling</h2>
+<p>using the result type and match we can handle errors, for example, trying to open a file</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">std::fs::</span>File<span class="op">;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> f <span class="op">=</span> <span class="pp">File::</span>open(<span class="st">"hello.txt"</span>)<span class="op">;</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> f <span class="op">=</span> <span class="cf">match</span> f <span class="op">{</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        <span class="cn">Ok</span>(file) <span class="op">=&gt;</span> file<span class="op">,</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>        <span class="cn">Err</span>(error) <span class="op">=&gt;</span> <span class="pp">panic!</span>(<span class="st">"Problem opening the file: {:?}"</span><span class="op">,</span> error)<span class="op">,</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>the standard library functions all return <code>Result</code> enums and all your should too</p>
+<hr>
+</section>
+<section id="python-2-rust" class="level2">
+<h2 class="anchored" data-anchor-id="python-2-rust">Python 2 Rust</h2>
+<p>Rust code with vaguely similar python equivalents</p>
+<ul>
+<li>pydoc/sphinx -&gt; rustdoc</li>
+<li>virtualenv/pip/setuptools -&gt; rustup/cargo</li>
+<li>special methods (double underscore) -&gt; traits e.g. <code>__del__</code>-&gt; <code>Drop::drop</code> <code>__add__</code>-&gt; <code>Add::add</code>, as well as other arithmetic operations <code>__str__</code>/<code>__repr__</code>-&gt; <code>Display::fmt</code> <code>__getitem__</code>-&gt;<code>Index::index</code></li>
+</ul>
+<p>Errors:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span>foo()</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> SomeError <span class="im">as</span> e:</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">raise</span> NewError(e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>in rust</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">=</span> foo()<span class="op">?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Loop: <code>for i in range(n):</code> -&gt; <code>for i in 0..n {}</code> iterable loop: <code>for i in iterable:</code> -&gt; <code>for i in iterable.iter() {}</code></p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,129 @@
+---
+title: "The Statistics of Ionization"
+description: "Ionization in plasmas "
+author: "Henry Watkins"
+date: "01/18/2025"
+image: folder.jpg
+draft: true
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+categories:
+  - physics
+---
+
+In plasma physics the key process that defines the state of matter is *ionization*. However, the familiar ionization process as it is introduced in introductory courses omits ionization in bulk media, where there are several competing processes in a statistical ensemble of atoms or ions. 
+
+Ionization processes:
+- Photo-ionization
+- Collisional-ionization
+- Auto-ionization
+- Pressure ionization
+- Field ionization
+- Bremmstrahlung
+
+In addition one also must consider the excitation and de-excitation processes that determine the occupancy of atoms with or without ionization. 
+
+We can illustrate the competition between these processes with a simple two-level system, where each level has occupancy $N$ or $M$ respectively. These could be the occupancy across a whole statistical system. This system takes the form of a dynamical system.
+
+$$
+\begin{align}
+\frac{dN}{dt} = -N R_1 + M R_2
+\frac{dN}{dt} = N R_1 - M R_2
+\end{align}
+$$
+
+In this simplified system, $R_1$ and $R_2$ represent the excitation or transition constant from one state two the other. If you have ever studied chemical reaction kinetics, this form will be familiar, as the transition from reactants to products in a chemical reaction can be described in a similar mathematical fashion.
+
+These equiations can be written in a vector-matrix form $\frac{d \textbf{n}}{dt} = \textbf{A n}$, where $\textbf{n} = (N,M)$ and the matrix $\textbf{A}$ represents a matrix of rates. 
+
+$$
+\textbf{A} = \begin{pmatrix}
+-R_1 & R_2\\
+R_1 & -R_2
+\end{pmatrix}
+$$
+
+As this is a simple dynamical system, there exists a fixed point $\textbf{n}_s$ where $\textbf{An}=0$ such that the time derivative vanishes there is no evolution. The linear dynamical system has a solution
+$$
+\textbf{n} = \textbf{n}_s + \exp{\textbf{A} t} (\textbf{n}_0-\textbf{n}_s)
+$$
+Where $\textbf{n}_0$ is the initial state.
+The central question in the study of bulk or plasma ionization is the determination of $\texbf{A}$ from atomic theory and solving the dynamical system for a statistical system. Such a task requires some approximations, certainly if one is to include extra contributing factors such as hydrodynamics. 
+
+## Atomic theory recap
+
+Hydrogenic ions have $E = 13.6 \frac{Z^2}{n^2} eV$
+Multi electron ions
+- shielding reduces effect of the nucleus
+- Racah algebra
+- Slater determinants
+
+## Atomic Kinetics
+Ionization cross-sections are calculated from the underlying atomic physics, and we must also include recombination and de-excitation.
+Detailed balance - find the reverse rate from ionizations rates
+- collisions
+- in LTE $n_a R_{ab} = n_b R_{ba}$ for steady state
+- $n_b = n_a \frac{g_b}{g_a}e^{-E/kT}$ in Boltzmann statistics
+- $R_{ba} = \frac{g_a}{g_b}e^{Z/kT} R_{ab}$
+In LTE there is a Planck distribution for the photons so $R_{ab}=\sigma(E)F(E)$ so $R_{ba} = \sigma(E) \frac{g_a}{g_b}(E^2 + F(E))$
+
+In local thermal equilibrium (LTE), populations are given by Saha-Boltzmann statistics. There is a plasma of temperature T in a radiation field.
+In non-LTE one must solve the rate equations.
+
+The simplest LTE model is a Thomas-Fermi with cold electrons. This is a simplified form of density functional theory (DFT) where all states are calculated in terms of electron density.
+
+Average atom model - split by quantum number
+non-LTE and can be used to calculate emission and opacity. 
+Atoms and ions have energies composed of both kinetic and electronic energies $\epsilon_i = \epsilon_k + \epsilon_l$ and a density of states made of the product of the electron and kinetic states $g_i = g_k g_l$.
+The total partition function 
+
+$$
+\begin{align}
+Q &= \sum_i g_i \exp(-\epsilon_i/k_b T)\\ 
+&= \sum_k\sum_l g_k g_l \exp(-\epsilon_k/k_b T)\exp(-\epsilon_l/k_b T)\\
+&= [\sum_k g_k \exp(-\epsilon_k/k_b T)] [\sum_l g_l \exp(-\epsilon_l/k_b T)]\\
+&= Q_{trans} Q_{electron}
+$$
+
+In a 'square well' potential $\lambda = 2 l /n$ and $p = h/\lambda$ and $\epsilon_n = \frac{n^2 h^2}{8m l^2}$
+$$
+Q_{trans} = \sum_{n=1}^\infinity \exp (-\frac{n^2 h^2}{8m l^2 k_b T}) \approx \int_0^\infinity \exp (-\frac{n^2 h^2}{8m l^2 k_b T}) dn 
+$$
+A change of variables and application of the solution to a Gaussian integral yields $Q_{trans} = (\frac{2\pi mk_b T}{h^2})^{3/2} V$, where V is the volume of the square well.
+
+For equilibrium, a state where ionization and recombination happen at the same rate, there is a species *X*, such that $X^{m+1} \rightleftharpoons X^m + e^-$
+
+State $m+1$ 
+
+$$
+\frac{n_{m+1 n_e}}{n_m} = \frac{Q_{m+1} Q_e}{Q_m} = \frac{Q^{trans}_{m+1}Q^{elec}_{m+1} Q^{trans}_e}{Q^{trans}_m Q^{elec}_m}
+$$
+ incorporating our expression for the square well partition function $Q^{trans}_{m+1} \approx Q^{trans}_{m}$
+
+$$
+\frac{n_{m+1 n_e}}{n_m} = 2(\frac{2\pi mk_b T}{h^2})^{3/2} \frac{Q^{elec}_{m+1}}{Q^{elec}_m}
+$$
+Where an extra factor of 2 has been added to account for spin-degeneracy.
+
+The partition function in terms of *l* and *m*, the excitation and ionization states respectively.
+$$
+Q^{elec}_m = \sum_l g_{lm} e^{-\epsilon_{lm}/k_b T}
+$$
+We split off the ground state
+$$
+Q^{elec}_m = e^{-\epsilon_{1m}/k_b T}\sum_l g_{lm} e^{-(\epsilon_{lm}-\epsilon_{1m})/k_b T}
+$$
+
+$$
+\frac{n_{m+1 n_e}}{n_m} = 2(\frac{2\pi mk_b T}{h^2})^{3/2} \frac{Q^{elec}_{m+1}}{Q^{elec}_m}\frac{e^{-\epsilon_{1m+1}/k_bT}}{e^{-\epsilon_{1m}/k_bT}}
+$$
+
+We can now define the ionization energy for the transition from m to m+1 $I$  
+
+
+The Saha equation. 
+
+
+$$
+Q(T) = \sum_{n=1}^N 2n^2 \exp(-Z^2 I/k_bT (1- 1/n^2))
+$$
