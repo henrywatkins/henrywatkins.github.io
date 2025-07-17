@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Henry Watkins">
+<meta name="dcterms.date" content="2025-06-23">
+<meta name="description" content="Gluon emission amplitudes in the soft collinear limit">
+
+<title>Gluons in colliders – Henry Watkins</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-dae3192f81785cf0e6fe7ca13257d296.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4KRLE15B5S"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Henry Watkins</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../book/index.html"> 
+<span class="menu-text">Plasma Book</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Code Notes</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-code-notes">    
+        <li>
+    <a class="dropdown-item" href="../../code_notes/python-notes.html">
+ <span class="dropdown-text">Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/bash-notes.html">
+ <span class="dropdown-text">Command Line</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/git-notes.html">
+ <span class="dropdown-text">Git</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/sql-notes.html">
+ <span class="dropdown-text">SQL</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/cython-notes.html">
+ <span class="dropdown-text">Cython</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/docker-notes.html">
+ <span class="dropdown-text">Docker</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/rust-notes.html">
+ <span class="dropdown-text">Rust</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Gluons in colliders</h1>
+                  <div>
+        <div class="description">
+          Gluon emission amplitudes in the soft collinear limit
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">physics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Henry Watkins </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 23, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  </ul></li>
+  <li><a href="#comparison-with-qed" id="toc-comparison-with-qed" class="nav-link" data-scroll-target="#comparison-with-qed">Comparison with QED</a>
+  <ul class="collapse">
+  <li><a href="#one-photon-emission" id="toc-one-photon-emission" class="nav-link" data-scroll-target="#one-photon-emission">One Photon Emission</a></li>
+  <li><a href="#two-photon-emission" id="toc-two-photon-emission" class="nav-link" data-scroll-target="#two-photon-emission">Two Photon Emission</a></li>
+  <li><a href="#sec-coherence" id="toc-sec-coherence" class="nav-link" data-scroll-target="#sec-coherence">Coherence</a></li>
+  </ul></li>
+  <li><a href="#qcd" id="toc-qcd" class="nav-link" data-scroll-target="#qcd">QCD</a>
+  <ul class="collapse">
+  <li><a href="#one-gluon-emission" id="toc-one-gluon-emission" class="nav-link" data-scroll-target="#one-gluon-emission">One Gluon Emission</a></li>
+  <li><a href="#two-gluon-emission" id="toc-two-gluon-emission" class="nav-link" data-scroll-target="#two-gluon-emission">Two Gluon Emission</a></li>
+  </ul></li>
+  <li><a href="#sec-ordering" id="toc-sec-ordering" class="nav-link" data-scroll-target="#sec-ordering">Angular Ordering</a></li>
+  <li><a href="#n-gluon-emission" id="toc-n-gluon-emission" class="nav-link" data-scroll-target="#n-gluon-emission">N Gluon Emission</a></li>
+  <li><a href="#the-running-of-the-strong-coupling" id="toc-the-running-of-the-strong-coupling" class="nav-link" data-scroll-target="#the-running-of-the-strong-coupling">The Running of the Strong Coupling</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>Particle colliders investigate the fundamental structure of matter using collisions of particles at high energies. These collisions produce jets of particles that spray out into the detector, and the structure of these jets is determined by the interactions of the particles involved. The physics of jets and their production is of particular importance in hadron colliders like the Large Hadron Collider (LHC) at CERN, where protons are collided at very high energies.</p>
+<p>This post will cover an advanced treatment of the field theory for understanding these collisions, where we calculate the cross-section for the collision and its angular profile. Because the LHC collides protons, which are made of quarks and gluons, the strong force mediates the interaction; we must therefore use quantum chromodynamics (QCD) to describe the interactions.</p>
+<p>This post is a write-up of some notes of quantum chromodynamics I made some time ago, but will put up now. The core Phenomenology. Phenomenology is the study of the interactions of particles and their decays, with a focus on drawing out measurable and experimentally-relevant results. In this case we will be looking at the decay of a photon into a quark-antiquark pair and the subsequent emission of gluons from the quarks. In the end we will find the matrix elements for these processes and to study the angular ordering that results from the collinear limit. It will be very mathematical; the aim is to show some calculations as is. These derive from quantum field theory, gauge theories and the standard model of particle physics. The results are useful for understanding the structure of jets in hadron colliders like the LHC and phenomena like the running of the strong coupling constant.</p>
+<p>For a clear introduction to quantum field theory and the QCD requirred for this post, I recommend the following books. The standard reference for quantum field theory is <span class="citation" data-cites="peskin2018introduction">Peskin (<a href="#ref-peskin2018introduction" role="doc-biblioref">2018</a>)</span>, but I also recommend <span class="citation" data-cites="thomson2013modern">Thomson (<a href="#ref-thomson2013modern" role="doc-biblioref">2013</a>)</span> as an accessible source for particle physics in general. For QCD in particular, the lecture notes by <span class="citation" data-cites="mangano1999introduction">Mangano (<a href="#ref-mangano1999introduction" role="doc-biblioref">1999</a>)</span> and <span class="citation" data-cites="skands2013introduction">Skands (<a href="#ref-skands2013introduction" role="doc-biblioref">2013</a>)</span> are excellent resources. For extra information about the running of the strong coupling constant and quark confinement, consider these notes by <span class="citation" data-cites="Deur_2016">Deur, Brodsky, and Téramond (<a href="#ref-Deur_2016" role="doc-biblioref">2016</a>)</span>.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>The aim is post is to study the soft emissions of photons and gluons from a hard photon decay to a particle/antiparticle pair. I will derive the matrix elements (the central force-dependent component of the scattering cross-section) for such processes with a focus on the correlated emission of gluons and the application of the collinear limit. From this I will also extract the resulting angular ordering and compare gluon emissions to photon emissions. Finally we will look at the running of the strong coupling constant apparent in the results.</p>
+<p>In the decay of a Z boson or a photon into a quark/antiquark pair, it is possible for gluons to be emitted from the quarks, a process that contributes to hadronization and jet structure. In the limit where these gluons are soft (low energy) and collinear (emitted at a very small angle relative to another particle) the matrix elements for these interactions simplify in an interesting way. First I will consider the decay of a photon into an electron-positron pair when we look at the simpler case of photon emissions. Then we shall look at the decay into a quark-antiquark pair from which gluon emissions can be studied. The decays will be of the form in <a href="#fig-decay" class="quarto-xref">Figure&nbsp;1</a> but for brevity we shall re-write the diagram in the ‘decay product form’ illustrated in <a href="#fig-productform" class="quarto-xref">Figure&nbsp;2</a>.</p>
+<div id="fig-decay" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-decay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="decay.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-decay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The decay diagram, the products are <span class="math inline">\(e^-e^+\)</span> in section 2 and <span class="math inline">\(q\bar{q}\)</span> in section 3
+</figcaption>
+</figure>
+</div>
+<div id="fig-productform" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-productform-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="productform.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-productform-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: The decay product form
+</figcaption>
+</figure>
+</div>
+<section id="assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
+<p>We start with certain assumptions that greatly simplify the calculations and enable us to produce much simpler expressions for the matrix elements.These are:</p>
+<ol type="1">
+<li>Softness of the emitted gluons with respect to the quarks. This means that for gluon 4-momentum k and quark/antiquark 4-momenta <span class="math inline">\(P_1, P_2\)</span>; <span class="math inline">\(k&lt;&lt;P_1,P_2\)</span> and we can neglect any terms quadratic in k.</li>
+<li>Massless quarks. The momenta involved in the interaction are such that the masses are negligible and can be neglected. This assumption also allows us to simplify our calculations further by using the Dirac equations <span class="math inline">\(\bar{u}(p_1)\not{p_1}=0, \not{p_2}v(p_2)=0\)</span></li>
+<li>Collinearity. The gluon momenta are at small angles from the quark momenta and the decay products are at small angles to each other.</li>
+</ol>
+<p>Note the use ‘dashed’ notation for 4-momenta, e.g.&nbsp;<span class="math inline">\(p_1\)</span> is the 4-momentum of the first fermion in the decay and <span class="math inline">\(\not{p_1}=\gamma^\mu p_{1\mu}\)</span> is the Dirac operator acting on that momentum. The Dirac spinors <span class="math inline">\(u(p)\)</span> and <span class="math inline">\(v(p)\)</span> are used to represent fermions and antifermions respectively.</p>
+</section>
+</section>
+<section id="comparison-with-qed" class="level1">
+<h1>Comparison with QED</h1>
+<p>In a photon decay to lepton/antilepton pair we can see radiative corrections with photons being emitted from the leptons. This situation will be very similar to our gluon diagrams with some important differences. Since QCD is a non-abelian gauge theory the gluons have colour charge and can couple to other gluons; photons being chargeless cannot couple to other photons and so all photon emissons are <em>independent</em> whereas we can have <em>correlated</em> gluon emissions (where we have triple or higher gluon verticies in our diagram).</p>
+<div id="fig-ptoe" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ptoe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ptoe.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ptoe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The Feynman diagram for a photon decay to electron-positron pair with no emission. The photon must have sufficient energy of at least twice the rest mass of the electron to decay in this way.
+</figcaption>
+</figure>
+</div>
+<div id="fig-electronnophoton" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-electronnophoton-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="electronnophoton.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-electronnophoton-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: In decay product form. This form changes the rest frame of the diagram to that of the decay products. The decay point lies in the centre X, and the decay products are placed on a line.
+</figcaption>
+</figure>
+</div>
+<p>The $ q {q}$ decay with no photon emission shown in <a href="#fig-ptoe" class="quarto-xref">Figure&nbsp;3</a> is:</p>
+<p><span id="eq-electronnophoton"><span class="math display">\[
+M_{e^+e^-}=\epsilon_\mu (q) \bar{u}(p_1)ie\gamma^\mu v(p_2)
+\tag{1}\]</span></span></p>
+<p>Where the momenta satisfy <span class="math inline">\(q=p_1+p_2\)</span>. Henceforth the parent particle will have momentum <span class="math inline">\(q\)</span>, the daughter fermions <span class="math inline">\(p_1,p_2\)</span> and any bosons will have <span class="math inline">\(k_i\)</span>. This matrix element is made up of the polarization vector <span class="math inline">\(\epsilon_\mu (q)\)</span> of the parent particle, the Dirac spinors <span class="math inline">\(\bar{u}(p_1),v(p_2)\)</span> of the daughter fermions and the vertex factor <span class="math inline">\(ie\gamma^\mu\)</span> where <span class="math inline">\(e\)</span> is the electric charge. The matrix element is Lorentz invariant and can is used to calculate the cross-section for this decay.</p>
+<section id="one-photon-emission" class="level2">
+<h2 class="anchored" data-anchor-id="one-photon-emission">One Photon Emission</h2>
+<p>With one soft photon emission <span class="math inline">\(\gamma \rightarrow q \bar{q}+\gamma\)</span> we have two diagrams. From assumption (2) we have neglected the masses in the propagators. The diagrams for this decay follow the form in <a href="#fig-electrononephoton" class="quarto-xref">Figure&nbsp;5</a></p>
+<div id="fig-electrononephoton" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-electrononephoton-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="electrononephoton.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-electrononephoton-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: The decay with one photon emission. The original photon has decayed into a electron-positron pair, one of which then proceeds to emit a low-energy soft photon.
+</figcaption>
+</figure>
+</div>
+<p><span class="math display">\[
+M_{e^+e^-\gamma}=\epsilon_\mu (q)\bar{u}(p_1)ie\gamma^\mu\left[ -i\frac{\not{p_2}+\not{k}}{(p_2+k)^2}\epsilon_\nu (k) ie\gamma^\nu + \epsilon_\nu (k) ie\gamma^\nu i\frac{\not{p_1}+\not{k}}{(p_1+k)^2}\right]v(p_2)
+\]</span></p>
+<p>This expression is equivalent to the element in <a href="#eq-electronnophoton" class="quarto-xref">Equation&nbsp;1</a>, but with an additional expression (in square brackets) that represents the contrubtion from the photon emission. When we apply assumption (1) such that <span class="math inline">\((p_2+k)^2=p_2^2+k^2+2p_2.k=2p_2.k\)</span> and the general expression <span class="math inline">\(\not{p}\not{k}+\not{k}\not{p}=2p.k\)</span> and remembering that <span class="math inline">\(\epsilon_\mu \gamma^\mu=\not{\epsilon}\)</span> and finally using the Dirac equations specified in assumption (2) we can then find:</p>
+<p><span class="math display">\[
+M_{e^+e^-\gamma}=\epsilon_\mu (q)\bar{u}(p_1)ie^2 \gamma^\mu v(p_2)\left[\frac{p_1.\epsilon}{p_1.k}- \frac{p_2.\epsilon}{p_2.k}\right]
+\]</span></p>
+<p>and when we compare with <a href="#eq-electronnophoton" class="quarto-xref">Equation&nbsp;1</a> we can then write:</p>
+<p><span class="math display">\[
+M_{e^+e^-\gamma}=M_{e^+e^-}e\left[\frac{p_1.\epsilon}{p_1.k}- \frac{p_2.\epsilon}{p_2.k}\right]
+\]</span></p>
+<p><span class="math display">\[
+\begin{align*}
+\vert M_{e^+e^-\gamma}\vert^2 &amp;=e^2\vert M_{e^+e^-}\vert^2 \sum\limits_{i} \epsilon_\mu^i \epsilon_\nu^{* i} \left[\frac{p_1^\mu}{p_1.k}- \frac{p_2^\mu}{p_2.k}\right]\left[\frac{p_1^\nu}{p_1.k}- \frac{p_2^\nu}{p_2.k}\right]\\
+&amp;=e^2\vert M_{e^+e^-}\vert^2 \frac{2p_1.p_2}{p_1.k p_2.k}
+$\end{align*}
+\]</span></p>
+<p><span id="eq-matrixelement"><span class="math display">\[
+\vert M_{e^+e^-\gamma}\vert^2=e^2\vert M_{e^+e^-}\vert^2 \frac{2p_1.p_2}{p_1.k p_2.k}
+\tag{2}\]</span></span></p>
+<p>Where we have used the sum over photon polarizations <span class="math inline">\(\sum\limits_{i} \epsilon_\mu^i \epsilon_\nu^{* i}=-g_{\mu \nu}\)</span> and we neglect terms like <span class="math inline">\(p_1.p_1\)</span> or <span class="math inline">\(p_2.p_2\)</span>. This is the squared matrix element for the decay of a photon into an electron-positron pair with one soft photon emission. This expression can be directly incorporated into the cross-section for the decay and is used to calculate the angular distribution of the emitted photon in a collider.</p>
+</section>
+<section id="two-photon-emission" class="level2">
+<h2 class="anchored" data-anchor-id="two-photon-emission">Two Photon Emission</h2>
+<p>Two photon emission proceeds in the say way as with one photon. We have 4 possible diagrams this time and so four terms in the amplitude. These correspond to the two photons being emitted from the electron or the positron, and the order of emission. The first two diagrams are where the first photon is emitted from the electron and the second from the positron (<a href="#fig-electrontwophoton1" class="quarto-xref">Figure&nbsp;6</a>) and vice versa. The second two diagrams are where both photons are emitted from the positron (<a href="#fig-electrontwophoton2" class="quarto-xref">Figure&nbsp;7</a>) or vice versa. The momenta in this case satisfy <span class="math inline">\(q=p_1+p_2+k_a+k_b\)</span> with <span class="math inline">\(k_a,k_b&lt;&lt;p_1,p_2\)</span>. In the two photon emission the <em>softer photon is always emitted second</em>, as it cannot be emitted from a more off-shell line. This also holds true for gluons and shall be used later. The first diagram component to the amplitude is:</p>
+<div id="fig-electrontwophoton1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-electrontwophoton1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="electrontwophoton1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-electrontwophoton1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: The first two photon emission diagram. There are three vertex factors for this diagram, corresponding to the initial photon decay, followed by the subsequent photon emissions respectively.
+</figcaption>
+</figure>
+</div>
+<p><span class="math display">\[
+\begin{align*}
+M_{e^+e^-\gamma\gamma} &amp;=\epsilon_\mu (q)\bar{u}(p_1)ie \gamma^\nu \epsilon_\nu(k_a) i\frac{(\not{p_1}+\not{k_a})}{(p_1+k_a)^2} ie\gamma^\mu(-i)\frac{(\not{p_2}+\not{k_b})}{(p_2+k_b)^2} ie\gamma^\rho \epsilon_\rho(k_b)v(p_2)\\
+&amp;=-\epsilon_\mu (q)\bar{u}(p_1)ie \gamma^\mu \frac{p_1.\epsilon_a}{p_1.k_a}\frac{p_2.\epsilon_b}{p_2.k_b}v(p_2)
+\end{align*}
+\]</span></p>
+<p>For the second diagram we can simply do <span class="math inline">\(p_1 \Leftrightarrow p_2\)</span> so that we get</p>
+<p><span class="math display">\[
+\begin{align*}
+M_{e^+e^-\gamma\gamma}=-\epsilon_\mu (q)\bar{u}(p_1)ie \gamma^\mu \frac{p_2.\epsilon_a}{p_2.k_a}\frac{p_1.\epsilon_b}{p_1.k_b}v(p_2)
+\end{align*}
+\]</span></p>
+<div id="fig-electrontwophoton2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-electrontwophoton2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="electrontwophoton2.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-electrontwophoton2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: The diagram for the matrix element for two photon emission from the positron.
+</figcaption>
+</figure>
+</div>
+<p>For the other two diagrams:</p>
+<p><span class="math display">\[
+\begin{align*}
+M_{e^+e^-\gamma\gamma}&amp;=\epsilon_\mu (q)\bar{u}(p_1)ie \gamma^\mu (-i)\frac{(\not{p_2}+\not{k_a}+\not{k_b})}{(p_2+k_a+k_b)^2} ie\gamma^\nu \epsilon_\nu(k_a) (-i)\frac{(\not{p_2}+\not{k_b})}{(p_2+k_b)^2} ie\gamma^\rho \epsilon_\rho(k_b)v(p_2)\\
+&amp;=\epsilon_\mu (q)\bar{u}(p_1)ie \gamma^\mu \frac{p_2.\epsilon_a}{p_2.k_a}\frac{p_2.\epsilon_b}{p_2.k_b}v(p_2)
+\end{align*}
+\]</span></p>
+<p>And again reversing the quark momenta</p>
+<p><span class="math display">\[
+M_{e^+e^-\gamma\gamma}=\epsilon_\mu (q)\bar{u}(p_1)ie \gamma^\mu \frac{p_1.\epsilon_a}{p_1.k_a}\frac{p_1.\epsilon_b}{p_1.k_b}v(p_2)
+\]</span></p>
+<p>Collecting all these together we get</p>
+<p><span id="eq-twophoton"><span class="math display">\[
+\begin{align}
+M_{e^+e^-\gamma\gamma}&amp;=M_{e^+e^-}e^2\left[\frac{p_1.\epsilon_a}{p_1.k_a}\frac{p_1.\epsilon_b}{p_1.k_b}+\frac{p_2.\epsilon_a}{p_2.k_a}\frac{p_2.\epsilon_b}{p_2.k_b}-\frac{p_1.\epsilon_a}{p_1.k_a}\frac{p_2.\epsilon_b}{p_2.k_b}-\frac{p_2.\epsilon_a}{p_2.k_a}\frac{p_1.\epsilon_b}{p_1.k_b}\right]\\
+&amp;=M_{e^+e^-}e^2\left[\frac{p_1.\epsilon_a}{p_1.k_a}-\frac{p_2.\epsilon_a}{p_2.k_a}\right]\left[\frac{p_1.\epsilon_b}{p_1.k_b}-\frac{p_2.\epsilon_b}{p_2.k_b}\right]
+\end{align}
+\tag{3}\]</span></span></p>
+<p>When we square this with the methods used to obtain <a href="#eq-matrixelement" class="quarto-xref">Equation&nbsp;2</a> we arrive at</p>
+<p><span class="math display">\[
+\vert M_{e^+e^-\gamma}\vert^2=e^4\vert M_{e^+e^-}\vert^2 \frac{2p_1.p_2}{p_1.k_a p_2.k_a}\frac{2p_1.p_2}{p_1.k_b p_2.k_b}
+\]</span></p>
+<p>As we can see in <a href="#eq-twophoton" class="quarto-xref">Equation&nbsp;3</a> the number of terms in the matrix element is just the number of possible diagrams and the terms themselves are products of n factors like <span class="math inline">\(\frac{p.\epsilon}{p.k}\)</span> for n photons emitted. When we square the matrix element we find that for n emitted photons the squared matrix element is always of the form:</p>
+<p><span id="eq-twophoton2"><span class="math display">\[
+\vert M_{e^+e^- n\gamma}\vert^2=\vert M_{e^+e^-}\vert^2 \prod\limits_{i}^n W_i
+\tag{4}\]</span></span></p>
+<p>Where the <span class="math inline">\(W_i\)</span> are factors of the form <span class="math inline">\(\frac{p_i.\epsilon}{p_i.k}\)</span> for each emitted photon. This is a very useful result as it allows us to write the squared matrix element for any number of photons emitted from a fermion pair in terms of the original matrix element for the fermion pair decay. Where I define the W as</p>
+<p><span id="eq-wfactor"><span class="math display">\[
+W_1:=g^2\frac{2p_1.p_2}{p_1.k_i p_2.k_i}
+\tag{5}\]</span></span></p>
+<p>Expression <a href="#eq-twophoton2" class="quarto-xref">Equation&nbsp;4</a> will reappear when we look at gluon emissions.</p>
+</section>
+<section id="sec-coherence" class="level2">
+<h2 class="anchored" data-anchor-id="sec-coherence">Coherence</h2>
+<p>We now apply the collinearity assumption. This is that the the decay products (in the case of QED above it is an electron/positron pair) are at small angles and the emitted bosons are also at small angles. In the QED matrix element we have the W factor defined in <a href="#eq-wfactor" class="quarto-xref">Equation&nbsp;5</a> and if we remember that <span class="math inline">\(p.k=E_p E_k-E_p E_k cos\theta_{pk}\)</span>. Since in this limit and using natural units we write <span class="math inline">\(E=p\)</span>. This then implies that for the W factor we get.</p>
+<p><span id="eq-coherence"><span class="math display">\[
+g^2 \frac{2p_1.p_2}{p_1.k p_2.k}=\frac{g^2}{\omega^2_k}\frac{2(1-cos \theta_{12})}{(1-cos \theta_{1k})(1-cos \theta_{2k})}
+\tag{6}\]</span></span></p>
+<p>Since also <span class="math inline">\(E_k= \omega_k\)</span> in natural units. The angle <span class="math inline">\(\theta_{12}\)</span> is the angle between the two fermions, <span class="math inline">\(\theta_{1k}\)</span> is the angle between fermion 1 and the photon k. This notation shall be used for the rest of this post with the fermions as numbers and the bosons as latin letters. As we are using the collinear assumption, we can replace the cosine with the first couple of terms in its Taylor series expansion. and so <a href="#eq-coherence" class="quarto-xref">Equation&nbsp;6</a> then becomes:</p>
+<p><span id="eq-coherence2"><span class="math display">\[
+\frac{g^2}{\omega^2_k}\frac{2(1-cos \theta_{12})}{(1-cos \theta_{1k})(1-cos \theta_{2k})}\simeq \frac{4g^2}{\omega^2_k}\frac{\theta_{12}^2}{\theta_{1k}^2 \theta_{2k}^2}
+\tag{7}\]</span></span></p>
+<p>Here we now have two cases, one where <span class="math inline">\(\theta_{1k}\)</span> or <span class="math inline">\(\theta_{2k}&lt;&lt;\theta_{12}\)</span> i.e the boson is close in angle to one of the fermions in which case the expression above simplifies slightly, or we have <span class="math inline">\(\theta_{12}&lt;&lt;\theta_{1k}\simeq \theta_{2k}\)</span> where the emitted boson is far away in angle. This latter case is <em>coherence</em> and the photon radiation is suppressed as we do not see the charges of the fermion pair. This means that the former case is of importance to us but not the latter. So we can now write <a href="#eq-coherence2" class="quarto-xref">Equation&nbsp;7</a> as a sum of the two cases where the boson is emitted close to one or the other using a step function <span class="math inline">\(\Theta\)</span>.</p>
+<p><span id="eq-coherence3"><span class="math display">\[
+\frac{4g^2}{\omega^2_k}\frac{\theta_{12}^2}{\theta_{1k}^2 \theta_{2k}^2}\simeq \frac{4g^2}{\omega^2_k}\frac{1}{\theta_{1k}^2} \Theta(\theta_{12}-\theta_{1k})+\frac{4g^2}{\omega^2_k}\frac{1}{\theta_{2k}^2} \Theta(\theta_{12}-\theta_{2k})
+\tag{8}\]</span></span></p>
+<p>This is angular ordering and shall be applied to QCD.</p>
+</section>
+</section>
+<section id="qcd" class="level1">
+<h1>QCD</h1>
+<p>The key distrinction between QCD and QED is that QCD is a non-abelian gauge theory, meaning that the gluons carry colour charge and can interact with each other. This leads to the possibility of correlated emissions, where the emission of one gluon can affect the emission of another, leading to gluon cascades and the formation of jets.</p>
+<section id="one-gluon-emission" class="level2">
+<h2 class="anchored" data-anchor-id="one-gluon-emission">One Gluon Emission</h2>
+<p>One gluon emission proceeds like that of the one photon emission, since with only one boson we don’t get any correlated emission. Differences however arise from the gluon vertex factor and the Gell-Mann matrix (<span class="math inline">\(t^a\)</span>) it contains. We consider the decay <span class="math inline">\(\gamma\rightarrow q \bar{q}+g\)</span>. With diagrams of the form in <a href="#fig-onegluon" class="quarto-xref">Figure&nbsp;8</a>.</p>
+<div id="fig-onegluon" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-onegluon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="onegluon.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-onegluon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: The decay to a quark-antiquark pair with a single gluon emission off the anitquark
+</figcaption>
+</figure>
+</div>
+<p>In this case the matrix element is</p>
+<p><span class="math display">\[
+\begin{align}
+M_{q\bar{q}g}&amp;=\epsilon_\mu (q)\bar{u}(p_1)ie g_s \gamma^\mu v(p_2)t^a\left[\frac{p_1.\epsilon}{p_1.k}- \frac{p_2.\epsilon}{p_2.k}\right]\\
+&amp;=M_{q\bar{q}}g_s t^a\left[\frac{p_1.\epsilon}{p_1.k}- \frac{p_2.\epsilon}{p_2.k}\right]
+\end{align}  
+\]</span></p>
+<p>When we square the element we must use the sum <span class="math inline">\(\sum\limits_a t^a t^a=C_f=4/3\)</span>, which comes from the trace of the Gell-Mann matrices. This gives us the squared matrix element for one gluon emission:</p>
+<p><span class="math display">\[
+\vert M_{q\bar{q}g}\vert^2=C_fg_s^2\vert M_{q\bar{q}}\vert^2 \frac{2p_1.p_2}{p_1.k p_2.k}
+\]</span></p>
+<p>We can see that this differs from the QED case only by the constants <span class="math inline">\(e^2\Rightarrow C_f g_s^2\)</span></p>
+</section>
+<section id="two-gluon-emission" class="level2">
+<h2 class="anchored" data-anchor-id="two-gluon-emission">Two Gluon Emission</h2>
+<p>For two gluon emission we have six diagrams and the prospect of correlated emission. This effect leads to the matrix element for the gluon case changing drastically from the much simpler two photon emission in <a href="#eq-twophoton" class="quarto-xref">Equation&nbsp;3</a> . Four of our six diagrams are independent emission diagrams and so are the same as the four diagrams of the two photon emission with the addition of Gell-Mann matrices from the quark-gluon vertex. So without the correlated emission our matrix element is:</p>
+<p><span class="math display">\[
+M_{q\bar{q}gg}=M_{q\bar{q}}g_s^2\left[t^bt^a\frac{p_1.\epsilon_a}{p_1.k_a}\frac{p_1.\epsilon_b}{p_1.k_b}+t^at^b\frac{p_2.\epsilon_a}{p_2.k_a}\frac{p_2.\epsilon_b}{p_2.k_b}-t^at^b\frac{p_1.\epsilon_a}{p_1.k_a}\frac{p_2.\epsilon_b}{p_2.k_b}-t^bt^a\frac{p_2.\epsilon_a}{p_2.k_a}\frac{p_1.\epsilon_b}{p_1.k_b}\right]
+\]</span></p>
+<div id="fig-twogluon" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-twogluon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="twogluon1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-twogluon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: The independent emission diagram for two gluons. There is a corresponding diagram for dual independent emission from the quark.
+</figcaption>
+</figure>
+</div>
+<div id="fig-twogluon2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-twogluon2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="twogluon2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-twogluon2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: One of the two correlated emission diagrams. The gluon-gluon coupling sees the triple-gluon vertex appear in this decay.
+</figcaption>
+</figure>
+</div>
+<p>The last two matrix elements come from the correlated emission of two gluons where we have a triple gluon vertex, illustrated in <a href="#fig-twogluon2" class="quarto-xref">Figure&nbsp;10</a>. Note we also make use of the structure constant <span class="math inline">\(f^{abc}\)</span> of the Gell-Mann matrices, which is defined by the commutation relation <span class="math inline">\([t^a,t^b]= i f^{abc} t^c\)</span>. The matrix element for these two diagrams is:</p>
+<p><span class="math display">\[
+\begin{align*}
+M_{q\bar{q}gg}=\epsilon_\mu(q)\bar{u}(p_1)ie\gamma^\mu (-i)\frac{(\not{p_2}+\not{k_a}+\not{k_b})}{(p_2+k_a+k_b)^2} i g_s\gamma^\nu t^d\frac{(-ig_{\nu\rho}\delta^{dc})}{(k_a+k_b)^2}(-1)g_s f^{abc}\\\left[g^{\rho\beta}(2k_a+k_b)^\gamma +g^{\beta\gamma}(-k_a+k_b)^\rho +g^{\gamma\rho} (-2k_b-k_a)^\beta \right]\epsilon_\beta^*(k_a) \epsilon_\gamma^* (k_b)v(p_2)
+\end{align*}
+\]</span></p>
+<p>We apply the ‘second gluon is softer’ condition so that we can ignore <span class="math inline">\(k_b\)</span> in the propagator and applying the other assumptions we get</p>
+<p><span class="math display">\[
+\begin{align*}
+M_{q\bar{q}gg}&amp;=M_{q\bar{q}} i f^{abc}g_s^2 t^c \frac{(\not{p_2}+\not{k_a})}{2p_2.k_a}\frac{\gamma^\nu g_{\nu\rho}}{2k_a.k_b}\\
+&amp;\left[\epsilon^{\rho*}(k_a)\epsilon_\gamma^* (k_b)(2k_a+k_b)^\gamma +\epsilon_a.\epsilon_b(-k_a+k_b)^\rho +\epsilon_\beta^*(k_a) \epsilon^{\rho*} (k_b)(-2k_b-k_a)^\beta \right]\\
+&amp;=M_{q\bar{q}} i f^{abc}g_s^2 t^c \frac{(\not{p_2}+\not{k_a})}{2p_2.k_a}\frac{1}{2k_a.k_b}\left[\not{\epsilon_a}\epsilon_\gamma^* (k_b)(2k_a+k_b)^\gamma +\not{\epsilon_b}\epsilon_\beta^*(k_a)(-2k_b-k_a)^\beta \right]\\
+&amp;=M_{q\bar{q}} i f^{abc}g_s^2 t^c \frac{p_2.\epsilon_a}{p_2.k_a}\frac{k_a.\epsilon_b}{k_a.k_b}
+\end{align*}
+\]</span></p>
+<p>We have ignored the term involving <span class="math inline">\(\epsilon_a.\epsilon_b\)</span> since it becomes like <span class="math inline">\(\not{k}\)</span> which we have neglected. The last component to the matrix element is found by the substitution <span class="math inline">\(p_1\Leftrightarrow p_2\)</span> into the equation above. When we include all the components we find the total matrix element is</p>
+<p><span id="eq-twogluonelement"><span class="math display">\[
+M_{q\bar{q}gg}=M_{q\bar{q}}g_s^2\left[\frac{p_1.\epsilon_a}{p_1.k_a}-\frac{p_2.\epsilon_a}{p_2.k_a}\right]\left[t^bt^a \frac{p_1.\epsilon_b}{p_1.k_b}-t^a t^b\frac{p_2.\epsilon_b}{p_2.k_b}-i f^{abc}t^c \frac{k_a.\epsilon_b}{k_a.k_b} \right]
+\tag{9}\]</span></span></p>
+<p>To square the element, we must sum over the different colour states of the gluons</p>
+<p><span class="math display">\[
+\begin{align*}
+\vert M_{q\bar{q}gg}\vert^2&amp;=g_s^4\vert M_{q\bar{q}}\vert^2 \frac{2p_1.p_2}{p_1.k_a p_2.k_a}[\sum\limits_{col}\frac{2p_1.p_2}{p_1.k_b p_2.k_b}t^a t^b t^a t^b +\\
+&amp;\frac{p_2.k_a}{k_a.k_b p_2.k_b} i f^{abc} (t^c t^b t^a-t^a t^b t^c)-\frac{p_1.k_a}{p_1.k_b k_a.k_b}if^{abc} (t^c t^a t^b - t^b t^a t^c)]\\
+&amp;=g_s^4\vert M_{q\bar{q}}\vert^2[\frac{W_a}{N_c} 2 W_b Tr(t^a t^b t^a t^b)+\frac{p_2.k_a}{k_a.k_b p_2.k_b} i f^{abc} Tr(t^c t^b t^a-t^a t^b t^c)\\
+&amp;-\frac{p_1.k_a}{p_1.k_b k_a.k_b}if^{abc} Tr(t^c t^a t^b - t^b t^a t^c)]
+\end{align*}
+\]</span></p>
+<p>I have used the W defined in <a href="#eq-wfactor" class="quarto-xref">Equation&nbsp;5</a> and now we can use some relations to simplify this result</p>
+<p><span class="math display">\[
+\begin{align*}
+t^a t^b t^a&amp;=-\frac{t^b}{2N_c}\Rightarrow Tr(t^a t^b t^a t^b)=-\frac{Tr(t^b t^b)}{2N_c}=-C_f/2\\
+&amp;[t^a,t^b]=i f^{abc} t^c\Rightarrow i f^{abc} Tr(t^c t^b t^a-t^a t^b t^c)=f^{abc}f^{abd} Tr(t^c t^d)=C_a Tr(t^c t^c)=C_a^2 C_f
+\end{align*}
+\]</span></p>
+<p><span class="math inline">\(C_a=N_c\)</span> and the above can simplify the squared amplitude to</p>
+<p><span id="eq-twogluonmat"><span class="math display">\[
+\vert M_{q\bar{q}gg}\vert^2=g_s^4\vert M_{q\bar{q}}\vert^2  W_a C_f \left[N_c\frac{p_2.k_a}{k_a.k_b p_2.k_b}+N_c \frac{p_1.k_a}{k_a.k_b p_1.k_b}- \frac{1}{N_c}W_b\right]
+\tag{10}\]</span></span></p>
+</section>
+</section>
+<section id="sec-ordering" class="level1">
+<h1>Angular Ordering</h1>
+<p>We now wish to apply the result of the collinear limit outlined in <a href="#sec-coherence" class="quarto-xref">Section&nbsp;2.3</a> onto our gluon emissions. The one gluon emission follows a very similar form to that of <a href="#eq-coherence3" class="quarto-xref">Equation&nbsp;8</a> except that it has the factor <span class="math inline">\(C_f\)</span>. We shall proceed by first considering the two gluon emission squared matrix element in <a href="#eq-twogluonmat" class="quarto-xref">Equation&nbsp;10</a> but the first part will be absorbed into a one gluon matrix element:</p>
+<p><span class="math display">\[
+\vert M_{q\bar{q}gg}\vert^2=g_s^2\vert M_{q\bar{q}g}\vert^2 \left[N_c\frac{p_2.k_a}{k_a.k_b p_2.k_b}+N_c \frac{p_1.k_a}{k_a.k_b p_1.k_b}- \frac{1}{N_c}W_b\right]
+\]</span></p>
+<p>Now using the same method in <a href="#eq-coherence" class="quarto-xref">Equation&nbsp;6</a> and <a href="#eq-coherence2" class="quarto-xref">Equation&nbsp;7</a> the three factors in the brackets are rewritten to become:</p>
+<p><span class="math display">\[
+\vert M_{q\bar{q}gg}\vert^2\simeq g_s^2\vert M_{q\bar{q}g}\vert^2 \frac{N_c}{\omega^2_b}\left[\frac{2 \theta^2_{2a}}{\theta^2_{ab}\theta^2_{2b}} +\frac{2\theta^2_{1a}}{\theta^2_{ab}\theta^2_{1b}}-\frac{1}{4 N_c^2}\frac{\theta^2_{12}}{\theta^2_{1b}\theta^2_{2b}}\right]
+\]</span></p>
+<p>If we include the first gluon contribution we get:</p>
+<p><span class="math display">\[
+\vert M_{q\bar{q}gg}\vert^2\simeq g_s^4 C_f \vert M_{q\bar{q}}\vert^2 \frac{4}{\omega^2_a}\frac{N_c}{\omega^2_b}\frac{\theta^2_{12}}{\theta^2_{1a}\theta^2_{2a}} \left[\frac{2 \theta^2_{2a}}{\theta^2_{ab}\theta^2_{2b}} +\frac{2\theta^2_{1a}}{\theta^2_{ab}\theta^2_{1b}}-\frac{1}{4 N_c^2}\frac{\theta^2_{12}}{\theta^2_{1b}\theta^2_{2b}}\right]
+\]</span></p>
+<p>We now consider the different ordering cases. There are eight cases for two gluon emission. We first expect the single gluon part (inside <span class="math inline">\(\vert M_{q\bar{q}g}\vert^2\)</span>) to undergo the ordering procedure like the photon in <a href="#eq-coherence3" class="quarto-xref">Equation&nbsp;8</a>. This means that we can write:</p>
+<p><span id="eq-ordering"><span class="math display">\[
+\begin{align}
+\vert M_{q\bar{q}gg}\vert^2\simeq g_s^4 C_f \vert M_{q\bar{q}}\vert^2 \frac{N_c}{\omega^2_b}\frac{4}{\omega^2_a}\left[\frac{1}{\theta_{1a}^2} \Theta(\theta_{12}-\theta_{1a})+\frac{1}{\theta_{2a}^2} \Theta(\theta_{12}-\theta_{2a})\right]\left[\frac{2 \theta^2_{2a}}{\theta^2_{ab}\theta^2_{2b}} +\frac{2\theta^2_{1a}}{\theta^2_{ab}\theta^2_{1b}}-\frac{1}{4 N_c^2}\frac{\theta^2_{12}}{\theta^2_{1b}\theta^2_{2b}}\right]
+\end{align}
+\tag{11}\]</span></span></p>
+<p>The part of the squared amplitude that corresponds to the second gluon undergoes the process in a more complicated manner since it has three terms whereas we only needed to consider one term in <a href="#eq-coherence3" class="quarto-xref">Equation&nbsp;8</a>.</p>
+<p>For the first gluon above and for the photons in <a href="#eq-coherence3" class="quarto-xref">Equation&nbsp;8</a> we made the assumption that the angle the photon/gluon makes with one fermion is much smaller than the other and so we can use the step function of the form in the first part in <a href="#eq-ordering" class="quarto-xref">Equation&nbsp;11</a>. When we try to apply the same constraint to the second gluon part it does not easily reduce in the same way. We might expect that each of the three terms in the last factor of <a href="#eq-ordering" class="quarto-xref">Equation&nbsp;11</a> would produce two step function terms as it has done for the single gluon factor that precedes it.</p>
+</section>
+<section id="n-gluon-emission" class="level1">
+<h1>N Gluon Emission</h1>
+<p>We have seen that in both QED and QCD for a matrix element of n diagrams (possible emission pathways) describing m independent emissions we have a sum of n products of m factors like <span class="math inline">\(\frac{p.\epsilon}{p.k}\)</span> when we include diagrams with correlated emission in QCD we will get terms like <span class="math inline">\(if^{abc}\frac{k.\epsilon}{k.k}\)</span> for each triple gluon vertex in our diagram.</p>
+<p>A general N-gluon result for the squared matrix element <span class="citation" data-cites="mangano1999introduction">(<a href="#ref-mangano1999introduction" role="doc-biblioref">Mangano 1999</a>)</span> is: <span class="math display">\[
+\vert M_{q\bar{q}ng}\vert^2\simeq\vert M_{q\bar{q}}\vert^2 \prod\limits^n_{i=1}\frac{4 g_s^2}{\omega^2_i}\frac{C_s \Theta(\omega_{i-1}-\omega_i)}{min(\theta_{qg},...,\theta_{gg})^2}
+\]</span></p>
+<p>However it can be seen that for a general N gluon squared amplitude there would be more than one term, and this expression cannot produce a sum of terms that is required. For a two gluon emission this expression results in:</p>
+<p><span class="math display">\[
+\vert M_{q\bar{q}gg}\vert^2\simeq\vert M_{q\bar{q}g}\vert^2 \frac{4g_s^2}{\omega_a^2}\frac{4g_s^2}{\omega_b^2}C^2_f\frac{\Theta(\theta_{12}-\theta_{k1})}{\theta_{k1}^2}\frac{\Theta(\theta_{12}-\theta_{k2})}{\theta_{k2}^2}
+\]</span></p>
+</section>
+<section id="the-running-of-the-strong-coupling" class="level1">
+<h1>The Running of the Strong Coupling</h1>
+<p>We can use these expressions to ask a question about the running of the strong coupling and the nature of the correlated emission. Does the correlated emission part of the two soft gluon matrix element look like a one gluon emission with a running coupling constant? We know that a triple gluon vertex in a diagram will always introduce a term like <span class="math inline">\(if^{abc}t^c \frac{k.\epsilon}{k.k}\)</span> into our matrix element. From the Gell-Mann matrix identity</p>
+<p><span class="math display">\[
+\left[t^a,t^b\right]=if^{abc}t^c
+\]</span></p>
+<p>We can always write this term as two products of the same factors we have with independent emission, albeit with the gluon momenta rather than the quark momenta. This means we can re-write the element for two gluon emissions in <a href="#eq-twogluonelement" class="quarto-xref">Equation&nbsp;9</a> as</p>
+<p><span class="math display">\[
+M_{q\bar{q}gg}=M_{q\bar{q}}g_s^2\left[\frac{p_1.\epsilon_a}{p_1.k_a}-\frac{p_2.\epsilon_a}{p_2.k_a}\right]\left[t^bt^a \frac{p_1.\epsilon_b}{p_1.k_b}-t^a t^b\frac{p_2.\epsilon_b}{p_2.k_b}-t^a t^b\frac{k_a.\epsilon_b}{k_a.k_b}+t^b t^a \frac{k_a.\epsilon_b}{k_a.k_b} \right]
+\]</span></p>
+<p>This looks like a matrix element of wholly independent emissions with a very soft gluon being emitted from the initial gluon line, which is what we expect. If we consider a situation where the gluons acted like photons and didn’t self-interact, they would have a squared matrix element like:</p>
+<p><span class="math display">\[
+\vert M_{q\bar{q}gg}\vert^2_{alt}=g_s^4\vert M_{q\bar{q}}\vert^2  C_f^2 W_a W_b
+\]</span></p>
+<p>and if we divide our actual two gluon emission squared matrix element by this we will the effect of the non-abelian nature of QCD.</p>
+<p><span class="math display">\[
+\frac{\vert M_{q\bar{q}gg}\vert^2}{\vert M_{q\bar{q}gg}\vert^2_{alt}}=\frac{N_c}{2 C_f}\left[\frac{p_2.k_a p_1 .k_b}{k_a .k_b p_1.p_2}+\frac{p_1.k_a p_2 .k_b}{k_a .k_b p_1.p_2}-\frac{1}{N_c^2}\right]
+\]</span></p>
+<p>If we apply the collinear assumption and use the approximations of <a href="#sec-ordering" class="quarto-xref">Section&nbsp;4</a> then this becomes:</p>
+<p><span class="math display">\[
+\frac{\vert M_{q\bar{q}gg}\vert^2}{\vert M_{q\bar{q}gg}\vert^2_{alt}}=\frac{N_c}{2C_f}\left[\frac{\theta^2_{2a}\theta^2_{1c}}{\theta^2_{ab}\theta^2_{12}}+\frac{\theta^2_{1a}\theta^2_{2b}}{\theta^2_{ab}\theta^2_{12}}-\frac{1}{N_c^2}\right]
+\]</span></p>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<p>In this report we have considered the decay of a photon into a quark-antiquark pair and the subsequent gluon emissions from the quarks. This illustrates a clear line from the simplest radiation processes we know to the complex patterns of particle jets recorded at modern colliders. We have seen that the matrix elements for these processes can be simplified by assuming that the gluons are soft and collinear with respect to the quarks. Because the emission probability grows when the photon is softer or more closely aligned with its parent, one soon sees that a whole chain of such emissions must be ordered in both energy and angle—each new photon fits inside a progressively narrower cone nested inside the last.</p>
+<p>We have also seen that the matrix elements for the gluon emissions can be written in a form that is similar to that of the photon emissions, with the addition of the Gell-Mann matrices and the running of the strong coupling constant. The basic factorisation still holds, but an important new feature emerges: whenever two gluons are radiated there is an interference term tied to the three‑gluon vertex, a purely non‑Abelian effect with no analogue in QED. This term embodies the idea of colour coherence. It says that wide‑angle soft gluons cannot tell which of the original quarks they came from; instead they see the entire colour charge of the system and are suppressed when that charge cancels. The practical consequence is a more stringent version of angular ordering that is a coherent pattern through every stage of a multi‑gluon cascade.</p>
+<p>The calculations presented here provide the theoretical backbone for parton‑shower algorithms such as Pythia <span class="citation" data-cites="sjostrand2015introduction">(<a href="#ref-sjostrand2015introduction" role="doc-biblioref">Sjöstrand et al. 2015</a>)</span>, which simulates the hundreds of particles recorded in each collision at the Large Hadron Collider. They explain why jets broaden with multiplicity, why grooming techniques like soft‑drop work, and why measurements of event shapes can pin down the numerical value of the coupling constant <span class="math inline">\(\alpha\_s\)</span> with ever finer precision.</p>
+<p>By following the thread from soft photons to coherent multi‑gluon cascades, we can see how a handful of simple approximations, when combined with the unique self‑interaction of gluons, give rise to the characteristic structure of the strong interactions and to the patterns of jets observed in experiment.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Deur_2016" class="csl-entry" role="listitem">
+Deur, Alexandre, Stanley J. Brodsky, and Guy F. de Téramond. 2016. <span>“The QCD Running Coupling.”</span> <em>Progress in Particle and Nuclear Physics</em> 90 (September): 1–74. <a href="https://doi.org/10.1016/j.ppnp.2016.04.003">https://doi.org/10.1016/j.ppnp.2016.04.003</a>.
+</div>
+<div id="ref-mangano1999introduction" class="csl-entry" role="listitem">
+Mangano, Michelangelo L. 1999. <span>“Introduction to QCD.”</span> <em>High Energy Physics And Cosmology 1998-Proceedings Of The Summer School</em> 15: 84.
+</div>
+<div id="ref-peskin2018introduction" class="csl-entry" role="listitem">
+Peskin, Michael E. 2018. <em>An Introduction to Quantum Field Theory</em>. CRC press.
+</div>
+<div id="ref-sjostrand2015introduction" class="csl-entry" role="listitem">
+Sjöstrand, Torbjörn, Stefan Ask, Jesper R Christiansen, Richard Corke, Nishita Desai, Philip Ilten, Stephen Mrenna, Stefan Prestel, Christine O Rasmussen, and Peter Z Skands. 2015. <span>“An Introduction to PYTHIA 8.2.”</span> <em>Computer Physics Communications</em> 191: 159–77.
+</div>
+<div id="ref-skands2013introduction" class="csl-entry" role="listitem">
+Skands, Peter. 2013. <span>“Introduction to QCD.”</span> In <em>Searching for New Physics at Small and Large Scales: TASI 2012</em>, 341–420. World Scientific.
+</div>
+<div id="ref-thomson2013modern" class="csl-entry" role="listitem">
+Thomson, Mark. 2013. <em>Modern Particle Physics</em>. Cambridge University Press.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
