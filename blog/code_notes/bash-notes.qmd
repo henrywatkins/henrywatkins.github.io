@@ -259,6 +259,14 @@ The llm library is a good CLI for tasks querying large lanuage models. It is a f
 
 [llm library](https://llm.datasette.io)
 
+## gnuplot
+
+[gnuplot](https://gnuplot.sourceforge.net/) is a command line plotting utility. It can be used to create simple plots and graphs from data files, or from the output of other command line programs. It is particularly useful for quick visualisation of data without needing to write a script or open a jupyter notebook. It is thus the ideal companion to the command line utilities and bash scripts. The quality of the plots is very good; comparable to matplotlib and seaborn. In fact it was the standard for academic plotting before matplotlib became popular. The usage is similar to python in that you can run it via an interpreter or a script. 
+
+```bash
+gnuplot plotscript.gnu
+```
+
 
 # Bash scripts 
 
@@ -287,3 +295,23 @@ fi
 # Extract lines where the name starts with G, then extract phone numbers using awk
 grep "^G" "$input_file" | awk '{print $2}'
 ```
+
+# Data processing with bash
+
+With all these tools, it becomes clear that bash scripts can be created to build sophisticaed data processing pipelines. Together with standard command-line tools like `grep`, `awk`, `sed`, `jq` and `gnuplot`, you can create powerful scripts to process and analyze data without needing to write custom Python or R scripts. We could for example create a bash script to pull data from a database with `sqlite3` (see also notes on SQL), process it with `awk` and `sed`, and then visualize it with `gnuplot`. 
+
+```bash
+#!/bin/bash
+# Example bash script to process data from a SQLite database and visualize it
+# Query data from SQLite database
+sqlite3 my_database.db "SELECT date, value FROM measurements;" > data.csv
+
+# Process the CSV: extract columns, clean up, and convert to TSV
+awk -F',' '{print $1 "\t" $2}' data.csv | sed 's/"//g' > data.tsv
+# Run gnuplot to create the plot
+gnuplot plotscript.gnu
+
+echo "Plot saved as plot.png"
+```
+
+Combined with the command line interfaces to some other popular software such as the statistical software R, or the large language model library, you can create sophisticated data processing pipelines that are easy to run and modify.
