@@ -1,0 +1,61 @@
+---
+title: "Notes on Stochastic Processes"
+description: "Brownian motion, stochastic processes and the Fokker-Planck Equation"
+author: "Henry Watkins"
+date: "01/18/2025"
+image: folder.jpg
+draft: true
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+categories:
+  - physics
+---
+
+## Brownian motion
+
+How do we explain random motion? 
+
+We begin with the Langevin equation, which models a dynamical system under the influence of random perturbations. The archetypal system is that of Brownian motion, where a particle, suspended in a background medium, displays seemingly random motion from many unseen collisions. Einstein's explanation of Brownian motion is an often overlooked, but no less impressive, illustration of his way of thinking.
+
+Start with the Langevin equation for a Brownian particle. This is just the equation of motion with a friction term $\gamma$ and forces $\textbf{F}$
+
+
+$$
+m \frac{d^2\textbf{x}}{dt^2} = - \gamma \frac{d\textbf{x}}{dt} + \textbf{F}
+$$
+
+This equation has a steady state solution (or fixed point) with 
+
+$$
+\frac{d\textbf{x}}{dt} = \gamma^{-1}\textbf{F}
+$$
+
+Here we call $\gamma^{-1}$ the *mobility*. We model the force term as a potential gradient (and thus a conservative force) with random fluctuations. The result is a *stochastic differential equation* (SDE)
+
+$$
+m \frac{d^2\textbf{x}}{dt^2} = - \gamma \frac{d\textbf{x}}{dt} -\nabla \phi + \textbf{f}(t)
+$$
+ 
+A trivial solution to this equation is one where there is no potential ($\phi=0$) and the medium is so viscous that effectively we can take $m=0$. This yields
+$$
+\textbf{x}(t) =\textbf{x}(0) +\gamma^{-1}\int_0^t \textbf{f}(t') dt' 
+$$
+
+
+To make this expression analytically feasible, we look at the expectation values and variances of the terms in our equation instead of the point values. The random fluctations of the function *f* mean we cannot know the exact value, so we only have information about the statistical behaviour of this function. We first assume that the expectation value of *f* is zero, $\langle\textbf{f}\rangle=0$. This means $\langle\textbf{x}(t)\rangle = \langle\textbf{x}(0)\rangle$. The mean position of the particle over time is the initial position, despite the fluctuations and movements around the space. 
+
+We define the variance of the particle position in terms of the *correlation function* $\langle\textbf{f}(t'_1)\cdot\textbf{f}(t'_2)\rangle$
+
+$$
+\langle(\textbf{x}(t)-\textbf{x}(0))^2\rangle =\gamma^{-2} \int_0^{t_1}\int_0^{t_2} \langle\textbf{f}(t'_1)\cdot\textbf{f}(t'_2)\rangle dt'_1dt'_2
+$$
+
+We further assum that as well as having a mean fluctuation of zero, the random fluctuationas are *uncorrelated*: in a sense the force impacted by later collisions knows nothing about earlier collisions. This is a *Markovian* system, defined as one in which $\langle f_i(t_1)f_j(t_2)\rangle = 0$ for $t_2-t_1>> \tau_{coll}$ ($\tau_{coll}$ is the collision time). If the collision time is taken to zero, we can define the correlation function for *white noise*, also known as *Gaussian noise*.
+
+$$
+\langle f_i(t_1)f_j(t_2)\rangle = 2D \gamma^2 \delta_{ij}\delta(t_2-t_1).
+$$
+
+If this expression is used in the integral for the variance of *x* above, we find $\langle(\textbf{x}(t)-\textbf{x}(0))^2\rangle =6Dt$. 
+
+

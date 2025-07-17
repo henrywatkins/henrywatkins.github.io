@@ -17,7 +17,7 @@ website:
         menu:
           - text: "Python"
             href: code_notes/python-notes.qmd
-          - text: "Bash"
+          - text: "Command Line"
             href: code_notes/bash-notes.qmd
           - text: "Git"
             href: code_notes/git-notes.qmd
@@ -25,8 +25,6 @@ website:
             href: code_notes/sql-notes.qmd
           - text: "Cython"
             href: code_notes/cython-notes.qmd
-          - text: "C++"
-            href: code_notes/cpp-notes.qmd
           - text: "Docker"
             href: code_notes/docker-notes.qmd
           - text: "Rust"

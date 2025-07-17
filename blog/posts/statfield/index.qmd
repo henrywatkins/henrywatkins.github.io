@@ -1,0 +1,13 @@
+---
+title: "Notes on Statistical Field Theory"
+description: "Brownian motion, stochastic processes and the Fokker-Planck Equation"
+author: "Henry Watkins"
+date: "01/18/2025"
+image: folder.jpg
+draft: true
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+categories:
+  - physics
+---
+

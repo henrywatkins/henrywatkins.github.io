@@ -422,14 +422,10 @@ Run scripts
 sqlite3 your_database.db < /path/to/your_script.sql
 ```
 
-creation
-    sqlite3 data.db < make_db.sql
+creation `sqlite3 data.db < make_db.sql`
 
-querying
-    sqlite3 -header -table data.db < query.sql
+querying `sqlite3 -header -table data.db < query.sql`
 
-importing csv
-    sqlite3 data.db ".mode csv" ".import extra_data.csv wardens"
+importing csv `sqlite3 data.db ".mode csv" ".import extra_data.csv wardens"`
 
-export
-    sqlite3 -header -csv data.db "SELECT date, AVG(temperature) FROM observations GROUP BY date;" > export.csv
+export `sqlite3 -header -csv data.db "SELECT date, AVG(temperature) FROM observations GROUP BY date;" > export.csv`
