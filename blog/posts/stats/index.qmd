@@ -58,3 +58,1235 @@ $$
 ## Central limit theorem
 
 ## Hypothesis tests
+
+Here's the transcription of your notes on page **60**, which covers **Basic Statistics**:
+
+---
+
+### **Basic Statistics**
+
+#### **Bayes**
+
+$$
+P(A|B) = \frac{P(A) \cdot P(B|A)}{P(B)}
+$$
+
+* **P(A)**: a priori prob. → *Probability of outcome A*
+* **P(B|A)**: *Likelihood of B given A*
+* **P(A|B)**: a posteriori prob. → *Probability of A given B (conditional probability)*
+* **P(B)**: *Total probability of B*
+
+Also:
+
+$$
+P(B) = P(A)P(B|A) + P(\bar{A})P(B|\bar{A})
+$$
+
+where $P(\bar{A}) = 1 - P(A)$
+
+---
+
+### **Probability distributions**
+
+* For a random variable **X**, we can define a **distribution**:
+
+  $$
+  f(x) = P(X = x)
+  $$
+
+  which gives the probability of the value **X**
+
+#### **Key properties of distributions**:
+
+* **Expectation value**:
+
+  $$
+  E[f(X)] = \langle g(x) \rangle =
+  \begin{cases}
+  \sum g(x_i)f(x_i) & \text{(discrete)} \\
+  \int g(x)f(x)\,dx & \text{(continuous)}
+  \end{cases}
+  $$
+
+---
+
+Let me know if you want this turned into a study sheet or need help with any part of it!
+
+Here’s a clean transcription of your notes from page **61**, which continue the topic on **Basic Statistics** — specifically focusing on distribution properties:
+
+---
+
+### **Cumulative Distribution**
+
+$$
+F(x) = P(X \leq x)
+$$
+
+$$
+F(x) =
+\begin{cases}
+\sum_{x_i \leq x} f(x_i) & \text{(discrete)} \\
+\int_a^x f(u)\,du & \text{(continuous)}
+\end{cases}
+$$
+
+---
+
+### **Mean**
+
+$$
+E[X] = \langle x \rangle = \int x f(x)\,dx
+$$
+
+---
+
+### **Mode**
+
+* The value of **X** where the PDF $f(x)$ has its greatest value:
+
+$$
+f(x_{\text{mode}}) = f_{\text{max}}
+$$
+
+---
+
+### **Median**
+
+* The value of **X** where the CDF $F(x) = \frac{1}{2}$:
+
+$$
+F(x_{\text{median}}) = \frac{1}{2}
+$$
+
+* Related are the **upper and lower quartiles**:
+
+$$
+F(Q_1) = \frac{1}{4}, \quad F(Q_3) = \frac{3}{4}
+$$
+
+---
+
+### **Variance**
+
+$$
+V(X) = E[(X - \mu)^2] = \sigma^2
+$$
+
+$$
+= \langle (x - \mu)^2 \rangle = \langle x^2 \rangle - \langle x \rangle^2
+$$
+
+---
+
+### **Moments**
+
+* Higher powers of **X**:
+
+$$
+E[x^k] = \langle x^k \rangle = \int x^k f(x)\,dx
+$$
+
+---
+
+Let me know if you'd like a typed summary or cheat sheet of these notes!
+
+Here's a clean transcription of your notes from **page 62**, covering **important discrete probability distributions**:
+
+---
+
+### **Important Distributions**
+
+#### **Discrete**
+
+---
+
+### **Binomial Distribution**
+
+* **Processes** that consist of $N$ trials with a **binary outcome**: success or failure (q).
+* If the test is performed $N$ times, the number of successful tests follows the **binomial distribution**.
+* **Probability of getting $x$ successes from $n$ trials**:
+
+$$
+f(x) = P(X = x) = \binom{n}{x} p^x q^{n - x}
+$$
+
+* $P(\text{success}) = p$
+* $P(\text{failure}) = q$
+
+$$
+\binom{n}{x} = \frac{n!}{x! (n - x)!}
+$$
+
+---
+
+### **Hypergeometric Distribution**
+
+* **If the trials are not independent**:
+
+$$
+P(X = x) = \frac{\binom{M}{x} \binom{N - M}{n - x}}{\binom{N}{n}}
+$$
+
+* **Used when sampling is done without replacement**
+* E.g. lottery or deck number probabilities
+* **Probabilities change as trials are performed!**
+
+Here’s a clean transcription of your **page 63** notes, which cover more **important probability distributions** — both discrete and continuous:
+
+---
+
+## **Important Distributions (cont.)**
+
+---
+
+### **Poisson (Discrete)**
+
+* For **discrete events** occurring in a continuum, with a mean rate of occurrence $\lambda$.
+* In some interval or area, the Poisson distribution gives the **probability of $x$ events happening**:
+
+$$
+f(x) = P(X = x) = \frac{e^{-\lambda} \lambda^x}{x!}
+$$
+
+---
+
+### **Continuous Distributions**
+
+---
+
+#### **Gaussian (Normal)**
+
+$$
+f(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left( -\frac{(x - \mu)^2}{2\sigma^2} \right)
+$$
+
+---
+
+#### **Log-normal**
+
+* If a variable $X$ is Gaussian distributed, then $Y = e^X$ is **log-normal** distributed.
+
+$$
+f(y) = \frac{1}{\sigma \sqrt{2\pi} y} \exp\left( -\frac{(\ln y - \mu)^2}{2\sigma^2} \right)
+$$
+
+---
+
+#### **Exponential**
+
+* Describes the distribution of the **length of intervals between successive events** of a Poisson process:
+
+$$
+f(x) = \lambda e^{-\lambda x}
+$$
+
+---
+
+#### **Gamma**
+
+* Describes the interval **between every $r$th event** in a Poisson process:
+
+$$
+f(x) = \frac{\lambda^r}{\Gamma(r)} x^{r-1} e^{-\lambda x}
+$$
+
+* $\Gamma(r)$ is the **gamma function**, generalizing factorial: $\Gamma(n) = (n-1)!$
+
+Here’s a clean transcription of your **page 64** notes on **covariance, correlation, and sample statistics**:
+
+---
+
+## **Covariance**
+
+* If we have **random variables** that are **not independent**, there will be some correlation.
+* For two random variables $X$ and $Y$, the **covariance** is:
+
+$$
+\text{Cov}[X, Y] = \mathbb{E}[(X - \mu_X)(Y - \mu_Y)] = \langle xy \rangle - \langle x \rangle \langle y \rangle
+$$
+
+---
+
+## **Correlation (Pearson)**
+
+$$
+\text{Corr}[X, Y] = \frac{\text{Cov}[X, Y]}{\sigma_X \sigma_Y}
+$$
+
+---
+
+## **Sample Statistics**
+
+* With $N$ measurements (samples of a population) $x_1, \dots, x_n$, a function of these data is a **sample statistic**.
+
+### **Averages**
+
+* **Arithmetic mean**:
+
+$$
+\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i
+$$
+
+* **Geometric mean**:
+
+$$
+\bar{x}_g = \left( \prod_{i=1}^{N} x_i \right)^{\frac{1}{N}}
+$$
+
+* **Harmonic mean**:
+
+$$
+\bar{x}_h = \frac{N}{\sum_{i=1}^{N} \frac{1}{x_i}}
+$$
+
+Here’s a transcription of **page 65** of your notes, covering **more sample statistics** and **estimators**:
+
+---
+
+## **More Sample Statistics**
+
+* **Root Mean Square (RMS):**
+
+$$
+\bar{x}_{\text{rms}} = \left( \frac{1}{N} \sum_{i=1}^{N} x_i^2 \right)^{\frac{1}{2}}
+$$
+
+* **Variance:**
+
+$$
+s^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2 = \overline{x^2} - \bar{x}^2
+$$
+
+* **Covariance:**
+
+$$
+V_{xy} = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})(y_i - \bar{y}) = \overline{xy} - \bar{x}\bar{y}
+$$
+
+* **Correlation:**
+
+$$
+r_{xy} = \frac{V_{xy}}{s_x s_y}
+$$
+
+---
+
+## **Estimators**
+
+* The purpose of statistics is to **infer the unknown population probability density function** $P(x_1, \dots, x_n)$ from the **sample data**.
+
+* Parameters like $a$ are characteristics of the **entire population** (e.g., mean, variance) and are derived from the full dataset.
+
+* **Estimators** (denoted as $\hat{a}$) are **sample statistics** that aim to approximate the true population parameters $a$.
+
+* A good estimator $\hat{a}$ is judged based on:
+
+  * **Consistency**
+  * **Bias**
+  * **Efficiency**
+
+Here’s the transcription of **page 66** from your notes, which continues the topic of **estimators** and their properties:
+
+---
+
+## **Estimator Properties (cont'd)**
+
+* **Consistency**:
+
+  $$
+  \lim_{N \to \infty} \hat{a} \to a
+  $$
+
+  → $\hat{a}$ tends to $a$ in the **large sample limit**.
+
+* **Bias**:
+
+  $$
+  B(a) = \mathbb{E}[\hat{a}] - a
+  $$
+
+  $$
+  \mathbb{E}[\hat{a}] = \int \hat{a} \, P(\hat{a}|a) \, d\hat{a} = \int \hat{a}(x) \, P(x|a) \, d^n x
+  $$
+
+* **Efficiency**:
+
+  $$
+  e = \frac{V_{\text{min}}}{V[\hat{a}]}
+  $$
+
+  → An estimator with **low variance** is more *efficient*.
+
+  $$
+  V_{\text{min}} = \frac{\left(1 + \frac{\partial B}{\partial a}\right)^2}{\mathbb{E} \left[ -\frac{\partial^2 \log P}{\partial a^2} \right]}
+  $$
+
+  (includes **bias** and **likelihood** $P(x|a)$)
+
+* **Fisher’s Inequality**:
+
+  $$
+  V[\hat{a}] \geq V_{\text{min}}
+  $$
+
+  → Sets a **lower limit** on the variance of any estimator.
+
+---
+
+## **Popular Estimators Are**:
+
+* Mean, variance, standard deviation, moments
+* Central moments, covariance, correlation
+
+$$
+\hat{\mu}, \quad \hat{\sigma}^2, \quad \hat{\sigma}, \quad \hat{M}_r, \quad \hat{\mu}_r, \quad \widehat{\text{cov}}, \quad \widehat{\text{corr}}
+$$
+
+Here is the transcription of **page 67** from your notes, which discusses **errors in estimators** and the **Central Limit Theorem**:
+
+---
+
+## **Errors**
+
+* The estimators we get from sample statistics have **errors associated** with them because we have only partial information about the population.
+
+* Characterise this **uncertainty** with the **standard deviation of the sampling distribution**:
+
+  $$
+  \hat{\sigma} = \sqrt{V[\hat{a}]}
+  $$
+
+* **Standard error** $\hat{\sigma}$ depends on the true values of the quantities of $a$, so we must use the estimated error $\hat{\sigma}$.
+  So:
+
+  $$
+  a = \hat{a} \pm \hat{\sigma}
+  $$
+
+* Example: The sample mean $\bar{x}$ is found and has variance
+
+  $$
+  V[\bar{x}] = \frac{\sigma^2}{N}
+  $$
+
+  and so:
+
+  $$
+  \hat{\mu} = \bar{x} \pm \frac{\hat{\sigma}}{\sqrt{N}}
+  $$
+
+  (we draw values in this example from a Gaussian distribution with $\sigma = 1$, and so $\hat{\sigma}$ is known)
+
+---
+
+## **Central Limit Theorem**
+
+* When **independent random variables** are added, their **normalised sum tends to a normal distribution**
+* Even if the original variables are not normally distributed
+* Example: after many observations, a sample is found and the mean is calculated. As this procedure is repeated,...
+
+Here is the transcription of **page 68** from your notes, which continues the Central Limit Theorem and introduces **Hypothesis Tests**:
+
+---
+
+## *(Continuation of Central Limit Theorem)*
+
+* The average **sample distribution** will tend to a normal distribution.
+
+---
+
+## **Hypothesis Tests**
+
+* Use the data to give a simple **yes/no** answer to a question.
+* Begin with a **null hypothesis** $H_0$, and perform a statistical test to accept or reject it.
+  Choose between $H_0$ and an **alternative hypothesis** $H_1$.
+* We define a **test statistic** $t(x)$ based on data $x$.
+* We determine the **sampling distribution** $P(t|H_0)$.
+* We define a **rejection region** that contains some fraction $\alpha$ of the total probability.
+* If $t$ lies in the rejection region, then $H_0$ is **rejected**, otherwise $H_0$ is **accepted**.
+
+---
+
+* When sampling from a **Gaussian distribution**, the **Student’s t-test** is used for hypotheses:
+
+  $$
+  H_0: \mu = \mu_0 \quad \text{vs.} \quad H_1: \mu \ne \mu_0
+  $$
+
+Here is the transcription of **page 69** from your notes, which continues with hypothesis testing and touches on **conditional probability**:
+
+---
+
+## **The equivalent for standard deviation $\sigma$ is the Fisher F-test**
+
+---
+
+### **Statistical significance**
+
+* Is the probability of finding a deviation from the null hypothesis, also called the **p-value**.
+* If $p < 0.05$ (or other chosen value), we **reject** the null hypothesis.
+
+(A sketch of a normal distribution with a **rejection region** is shown)
+
+**sampling distribution $P(t | H_0)$**
+
+---
+
+* **Null hypothesis** = no relationship, no effect, "status quo"
+
+---
+
+## **Conditional Probability**
+
+$$
+P(A | B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+* "A given B"
+* $A \cap B$ means "A and B"
+
+Here is the transcription of **page 75** from your notes:
+
+---
+
+## **More Statistics**
+
+### **Spearman Correlation**
+
+* The Pearson correlation between **ranked variables**
+
+$$
+\rho_s = \frac{\text{Cov}(g_x, g_y)}{\sigma_{g_x} \sigma_{g_y}}
+$$
+
+* Spearman finds **monotonic** relationships between variables.
+* Pearson finds **linear** only.
+
+---
+
+### **Goodness of Fit** *(hypothesis test)*
+
+* Given a model $y = f(x_i; a)$ of some data that provides a relationship between variables, how good is the fit? ($H_0$ or $H_1$)
+* Perform the **χ² test**
+* The test statistic is
+
+$$
+\chi^2 = \sum_{i=1}^{N} \left( \frac{y_i - f(x_i; a)}{\sigma_i} \right)^2
+$$
+
+Where:
+
+* $z_i = y_i - f(x_i; a)$
+
+* $a$ = estimators of model
+
+* The **sampling distribution** of the quantity $\chi^2$ will follow a **chi-squared distribution** with $N - M$ degrees of freedom (M = constraints).
+
+Here is the transcription of **page 76** from your notes:
+
+---
+
+$$
+\mathbb{E}[\chi^2(\hat{a})] = N - M, \quad \text{Var}[\chi^2(\hat{a})] = 2(N - M)
+$$
+
+* We can perform a **one/two-tailed test** on the value of $\chi^2(a)$ for our model.
+* For significance level $\alpha$, the rejection region $\chi^2(a) > k$
+
+$$
+\int_k^\infty P(\chi^2_n) \, d\chi^2 = \alpha
+$$
+
+Where $P(\chi^2_n)$ is the PDF of the chi-squared distribution for
+$n = N - M$ degrees of freedom.
+
+---
+
+### **Chi-square:**
+
+$$
+P(\chi^2_n = x) = f(x) = \left[ \frac{(\chi^2_{n/2})}{\Gamma(n/2)} \right] x^{n/2 - 1} e^{-x/2}
+$$
+
+---
+
+### **Student’s t-test**
+
+* Samples $x_i$ drawn from **Gaussian distribution** with $\mu, \sigma^2$
+* Want to distinguish the hypotheses:
+
+$$
+H_0: \mu = \mu_0, \quad 0 < \sigma^2 < \infty \quad \text{vs.} \quad H_1: \mu \ne \mu_0
+$$
+
+$H_0$: **null** for some given $\mu_0$
+
+* The **test statistic** is:
+
+$$
+t = \frac{\bar{x} - \mu_0}{s / \sqrt{N - 1}}
+$$
+
+Where:
+
+* $\bar{x}$ = sample mean
+* $s^2$ = sample variance
+
+Here is the transcription of **page 77** from your notes:
+
+---
+
+* We reject $H_0$ if $t$ falls into the rejection region defined by a **critical value** $c$:
+
+  $$
+  |t| > c
+  $$
+
+* We must now find the **sampling distribution** $P(t|H_0)$
+  i.e., what is $t$ under the null hypothesis $H_0$?
+
+* The joint distribution for $\bar{x}, s$ under the null hypothesis:
+
+$$
+P(\bar{x}, s|H_0) = C \cdot s^{N-2} \cdot \exp\left(-\frac{N s^2}{2\sigma^2}\right) \cdot \exp\left(-\frac{N(\bar{x} - \mu_0)^2}{\sigma^2}\right)
+$$
+
+* For $t$ above, it is:
+
+$$
+P(t|H_0) = \frac{1}{\sqrt{(N-1)\pi}} \cdot \left( \frac{\Gamma(N/2)}{\Gamma((N-1)/2)} \right) \cdot \left(1 + \frac{t^2}{N-1} \right)^{-N/2}
+$$
+
+→ $N-1$ degrees of freedom
+
+* As $N \to \infty$, this tends to the **normal distribution**.
+
+---
+
+### Cumulative distribution:
+
+$$
+C_{N-1}(t) = \int_0^t P(t'|H_0) dt'
+$$
+
+---
+
+* For some significance level $\alpha$, the **rejection region** is defined by:
+
+$$
+C_{N-1}(t_{\text{crit}}) = 1 - \frac{\alpha}{2}
+$$
+
+Here is the transcription of **page 78** from your notes:
+
+---
+
+### Fisher's F test (ANOVA)
+
+* The previous test relied on the assumption that the parent distribution had variance $\sigma^2$.
+
+* Now we can test this hypothesis using the **F test**.
+
+* Samples $x_i$, $N$ drawn from Gaussian with unknown $\mu, \sigma^2$
+
+* Want to distinguish:
+  $H_0 : \sigma^2 = \sigma_0^2 \quad \text{or} \quad H_1 : \sigma^2 \ne \sigma_0^2$
+  for a given $\sigma_0$.
+
+* From the **ratio of the likelihood distributions** $\lambda(u)$, we can define the variable:
+
+$$
+u = \frac{N s^2}{\sigma_0^2}
+$$
+
+* The **rejection region** that corresponds to a two-tailed region:
+
+  $$
+  0 < u < a \quad \text{or} \quad b < u < \infty
+  $$
+
+  where $\lambda_{\text{crit}} = \lambda(\bar{u}) = \lambda(b)$
+
+---
+
+### The **sampling distribution** of $u$ is:
+
+$$
+P(u | H_0) = \left[2^{\frac{N-1}{2}} \left( \frac{N-1}{2} \right)^{-\frac{N-1}{2}} \right] u^{\frac{N-3}{2}} \exp\left(-\frac{u}{2}\right)
+$$
+
+---
+
+This is a standard form of the **chi-squared distribution** scaled and used in **F-tests** (used in ANOVA — Analysis of Variance). Let me know if you'd like a summary of the F-test or how to perform it practically.
+
+
+Here is the transcription for **page 79** of your notes:
+
+---
+
+### For significance level $\alpha$:
+
+$$
+\int_0^a P(u \mid H_0) \, du = \frac{\alpha}{2}, \quad \int_b^\infty P(u \mid H_0) \, du = \frac{\alpha}{2}
+$$
+
+---
+
+### The full **F-test** compares the **variances** of two distributions with
+
+$\mu_1, \sigma_1^2 \quad \text{and} \quad \mu_2, \sigma_2^2$
+
+* The test is to distinguish:
+  $H_0: \sigma_1^2 = \sigma_2^2 \quad \text{vs.} \quad H_1: \sigma_1^2 \ne \sigma_2^2$
+
+* Samples: $\bar{x}_1, s_1^2, N_1$ and $\bar{x}_2, s_2^2, N_2$
+
+* We define the test statistic
+
+  $$
+  F = \frac{u^2}{v^2}
+  $$
+
+  based on the likelihood ratio of the two distributions.
+  (Assume $N_1 > N_2$)
+
+---
+
+### The sampling distribution of $F$ is:
+
+$$
+P(F \mid H_0) = \left( \frac{N_1 - 1}{N_2 - 1} \right)^{\frac{N_1 - 1}{2}} F^{\frac{N_1 - 3}{2}} \left(1 + \frac{N_1 - 1}{N_2 - 1} F \right)^{-\frac{N_1 + N_2}{2}} \div B\left( \frac{N_1 - 1}{2}, \frac{N_2 - 1}{2} \right)
+$$
+
+Here, $B(\cdot,\cdot)$ is the **beta function**.
+
+---
+
+### For a given significance $\alpha$, the rejection region $F > F_{\text{crit}}$ is defined by:
+
+$$
+C_{N_1 - 1, N_2 - 1}(F_{\text{crit}}) = \int_1^{F_{\text{crit}}} P(F \mid H_0) \, dF = \alpha
+$$
+
+---
+
+This page outlines the **F-distribution** used to test the ratio of variances (F-test), including its probability density function (PDF), hypothesis setup, and significance thresholding. Let me know if you'd like a summary or practical example.
+
+
+Here is the transcription for **page 80** of your notes:
+
+---
+
+### The standard process for a hypothesis test:
+
+* Define null ($H_0$) and alternative ($H_1$) hypotheses
+* Consider whether statistical assumptions are justified
+* Choose test and define test statistic $T$
+* Derive the sampling distribution of the test statistic under the null hypothesis given the assumptions
+* Choose a significance level $\alpha$
+* Compute the value of the test statistic from the dataset
+* **Reject or accept null hypothesis** based on whether the test statistic from the data **falls in the critical region** or not
+
+---
+
+### **Jarque–Bera test**
+
+* Test used to determine the **normality** of a set of data
+* Returns a **p-value** of how likely the data is **non-normally distributed**
+
+Here is the transcription of the notes from **page 81**, which presents a simplified **hypothesis test flowchart**:
+
+---
+
+### Hypothesis test flowchart – simple
+
+**Data type:**
+
+* **Categorical** → Use **Chi-square test**
+
+* **Continuous**:
+
+  * **Normally distributed**:
+
+    * **2 groups** → *paired/unpaired* → **Student's t-test**
+    * **> 2 groups** → **ANOVA**
+  * **Skewed**:
+
+    * **2 groups** → **Wilcoxon-type tests**
+    * **> 2 groups** → **Non-parametric ANOVA**
+
+---
+
+*Note at the bottom:*
+
+> When trying to find relationships, as opposed to differences, **regression models** or **correlation analysis** is required.
+
+---
+
+Let me know if you want this turned into a clearer digital chart or need help choosing the right statistical test for your own data.
+
+
+
+Here is the extracted content from the handwritten note dated **16/4/20**, formatted in Markdown with LaTeX for all mathematical expressions:
+
+---
+
+### **Basic Statistics Ref**
+
+---
+
+#### **Set Theory & Probability**
+
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B) \quad \text{(union)}
+$$
+
+$$
+\text{odds:} \quad \frac{P(A)}{1 - P(A)}
+$$
+
+---
+
+#### **Binomial Coefficient**
+
+Combinations of $n$ objects into $k$ groups:
+
+$$
+\binom{n}{k} = \frac{n!}{(n - k)! \, k!}
+$$
+
+* $n$ objects have $n!$ possible permutations
+* We multiply combinations to get total set size
+
+**e.g.** when removing sample in combinations:
+Total number of combinations:
+
+$$
+\binom{n}{k_1} \binom{n - k_1}{k_2} \binom{n - k_2}{k_3} \ldots \binom{}{k_l}
+$$
+
+---
+
+#### **Conditional Probability**
+
+$$
+P(A | B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+---
+
+#### **Bayes' Theorem**
+
+$$
+P(A | B) = \frac{P(A) P(B | A)}{P(B)}
+$$
+
+---
+
+#### **General Law of Total Probability**
+
+$$
+P(A \cap B) = P(A) P(B) + P(A \cap \neg B)
+$$
+
+---
+
+#### **Expectation**
+
+Discrete:
+
+$$
+E[X] = \sum x_i \cdot P(X = x_i)
+$$
+
+Continuous:
+
+$$
+E[X] = \int_{-\infty}^{\infty} x f(x) \, dx
+$$
+
+---
+
+#### **Variance**
+
+$$
+\text{Var}[X] = E[(X - \mu)^2] = E[X^2] - \mu^2 \quad \text{where } \mu = E[X]
+$$
+
+---
+
+
+Here is the extracted content from the handwritten note, formatted in Markdown with all mathematical expressions in LaTeX:
+
+---
+
+### **Information Theory**
+
+* We can define **information** of the message that $X = x$
+  by the probability of $X = x$:
+
+  $$
+  I(p)
+  $$
+
+---
+
+#### **For two outcomes**
+
+Let $p_1 = p$, $p_2 = q$, and if independent:
+
+$$
+P(A \cap B) = pq \Rightarrow I(pq) \leftarrow \text{info of both combined}
+$$
+
+But also:
+
+$$
+I(pq) = I(p) + I(q)
+\Rightarrow I(q) = -\log_2(q)
+$$
+
+---
+
+### **Shannon Entropy**
+
+* For arbitrary outcomes with probabilities $p_i$,
+  $\log(p_i)$ is the information in $x = x_i$ — the expected information that is transmitted in $X$ is:
+
+$$
+H(X) = -\sum_i p_i \log(p_i)
+$$
+
+→ **Shannon entropy** of variable $X$
+
+---
+
+### **Correlation**
+
+$$
+\text{Corr}(X, Y) = \frac{\text{Cov}[X, Y]}{\sqrt{\text{Var}[X] \text{Var}[Y]}} = 
+\frac{E[(X - \mu_X)(Y - \mu_Y)]}{\sqrt{\text{Var}[X] \text{Var}[Y]}}
+$$
+
+---
+
+### **Binomial Distribution**
+
+$$
+P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k}
+$$
+
+$$
+E[X] = np \quad \text{Var}[X] = np(1 - p)
+$$
+
+→ Probability of $k$ successes (with prob. $p$) in $n$ trials
+
+---
+
+Here is the extracted content from the handwritten note, formatted in Markdown with LaTeX for all mathematical expressions:
+
+---
+
+### **Poisson Distribution**
+
+$$
+P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}
+$$
+
+$$
+E[X] = \lambda \quad \text{Var}[X] = \lambda
+$$
+
+* Probability of $k$ events in interval with mean occurrence of $\lambda$ over that interval.
+
+---
+
+### **Normal Distribution**
+
+$$
+f(x) = \frac{1}{\sqrt{2\pi} \sigma} e^{-\frac{(x - \mu)^2}{2\sigma^2}} \quad \langle x \rangle = \mu
+$$
+
+$$
+E[X] = \mu \quad \text{Var}[X] = \sigma^2
+$$
+
+**Cumulative:**
+
+$$
+P(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x} e^{-y^2/2} \, dy
+$$
+
+---
+
+### **Exponential Distribution**
+
+$$
+f(x) = \lambda e^{-\lambda x}
+$$
+
+$$
+E[X] = \frac{1}{\lambda} \quad \text{Var}[X] = \frac{1}{\lambda^2}
+$$
+
+* Distribution of amount of time until event occurs.
+
+---
+
+### **Gamma Distribution**
+
+$$
+f(x) = \frac{\lambda e^{-\lambda x} (\lambda x)^{\alpha - 1}}{\Gamma(\alpha)}
+$$
+
+$$
+E[X] = \frac{\alpha}{\lambda} \quad \text{Var}[X] = \frac{\alpha}{\lambda^2}
+$$
+
+* For collection of $\alpha$ **exponentially distributed processes**.
+
+---
+
+Here is the extracted content from the handwritten note, formatted in Markdown with LaTeX for mathematical clarity:
+
+---
+
+### **Central Limit Theorem**
+
+The **sum of independently** sampled variables from **any distribution** is itself **normally distributed**
+with mean $n\mu$ and variance $n\sigma^2$
+
+* $\mu$: original distribution mean
+* $\sigma^2$: original distribution variance
+
+---
+
+So we get a **normally distributed variable**:
+
+$$
+Z = \frac{X - n\mu}{\sigma \sqrt{n}} \quad \text{where} \quad X = \sum_{i=1}^{n} X_i
+$$
+
+---
+
+**Sample mean** as:
+
+$$
+\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i \Rightarrow Z = \frac{n\bar{X} - n\mu}{\sigma \sqrt{n}}
+$$
+
+$$
+\Rightarrow \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \Rightarrow \text{Sample mean is normally distributed}  
+$$
+
+With:
+
+* **Expectation** = $\mu$
+* **Standard deviation** = $\frac{\sigma}{\sqrt{n}}$
+
+---
+
+
+Here is the extracted text from the handwritten note dated 27/10/19, formatted in Markdown with all mathematics in LaTeX:
+
+---
+
+### **Generative + Discriminative Modelling**
+
+**Date: 27/10/19**
+
+* **Discriminative models** learn the decision boundary between classes, that is, it learns the **conditional probability distribution** directly
+
+  $$
+  P(x|y)
+  $$
+
+* **Generative models** learn the distribution of each class. They learn the **joint probability distribution**
+
+  $$
+  P(x, y) \quad \text{(also written } p(x \cap y) \text{)}
+  $$
+
+  if $x$ and $y$ are dependent:
+
+  $$
+  P(x, y) = P(y | x) P(x)
+  \quad \text{(Prior)}
+  $$
+
+* We can then model the data as being generated from a lower-dimensional or sparse latent variable $x$ ( $P(x)$ )
+
+  $$
+  P(y) = \int P(y | x) P(x) \, dx
+  $$
+
+* And we can then do classification: we find $P(y | x)$, the likelihood that $y$ is conditional on latent variable $x$
+
+* We can then do inference with Bayes’ theorem to classify $x$ or $y$
+
+  $$
+  P(x | y) = \frac{P(y | x) P(x)}{P(y)}
+  $$
+
+* This approach allows us to take advantage of the structure of **unlabelled data** – this is **semi-supervised**
+
+---
+
+Here is the extracted text from the handwritten note, formatted in Markdown:
+
+---
+
+### **Learning**
+
+* Examples of **discriminative methods** are:
+
+  * Logistic classifiers
+  * Support Vector Machines
+
+* Examples of **generative models** are:
+
+  * Naive Bayes classification
+  * Markov Random Fields
+
+---
+
+* **Generative models generally outperform discriminative models when there is little data**, because they can take advantage of unlabelled data via **semi-supervised learning**.
+
+---
+
+* **Inference on generative models has been difficult** because Markov-chain Monte-Carlo (MCMC) simulations of the evidence were not used and usually **too slow** in large models (or with little data).
+
+---
+
+* **Improved inference models** have appeared in the last few years including:
+
+  * Variational Autoencoders (**VAE**)
+  * Generative Adversarial Networks (**GAN**)
+  * Autoregressive models (**AR**)
+
+---
+
+
+Here is the extracted text from the handwritten note, formatted in Markdown with LaTeX for all mathematical expressions:
+
+---
+
+### **Variational Autoencoders (VAE)**
+
+* These methods scale to high-dimensional models because their loss functions are end-to-end differentiable, while MCMC requires alternating inference and optimization steps.
+
+---
+
+**Variational Autoencoders**
+
+A **VAE** learns a model of the data $x$ and latent variables $z$, i.e. the joint probability:
+
+$$
+p(x, z) = p(x|z)p(z)
+$$
+
+The model draws (for each data point $x_i$) a latent variable $z_i$ from a prior $p(z) \leftarrow \text{Normal dist}$,
+then draws data point $x_i$ from $p(x|z)$.
+
+---
+
+To do inference to find the posterior $p(z|x)$, we need the evidence $p(x)$ found from:
+
+$$
+p(x) = \int p(x|z)p(z) \, dz
+$$
+
+This integral is very computationally expensive via conventional methods like MCMC for very high-dimensional models.
+
+---
+
+VAEs approximate $p(z|x)$ with a family $q_\lambda(z|x)$ with variational parameter $\lambda$.
+We find the values of $\lambda$ that minimize the **Kullback-Leibler divergence**:
+
+$$
+KL(q_\lambda \parallel p) = \mathbb{E}_{q_\lambda}[\log q_\lambda] - \mathbb{E}_{q_\lambda}[\log p] + \log p
+$$
+
+---
+
+
+Here is the extracted text from the handwritten note, formatted in Markdown with all mathematics in LaTeX:
+
+---
+
+### **Variational Autoencoders (continued)**
+
+i.e.
+
+$$
+q^*_\lambda(z|x) = \arg\min_\lambda \, KL(q_\lambda \parallel p)
+$$
+
+To calculate this, we use **gradient descent** on the **evidence lower bound (ELBO)** to find $\lambda$
+
+$$
+\text{ELBO}(\lambda) = \mathbb{E}_q[\log p(x, z)] - \mathbb{E}_q[\log q_\lambda(z|x)]
+$$
+
+A **VAE** uses a **NN** to approximate the posterior for data point $i$,
+
+$$
+q(z_i | x_i)
+$$
+
+* The **Encoder** acts as an inference network that parameterizes the approximate posterior of the latent variables $z$, i.e., it outputs parameters of
+
+$$
+q(z|x)
+$$
+
+* The **Decoder** is a generative network parameterizing the likelihood
+
+$$
+p(x|z)
+$$
+
+---
+
+### **Autoregressive Models**
+
+These models approximate $p(x)$ as a product of **conditional distributions**:
+
+$$
+p(x) = p(x_1) p(x_2 | x_1) p(x_3 | x_2, x_1) \ldots
+$$
+
+and are often implemented with **RNNs**
+
+---
+
+
+Here is the extracted text from the handwritten note, formatted in Markdown with LaTeX for all mathematical expressions:
+
+---
+
+### **Generative Adversarial Networks (GANs)**
+
+Made up of a **generative** and a **discriminative** network.
+It is a method of training generative models by optimizing them to fool a **discriminator** (classifier) network.
+
+---
+
+### **Bayesian vs Frequentist**
+
+**e.g.** classification of data $x$ into category $z$ with model parameters $\beta$
+
+|                    | **Frequentist**      | **Bayesian**                                          |
+| ------------------ | -------------------- | ----------------------------------------------------- |
+| **Discriminative** | $p(z \mid x; \beta)$ | $p(z, \beta \mid x) = p(z \mid \beta, x) \, p(\beta)$ |
+| **Generative**     | $p(z, x \mid \beta)$ | $p(z, x, \beta) = p(z, x \mid \beta) \, p(\beta)$     |
+
+---
+
+* **Bayesians** model the joint probability of data and parameters
+* **Frequentists** model the probability of observations **given the parameters**
+
+---
+
+
