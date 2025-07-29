@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Posts – Henry Watkins</title>
+<title>9&nbsp; Further reading – Practical Plasma Physics: Lasers, Transport, and Magnetisation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<link href="./applications.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -41,13 +60,13 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dae3192f81785cf0e6fe7ca13257d296.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a054514f9e70afcecfffd91f61242d4d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -69,399 +88,171 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4KRLE15B5S"></script>
-
-<script type="text/javascript">
-
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
-</script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Henry Watkins</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
-<span class="menu-text">Blog</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./../book/index.html"> 
-<span class="menu-text">Plasma Book</span></a>
-  </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Code Notes</span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-code-notes">    
-        <li>
-    <a class="dropdown-item" href="./code_notes/python-notes.html">
- <span class="dropdown-text">Python</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./code_notes/bash-notes.html">
- <span class="dropdown-text">Command Line</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./code_notes/git-notes.html">
- <span class="dropdown-text">Git</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./code_notes/sql-notes.html">
- <span class="dropdown-text">SQL</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./code_notes/cython-notes.html">
- <span class="dropdown-text">Cython</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./code_notes/docker-notes.html">
- <span class="dropdown-text">Docker</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./code_notes/rust-notes.html">
- <span class="dropdown-text">Rust</span></a>
-  </li>  
-    </ul>
-  </li>
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./summary.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Further reading</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Posts</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page-left">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Practical Plasma Physics: Lasers, Transport, and Magnetisation</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mhd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Magneto-Hydrodynamics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./collisions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Closure and Collisions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./transport.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Magnetised Transport</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nonlocal_transport.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Non-Local Transport</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lasers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Laser Theory</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./laserplasma.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plasma-Laser Coupling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inertial Confinement Fusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Further reading</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="bWV0YXNjaWVuY2U=">metascience <span class="quarto-category-count">(3)</span></div><div class="category" data-category="bmV1cm9sb2d5">neurology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bmxw">nlp <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGh5c2ljcw==">physics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="c3RhdGlzdGljcw==">statistics <span class="quarto-category-count">(1)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-summary" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Further reading</span></span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
 
 
+<p>There are lots of excellent resources and textbooks for learning about plasma physics if you want to go further and study the content of this short online book in more depth. Textbooks such as <span class="citation" data-cites="Boyd2003ThePlasmas">Boyd and Sanderson (<a href="#ref-Boyd2003ThePlasmas" role="doc-biblioref">2003</a>)</span> are a great comprehensive introduction to plasma theory. Online lecture notes such as those of <span class="citation" data-cites="tong2012kinetic">Tong (<a href="#ref-tong2012kinetic" role="doc-biblioref">2012</a>)</span> on kinetic theory provide a deep dive on the topic, but <span class="citation" data-cites="Swanson2008PlasmaTheory">Swanson (<a href="#ref-Swanson2008PlasmaTheory" role="doc-biblioref">2008</a>)</span> is the best in-depth source for plasma kinetic theory. Additionally there is also <span class="citation" data-cites="Shkarofsky1966ThePlasmas">Shkarofsky, Johnston, and Bachynski (<a href="#ref-Shkarofsky1966ThePlasmas" role="doc-biblioref">1966</a>)</span>, the venerable classic reference for plasma kinetics. For a textbook focused on collisions in plasmas, <span class="citation" data-cites="Helander2005CollisionalPlasmas">Helander and Sigmar (<a href="#ref-Helander2005CollisionalPlasmas" role="doc-biblioref">2005</a>)</span> is an excellent resource, And for an introduciton to inertial confinement fusion and laser-plasma interactions, <span class="citation" data-cites="Atzeni2004">Atzeni and Meyer-ter-Vehn (<a href="#ref-Atzeni2004" role="doc-biblioref">2004</a>)</span>, <span class="citation" data-cites="Pfalzner2006AnFusion">Pfalzner (<a href="#ref-Pfalzner2006AnFusion" role="doc-biblioref">2006</a>)</span> and <span class="citation" data-cites="Kruer1988">Kruer (<a href="#ref-Kruer1988" role="doc-biblioref">2018</a>)</span> are the best books on the subject. <span class="citation" data-cites="Stix1992">Stix (<a href="#ref-Stix1992" role="doc-biblioref">1992</a>)</span> has a wonderful short book on plasma waves, and <span class="citation" data-cites="Biskamp1997NonlinearMagnetohydrodynamics">Biskamp (<a href="#ref-Biskamp1997NonlinearMagnetohydrodynamics" role="doc-biblioref">1997</a>)</span> provides a more advanced treatment of MHD and nonlinear plasma physics. <span class="citation" data-cites="drake2006introduction">Drake and Drake (<a href="#ref-drake2006introduction" role="doc-biblioref">2006</a>)</span> is a good introduction to high-energy-density physics, covering plasmas at extreme conditions such as those found in inertial confinement fusion experiments. Finally, a good desk-side companion is the well-loved NRL Plasma Formulary <span class="citation" data-cites="richardson20192019">(<a href="#ref-richardson20192019" role="doc-biblioref">Richardson 2019</a>)</span> which lists many useful plasma formulas and parameters.</p>
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="c3RhdGlzdGljcw==" data-listing-date-sort="1753743600000" data-listing-file-modified-sort="1753802403631" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2869">
-<div class="thumbnail"><a href="./posts/stats/index.html" class="no-external">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Atzeni2004" class="csl-entry" role="listitem">
+Atzeni, Stefano, and Jurgen Meyer-ter-Vehn. 2004. <em><span class="nocase">The Physics of Inertial Fusion : Beam Plasma Interaction, Hydrodynamics, Hot Dense Matter</span></em>. Oxford University, Oxford. <a href="https://books.google.com/books?id=BJcy_p5pUBsC&amp;pgis=1">https://books.google.com/books?id=BJcy_p5pUBsC&amp;pgis=1</a>.
+</div>
+<div id="ref-Biskamp1997NonlinearMagnetohydrodynamics" class="csl-entry" role="listitem">
+Biskamp, Dieter. 1997. <em><span class="nocase">Nonlinear magnetohydrodynamics</span></em>. Vol. 1. Cambridge University Press.
+</div>
+<div id="ref-Boyd2003ThePlasmas" class="csl-entry" role="listitem">
+Boyd, Thomas James Morrow, and Jeffrey John Sanderson. 2003. <em><span class="nocase">The physics of plasmas</span></em>. Cambridge University Press.
+</div>
+<div id="ref-drake2006introduction" class="csl-entry" role="listitem">
+Drake, R Paul, and R Paul Drake. 2006. <em>Introduction to High-Energy-Density Physics</em>. Springer.
+</div>
+<div id="ref-Helander2005CollisionalPlasmas" class="csl-entry" role="listitem">
+Helander, Per, and Dieter J Sigmar. 2005. <em><span class="nocase">Collisional transport in magnetized plasmas</span></em>. Vol. 4. Cambridge University Press.
+</div>
+<div id="ref-Kruer1988" class="csl-entry" role="listitem">
+Kruer, William L. 2018. <em><span class="nocase">The physics of laser plasma interactions</span></em>. CRC Press. <a href="https://doi.org/10.1080/09500348914550481">https://doi.org/10.1080/09500348914550481</a>.
+</div>
+<div id="ref-Pfalzner2006AnFusion" class="csl-entry" role="listitem">
+Pfalzner, Susanne. 2006. <em><span class="nocase">An introduction to inertial confinement fusion</span></em>. CRC Press.
+</div>
+<div id="ref-richardson20192019" class="csl-entry" role="listitem">
+Richardson, Andrew S. 2019. <em>2019 NRL Plasma Formulary</em>. Naval Research Laboratory Washington, DC.
+</div>
+<div id="ref-Shkarofsky1966ThePlasmas" class="csl-entry" role="listitem">
+Shkarofsky, Issie Peter, Tudor Wyatt Johnston, and Morrel Paul Bachynski. 1966. <em><span class="nocase">The particle kinetics of plasmas</span></em>. Reading, Mass.: Addison-Wesley Publishing Company.
+</div>
+<div id="ref-Stix1992" class="csl-entry" role="listitem">
+Stix, T H. 1992. <em><span class="nocase">Waves in Plasmas</span></em>. Springer Science <span>&amp;</span> Business Media. <a href="https://doi.org/10.1007/978-1-4757-0459-4{\_}4">https://doi.org/10.1007/978-1-4757-0459-4{\_}4</a>.
+</div>
+<div id="ref-Swanson2008PlasmaTheory" class="csl-entry" role="listitem">
+Swanson, Donald Gary. 2008. <em><span class="nocase">Plasma kinetic theory</span></em>. CRC Press.
+</div>
+<div id="ref-tong2012kinetic" class="csl-entry" role="listitem">
+Tong, David. 2012. <span>“Kinetic Theory.”</span> <em>Graduate Course, University of Cambridge, Cambridge, UK</em>.
+</div>
+</div>
 
-<img loading="lazy" src="./posts/stats/gaussians-002.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/stats/index.html" class="no-external">Statistics Reference</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlzdGljcw=='); return false;">statistics</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/stats/index.html" class="no-external">
-<p>A reference for basic concepts in statistics, probability, and hypothesis testing.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/stats/index.html" class="no-external">
-<div class="listing-date">
-Jul 29, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="cGh5c2ljcw==" data-listing-date-sort="1750633200000" data-listing-file-modified-sort="1750927471058" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3502">
-<div class="thumbnail"><a href="./posts/gluonemissions/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/gluonemissions/decay.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/gluonemissions/index.html" class="no-external">Gluons in colliders</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/gluonemissions/index.html" class="no-external">
-<p>Gluon emission amplitudes in the soft collinear limit</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/gluonemissions/index.html" class="no-external">
-<div class="listing-date">
-Jun 23, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="cGh5c2ljcw==" data-listing-date-sort="1749942000000" data-listing-file-modified-sort="1750927471172" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1647">
-<div class="thumbnail"><a href="./posts/intro2qft/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/intro2qft/paths.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/intro2qft/index.html" class="no-external">Path Integrals in Quantum Field Theory</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/intro2qft/index.html" class="no-external">
-<p>An brief introduction</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/intro2qft/index.html" class="no-external">
-<div class="listing-date">
-Jun 15, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="bmxwJTJDbmV1cm9sb2d5" data-listing-date-sort="1749510000000" data-listing-file-modified-sort="1752920630465" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1303">
-<div class="thumbnail"><a href="./posts/termgraph/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/termgraph/Tumour_Group.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/termgraph/index.html" class="no-external">Graphs of Neurological Terminology</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bmxw'); return false;">nlp</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bmV1cm9sb2d5'); return false;">neurology</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/termgraph/index.html" class="no-external">
-<p>Uncovering semantic structures in neurological language using graph-based techniques</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/termgraph/index.html" class="no-external">
-<div class="listing-date">
-Jun 10, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="bWV0YXNjaWVuY2U=" data-listing-date-sort="1737158400000" data-listing-file-modified-sort="1750927471523" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1264">
-<div class="thumbnail"><a href="./posts/projects/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/projects/folder.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/projects/index.html" class="no-external">A Scientific Project Template</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWV0YXNjaWVuY2U='); return false;">metascience</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/projects/index.html" class="no-external">
-<p>Keeping your scientific projects organized</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/projects/index.html" class="no-external">
-<div class="listing-date">
-Jan 18, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="bWV0YXNjaWVuY2U=" data-listing-date-sort="1736726400000" data-listing-file-modified-sort="1750927473747" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="803">
-<div class="thumbnail"><a href="./posts/twoscientists/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/twoscientists/twoscientists.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/twoscientists/index.html" class="no-external">The two scientists: hammers and nails</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWV0YXNjaWVuY2U='); return false;">metascience</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/twoscientists/index.html" class="no-external">
-<p>Approaches to research</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/twoscientists/index.html" class="no-external">
-<div class="listing-date">
-Jan 13, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="bWV0YXNjaWVuY2U=" data-listing-date-sort="1733270400000" data-listing-file-modified-sort="1750927471937" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1292">
-<div class="thumbnail"><a href="./posts/reviews/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/reviews/articles.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reviews/index.html" class="no-external">What is a literature review for?</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWV0YXNjaWVuY2U='); return false;">metascience</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/reviews/index.html" class="no-external">
-<p>Crafting a literature review for your research project</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/reviews/index.html" class="no-external">
-<div class="listing-date">
-Dec 4, 2024
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -861,6 +652,15 @@ Henry Watkins
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./applications.html" class="pagination-link" aria-label="Inertial Confinement Fusion">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inertial Confinement Fusion</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

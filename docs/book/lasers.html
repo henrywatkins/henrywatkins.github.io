@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Posts – Henry Watkins</title>
+<title>6&nbsp; Laser Theory – Practical Plasma Physics: Lasers, Transport, and Magnetisation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<link href="./laserplasma.html" rel="next">
+<link href="./nonlocal_transport.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -41,13 +41,13 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dae3192f81785cf0e6fe7ca13257d296.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a054514f9e70afcecfffd91f61242d4d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -69,44 +69,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4KRLE15B5S"></script>
-
-<script type="text/javascript">
-
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
-</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -140,328 +102,208 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Henry Watkins</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
-<span class="menu-text">Blog</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./../book/index.html"> 
-<span class="menu-text">Plasma Book</span></a>
-  </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Code Notes</span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-code-notes">    
-        <li>
-    <a class="dropdown-item" href="./code_notes/python-notes.html">
- <span class="dropdown-text">Python</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./code_notes/bash-notes.html">
- <span class="dropdown-text">Command Line</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./code_notes/git-notes.html">
- <span class="dropdown-text">Git</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./code_notes/sql-notes.html">
- <span class="dropdown-text">SQL</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./code_notes/cython-notes.html">
- <span class="dropdown-text">Cython</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./code_notes/docker-notes.html">
- <span class="dropdown-text">Docker</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./code_notes/rust-notes.html">
- <span class="dropdown-text">Rust</span></a>
-  </li>  
-    </ul>
-  </li>
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lasers.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Laser Theory</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Posts</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page-left">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Practical Plasma Physics: Lasers, Transport, and Magnetisation</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mhd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Magneto-Hydrodynamics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./collisions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Closure and Collisions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./transport.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Magnetised Transport</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nonlocal_transport.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Non-Local Transport</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lasers.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Laser Theory</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./laserplasma.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plasma-Laser Coupling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inertial Confinement Fusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Further reading</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="bWV0YXNjaWVuY2U=">metascience <span class="quarto-category-count">(3)</span></div><div class="category" data-category="bmV1cm9sb2d5">neurology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bmxw">nlp <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGh5c2ljcw==">physics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="c3RhdGlzdGljcw==">statistics <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-helmholtz-equation" id="toc-the-helmholtz-equation" class="nav-link active" data-scroll-target="#the-helmholtz-equation"><span class="header-section-number">6.1</span> The Helmholtz Equation</a></li>
+  <li><a href="#the-paraxial-laser-model" id="toc-the-paraxial-laser-model" class="nav-link" data-scroll-target="#the-paraxial-laser-model"><span class="header-section-number">6.2</span> The Paraxial Laser Model</a></li>
+  <li><a href="#gaussian-optics" id="toc-gaussian-optics" class="nav-link" data-scroll-target="#gaussian-optics"><span class="header-section-number">6.3</span> Gaussian Optics</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-lasers" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Laser Theory</span></span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
 
 
+<p>High-intensity lasers are a key tool in the field of plasma physics. They are used to create and probe plasmas, as well as to drive high-energy particle acceleration. The interaction of laser light with plasma is complex and requires a detailed understanding of both the laser propagation and the plasma response. This chapter will introduce the theory of long-pulse laser propagation and coupling to plasma, which is essential for understanding high-energy-density physics. We start with the primary assumptions and analysis of laser propagation, before deriving the unidirectional-or paraxial-laser model. The plasma coupling mechanisms of inverse bremmsstrahlung and the ponderomotive force will then be introduced before concluding with a brief description of some of the important laser-plasma interactions that occur in the regimes of interest to this plasma regime.</p>
+<section id="the-helmholtz-equation" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="the-helmholtz-equation"><span class="header-section-number">6.1</span> The Helmholtz Equation</h2>
+<p>Laser light is a monochromatic coherent electromagnetic wave. The starting point is Maxwell’s electromagnetic wave equation. <span class="math display">\[
+c^2 \nabla^2 \textbf{E}-c^2 \nabla (\nabla \cdot \textbf{E})=\frac{1}{\epsilon_0}\frac{\partial\textbf{j}}{\partial t}+\frac{\partial^2 \textbf{E}}{\partial t^2}.
+\]</span></p>
+<p>Solving this equation exactly would be numerically too demanding because the spatial and temporal resolution requirements would be too great and are unnecessary for the nanosecond pulse duration, high-power lasers used in laser-plasma physics experiments. Several simplifying assumptions can be made to reduce this equation into the paraxial laser equation. The current in a plasma is determined by the flux of the electrons. The dielectric behaviour of the plasma can thus be found from the electron equation of motion. The simplified equation of motion required for the fast electron response to the laser field is <span class="math display">\[
+m_e\frac{\partial (n_e \textbf{V}_e)}{\partial t}=-e n_e\textbf{E} - m_e\nu_{ei}n_e \textbf{V}_e.
+\]</span> The high-frequency response of a plasma to the oscillating laser fields justifies dropping the pressure gradient term. The magnetic field term is ignored because unless the plasma is relativistic, it will be much smaller than the electric field contribution due to the factor <span class="math inline">\(\sim v/c\)</span>. Using the definition of the current in terms of electron velocity this can be recast as <span class="math display">\[
+\frac{\partial \textbf{j}}{\partial t}= \frac{e^2 n_e}{m_e}\textbf{E}-\nu_{ei}\textbf{j}.
+\]</span></p>
+<p>Unfortunately, in order to have a closed set of equations the collision term must be rewritten in terms of the electric field. In order to do this the current in the collision term is approximated as <span class="math display">\[
+\textbf{j}\approx-\frac{e n_e}{m_e \omega_l^2}\frac{\partial \textbf{E}}{\partial t},
+\]</span><br>
+which only holds in the regime where the collision frequency <span class="math inline">\(\nu_{ei}\)</span> is much less than the laser angular frequency <span class="math inline">\(\omega_l\)</span>. Therefore the wave equation can be written <span class="math display">\[
+c^2 \nabla^2 \textbf{E}=\frac{e^2 n_e}{\epsilon_0 m_e}\left(\textbf{E}+\frac{\nu_{ei}}{\omega_l^2}\frac{\partial \textbf{E}}{\partial t}\right)+\frac{\partial^2 \textbf{E}}{\partial t^2}.
+\]</span></p>
+<p>Given this describes a laser field, the electric field can be considered a product of the fast temporal oscillation at the laser angular frequency <span class="math inline">\(\omega_l\)</span> and a slowly varying ‘envelope’ <span class="math inline">\(\textbf{E'}(\textbf{r})\)</span>, where in total <span class="math inline">\(\textbf{E}(\textbf{r})=\textbf{E'}(\textbf{r})e^{-i\omega_l t}\)</span>. It is not necessary to resolve the fast oscillation of the wave because the <span class="math inline">\(\omega_l\)</span> timescale is much faster than the timescale of the plasma dynamics. It is possible to integrate out the fast motion, giving an equation for the envelope of the laser field. Time derivatives of <span class="math inline">\(\textbf{E'}\)</span> are ignored as the envelope is assumed to be slowly varying.</p>
+<p>It is here we make use of the paraxial approximation, whereby <span class="math inline">\(\textbf{k}\cdot\textbf{E}=0\)</span>. This limits the validity of this model to small angle refraction from the wavevector axis (to within <span class="math inline">\(\pm 15\)</span> degrees). While large angle refraction does occur in plasmas, the setups within most experiments are securely within the small-angle regime. This approximation removes the <span class="math inline">\(\nabla \cdot \textbf{E}\)</span> term in the wave equation. This leaves the Helmholtz equation <span class="math display">\[
+\nabla^2 \textbf{E'}+\frac{\omega_l^2}{c^2}\epsilon\textbf{E'}=0.
+\]</span> Where the dielectric function <span class="math inline">\(\epsilon\)</span> is defined as <span class="math display">\[
+\epsilon=1-\frac{\omega_p^2}{\omega_l^2}+i\frac{\omega_p^2}{\omega_l^3}\nu_{ei},
+\]</span> when expressed in terms of the plasma frequency, <span class="math display">\[
+    \omega_p=\frac{e^2 n_e}{\epsilon_0 m_e}.
+\]</span></p>
+<p>This Helmholtz equation for the laser envelope provides a powerful and tractable model for simulating laser propagation in underdense and near-critical plasmas. The dielectric function <span class="math inline">\(\epsilon\)</span> encodes both dispersive and absorptive effects of the plasma on the laser field. The real part of <span class="math inline">\(\epsilon\)</span> governs wave refraction, with the index of refraction given by <span class="math inline">\(n=Re(\epsilon)\)</span>​, while the imaginary part describes absorption, often referred to as inverse bremsstrahlung. This absorption mechanism dominates in dense, low-temperature plasmas where electron-ion collisions are frequent. The frequency dependence of <span class="math inline">\(\epsilon\)</span> also reveals the cutoff condition: when <span class="math inline">\(\omega_p=\omega_l\)</span>​, the dielectric function vanishes, and the wave is unable to propagate further. This defines the critical density surface, beyond which the laser cannot penetrate. This critical surface plays a key role in laser-plasma interactions, acting as the interface where laser energy is deposited and converted into plasma motion, heat, or magnetic field generation. Despite its simplifying assumptions, the Helmholtz model captures essential physics for laser beam propagation, refraction, and absorption in inhomogeneous plasmas and is widely used in both theoretical and numerical laser-plasma modeling.</p>
+</section>
+<section id="the-paraxial-laser-model" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="the-paraxial-laser-model"><span class="header-section-number">6.2</span> The Paraxial Laser Model</h2>
+<p>The paraxial laser model is a simplification of the Helmholtz equation and it is based on the assumption that the laser beam is nearly collimated, meaning that it does not diverge significantly as it propagates. This allows us to derive a simpler equation that captures the essential physics of laser propagation while ignoring higher-order effects. This is also a form of a slowly varying envelope approximation. It is possible to write the electric field of a linearly polarised wave <span class="math inline">\(\textbf{E'}\)</span> in terms of the envelope <span class="math inline">\(\psi\)</span> (the magnitude in the axis of polarisation) and the phase <span class="math inline">\(\phi(z)\)</span>. Without loss of generality the direction of propagation is chosen to be along the <span class="math inline">\(z\)</span>-axis which gives <span class="math display">\[
+E'(r,z)=\psi(r,z)\exp i\phi(z).
+\]</span></p>
+<p>The field is linearly polarised so it can be expressed as a complex scalar field. The phase function <span class="math inline">\(\phi\)</span> is chosen such that <span class="math display">\[
+\phi(z)=\frac{\omega_l}{c}\sqrt{\epsilon_a} z.
+\]</span> The factor <span class="math inline">\(\epsilon_a\)</span> is the dielectric function at the axis (that is, <span class="math inline">\(r=0\)</span>). This expression is plugged into the Helmholtz equation and the envelope is assumed to be slowly varying such that <span class="math display">\[
+|\partial_{zz}|&lt;&lt;|k\partial_z|.
+\]</span> This is equivalent to assuming the wavevector of the laser light is directed along z axis and any variation away from this direction is small. This yields the paraxial transport equation <span class="math display">\[
+2ik\sqrt{\epsilon_a}\partial_z \psi+\nabla^2_\perp \psi+k^2\left(\epsilon-\epsilon_a\right)\psi=0,
+\]</span> where the vacuum wavenumber <span class="math inline">\(k\)</span> is <span class="math display">\[
+k^2=\frac{\omega_l^2}{c^2}.
+\]</span></p>
+<p>The paraxial transport equation allows one to use the intensity <span class="math inline">\(I\)</span> of the laser field directly, calculated from the laser envelope <span class="math inline">\(\psi\)</span> <span class="math display">\[
+    I=\frac{1}{2} c \epsilon_0 \eta |\psi|^2,
+\]</span> with the speed of light <span class="math inline">\(c\)</span>, the permitivity of a vaccum <span class="math inline">\(\epsilon_0\)</span> and <span class="math inline">\(\eta\)</span> is the refractive index, defined as <span class="math display">\[
+    \eta=\sqrt{1-\frac{\omega_p^2}{\omega_l^2}}.
+\]</span></p>
+</section>
+<section id="gaussian-optics" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="gaussian-optics"><span class="header-section-number">6.3</span> Gaussian Optics</h2>
+<p>In a vacuum the paraxial equation has a cylindrically symmetric solution known as a Gaussian beam. This solution is a valuable approximation to many real-world beam profiles for the model of the laser pulse field before it enters a plasma. This solution is <span class="math display">\[
+\psi(r,z)=\psi_0 \frac{w_0}{w(z)}\exp\left(\frac{- r^2}{ w(z)^2}\right)\exp\left(-i k z  -\frac{i r^2}{2 R}+ i \phi (z)\right).
+\]</span> This solution is defined in terms of the following parameters, the beam waist size <span class="math display">\[
+w(z)=w_0\sqrt{1+\frac{z^2}{z_r^2}},
+\]</span> the beam radius of curvature <span class="math display">\[
+R(z)=z\left(1+\frac{z_r^2}{z^2}\right),
+\]</span> the Rayleigh length, <span class="math display">\[
+z_r=\frac{ k w_0^2}{2},
+\]</span> and the Gouy phase <span class="math display">\[
+\phi(z)=\arctan (\frac{z}{z_r}).
+\]</span></p>
+<p>A map of the real part of the laser envelope <span class="math inline">\(\psi\)</span> can be found in <a href="#fig-gaussbeam" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>.</p>
+<div id="fig-gaussbeam" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gaussbeam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/gaussian_beam_plot.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gaussbeam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Plot of a Gaussian beam profile. The real part of a Gaussian beam in a vacuum illustrated here shows how the beam focuses to a focal point in the centre of the plot. The width of the beam at the focal point defines the minimum beam waist <span class="math inline">\(\omega_0\)</span>.
+</figcaption>
+</figure>
+</div>
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="c3RhdGlzdGljcw==" data-listing-date-sort="1753743600000" data-listing-file-modified-sort="1753802403631" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2869">
-<div class="thumbnail"><a href="./posts/stats/index.html" class="no-external">
+</section>
 
-<img loading="lazy" src="./posts/stats/gaussians-002.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/stats/index.html" class="no-external">Statistics Reference</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlzdGljcw=='); return false;">statistics</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/stats/index.html" class="no-external">
-<p>A reference for basic concepts in statistics, probability, and hypothesis testing.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/stats/index.html" class="no-external">
-<div class="listing-date">
-Jul 29, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="cGh5c2ljcw==" data-listing-date-sort="1750633200000" data-listing-file-modified-sort="1750927471058" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3502">
-<div class="thumbnail"><a href="./posts/gluonemissions/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/gluonemissions/decay.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/gluonemissions/index.html" class="no-external">Gluons in colliders</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/gluonemissions/index.html" class="no-external">
-<p>Gluon emission amplitudes in the soft collinear limit</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/gluonemissions/index.html" class="no-external">
-<div class="listing-date">
-Jun 23, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="cGh5c2ljcw==" data-listing-date-sort="1749942000000" data-listing-file-modified-sort="1750927471172" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1647">
-<div class="thumbnail"><a href="./posts/intro2qft/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/intro2qft/paths.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/intro2qft/index.html" class="no-external">Path Integrals in Quantum Field Theory</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/intro2qft/index.html" class="no-external">
-<p>An brief introduction</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/intro2qft/index.html" class="no-external">
-<div class="listing-date">
-Jun 15, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="bmxwJTJDbmV1cm9sb2d5" data-listing-date-sort="1749510000000" data-listing-file-modified-sort="1752920630465" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1303">
-<div class="thumbnail"><a href="./posts/termgraph/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/termgraph/Tumour_Group.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/termgraph/index.html" class="no-external">Graphs of Neurological Terminology</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bmxw'); return false;">nlp</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bmV1cm9sb2d5'); return false;">neurology</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/termgraph/index.html" class="no-external">
-<p>Uncovering semantic structures in neurological language using graph-based techniques</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/termgraph/index.html" class="no-external">
-<div class="listing-date">
-Jun 10, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="bWV0YXNjaWVuY2U=" data-listing-date-sort="1737158400000" data-listing-file-modified-sort="1750927471523" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1264">
-<div class="thumbnail"><a href="./posts/projects/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/projects/folder.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/projects/index.html" class="no-external">A Scientific Project Template</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWV0YXNjaWVuY2U='); return false;">metascience</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/projects/index.html" class="no-external">
-<p>Keeping your scientific projects organized</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/projects/index.html" class="no-external">
-<div class="listing-date">
-Jan 18, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="bWV0YXNjaWVuY2U=" data-listing-date-sort="1736726400000" data-listing-file-modified-sort="1750927473747" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="803">
-<div class="thumbnail"><a href="./posts/twoscientists/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/twoscientists/twoscientists.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/twoscientists/index.html" class="no-external">The two scientists: hammers and nails</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWV0YXNjaWVuY2U='); return false;">metascience</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/twoscientists/index.html" class="no-external">
-<p>Approaches to research</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/twoscientists/index.html" class="no-external">
-<div class="listing-date">
-Jan 13, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="bWV0YXNjaWVuY2U=" data-listing-date-sort="1733270400000" data-listing-file-modified-sort="1750927471937" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1292">
-<div class="thumbnail"><a href="./posts/reviews/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/reviews/articles.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reviews/index.html" class="no-external">What is a literature review for?</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWV0YXNjaWVuY2U='); return false;">metascience</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/reviews/index.html" class="no-external">
-<p>Crafting a literature review for your research project</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/reviews/index.html" class="no-external">
-<div class="listing-date">
-Dec 4, 2024
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -861,6 +703,18 @@ Henry Watkins
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./nonlocal_transport.html" class="pagination-link" aria-label="Non-Local Transport">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Non-Local Transport</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./laserplasma.html" class="pagination-link" aria-label="Plasma-Laser Coupling">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plasma-Laser Coupling</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

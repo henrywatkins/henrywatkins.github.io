@@ -205,7 +205,9 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
   <li><a href="#sed" id="toc-sed" class="nav-link" data-scroll-target="#sed">sed</a></li>
   <li><a href="#ssh" id="toc-ssh" class="nav-link" data-scroll-target="#ssh">ssh</a></li>
   <li><a href="#llm" id="toc-llm" class="nav-link" data-scroll-target="#llm">llm</a></li>
+  <li><a href="#gnuplot" id="toc-gnuplot" class="nav-link" data-scroll-target="#gnuplot">gnuplot</a></li>
   <li><a href="#bash-scripts" id="toc-bash-scripts" class="nav-link" data-scroll-target="#bash-scripts">Bash scripts</a></li>
+  <li><a href="#data-processing-with-bash" id="toc-data-processing-with-bash" class="nav-link" data-scroll-target="#data-processing-with-bash">Data processing with bash</a></li>
   </ul>
 </nav>
     </div>
@@ -371,29 +373,50 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <p>The llm library is a good CLI for tasks querying large lanuage models. It is a fantastic addition to the aformentioned command line utilities to solve complex problems strait from the command line.</p>
 <p><a href="https://llm.datasette.io">llm library</a></p>
 </section>
+<section id="gnuplot" class="level2">
+<h2 class="anchored" data-anchor-id="gnuplot">gnuplot</h2>
+<p><a href="https://gnuplot.sourceforge.net/">gnuplot</a> is a command line plotting utility. It can be used to create simple plots and graphs from data files, or from the output of other command line programs. It is particularly useful for quick visualisation of data without needing to write a script or open a jupyter notebook. It is thus the ideal companion to the command line utilities and bash scripts. The quality of the plots is very good; comparable to matplotlib and seaborn. In fact it was the standard for academic plotting before matplotlib became popular. The usage is similar to python in that you can run it via an interpreter or a script.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gnuplot</span> plotscript.gnu</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="bash-scripts" class="level1">
 <h1>Bash scripts</h1>
 <p>Bash scripts can be remarkable capable. Combining variables, simple loops and pipeing alongside mature programs like <code>grep</code> and <code>awk</code> can create sophisticated scripts.</p>
 <p>For example, if I wants a short program to extract the phone numbers for all names starting with G, from a table of names and numbers, I can use:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for input argument (file name)</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$#</span><span class="st">"</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> &lt;filename&gt;"</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign the file name to a variable</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="va">input_file</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the file exists</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$input_file</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"File '</span><span class="va">$input_file</span><span class="st">' not found!"</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract lines where the name starts with G, then extract phone numbers using awk</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"^G"</span> <span class="st">"</span><span class="va">$input_file</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $2}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for input argument (file name)</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$#</span><span class="st">"</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> &lt;filename&gt;"</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign the file name to a variable</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="va">input_file</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the file exists</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$input_file</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"File '</span><span class="va">$input_file</span><span class="st">' not found!"</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract lines where the name starts with G, then extract phone numbers using awk</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"^G"</span> <span class="st">"</span><span class="va">$input_file</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $2}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="data-processing-with-bash" class="level1">
+<h1>Data processing with bash</h1>
+<p>With all these tools, it becomes clear that bash scripts can be created to build sophisticaed data processing pipelines. Together with standard command-line tools like <code>grep</code>, <code>awk</code>, <code>sed</code>, <code>jq</code> and <code>gnuplot</code>, you can create powerful scripts to process and analyze data without needing to write custom Python or R scripts. We could for example create a bash script to pull data from a database with <code>sqlite3</code> (see also notes on SQL), process it with <code>awk</code> and <code>sed</code>, and then visualize it with <code>gnuplot</code>.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example bash script to process data from a SQLite database and visualize it</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Query data from SQLite database</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> my_database.db <span class="st">"SELECT date, value FROM measurements;"</span> <span class="op">&gt;</span> data.csv</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Process the CSV: extract columns, clean up, and convert to TSV</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">','</span> <span class="st">'{print $1 "\t" $2}'</span> data.csv <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/"//g'</span> <span class="op">&gt;</span> data.tsv</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Run gnuplot to create the plot</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="ex">gnuplot</span> plotscript.gnu</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Plot saved as plot.png"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Combined with the command line interfaces to some other popular software such as the statistical software R, or the large language model library, you can create sophisticated data processing pipelines that are easy to run and modify.</p>
 
 
 </section>
