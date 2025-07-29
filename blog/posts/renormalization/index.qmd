@@ -1,0 +1,463 @@
+---
+title: "Renormalization"
+description: "An brief introduction"
+author: "Henry Watkins"
+date: "06/15/2025"
+image: paths.jpg
+draft: true
+toc: true
+bibliography: references.bib
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+categories:
+  - physics
+---
+
+
+## Spontaneous Symmetry Breaking (from Mandl & Shaw)
+
+* Only relevant if vacuum state is not unique.
+* The vacuum expectation value must be non-zero:
+
+  $$
+  \langle 0|\phi(x)|0 \rangle = c \neq 0
+  $$
+
+  For this to satisfy Lorentz symmetry, it must be scalar.
+
+---
+
+### Simple symmetry breaking model is Goldstone:
+
+$$
+\mathcal{L} = \partial^\mu \phi \partial_\mu \phi^* - \mu^2 |\phi|^2 - \lambda |\phi|^4,\quad \phi = \frac{1}{\sqrt{2}}(\phi_1 + i\phi_2)
+$$
+
+* Invariance under $U(1)$ global phase $\phi \rightarrow \phi e^{i\alpha}$
+* Breaks spontaneously
+
+---
+
+$$
+\mathcal{L} = \frac{1}{2} \partial^\mu \phi \partial_\mu \phi + \nabla \phi \cdot \nabla \phi + V(\phi),\quad V(\phi) = \mu^2 |\phi|^2 + \lambda |\phi|^4
+$$
+
+* $\lambda > 0$ to be bounded from below
+* Minimum of $V(\phi)$ at $\phi$ that minimizes $V(\phi)$:
+
+  * If $\mu^2 > 0$: no breaking → similar to complex Klein–Gordon
+  * If $\mu^2 < 0$: Mexican hat, potential will minimize at
+
+    $$
+    \phi_0 = \left( \frac{-\mu^2}{2\lambda} \right)^{1/2} e^{i\theta}
+    $$
+* Vacuum state **not unique**, can choose $\theta = 0$
+  ⇒ $\phi_0 = \frac{1}{\sqrt{2}} v$
+
+---
+
+* Can introduce real fields:
+
+  $$
+  \phi(x) = \frac{1}{\sqrt{2}} [v + \sigma + i \eta]
+  $$
+
+  to measure deviation from vacuum
+
+---
+
+Let me know if you want this typed up in LaTeX format, or if you'd like the next page transcribed.
+
+Here is the transcription of **Page 108** of your notes:
+
+---
+
+## Page 108
+
+### The new Lagrangian:
+
+$$
+\mathcal{L} = \frac{1}{2} \partial^\mu \sigma \partial_\mu \sigma - \frac{1}{2} (2\lambda v^2) \sigma^2 + \frac{1}{2} \partial^\mu \eta \partial_\mu \eta - \lambda v \sigma (\sigma^2 + \eta^2) - \frac{\lambda}{4} (\sigma^2 + \eta^2)^2
+$$
+
+* Quantize with kinetic + → interactions
+
+* Acts like coupled real Klein–Gordon fields, one with mass $\sqrt{2\lambda v^2}$ (σ), one massless (η)
+
+* The vacuum value $\phi_0 = \langle 0|\phi|0 \rangle$ satisfies condition for breaking
+
+* $\eta$ is a Goldstone field, i.e., zero mass as a consequence of vacuum degeneracy
+
+---
+
+### **QED + Higgs**
+
+* Define the QED covariant derivative:
+
+  $$
+  D_\mu \phi = \partial_\mu \phi + iq A_\mu \phi
+  $$
+
+* The coupled model is:
+
+  $$
+  \mathcal{L} = (D^\mu \phi)^* D_\mu \phi - \mu^2 |\phi|^2 - \lambda |\phi|^4 - \frac{1}{4} F_{\mu\nu} F^{\mu\nu}
+  $$
+
+* $U(1)$ symmetry means:
+
+  $$
+  \phi \rightarrow \phi' = \phi e^{iq\alpha(x)}, \quad \phi^* \rightarrow \phi'^* = \phi^* e^{-iq\alpha(x)}
+  $$
+
+  $$
+  A_\mu \rightarrow A'_\mu = A_\mu + \partial_\mu \alpha
+  $$
+
+* If $\sigma, \eta$ fields are used again...
+
+---
+
+Let me know if you'd like the next page transcribed or formatted in LaTeX.
+
+Here is the transcription of **Page 109** of your notes:
+
+---
+
+## Page 109
+
+However, there are too many degrees of freedom, so the **unitary gauge** is used where
+
+$$
+\phi = \frac{1}{\sqrt{2}} (v + \sigma)
+$$
+
+$$
+\Rightarrow \mathcal{L} = \frac{1}{2} \partial_\mu \sigma \partial^\mu \sigma - \frac{1}{2}(2\lambda v^2)\sigma^2 - \frac{1}{4}F_{\mu\nu}F^{\mu\nu} + \frac{1}{2}(qv)^2 A_\mu A^\mu 
+$$
+
+$$
+- 2\lambda v \sigma^3 - \frac{\lambda}{4} \sigma^4 + \frac{1}{2} q^2 (v + \sigma)^2 A_\mu A^\mu
+$$
+
+→ This is a **Klein-Gordon field** $\sigma$ and a **free massive vector field** $A^\mu$ + some interaction terms.
+
+* When quantized, $\sigma$ is a neutral boson with mass $\sqrt{2\lambda v^2}$, and $A^\mu$ is a neutral vector boson of mass $\sqrt{q^2 v^2}$
+
+* We found: a **complex scalar + massless vector** → **real scalar + massive vector field**
+
+* This way of acquiring mass **without removing gauge invariance** is the **Higgs mechanism** with the **Higgs field** $\sigma$
+
+---
+
+Let me know if you'd like a typed-up version of the full derivation or LaTeX code for these notes.
+
+Here is the transcription of **Page 110** from your notes:
+
+---
+
+## Page 110
+
+**9/5/19**
+
+### Scalar Field Theory + Renormalization
+
+* The path integral is
+
+  $$
+  Z = \langle 0 | e^{-iHt} | 0 \rangle = \int \mathcal{D} \phi \, e^{iS/\hbar}
+  $$
+
+  with $S = \int \mathcal{L} \, d^4x$
+
+$$
+\mathcal{L} = \frac{1}{2} \partial_\mu \phi \, \partial^\mu \phi - \frac{1}{2} \mu^2 \phi^2 + J \phi + \frac{\lambda}{4!} \phi^4
+$$
+
+* $\int \mathcal{D}\phi \Rightarrow \lim_{N \to \infty} \prod_i d\phi_i$  (sum over paths)
+
+---
+
+* **Observables**
+
+  * Taken from **n-point correlation functions** (time ordering):
+
+  $$
+  G_n(x_1, \dots, x_n) = \langle 0 | \mathcal{T} \{ \phi(x_1) \dots \phi(x_n) \} | 0 \rangle
+  $$
+
+  $$
+  = \frac{ \int \mathcal{D}\phi \, \phi(x_1) \dots \phi(x_n) e^{iS/\hbar} }{ \int \mathcal{D}\phi \, e^{iS/\hbar} }
+  $$
+
+  $$
+  = (-i\hbar)^n \, \left. \frac{1}{Z(J=0)} \, \frac{\delta^n Z}{\delta J(x_1) \dots \delta J(x_n)} \right|_{J=0}
+  $$
+
+---
+
+Let me know if you'd like a LaTeX version or a deeper explanation of this material.
+
+Here is the transcription for **Page 111** from your notes:
+
+---
+
+## Page 111
+
+### Perturbation theory – expand λ term
+
+$$
+\exp\left[-\frac{i}{2} \left( \int d^4x \, \frac{\lambda}{4!} \phi^4 \right)\right]
+$$
+
+* When no coupling, $\lambda = 0$, the phase function is
+
+$$
+\exp\left\{ \frac{i}{2} \int d^4x \left[ -\frac{1}{2} \phi (\partial^2 + \mu^2) \phi + J\phi \right] \right\}
+\Rightarrow \text{via int. by parts}
+$$
+
+* Klein-Gordon operator:
+
+$$
+(\Box + m^2) D(x - y) = \delta(x - y)
+$$
+
+$$
+\Rightarrow D(x - y) = \int \frac{d^4k}{(2\pi)^4} \, \frac{e^{ik(x - y)}}{k^2 - m^2}
+\qquad
+\phi(x) = \int D(x - y) J(y) \, d^4y
+$$
+
+---
+
+$$
+\Rightarrow \exp\left\{ \frac{i}{2} \int d^4x \left[ \int d^4y \, J(x) D(x - y) J(y) \right] \right\}
+$$
+
+$$
+= \exp\left[ -\frac{i}{2} \int d^4x \, d^4y \, J(x) D(x - y) J(y) \right] 
+\Rightarrow \text{defines } W[J]
+$$
+
+---
+
+$$
+\mathcal{Z}[J] = \mathcal{Z}[0] \, e^{\frac{i}{2} W[J]}
+$$
+
+$$
+W[J] = -\frac{1}{2} \iint d^4x \, d^4y \, J(x) D(x - y) J(y)
+$$
+
+---
+
+Let me know if you’d like this cleaned up into LaTeX format, or if you’d like an explanation of the meaning or derivation of any of the terms!
+
+Here is the transcription for **Page 112** from your notes:
+
+---
+
+## Page 112
+
+### **Renormalization**
+
+* A result in perturbation theory
+* Divergences appear in the ultraviolet limit of **effective field theory**, to deal with these we apply **regularization** — cut-offs in scale so divergences are replaced by dependence on scale $\Lambda$
+* Change in cutoff $\Lambda$ can be compensated by changing the coupling constants
+
+---
+
+### **Group equation**
+
+* In **QED** the coupling follows the running with energy $\mu$ according to:
+
+$$
+g(\mu) = G\left( \left(\frac{\mu}{M}\right)^d G(g(M)) \right)
+$$
+
+Where:
+
+* $G$ = Womgers (possibly “Wegner’s”) scaling function
+
+* $M$ = reference scale
+
+* $d$ = constant
+
+* Follows the **renormalization group equation**:
+
+$$
+\frac{\partial g}{\partial \log \mu} = \beta(g)
+$$
+
+---
+
+Let me know if you'd like this rewritten in LaTeX, or explained further (e.g., how the beta function $\beta(g)$ controls the flow of the coupling constant in the renormalization group).
+
+Here's the transcription for **Page 113** of your notes:
+
+---
+
+## Page 113
+
+For $\phi^4$ theory:
+
+$$
+\mathcal{L} = \frac{1}{2} \left\{ \partial_\mu \phi_0 \partial^\mu \phi_0 - \mu_0^2 \phi_0^2 \right\} - \frac{\lambda_0}{4!} \phi_0^4
+$$
+
+### The propagator is:
+
+$$
+i\Delta(p) = \int d^4x \, e^{-ipx} \langle 0 | T \phi_0(x) \phi_0(0) | 0 \rangle
+$$
+
+We can expand in powers of $\lambda_0$:
+→ **self-energy**
+
+$$
+i\Delta(p) = \frac{i}{p^2 - \mu_0^2 + i\varepsilon} + \frac{i}{p^2 - \mu_0^2 + i\varepsilon} (-i \Sigma(p^2)) \frac{i}{p^2 - \mu_0^2 + i\varepsilon} + \dots
+$$
+
+$$
+= \frac{i}{p^2 - \mu_0^2 - \Sigma(p^2) + i\varepsilon}
+$$
+
+---
+
+### One loop, 2-point:
+
+$$
+-i \Sigma(p^2) = -\frac{i \lambda_0}{2} \int \frac{d^4 \ell}{(2\pi)^4} \frac{i}{\ell^2 - \mu_0^2 + i\varepsilon}
+$$
+
+---
+
+### One loop, 4-point:
+
+$$
+\Gamma(p^2) = (-i\lambda_0)^2 \int \frac{d^4\ell}{(2\pi)^4} \frac{i}{\ell^2 - \mu_0^2} \cdot \frac{i}{(1 - p)^2 - \mu_0^2}
+$$
+
+---
+
+### Notes:
+
+* These are both **divergent**!
+* **Divergences** only reside in first few terms of expansion about external momenta $p^2 = s$
+* So:
+
+$$
+\Gamma(s) = \Gamma(0) + \tilde{\Gamma}(s) \quad \text{(finite part)}
+$$
+
+↳ $\Gamma(0)$: **divergent**
+
+---
+
+Let me know if you'd like a clearer LaTeX version or any explanations for the Feynman diagram contributions!
+
+Here's the transcription for **Page 114** of your notes:
+
+---
+
+## Page 114
+
+* Renormalise to get finite answer by
+
+  $$
+  \tilde{\Gamma}(s) = \Gamma(s) - \Gamma(0)
+  $$
+
+* In terms of $\Sigma$:
+
+  $$
+  \Sigma(p^2) = \Sigma(\mu^2) + (p^2 - \mu^2)\Sigma'(\mu^2) + \tilde{\Sigma}(p^2)
+  $$
+
+* $\tilde{\Sigma}$ satisfies:
+
+  $$
+  \tilde{\Sigma}(\mu^2) = \tilde{\Sigma}'(\mu^2) = 0
+  $$
+
+---
+
+### Propagator is now:
+
+$$
+i\Delta(p) = i \left[ (p^2 - \mu_0^2 - \Sigma(\mu^2) - (p^2 - \mu^2)\Sigma'(\mu^2) - \tilde{\Sigma}(p^2)) \right]^{-1}
+$$
+
+* “New” mass is now:
+
+  $$
+  \mu^2 = \mu_0^2 + \Sigma(\mu^2)
+  $$
+
+---
+
+$$
+i\Delta(p) = i \left[ (p^2 - \mu^2) \left\{ 1 - \Sigma'(\mu^2) \right\} - \tilde{\Sigma}(p^2) + i\varepsilon \right]^{-1}
+$$
+
+* $\mu_0$: “bare” mass
+* $\mu$: “physical” mass
+  → it has been **renormalised**
+
+---
+
+* If instead:
+
+  $$
+  \tilde{\Sigma}(p^2) \simeq \left[ 1 - \Sigma'(\mu^2) \right] + \mathcal{O}(\lambda_0)
+  $$
+
+$$
+i\Delta(p) = i Z_\varphi \left[ (p^2 - \mu^2) - \tilde{\Sigma}(p^2) + i\varepsilon \right]^{-1}
+$$
+
+* $Z_\varphi = \left[ 1 - \Sigma'(\mu^2) \right]^{-1}$, with $\varphi = Z_\varphi^{-1/2} \varphi_0$
+  → **wave function renormalisation**
+
+---
+
+Let me know if you'd like this rewritten in LaTeX for typesetting or if you'd like a summary of renormalisation concepts!
+
+Here is a transcription of **Page 115** of your notes:
+
+---
+
+## Page 115
+
+* These are one-loop, two-, ... *n*-loop — are not so simple
+
+---
+
+### Gravity
+
+* **Non-renormalisable** because infinitely many divergences
+* In **perturbative** approach
+* Cannot hide divergences into the constants
+* Works up to one-loop but cannot be extended to higher terms
+
+---
+
+### In short:
+
+* Given a theory described by function $Z$ of state variables $\{s_i\}$ and couplings $\{\lambda_j\}$
+  → Contains all the physics of the system
+
+* If there is a **scale transformation** $\{s_i\} \rightarrow \{\tilde{s}_i\}$, where there are fewer $\tilde{s}_i$ than $s_i$:
+
+* If we re-write $Z$ in terms of $\tilde{s}_i$, and this can be done by a change in couplings $\{\lambda_j\} \rightarrow \{\tilde{\lambda}_j\}$, then it is **renormalisable**
+
+* The change in couplings
+
+  $$
+  \frac{d \tilde{\lambda}_j}{d \ln \mu} = \beta_j(\{\lambda_j\})
+  $$
+
+  is performed by a **beta function** → which induces **renormalisation group flow**, and $\lambda$'s are **running couplings**
+
+* The **fixed points** of $\beta$ are the most important interactions

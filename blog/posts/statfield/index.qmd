@@ -11,3 +11,445 @@ categories:
   - physics
 ---
 
+
+### Statistical Field Theory
+
+* Can describe phase transitions in equilibrium statistical systems
+* In system quantified by external parameter like $T, B$, systems exhibit singularities in thermodynamic variables
+* Can get **first-order** transitions
+
+  * *Boiling water* — discontinuity in entropy
+* **Second-order transition**
+
+  * continuous transition from paramagnetic to ferromagnetic behaviour at the Curie temperature
+* These are **critical phenomena**
+* Behaviour of a system is described by different variables at different scales, the relationship between these variables is the **renormalisation group equations**
+
+---
+
+### Ising Model
+
+* Magnetisation of a crystal lattice with positions $\mathbf{n} = \sum_{i=1}^{d} n_i \mathbf{e}_i$
+* Each has spin $\sigma_n \in \{-1, +1\}$
+* The energy is
+
+$$
+E = -J \sum_{n, m} \sigma_n \sigma_{n + m}
+$$
+
+* Sum of nearest-neighbour interactions with coupling $J$
+
+---
+
+Let me know if you'd like this added to the previous notes or compiled into a LaTeX or PDF file!
+
+Here is the extracted content from page 27 of your notes, formatted in Markdown with LaTeX:
+
+---
+
+## Page 27
+
+* Total so
+
+$$
+H = E - h \sum_n \sigma_n, \quad h = \text{B field}, \quad m \cdot e = \xi e_i
+$$
+
+---
+
+### The partition function for this system:
+
+$$
+Z = \sum \exp(-\beta H(\sigma)) = \sum \exp\left\{ -\beta \left( E(\sigma) - h \sum_n \sigma_n \right) \right\}
+$$
+
+↳ *sum over configurations*
+
+---
+
+### Probability density of configuration $\sigma$:
+
+$$
+P(\sigma) = \frac{1}{Z} \exp\left( -\beta H(\sigma) \right), \quad \beta = \frac{1}{kT}
+$$
+
+---
+
+$$
+\langle O(\sigma) \rangle = \sum P(\sigma) O(\sigma) \quad \text{– average observable (expectation)}
+$$
+
+---
+
+### The Gibbs entropy
+
+$$
+S = -k \sum P(\sigma) \log P(\sigma), \quad U = \langle E \rangle \text{ (internal energy)}
+$$
+
+$$
+= k \left[ \beta (U - hM) + \log Z \right], \quad M = \left\langle \sum_n \sigma_n \right\rangle \text{ (magnetisation)}
+$$
+
+---
+
+### The Helmholtz free energy / Lagrange potential
+
+$$
+-F = kT \log Z = U - TS + hM
+$$
+
+$$
+\Rightarrow U - hM = -\frac{\partial \log Z}{\partial \beta \, h}, \quad M = -\left( \frac{\partial F}{\partial h} \right)_T
+$$
+
+---
+
+### Considering an infinitesimal change in entropy
+
+$$
+\delta S = -k \sum \delta p \left( -\beta (E - h \sum \sigma_n) - \log Z + 1 \right)
+$$
+
+---
+
+### and energy
+
+$$
+\delta U = \sum \delta p E + \sum p \, \delta E
+$$
+
+---
+
+Would you like to compile these into a complete document or continue with more pages?
+
+Here is the extracted content from page 28, formatted in Markdown with LaTeX:
+
+---
+
+## Page 28
+
+$$
+\Rightarrow dU = T dS - P dV + h dM, \quad \text{using } \sum_\sigma \delta p = 0 \text{ since } \sum_\sigma p = 1
+$$
+
+---
+
+We can simplify by saying
+
+$$
+M = \left\langle \sum_\sigma \sigma_n \right\rangle = N \langle \sigma_0 \rangle \quad \text{← average per site}
+$$
+
+↑ *no. of sites*
+
+---
+
+### Define susceptibility $\chi$
+
+$$
+\chi = \frac{\partial M}{\partial h}\Big|_T = kT \frac{\partial^2 \log Z}{\partial h^2}\Big|_T
+$$
+
+---
+
+So
+
+$$
+\frac{\chi}{N} = \beta \left( \sum_\sigma p(\sigma) [\sigma_0 \sum \sigma_n] - \frac{kT}{Z} \frac{\partial Z}{\partial h} \sum_\sigma p(\sigma) \sigma_0 \right)
+$$
+
+$$
+\Rightarrow \frac{\chi}{N} = \beta \sum_n \left( \langle \sigma_0 \sigma_n \rangle - \langle \sigma_0 \rangle \langle \sigma_n \rangle \right)
+$$
+
+* *We can use this to define the **correlation function***
+
+$$
+G_\beta(n, r) = \langle \sigma_n \sigma_{n+r} \rangle - \langle \sigma_n \rangle \langle \sigma_{n+r} \rangle
+$$
+
+---
+
+**Translational invariance** implies we can drop $n$:
+
+$$
+\chi = \beta N \sum_r G(r)
+$$
+
+---
+
+> **The correlation function** gives the response of average magnetisation at $0$ to a fluctuation at $r$
+> – *parametrize with **correlation length** $\xi$*
+
+---
+
+Let me know if you'd like these compiled or converted into a specific format!
+
+
+Here is the extracted content from **page 29**, formatted in Markdown with LaTeX:
+
+---
+
+## Page 29
+
+$$
+G(r) = \begin{cases}
+\frac{1}{r^{D-2+\eta}} & r \ll \xi \\
+\frac{e^{-r/\xi}}{(\xi r)^{D/2}} & r \gg \xi
+\end{cases}
+$$
+
+---
+
+### The Ising model only works for $D = 1, 2$
+
+For $D = 1$:
+
+$$
+Z = \sum_{\sigma_i = \pm 1} \prod_{i=0}^{N-1} \exp\left[\beta J \, \sigma_i \sigma_{i+1} + \frac{1}{2} h (\sigma_i + \sigma_{i+1})\right]
+$$
+
+$$
+= \sum_{\sigma_1 \dots \sigma_N} W_{\sigma_1 \sigma_2} W_{\sigma_2 \sigma_3} \dots W_{\sigma_{N-1} \sigma_N} \quad \text{(transfer matrix)}
+$$
+
+$$
+W_{\sigma \sigma'} = \exp\left[\beta J \sigma \sigma' + \frac{1}{2} h (\sigma + \sigma')\right], \quad W = 
+\begin{bmatrix}
+\mu z & z^{-1} \\
+z^{-1} & \frac{1}{\mu z}
+\end{bmatrix}
+$$
+
+$$
+\mu = e^{\beta h}, \quad z = e^{\beta J}, \quad Z = \text{Tr}(W^N) \Rightarrow Z = \lambda_+^N + \lambda_-^N \quad \text{(eigenvalues!)}
+$$
+
+---
+
+If $N \gg 1$, then $\lambda_+^N \gg \lambda_-^N$ so $Z \approx \lambda_+^N$
+
+$$
+\lambda_\pm = z \cosh(\beta h) \pm \sqrt{z^2 \sinh^2(\beta h) + z^{-2}}
+$$
+
+---
+
+### The free energy is thus:
+
+$$
+F = -N k_B T \log \lambda_+
+$$
+
+---
+
+### Magnetisation:
+
+$$
+\frac{M}{N} = kT \frac{\partial \log \lambda_+}{\partial h} = \frac{e^{\beta J} \sinh \beta h}{\sqrt{e^{2\beta J} \sinh^2 \beta h + e^{-2\beta J}}}
+$$
+
+---
+
+**To find the correlation function, need $\langle \sigma_0 \sigma_r \rangle$**
+
+---
+
+Let me know if you’d like to compile this with the previous pages or format it for export (e.g., LaTeX/PDF).
+
+Here is the extracted content from **page 30**, formatted in Markdown with LaTeX:
+
+---
+
+## Page 30
+
+$$
+\langle \sigma_0 \sigma_r \rangle = \frac{1}{Z} \sum_\sigma \sigma_0 W_{\sigma_0 \sigma_1} \dots \sigma_r W_{\sigma_r \sigma_{r+1}} \dots W_{\sigma_{N-1} \sigma_N}
+$$
+
+$$
+= \frac{\text{Tr}(W P S P W^{N-r})}{\text{Tr}(W^N)} \quad \text{with } S = \begin{pmatrix} 0 & 1 \\ 0 & -1 \end{pmatrix}
+$$
+
+---
+
+Diagonalise $W = P \Lambda P^{-1} \Rightarrow \Lambda = \begin{pmatrix} \lambda_+ & 0 \\ 0 & \lambda_- \end{pmatrix}$
+
+$P$ is orthogonal, and so:
+
+$$
+P = \begin{pmatrix} \cos \phi & -\sin \phi \\ \sin \phi & \cos \phi \end{pmatrix}
+$$
+
+$$
+\Lambda^N = \begin{pmatrix} \lambda_+^N & 0 \\ 0 & \lambda_-^N \end{pmatrix} \Rightarrow \text{Tr}(\Lambda^N) = \lambda_+^N + \lambda_-^N
+$$
+
+$$
+P^{-1} S P = \begin{pmatrix} \cos 2\phi & -\sin 2\phi \\ -\sin 2\phi & -\cos 2\phi \end{pmatrix}
+$$
+
+$$
+\text{Tr}\left( P^{-1} S P \, N \, P^{-1} S P \, \Lambda^{N - r} \right) = \cos^2 2\phi + \sin^2 2\phi \left( \frac{\lambda_-}{\lambda_+} \right)^r
+$$
+
+---
+
+Define $\xi = \left( \log \frac{\lambda_+}{\lambda_-} \right)^{-1} \Rightarrow G(r) = \sin^2 2\phi \, e^{-r/\xi}$
+
+---
+
+### Phase Transition Phenomenology
+
+* Phase transitions occur at values of external fields
+  $(T, B, P)$ at which one or more observables are singular.
+* Equilibrium for fixed external fields defined by **minimum of a thermodynamic potential**
+
+---
+
+Let me know if you'd like to combine this with previous notes into a complete document!
+
+Here is the extracted content from **page 31**, formatted in Markdown:
+
+---
+
+## Page 31
+
+### Thermodynamic Potentials:
+
+* **Internal energy** $U$ → fixed $S, V$
+* **Helmholtz free energy** → fixed $T, V$
+* **Gibbs free energy** → fixed $T, P$
+* **Enthalpy** → fixed $S, P$
+
+---
+
+### 1st order (phase transitions):
+
+* Singularities are discontinuities
+* Latent heat is non-zero
+* Correlation length is finite
+* Bodies in 2 phases may be in equilibrium at transition points
+
+---
+
+### 2nd order — *continuous*:
+
+* Singularities are divergences
+* Latent heat is zero
+* Divergent correlation length
+* No mixing of phases at transition point
+* Symmetry of one phase is a subgroup of another
+
+---
+
+### Order Parameter
+
+* Distinguishes different phases, takes different values in each, usually intrinsic
+
+---
+
+Let me know if you want this compiled with your previous notes or exported in a specific format like LaTeX or PDF.
+
+Here is the extracted content from **page 32**, formatted in Markdown with LaTeX:
+
+---
+
+## Page 32
+
+### Examples
+
+* e.g. magnetisation $M$ is order parameter of **Ising model**
+* e.g. boiling $\text{H}_2\text{O}$: it is **density** $\rho$
+
+---
+
+### Phase diagram of $\text{H}_2\text{O}$
+
+(Graph labeled $M, \rho$ vs. $T$, showing curves A and B)
+
+* A: along A is **1st order** transition
+* B: along B **through critical point** → **2nd order**
+
+---
+
+### **Landau–Ginzburg theory**
+
+* A phenomenological theory describing all types of transition using classical physics
+* Expand the equilibrium free energy $A$ in terms of the order parameter $m$:
+
+$$
+A(T, M) = A_0 + \frac{1}{2} A_2 M^2 + \frac{1}{4} A_4 M^4 + \dots, \quad A_2 = a_2(T - T_c) \text{ as } T \to T_c
+$$
+
+---
+
+* Since equilibrium is when $\frac{dA}{dM} = 0$ (from equation of state):
+
+$$
+|M(T)| = \left| \frac{A_2}{A_4} \right|^{1/2} \left( 1 + \frac{1}{2} \frac{A_6 A_2}{A_4^2} + \dots \right)
+$$
+
+---
+
+$$
+\Rightarrow T \to T_c \quad \sim |T - T_c|^{1/2} \Rightarrow \beta = \frac{1}{2}
+$$
+
+---
+
+Let me know if you'd like a compiled version of all pages or a specific export format (LaTeX, PDF, etc.).
+
+Here is the extracted content from **page 33**, formatted in Markdown with LaTeX:
+
+---
+
+## Page 33
+
+We can write:
+
+$$
+m(T) = \left| \frac{A_2}{A_4} \right|^{1/2} M(x), \quad x = \frac{A_2 A_6}{A_4^2}
+$$
+
+---
+
+If $A_4 > 0$ and an external field $h$ is applied, the symmetry $m \to -m$ is broken and:
+
+$$
+A = A_0 - hM + \frac{1}{2} A_2 M^2 + \frac{1}{4} A_4 M^4
+$$
+
+At $T = T_c$, $A_2 = 0$, so equilibrium is:
+
+$$
+-h + A_4 M^3 = 0
+$$
+
+---
+
+If $T > T_c$, the equation of state is:
+
+$$
+-h + a_2 (T - T_c) M + A_4 M^3 = 0
+$$
+
+$$
+\text{Let } \epsilon = T - T_c
+$$
+
+---
+
+And the **susceptibility** is:
+
+$$
+\chi = \frac{\partial M}{\partial h} \Big|_{h \to 0} = \frac{1}{a_2 T_c \epsilon} \Rightarrow \delta = 1
+$$
+
+---
+
+* **First and second order transitions** separated by $A_4 \to 0$ at $T = T_c$
+* **Critical point**
+
+

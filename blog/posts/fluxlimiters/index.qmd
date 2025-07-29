@@ -1,0 +1,247 @@
+---
+title: "Flux limiters"
+description: "Ionization in plasmas "
+author: "Henry Watkins"
+date: "01/18/2025"
+image: folder.jpg
+draft: true
+toc: true
+bibliography: references.bib
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+categories:
+  - physics
+  - hpc
+---
+
+### Flux limiters
+
+**Datum/Date:** 3/16/2020
+
+One obtains a flux-limited method by combining a first-order method like upwind with a 2nd-order method like Lax-Wendroff
+
+\[ F = F_1 + \phi(r) F_{LW} \]
+
+\[
+F_{i-\frac{1}{2}} = F_{i-\frac{1}{2}} + \phi(r_{i-\frac{1}{2}}) \left[ F_{hi-\frac{1}{2}} - F_{i-\frac{1}{2}} \right]
+\]
+
+\[
+F_{i+\frac{1}{2}} = F_{L i+\frac{1}{2}} + \phi(r_{i+\frac{1}{2}}) \left[ F_{hi+\frac{1}{2}} - F_{L i+\frac{1}{2}} \right]
+\]
+
+\[
+r_{i-\frac{1}{2}} = \frac{u_{i-1} - u_{i-2}}{u_i - u_{i-1}}, \quad r_{i+\frac{1}{2}} = \frac{u_i - u_{i-1}}{u_{i+1} - u_i}
+\]
+
+---
+
+### Example limiters
+
+**Van Leer**  
+\[
+\phi(r) = \frac{r + |r|}{1 + |r|}
+\]
+
+**Superbee**  
+\[
+\phi(r) = \max(0, \min(1, 2r), \min(2, r))
+\]
+
+**Minmod**  
+\[
+\phi(r) = \min(1, r)
+\]
+
+---
+
+### MUSCL – Hancock scheme + HLL → gives high-order scheme
+
+1. reconstruct cell values with MUSCL-Hancock scheme  
+   - gives \( U^L, U^R \) of interface
+2. evolve \( U^L, U^R \) to \( U^{L}_{i+1/2}, U^{R}_{i+1/2} \) using physical flux function
+3. use HLL to get numerical fluxes at the half-step cell interfaces
+4. update cell-averaged solutions. (average)
+
+**Datum/Date:** 4/14/20
+
+### HLLE Flux
+
+\[
+F^{\text{HLLE}}_{i+\frac{1}{2}} = \frac{b^+ F_L - b^- F_R}{b^+ - b^-} + \frac{b^+ b^-}{b^+ - b^-} (U_R - U_L)
+\]
+
+\[
+b^+ = \max\left(\max(\lambda^M, v_x^R + c^R), 0\right)
+\]
+
+\[
+b^- = \min\left(\min(\lambda^M, v_x^L + c^L), 0\right)
+\]
+
+---
+
+### MUSCL - Hancock Reconstruction
+
+\[
+U_i^L = U_i^n - \frac{1}{2} \Delta U_i^n
+\]
+
+\[
+U_i^R = U_i^n + \frac{1}{2} \Delta U_i^n
+\]
+
+\[
+\Delta U_i^n = \min\text{mod} \left( (U_i^n - U_{i-1}^n), (U_{i+1}^n - U_i^n) \right)
+\]
+
+\[
+\Delta u_i = \phi_{\text{VL}}(r) C \quad \Delta u_i = \phi_{\text{SB}}(r) C
+\]
+
+---
+
+### Evolve
+
+\[
+U_{i}^{R,n+\frac{1}{2}} = U_i^R - \frac{\Delta t}{2\Delta x} \left[ F(U_i^R) - F(U_i^L) \right]
+\]
+
+\[
+U_{i}^{L,n+\frac{1}{2}} = U_i^L - \frac{\Delta t}{2\Delta x} \left[ F(U_i^R) - F(U_i^L) \right]
+\]
+
+---
+
+### Calculate Flux – Riemann problem
+
+\[
+F_{i+\frac{1}{2}}^{n+\frac{1}{2}} = F\left( U_{i+1}^{L,n+\frac{1}{2}}, U_i^{R,n+\frac{1}{2}} \right)
+\]
+
+← can use Lax-Friedrichs for a simple approach  
+← or use HLL ← upwind
+
+---
+
+### Average
+
+\[
+U_i^{n+1} = U_i^n - \frac{\Delta t}{\Delta x} \left( F_{i+\frac{1}{2}}^{n+\frac{1}{2}} - F_{i-\frac{1}{2}}^{n+\frac{1}{2}} \right)
+\]
+
+**Datum/Date:** *(Not specified on this page)*
+
+---
+
+\[
+U_{i-\frac{1}{2}}^{n,L} = U_i^n + \frac{1}{2} \Delta x \sigma_{i-1}
+\]
+
+\[
+U_{i-\frac{1}{2}}^{n,R} = U_i^n - \frac{1}{2} \Delta x \sigma_i \quad \sigma_i = \text{minmod}
+\]
+
+\[
+U_{i+\frac{1}{2}}^{n,L} = U_i^n + \frac{1}{2} \Delta x \sigma_i
+\]
+
+\[
+U_{i+\frac{1}{2}}^{n,R} = U_{i+1}^n - \frac{1}{2} \Delta x \sigma_{i+1}
+\]
+
+---
+
+**Evolve:**
+
+\[
+U_{i+\frac{1}{2}}^{n+\frac{1}{2},R} = U_{i-\frac{1}{2}}^{n,R} + \frac{1}{2} \frac{\Delta t}{\Delta x} \left[ F(U_{i+\frac{1}{2}}^n) - F(U_{i-\frac{1}{2}}^n) \right]
+\]
+
+\[
+U_{i+\frac{1}{2}}^{n+\frac{1}{2},L} = U_{i+\frac{1}{2}}^{n,L} + \frac{1}{2} \frac{\Delta t}{\Delta x} \left[ F(U_{i+1/2}^n) - F(U_{i-1/2}^n) \right]
+\]
+
+---
+
+### Simplest Roe flux
+
+\[
+F_{i+\frac{1}{2}}^{n+\frac{1}{2}} = F(U_{i+\frac{1}{2}}^{L*}, U_{i+\frac{1}{2}}^{R*})
+\]
+
+Where:
+- \( U_{i+\frac{1}{2}}^{L*} \downarrow U_{i+1}^n \)
+- \( U_{i+\frac{1}{2}}^{R*} \downarrow U_i^n \)
+
+\[
+= \frac{1}{2} \left[ F(U_{i+\frac{1}{2}}^{R*}) + F(U_{i+\frac{1}{2}}^{L*}) \right]
+- \frac{1}{2} \left| \frac{f(U_{i+\frac{1}{2}}^{R*}) - f(U_{i+\frac{1}{2}}^{L*})}{U_{i+1}^n - U_i^n} \right| 
+\left( U_{i+\frac{1}{2}}^{L*} - U_{i+\frac{1}{2}}^{R*} \right)
+\]
+
+---
+
+*When no MUSCL used this reduces to the standard upwind differencing with*  
+\( U_{i+1}^{n*}, U_i^{n*} = U \)
+
+---
+
+### Magnetosonic Speeds
+
+\[
+V_{\pm}^2 = \frac{1}{2} \left[ U_a^2 + U_s^2 + \sqrt{(U_a^2 + U_s^2)^2 - 4 c_a^2 U_s^2 \cos^2 \theta} \right]
+\]
+
+\[
+\cos \theta = \frac{\vec{k} \cdot \vec{B}_0}{|\vec{k}||\vec{B}_0|}
+\]
+
+\[
+v_{a x}^2 = \frac{B_x^2}{\rho} \quad \text{(with arrow pointing from } 4 c_s^2 v_{a x}^2 \text{)}
+
+**Datum/Date:** *(Not specified on this page)*
+
+---
+
+### Key to solution fs — *see Toro*
+
+1. Reconstruction method (e.g. MUSCL)  
+2. Riemann solver (e.g. HLL)  
+   **or**
+3. low-order flux (LXF)  
+4. high-order flux (LxW)  
+5. flux limiter (VL)
+
+---
+
+### Flux-limited centered scheme — **FORCE** *(see Toro)*
+
+\[
+F_{i+\frac{1}{2}} = F_{i+\frac{1}{2}}^{LO} + \phi_{i+\frac{1}{2}} \left[ F_{i+\frac{1}{2}}^{HI} - F_{i+\frac{1}{2}}^{LO} \right]
+\]
+
+\[
+F_{i+\frac{1}{2}}^{LO} = F_{i+\frac{1}{2}}^{\text{FOR}}, \quad F_{i+\frac{1}{2}}^{HI} = F_{i+\frac{1}{2}}^{RI}
+\]
+
+\[
+F_{i+\frac{1}{2}}^{\text{FOR}} = \frac{1}{2} \left[ F_{i+\frac{1}{2}}^{LF}(U_L, U_R) + F_{i+\frac{1}{2}}^{RI}(U_L, U_R) \right]
+\]
+
+- LF = Lax-Friedrichs  
+- RI = Lax-Wendroff (LW)
+
+---
+
+\[
+\phi(r) = \hat{\phi}_f + (1 - \hat{\phi}_f) \psi(r) \quad \text{→ conventional flux limiter}
+\]
+
+\[
+\hat{\phi}_f = 
+\begin{cases}
+0, & r \leq 1 \\
+\frac{1 - c_{\max}}{1 + c_{\max}}, & r > 1
+\end{cases}
+\]
