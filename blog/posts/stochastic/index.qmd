@@ -2,23 +2,29 @@
 title: "Notes on Stochastic Processes"
 description: "Brownian motion, stochastic processes and the Fokker-Planck Equation"
 author: "Henry Watkins"
-date: "01/18/2025"
-image: folder.jpg
-draft: true
+date: "08/11/2025"
+image: brownianmotion.png
+draft: false
 license: "CC BY"
+toc: true
 copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
 categories:
   - physics
 ---
 
-## Brownian motion
+How do mathematical models deal with random processes? How can we apply the familiar tools of calculus to systems that have inherently stochastic terms? Over the last few months it has been an interest to dive deeper into the mathematics of stochastic processes. These notes, partly for my own interests, cover some of the key concepts in this field. In particular, these cover the Langevin equation, Brownian motion, and the Fokker-Planck equation, which are foundational concepts in the study of stochastic processes.
+
+# The Langevin Equation
 
 How do we explain random motion? 
 
-We begin with the Langevin equation, which models a dynamical system under the influence of random perturbations. The archetypal system is that of Brownian motion, where a particle, suspended in a background medium, displays seemingly random motion from many unseen collisions. Einstein's explanation of Brownian motion is an often overlooked, but no less impressive, illustration of his way of thinking.
+We begin with the Langevin equation, which models a dynamical system under the influence of random perturbations. The archetypal system is that of Brownian motion, where a particle, suspended in a background medium, displays seemingly random motion from many unseen collisions.
+
+Einstein's explanation of Brownian motion is an often overlooked, but no less impressive, illustration of his way of thinking.
 
 Start with the Langevin equation for a Brownian particle. This is just the equation of motion with a friction term $\gamma$ and forces $\textbf{F}$
 
+## Brownian motion
 
 $$
 m \frac{d^2\textbf{x}}{dt^2} = - \gamma \frac{d\textbf{x}}{dt} + \textbf{F}
@@ -41,7 +47,6 @@ $$
 \textbf{x}(t) =\textbf{x}(0) +\gamma^{-1}\int_0^t \textbf{f}(t') dt' 
 $$
 
-
 To make this expression analytically feasible, we look at the expectation values and variances of the terms in our equation instead of the point values. The random fluctations of the function *f* mean we cannot know the exact value, so we only have information about the statistical behaviour of this function. We first assume that the expectation value of *f* is zero, $\langle\textbf{f}\rangle=0$. This means $\langle\textbf{x}(t)\rangle = \langle\textbf{x}(0)\rangle$. The mean position of the particle over time is the initial position, despite the fluctuations and movements around the space. 
 
 We define the variance of the particle position in terms of the *correlation function* $\langle\textbf{f}(t'_1)\cdot\textbf{f}(t'_2)\rangle$
@@ -57,91 +62,7 @@ $$
 $$
 
 If this expression is used in the integral for the variance of *x* above, we find $\langle(\textbf{x}(t)-\textbf{x}(0))^2\rangle =6Dt$. 
-
-
-### **Stochastic Processes**
-
-* Begin with the **Langevin equation**. If we try to model **Brownian motion**, a particle is in a background medium showing random motion due to unseen collisions:
-
-$$
-m\ddot{x} = -\gamma \dot{x} + F, \quad \gamma = \text{friction}
-$$
-
----
-
-**The steady-state solution:**
-
-$$
-\dot{x} = E \delta' \quad \delta' = \text{mobility}
-$$
-
----
-
-Model the force $F$ as a potential gradient + stochastic term:
-
-$$
-F = -\nabla \phi + f(t)
-$$
-
-$$
-\Rightarrow m\ddot{x} = -\gamma \dot{x} - \nabla \phi + f(t) \quad \text{— SDE, } f \text{ is unknown}
-$$
-
----
-
-If $\phi = 0$ and the medium is so viscous that $m \to 0$:
-
-$$
-\dot{x} = \delta' f \Rightarrow x(t) = \delta' \int_0^t f(t') dt' + x(0)
-$$
-
----
-
-The assumptions on $f$ are $\langle f \rangle = 0$ — **random**,
-so $\langle x(t) \rangle = \langle x(0) \rangle$, the mean position of many particles has $x(t) = x(0)$
-
----
-
-Let me know if you'd like this added to your previous notes or exported.
-
-Here is the extracted content from **page 35**, formatted in Markdown with LaTeX:
-
----
-
-## Page 35
-
-### The variance:
-
-$$
-\langle (x(t) - x(0))^2 \rangle = \delta'^2 \int_0^t dt_1' \int_0^t dt_2' \langle f(t_1') f(t_2') \rangle
-$$
-
-$$
-\langle f(t_1') f(t_2') \rangle \text{ is the **correlation function**}
-$$
-
----
-
-* A random force is **uncorrelated**: so force imparted by later collisions knows nothing about earlier collisions
-* **Markovian**:
-
-$$
-\langle f_i(t_1) f_j(t_2) \rangle = 0 \quad \text{for } t_2 - t_1 \gg \tau_{\text{col}}
-$$
-
-* This allows us to say $\tau_{\text{col}} \to 0$, which means:
-
-$$
-\langle f_i(t_1) f_j(t_2) \rangle = 2D \gamma^2 \delta_{ij} \delta(t_1 - t_2) \quad \text{— *white noise*}
-$$
-
-$$
-\Rightarrow \langle (x(t) - x(0))^2 \rangle = 6 D t
-$$
-
----
-
-### If $m \neq 0$:
+We saw earlier the solution for the case when $m=0$. Let's now look for a solution when our particles have inertia, when $m \neq 0$:
 
 $$
 \frac{d}{dt} \left( \dot{x} e^{\frac{\gamma t}{m}} \right) = \frac{1}{m} f(t) e^{\frac{\gamma t}{m}}
@@ -150,8 +71,6 @@ $$
 $$
 \Rightarrow \dot{x} = \dot{x}(0) e^{-\frac{\gamma t}{m}} + \frac{1}{m} \int_0^t dt' f(t') e^{\frac{\gamma (t' - t)}{m}}
 $$
-
----
 
 Since $\langle f \rangle = 0$:
 
@@ -163,31 +82,17 @@ $$
 \Rightarrow x(t) = x(0) + \int_0^t dt' \dot{x}(t')
 $$
 
----
-
-Let me know if you’d like this merged into a complete lecture summary or exported in LaTeX/PDF format!
-
-Here is the extracted content from **page 36**, formatted in Markdown with LaTeX:
-
----
-
-## Page 36
-
 $$
 \langle x(t) \rangle = x(0) + \frac{m}{\gamma} \dot{x}(0)(1 - e^{-\frac{\gamma t}{m}})
 $$
 
----
-
-### The variance more generally:
+And the variance more generally:
 
 $$
 \langle \dot{x}_i(t_1) \dot{x}_j(t_2) \rangle = \langle \dot{x}_i(t_1) \rangle \langle \dot{x}_j(t_2) \rangle + \frac{1}{m^2} \int_0^{t_1} dt_1' \int_0^{t_2} dt_2' \left\langle f_i(t_1') f_j(t_2') \right\rangle e^{\frac{\gamma}{m}(t_1' + t_2' - t_1 - t_2)}
 $$
 
----
-
-Now using **white noise correlation**:
+Now using white noise correlation:
 
 $$
 \langle \dot{x}_i(t_1) \dot{x}_j(t_2) \rangle = \langle \dot{x}_i(t_1) \rangle \langle \dot{x}_j(t_2) \rangle + \frac{D \gamma}{m} \delta_{ij} \left( e^{-\frac{\gamma}{m}(t_2 - t_1)} - e^{-\frac{\gamma}{m}(t_2 + t_1)} \right)
@@ -199,28 +104,20 @@ $$
 \Rightarrow \frac{D \gamma}{m} \delta_{ij} e^{-\frac{\gamma}{m}(t_2 - t_1)}
 $$
 
----
-
 * If $\Delta t \ll \frac{m}{\gamma}$, a particle will have a similar velocity
-* If $\Delta t \gg \frac{m}{\gamma}$, it is **unlikely** to
+* If $\Delta t \gg \frac{m}{\gamma}$, it is **unlikely** to have a similar velocity
 
----
-
-### The kinetic energy is:
+The kinetic energy is:
 
 $$
 \langle x(t) \cdot x(t) \rangle = \frac{3 D \gamma}{m}
 $$
 
----
-
-### The variance is:
+The variance is:
 
 $$
 \langle (x(t) - x(0))^2 \rangle = 6 D t
 $$
-
----
 
 We can now define the **Einstein relation**:
 
@@ -228,167 +125,94 @@ $$
 E_K = \frac{1}{2} m \langle \dot{x}^2 \rangle = \frac{3}{2} D \gamma
 $$
 
-But since $E_K = \frac{3}{2} k T$ by equipartition theorem:
+But since $E_K = \frac{3}{2} k T$ by the  equipartition theorem:
 
 $$
-\Rightarrow D = \frac{k T}{\gamma} \quad \text{– *Einstein relation*}
+\Rightarrow D = \frac{k T}{\gamma}
 $$
 
----
+This is the **Einstein relation**, and provides the link between the diffusion coefficient $D$ and the mobility $\gamma$ of a particle in a viscous medium. This Brownian motion system is quite simplified however; **White noise** has no non-trivial correlations other than $\langle f_i f_j \rangle$, but other kinds of noise require different correlation functions, potentially needing more than two $f$'s. This requires **higher moments**.
 
-Let me know if you'd like to compile this entire sequence of notes into a document or export it as LaTeX/PDF!
+## Higher Moments
 
-Here is the extracted content from **page 37**, formatted in Markdown with LaTeX:
-
----
-
-## Page 37
-
-* **White noise** has no non-trivial correlations other than
-  $\langle f_i f_j \rangle$, but other kinds of noise require different correlation functions, potentially needing more than two $f$'s. This requires **higher moments**.
-
----
-
-### For $N$-point correlations — $N$ even:
-
+If we now consider the **correlation function** for $N$ random variables, we can write for $N$-point correlations 
 $$
 \langle f_1(t_1) \dots f_N(t_N) \rangle = \langle f_1 f_2 \rangle + \dots \langle f_{N-1} f_N \rangle + \text{permutations}
 $$
-
+if the number $N$ is even, and for odd $N$:
 $$
-= 0 \quad \text{if } N \text{ odd}
-$$
-
----
-
-* For **one random variable**, the distribution with only 2-point correlations is the **Gaussian**:
-
-$$
-P[f(t)] = N \exp\left\{ - \int_{-\infty}^{\infty} dt \, \frac{f(t)^2}{4D \delta^2} \right\}
+\langle f_1(t_1) \dots f_N(t_N) \rangle = 0
 $$
 
----
-
-* **White noise distribution**
-* This is a **functional integral** over all $f(t)$, and is normalised by:
+For one random variable, the distribution with *only* 2-point correlations is the Gaussian (our white noise distribution):
 
 $$
-\int \mathcal{D}f(t) \, P[f(t)] = 1
+P[\textbf{f}(t)] = N \exp\left\{ - \int_{-\infty}^{\infty} dt \, \frac{\textbf{f}(t)\cdot\textbf{f}(t)}{4D \gamma^2} \right\}
 $$
 
----
+The Gaussian distribution is the only distribution with the property that all of its moments are finite, and it is completely determined by its first two moments. This is a **functional integral** over all $\textbf{f}(t)$, and is normalised by:
 
-* For some function $g(x)$:
-
+$$
+\int \mathcal{D}\textbf{f}(t) \, P[\textbf{f}(t)] = 1
+$$
+or some function $g(x)$:
 $$
 \langle g(x) \rangle = N \int \mathcal{D}f \, g(x) \, e^{- \int dt \, \frac{f^2}{4D\delta^2}}
 $$
+Where $x(t)$ is the solution to the Langevin equation with $f$. We can stop here and note the similarities between the mathematical form and path integrals, particularly in quantum mechanics from a previous post. The **functional integral** is a generalisation of the path integral, and we can use it to compute expectation values of functionals of $f(t)$. There is a deep connection between statistical mechanics and quantum mechanics.
 
-Where $x(t)$ is the **solution to the Langevin equation with $f$**.
-
----
-
-Let me know if you'd like all the pages compiled into a document!
-
-Here is the extracted content from **page 38**, formatted in Markdown with LaTeX:
-
----
-
-## Page 38
-
-* Introduce the **generating function** $\mathcal{Z}[J(t)]$:
+Let us now introduce the **generating function** $\mathcal{Z}[\textbf{J}(t)]$:
 
 $$
-\mathcal{Z}[J(t)] = \int \mathcal{D}f \, P[f] \, \exp\left\{ \int_{-\infty}^{\infty} dt \, J(t) f(t) \right\}
+\mathcal{Z}[\textbf{J}(t)] = \int \mathcal{D}\textbf{f} \, P[\textbf{f}] \, \exp\left\{ \int_{-\infty}^{\infty} dt \, \textbf{J}(t) \cdot \textbf{f}(t) \right\}
 $$
-
 Where $\mathcal{Z}[0] = 1$
-
----
-
+This generating function is a functional of the random variable $\textbf{f}(t)$, and it generates the moments of the distribution. The function $\textbf{J}(t)$ is a source term that couples to the random variable $\textbf{f}(t)$. If we compute $\mathcal{Z}$, the **correlation functions** are the coefficients of the **Taylor expansion** in $\textbf{J}$. For the one-point correlation:
 $$
-\left. \frac{\delta \mathcal{Z}}{\delta J(t_1)} \right|_{J = 0} = \int \mathcal{D}f \, f(t_1) P[f] = \langle f(t_1) \rangle
+\left. \frac{\partial \mathcal{Z}}{\partial J_i(t_1)} \right|_{J = 0} = \int \mathcal{D}f \, f_i(t_1) P[f] = \langle f_i(t_1) \rangle
 $$
-
----
-
-For the **n-th point correlation**:
-
+For the n-th point correlation:
 $$
-\left. \frac{\delta^n \mathcal{Z}}{\delta J(t_1) \dots \delta J(t_n)} \right|_{J = 0} = \langle f(t_1) \dots f(t_n) \rangle
+\left. \frac{\partial^n \mathcal{Z}}{ \prod^n \partial J_i(t_n)} \right|_{J = 0} = \langle f_i(t_1) \dots f_i(t_n) \rangle
 $$
-
----
-
-If we compute $\mathcal{Z}$, the **correlation functions** are the coefficients of the **Taylor expansion** in $J$.
-
----
-
-### So for the **Gaussian**:
-
+So for the Gaussian:
 $$
-\mathcal{Z}[J(t)] = N \int \mathcal{D}f \, \exp\left\{ - \int_{-\infty}^{\infty} dt \, \frac{f^2 - 2 f J + J^2}{4 D \delta^2} \right\}
+\mathcal{Z}[\textbf{J}(t)] = N \int \mathcal{D}f \, \exp\left\{ - \int_{-\infty}^{\infty} dt \, \frac{\textbf{f}\cdot\textbf{f}}{4 D \gamma^2} - \textbf{J}\cdot\textbf{f} \right\}
 $$
-
----
-
 Which, if we **complete the square**:
 
 $$
-\mathcal{Z}[J] = N \int \mathcal{D}f \, \exp\left\{ -\frac{1}{4 D \delta^2} \int dt \left[ (f - 2 D \delta^2 J)^2 - 4 D^2 \delta^4 J^2 \right] \right\}
+\mathcal{Z}[\textbf{J}] = N \int \mathcal{D}f \, \exp\left\{ -\frac{1}{4 D \gamma^2} \int dt \left[ \textbf{f} - 2 D \gamma^2 \textbf{J}\right]^2 - 4 D^2 \gamma^4 J^2 \right\}
 $$
 
----
-
-Let me know if you'd like a compiled and cleaned-up version of all pages, or want this exported in LaTeX/PDF format!
-
-Here is the extracted content from **page 39**, formatted in Markdown with LaTeX:
-
----
-
-## Page 39
-
-If $f \to f = 2D \delta^2 \delta$, then:
+If $\textbf{f} \rightarrow \textbf{f}  = 2D \gamma^2 \textbf{J}$, then:
 
 $$
-\mathcal{Z}[J] = \exp\left\{ D \delta^2 \int dt \, J^2 \right\}
+\mathcal{Z}[\textbf{J}] = \exp\left\{ D \delta^2 \int dt |\textbf{J}|^2 \right\}
 $$
-
 And:
 
 $$
-\frac{\delta \mathcal{Z}}{\delta J_i} = 2D \delta^2 J_i \, \mathcal{Z}[J] \quad \text{(for } n = 1 \text{)}
+\frac{\delta \mathcal{Z}}{\delta J_i} = 2D \delta^2 J_i \, \mathcal{Z}[\textbf{J}] \quad \text{(for } n = 1 \text{)}
 $$
 
 $$
-\frac{\delta^2 \mathcal{Z}}{\delta J_i \delta J_j} = 2D \delta^2 \delta_{ij} \delta(t_1 - t_2) \mathcal{Z}[J] \quad \text{(for } n = 2 \text{)}
+\frac{\delta^2 \mathcal{Z}}{\delta J_i \delta J_j} = 2D \delta^2 \delta_{ij} \delta(t_1 - t_2) \mathcal{Z}[\textbf{J}] +  4D^2 J_i(t_1) J_j(t_2) \mathcal{Z}[\textbf{J}]\quad \text{(for } n = 2 \text{)}
 $$
 
-$$
-\frac{\delta^2 \mathcal{Z}}{\delta J_i(t_1) \delta J_j(t_2)} = 4D^2 J_i(t_1) J_j(t_2) \mathcal{Z}[J]
-$$
-
----
-
-### This approach can be extended to **fields**, e.g. the **fluctuating boundary** between gas and liquid:
+This approach can be extended to fields, e.g. the fluctuating boundary between gas and liquid:
 
 $$
-\partial_t h = \sqrt{h} + \ell \quad \text{with } \ell = h(r, t)
+\partial_t h = \nabla^2 h + f \quad \text{with }  h(r, t)
 $$
 
----
+# The Fokker–Planck Equation
 
-### **Fokker–Planck Equation**
-
-* Move from **single particle motion** to **probability distribution**
-* If the **Langevin equation** is:
-
-  $$
-  \dot{x} = \delta' f
-  $$
-
-  for one particle in a viscous fluid, the distribution is:
-
+The aim of this section is to move from single-particle motion to a probability distribution of particles. The Fokker–Planck equation is a partial differential equation that describes the time evolution of the probability distribution of the velocity of particles under the influence of random forces. If the **Langevin equation** is:
+$$
+\dot{\textbf{x}} = \gamma^{-1} \textbf{f}
+$$
+for one particle in a viscous fluid, the distribution is:
 $$
 P(x, t) = (4\pi D t)^{-1/2} \exp\left( -\frac{x^2}{4 D t} \right)
 $$
@@ -399,122 +223,77 @@ $$
 \partial_t P = D \nabla^2 P
 $$
 
----
-
-Let me know if you'd like this added to a full compiled version or exported!
-
-Here is the extracted content from **page 40**, formatted in Markdown with LaTeX:
-
----
-
-## Page 40
-
-### For more general equations, we need the **Fokker–Planck equation**
-
-* Consider:
+This is a simple diffusion equation, and it show that for the simple of a massless particle in a viscous medium, the probability distribution of a particle's position 'diffuses' out over time. For more general equations however, we need the **Fokker–Planck equation**. Consider the Langevin equation with a force term (represented by the gradient of a potential $\phi$):
 
 $$
-\delta \dot{x} = -\nabla \phi + f
+\gamma \dot{\textbf{x}} = -\nabla \phi + f
 $$
 
 Then:
 
 $$
-\delta x = \dot{x} \delta \epsilon = -\delta' \nabla \phi \, \delta \epsilon + \delta' \int_t^{t + \delta \epsilon} dt' f(t')
+\delta \textbf{x} = \dot{\textbf{x}} \delta t = -\gamma^{-1} \nabla \phi \delta t + \gamma^{-1} \int_t^{t + \delta t} dt'\textbf{f}(t')
 $$
 
-Since $\langle f \rangle = 0$:
+Since $\langle \textbf{f} \rangle = 0$:
 
 $$
-\langle \delta x \rangle = -\delta' \nabla \phi \, \delta \epsilon
+\langle \delta \textbf{x} \rangle = -\gamma^{-1} \nabla \phi \, \delta t
 $$
-
 and
-
 $$
-\langle \delta x_i \, \delta x_j \rangle = \int_t^{t + \delta \epsilon} dt \int_t^{t + \delta \epsilon} dt'' \langle f_i(t') f_j(t'') \rangle
-$$
-
-* Using the **white noise** expression:
-
-$$
-\langle \delta x_i \delta x_j \rangle = 2 \delta_{ij} D \delta \epsilon + \mathcal{O}(\delta \epsilon^2)
+\gamma^2\langle \delta x_i \delta x_j \rangle = \langle \partial \phi_i \partial \phi_j \rangle \delta t^2 - \delta t \int_t^{t + \delta \epsilon} dt' \langle \partial \phi_i f_j + \partial \phi_j f_i \rangle  + \int_t^{t + \delta \epsilon} dt'\int_t^{t + \delta \epsilon} dt'' \langle f_i(t') f_j(t'') \rangle
 $$
 
----
-
-### To derive this from probability:
+Using the **white noise** expression
 
 $$
-P(x, t + \delta \epsilon; x_0, t_0) = \langle \delta(x - x' - \delta x) \rangle
+\langle \delta x_i \delta x_j \rangle = 2 \delta_{ij} D \delta t + \mathcal{O}(\delta t^2)
 $$
-
----
-
+To derive this from probability, we start with a Dirac delta function for the probability distribution of a particle at position $\textbf{x}'$ at time $t$:
+$$
+P(\textbf{x}, t + \delta t; \textbf{x}', t) = \langle \delta(\textbf{x} - \textbf{x}' - \delta \textbf{x}) \rangle
+$$
 Taylor expand the Dirac delta:
-
 $$
-P(x, t + \delta \epsilon; x_0, t_0) = \left\{ 1 + \langle \delta x_i \rangle \partial_i + \frac{1}{2} \langle \delta x_i \delta x_j \rangle \partial_i \partial_j + \dots \right\} \delta(x - x')
+P(\textbf{x}, t + \delta t; \textbf{x}_0', t_0) = \left\{ 1 + \langle \delta x_i \rangle \partial_i + \frac{1}{2} \langle \delta x_i \delta x_j \rangle \partial_{ij}^2 + \dots \right\} \delta(\textbf{x} - \textbf{x}')
 $$
-
----
-
-### And we use the **Chapman–Kolmogorov equation**:
-
+And we use the **Chapman–Kolmogorov equation**:
 $$
-P(x, t; x_0, t_0) = \int_{-\infty}^{\infty} dx' \, P(x, t; x', t') P(x', t'; x_0, t_0)
+P(\textbf{x}, t; \textbf{x}_0, t_0) = \int_{-\infty}^{\infty} d^3\textbf{x}' \, P(\textbf{x}, t; \textbf{x}', t') P(\textbf{x}', t'; \textbf{x}_0, t_0)
 $$
 
----
-
-Let me know if you'd like to compile this with the other notes into a full document or export to LaTeX/PDF!
-
-Here is the extracted content from **page 41**, formatted in Markdown with LaTeX:
-
----
-
-## Page 41
-
-Take $t' \to t + \delta t$ and integrate by parts to remove the integrals:
+Take $t \to t + \delta t$ and integrate by parts to remove the integrals:
 
 $$
-P(x, t + \delta t; x_0, t_0) = P(x, t; x_0, t_0) - \partial_i \langle \delta x_i \rangle P(x, t; x_0, t_0) + \frac{1}{2} \langle \delta x_i \delta x_j \rangle \partial_i \partial_j P(x, t; x_0, t_0) + \dots
+P(\textbf{x}, t + \delta t; \textbf{x}_0, t_0) = P(\textbf{x}, t; \textbf{x}_0, t_0) - \partial_i \langle \delta x_i \rangle P(\textbf{x}, t; \textbf{x}_0, t_0) + \frac{1}{2} \langle \delta x_i \delta x_j \rangle \partial_{ij}^2 P(\textbf{x}, t; \textbf{x}_0, t_0) + \dots
 $$
 
 Using expressions for $\langle \delta x \rangle$, $\langle \delta x^2 \rangle$:
+$$
+\Rightarrow P(\textbf{x}, t; \textbf{x}_0, t_0) = P(\textbf{x}, t; \textbf{x}_0, t_0) + \gamma^{-1} \delta t \, \partial_i (P \nabla_i \phi) + D \delta t \partial^2 P
+$$
+Also Taylor expand in time:
+$$
+\Rightarrow \frac{\partial P}{\partial t} = \gamma^{-1} \nabla \cdot (P \nabla \phi) + D \nabla^2 P
+$$
+This is the **Fokker–Planck equation** for a particle in a potential $\phi$ with diffusion coefficient $D$ and mobility $\gamma$.
+
+## Probability Flux and Conservation
+It is possible to write this as a **continuity equation**:
 
 $$
-\Rightarrow P(x, t; x_0, t_0) = P(x, t; x_0, t_0) + \delta t \, \partial_i (\delta' P \nabla_i \phi) + D \delta t \, \partial^2 P
+\frac{\partial P}{\partial t} + \nabla \cdot \mathbf{J} = 0 \quad \text{with } \mathbf{J} = \gamma^{-1} P \nabla \phi + D \nabla P
 $$
 
----
-
-### Also Taylor expand in time:
+The steady state solutions with potentials obey $\nabla \cdot \mathbf{J} = 0$ (i.e., equilibrium):
 
 $$
-\Rightarrow \frac{\partial P}{\partial t} = \delta' \nabla \cdot (P \nabla \phi) + D \nabla^2 P \quad \text{— *Fokker–Planck*}
+P(\textbf{x}) \sim \exp\left( -\frac{\phi}{D} \right) 
 $$
+If we use the now familiar Einstein relation, we can write this as $P(\textbf{x}) \sim e^{- \frac{\phi}{kT}}$. 
 
----
-
-### It is possible to write this as a **continuity equation**:
-
-$$
-\frac{\partial P}{\partial t} + \nabla \cdot \mathbf{J} = 0 \quad \text{with } \mathbf{J} = \delta' P \nabla \phi + D \nabla P
-$$
-
----
-
-### The **steady state solutions** with potentials obey $\nabla \cdot \mathbf{J} = 0$ (i.e., equilibrium):
-
-$$
-P(x) \sim \exp\left( -\frac{\phi}{D} \right) \Rightarrow e^{- \frac{\phi}{kT}} \text{ if we use the Einstein relation}
-$$
-
----
-
-### Consider a potential well — parabolic 1D:
-
+Consider a potential well, a one-dimensional parabolic potential with a minimum at $x_{\min}$:
 $$
 \phi(x) = \frac{1}{2} \omega^2 (x - x_{\min})^2
 $$
@@ -525,182 +304,49 @@ $$
 P(x, 0) = \left( \frac{\omega^2}{2\pi kT} \right)^{1/2} \exp\left( - \frac{\omega^2 (x - x_{\min})^2}{2kT} \right)
 $$
 
----
-
-Let me know if you'd like to compile this full notebook into one file (PDF, LaTeX, or another format).
-
-Here is the content from **Page 42** of your notes, transcribed and formatted in Markdown with LaTeX:
-
----
-
-## Page 42
-
-* Particles will leak out of the potential barrier.
-* Take this leak rate to be small so the initial state is a bath.
-* **Steady state** has:
-  $\nabla \cdot \mathbf{J} = 0 \Rightarrow \mathbf{J} = \text{const}$
+What we can see from this expression is that the probability distribution is Gaussian, centred on the minimum of the potential well. Particles will leak out of the potential barrier, because even if the potential well is deep, there is still a finite probability of finding particles outside the well. Take this leak rate to be small so the initial state is a bath. Close to this steady state we can define the flux stright from the expression for the probability
 
 $$
-J = \frac{kT}{\gamma} e^{\frac{\phi}{kT}} \frac{\partial}{\partial x} \left( e^{- \frac{\phi}{kT}} P \right)
+J = \frac{kT}{\gamma} e^{-\frac{\phi}{kT}} \frac{\partial}{\partial x} \left( e^{\frac{\phi}{kT}} P \right)
 $$
-
----
-
-* If we integrate this flux between $x_{\min}$ and far away $x^*$:
+If we integrate this flux between $x_{\min}$ and far away $x'$:
 
 $$
-\int_{x_{\min}}^{x^*} \delta e^{\frac{\phi}{kT}} dx = \frac{kT}{\gamma} \left[ e^{\frac{\phi(x_{\min})}{kT}} P(x_{\min}) - e^{\frac{\phi(x^*)}{kT}} P(x^*) \right]
+\int_{x_{\min}}^{x'} J \frac{\phi}{kT} dx = \frac{kT}{\gamma} \left[ e^{\frac{\phi(x_{\min})}{kT}} P(x_{\min}) - e^{\frac{\phi(x')}{kT}} P(x') \right]
 $$
 
-* If we assume $P(x^*) \ll P(x_{\min}) \Rightarrow$
+## The Kramers–Chandrasekhar equation
+We can look at the diffusion in velocity space instead of position space. The Langevin equation in terms of velocity is:
 
 $$
-J \sim \left( \frac{kT}{2\pi} \right)^{1/2} \left( \frac{\omega_m^2}{\gamma} \right)^{1/2}
-$$
-
-where $x \gtrsim x_{\min}$,
-
-$$
-\phi(x) \approx \phi_{\max} - \frac{1}{2} \omega^2 (x - x_{\max})^2
-$$
-
----
-
-$$
-\Rightarrow J_0 \int_{x_{\min}}^{x^*} dx \, e^{\frac{\phi}{kT}} \approx J_0 \frac{e^{\phi_{\max}/kT}}{\omega_{\max}} \left( \frac{2\pi kT}{\omega_{\max}^2} \right)^{1/2}
-$$
-
----
-
-* So together, the flux is:
-
-$$
-J \sim \frac{\omega_{\min} \omega_{\max}}{2\pi \gamma} e^{- \phi_{\max}/kT}
-$$
-
----
-
-### Velocity Diffusion
-
-If we look at $v$ instead of $x$:
-
-$$
-m \dot{v} = -\gamma v + \xi
+m \dot{\textbf{v}} = -\gamma \textbf{v} + \textbf{f}(t)
 $$
 
 $$
-\Rightarrow \partial_t P = \frac{1}{m} \nabla_v \cdot \left( \gamma v P + \frac{D}{m} \nabla_v P \right)
+\Rightarrow \partial_t P = \frac{1}{m} \nabla_v \cdot \left( \gamma \textbf{v} P + \frac{D \gamma^2}{m} \nabla_v P \right)
 $$
 
----
-
-Let me know if you'd like me to digitize the rest of your notes or compile them into a LaTeX or PDF document.
-
-Here's the content from **Page 43** of your notes, transcribed and typeset with LaTeX formatting in Markdown:
-
----
-
-## Page 43
-
-In equilibrium:
-$\nabla_v P = -\frac{mv}{D\gamma} P$
+In equilibrium $\partial_t P = 0$ so $\nabla_v P = -\frac{m}{D\gamma} P \textbf{v}$. If we solve this in one dimension, we get the familiar Maxwell–Boltzmann distribution:
 
 $$
-\Rightarrow P = \left( \frac{m}{2\pi kT} \right)^{3/2} e^{- \frac{mv^2}{2kT}} \quad \text{since } D\gamma = kT
+P(v) = \left( \frac{m}{2\pi kT} \right)^{3/2} e^{- \frac{mv^2}{2kT}} \quad \text{since } D\gamma = kT
 $$
 
-**– Maxwell–Boltzmann distribution**
-
----
-
-### Kramers–Chandrasekhar–Fokker–Planck Equation
-
-Use full Langevin:
+To find the full phase space evolution equation-where we calculate $P(x, v, t)$, we start with the full Langevin equation:
 
 $$
-m \ddot{x} = -\gamma \dot{x} - \nabla \phi + \xi \quad \text{looking for } P(x, v, t)
+m \ddot{\textbf{x}} = -\gamma \dot{\textbf{x}} - \nabla \phi + \textbf{f}(t) 
 $$
 
-In the Hamiltonian form:
+We can write this in a Hamiltonian form, where we split this equation into two first-order equations:
 
 $$
-\dot{x} = v, \quad m \dot{v} = -\gamma v - \nabla \phi + \xi
+\dot{\textbf{x}} = \textbf{v}, \quad m \dot{\textbf{v}} = -\gamma \textbf{v} - \nabla \phi + \textbf{f}(t)
 $$
 
 From this version we get the **Boltzmann–Fokker–Planck equation**:
 
 $$
-\left( \partial_t + v \cdot \nabla \right) P = \frac{1}{m} \nabla_v \cdot \left( \gamma v P + P \nabla \phi \right) + D \nabla_v^2 P
+\left( \partial_t + \textbf{v} \cdot \nabla \right) P = \frac{1}{m} \nabla_v \cdot \left( \gamma \textbf{v} P + P \nabla \phi \right) + \frac{D \gamma^2}{m^2} \nabla_v^2 P
 $$
-
----
-
-By setting $m \to 0$ (removing inertia), use $D\gamma = kT$:
-
-$$
-\Rightarrow \frac{1}{\gamma} \left( \partial_t + v \cdot \nabla - \frac{1}{m} \nabla \phi \cdot \nabla_v \right) P = \nabla_v \cdot \left( \frac{kT}{m} \nabla_v P + \frac{v}{m} P \right)
-$$
-
----
-
-### Expand $P$ in powers of $\frac{1}{\gamma}$:
-
-$$
-P = P^{(0)} + \frac{1}{\gamma} P^{(1)} + \frac{1}{\gamma^2} P^{(2)} + \cdots
-$$
-
----
-
-**$P^{(0)}$ equation yields:**
-
-$$
-P^{(0)} = \phi(x,t) e^{- \frac{mv^2}{2kT}}
-$$
-
----
-
-**$P^{(1)}$ equation:**
-
-$$
-\nabla_v \cdot \left[ \left( \frac{kT}{m} \nabla_v + \frac{v}{m} \right) P^{(1)} \right] = \left( \partial_t + v \cdot \nabla + \frac{v \cdot \nabla \phi}{kT} \right) \phi(x,t) e^{- \frac{mv^2}{2kT}}
-$$
-
----
-
-Let me know if you'd like this compiled into a LaTeX file or if you want the next page transcribed.
-
-Here is the content from **Page 44** of your notes, transcribed and formatted in LaTeX style using Markdown:
-
----
-
-## Page 44
-
-If we integrate over $\int d^3 v$, all terms vanish except $\partial_t q^{(0)}$,
-so set $q^{(0)} = q^{(0)}(x) \Rightarrow$
-
-$$
-P^{(1)} = \left[ -mv \cdot \nabla q^{(0)} - m \frac{v \cdot \nabla \phi}{kT} q^{(0)} + q^{(1)} \right] e^{-\frac{mv^2}{2kT}}
-$$
-
-We must go to $\mathcal{O}(\gamma^{-2})$ – once this is done and integrated over $\int d^3 v$ (use a Gaussian integral):
-
-$$
-\partial_t q^{(0)} = kT \nabla \cdot \left( \nabla - \frac{1}{kT} \nabla \phi \right) q^{(0)}
-$$
-
----
-
-### The first moment of $P^{(1)}$ etc.:
-
-$$
-P(x,t) = \left( \frac{2\pi kT}{m} \right)^{3/2} \left( q^{(0)}(x) + \frac{1}{\gamma} q^{(1)}(x,t) \right)
-$$
-
----
-
-From this:
-
-$$
-\partial_t P = \frac{kT}{\gamma} \nabla \cdot \left( \nabla + \frac{1}{kT} \nabla \phi \right) P \quad \Leftarrow \text{Fokker–Planck!}
-$$
-
+This equation describes the evolution of the probability distribution of particles in phase space, taking into account both the deterministic motion and the stochastic forces acting on the particles.
