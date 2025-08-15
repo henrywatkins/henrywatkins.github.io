@@ -22,7 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-q { quotes: "“" "”" "‘" "’"; }
 /* CSS for syntax highlighting */
 html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -146,6 +145,10 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
   <li class="nav-item">
     <a class="nav-link" href="../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../monograph/index.html"> 
+<span class="menu-text">Extratemporal Dimensions</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -337,7 +340,7 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> movies</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> name <span class="kw">LIKE</span> <span class="st">'Se_en'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Useful wildcards are ’_’ <q>%</q></p>
+<p>Useful wildcards are ’_’ ‘%’</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> movies </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> name <span class="kw">LIKE</span> <span class="st">'%man%'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -470,9 +473,9 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <p>SQLite does not enforce schema, so datatypes can be wrong and contraints will not be enforced</p>
 <p>This works via a CLI <code>sqlite3</code>, e.g.&nbsp;<code>sqlite3 newdb.sqlite</code></p>
 <p>Create a new local database <code>sqlite3 new.db</code></p>
-<p>Export to a file by <q>.output filename.txt</q></p>
-<p>Run scripts with <q>.read script.sql</q>, this will run the commands in the script as a normal interpreter</p>
-<p>Import data from a file with <q>.import –csv –schema schema-name file.csv table_1</q></p>
+<p>Export to a file by ‘.output filename.txt’</p>
+<p>Run scripts with ‘.read script.sql’, this will run the commands in the script as a normal interpreter</p>
+<p>Import data from a file with ‘.import –csv –schema schema-name file.csv table_1’</p>
 <p>Export</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> <span class="at">-header</span> <span class="at">-csv</span> your_database.db <span class="st">"SELECT * FROM your_table;"</span> <span class="op">&gt;</span> filename.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Import</p>

@@ -22,7 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-q { quotes: "“" "”" "‘" "’"; }
 /* CSS for syntax highlighting */
 html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -146,6 +145,10 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
   <li class="nav-item">
     <a class="nav-link" href="../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../monograph/index.html"> 
+<span class="menu-text">Extratemporal Dimensions</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -344,7 +347,7 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <p>substitution</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> helloworld <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/world/city'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">'7,9 s/day/week/gip'</span> file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>for lines 7 to 9, replace <q>day</q> with <q>week</q>, in case-insensitive manner (i), globally (g) so we perform the match-replace more than once, and print (p) the output.</p>
+<p>for lines 7 to 9, replace ‘day’ with ‘week’, in case-insensitive manner (i), globally (g) so we perform the match-replace more than once, and print (p) the output.</p>
 <p>cut entire lines that match the pattern</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">'/pattern/c replacement_text'</span> file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>append after lines that match pattern</p>

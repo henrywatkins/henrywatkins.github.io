@@ -22,7 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-q { quotes: "“" "”" "‘" "’"; }
 /* CSS for syntax highlighting */
 html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -146,6 +145,10 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
   <li class="nav-item">
     <a class="nav-link" href="../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../monograph/index.html"> 
+<span class="menu-text">Extratemporal Dimensions</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -427,7 +430,7 @@ let ref_c2 = &amp;c;</code></pre>
 <p>for variable-length data (like strings or arrays), one must use the lifetime parameter <code>&lt;'a&gt;</code> in your structs</p>
 <p>structs can act like classes in that they have logic associated with them, to append a method to a struct, one needs the <code>impl</code> (implementations). this wraps a set of functions that are bound to the struct and act on its data.</p>
 <p>use <code>&amp;self</code> as arguments to these functions to access member variables, like in python</p>
-<p>one can create generic structs, where the type is specified when it is called by using the <q>turbofish</q></p>
+<p>one can create generic structs, where the type is specified when it is called by using the ‘turbofish’</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> BagOfHolding<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    item<span class="op">:</span> T<span class="op">,</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

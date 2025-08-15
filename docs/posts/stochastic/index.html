@@ -23,7 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-q { quotes: "“" "”" "‘" "’"; }
 </style>
 
 
@@ -141,6 +140,10 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link" href="../../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../monograph/index.html"> 
+<span class="menu-text">Extratemporal Dimensions</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -389,7 +392,7 @@ P(x, t) = (4\pi D t)^{-1/2} \exp\left( -\frac{x^2}{4 D t} \right)
 <p><span class="math display">\[
 \partial_t P = D \nabla^2 P
 \]</span></p>
-<p>This is a simple diffusion equation, and it show that for the simple of a massless particle in a viscous medium, the probability distribution of a particle’s position <q>diffuses</q> out over time. For more general equations however, we need the <strong>Fokker–Planck equation</strong>. Consider the Langevin equation with a force term (represented by the gradient of a potential <span class="math inline">\(\phi\)</span>):</p>
+<p>This is a simple diffusion equation, and it show that for the simple of a massless particle in a viscous medium, the probability distribution of a particle’s position ‘diffuses’ out over time. For more general equations however, we need the <strong>Fokker–Planck equation</strong>. Consider the Langevin equation with a force term (represented by the gradient of a potential <span class="math inline">\(\phi\)</span>):</p>
 <p><span class="math display">\[
 \gamma \dot{\textbf{x}} = -\nabla \phi + f
 \]</span></p>

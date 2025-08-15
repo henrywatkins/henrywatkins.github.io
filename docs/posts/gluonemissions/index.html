@@ -23,7 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-q { quotes: "“" "”" "‘" "’"; }
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -162,6 +161,10 @@ window.Quarto = {
     <a class="nav-link" href="../../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../monograph/index.html"> 
+<span class="menu-text">Extratemporal Dimensions</span></a>
+  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Code Notes</span>
@@ -285,7 +288,7 @@ window.Quarto = {
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>The aim is post is to study the soft emissions of photons and gluons from a hard photon decay to a particle/antiparticle pair. I will derive the matrix elements (the central force-dependent component of the scattering cross-section) for such processes with a focus on the correlated emission of gluons and the application of the collinear limit. From this I will also extract the resulting angular ordering and compare gluon emissions to photon emissions. Finally we will look at the running of the strong coupling constant apparent in the results.</p>
-<p>In the decay of a Z boson or a photon into a quark/antiquark pair, it is possible for gluons to be emitted from the quarks, a process that contributes to hadronization and jet structure. In the limit where these gluons are soft (low energy) and collinear (emitted at a very small angle relative to another particle) the matrix elements for these interactions simplify in an interesting way. First I will consider the decay of a photon into an electron-positron pair when we look at the simpler case of photon emissions. Then we shall look at the decay into a quark-antiquark pair from which gluon emissions can be studied. The decays will be of the form in <a href="#fig-decay" class="quarto-xref">Figure&nbsp;1</a> but for brevity we shall re-write the diagram in the <q>decay product form</q> illustrated in <a href="#fig-productform" class="quarto-xref">Figure&nbsp;2</a>.</p>
+<p>In the decay of a Z boson or a photon into a quark/antiquark pair, it is possible for gluons to be emitted from the quarks, a process that contributes to hadronization and jet structure. In the limit where these gluons are soft (low energy) and collinear (emitted at a very small angle relative to another particle) the matrix elements for these interactions simplify in an interesting way. First I will consider the decay of a photon into an electron-positron pair when we look at the simpler case of photon emissions. Then we shall look at the decay into a quark-antiquark pair from which gluon emissions can be studied. The decays will be of the form in <a href="#fig-decay" class="quarto-xref">Figure&nbsp;1</a> but for brevity we shall re-write the diagram in the ‘decay product form’ illustrated in <a href="#fig-productform" class="quarto-xref">Figure&nbsp;2</a>.</p>
 <div id="fig-decay" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-decay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -314,7 +317,7 @@ Figure&nbsp;2: The decay product form
 <li>Massless quarks. The momenta involved in the interaction are such that the masses are negligible and can be neglected. This assumption also allows us to simplify our calculations further by using the Dirac equations <span class="math inline">\(\bar{u}(p_1)\not{p_1}=0, \not{p_2}v(p_2)=0\)</span></li>
 <li>Collinearity. The gluon momenta are at small angles from the quark momenta and the decay products are at small angles to each other.</li>
 </ol>
-<p>Note the use <q>dashed</q> notation for 4-momenta, e.g.&nbsp;<span class="math inline">\(p_1\)</span> is the 4-momentum of the first fermion in the decay and <span class="math inline">\(\not{p_1}=\gamma^\mu p_{1\mu}\)</span> is the Dirac operator acting on that momentum. The Dirac spinors <span class="math inline">\(u(p)\)</span> and <span class="math inline">\(v(p)\)</span> are used to represent fermions and antifermions respectively.</p>
+<p>Note the use ‘dashed’ notation for 4-momenta, e.g.&nbsp;<span class="math inline">\(p_1\)</span> is the 4-momentum of the first fermion in the decay and <span class="math inline">\(\not{p_1}=\gamma^\mu p_{1\mu}\)</span> is the Dirac operator acting on that momentum. The Dirac spinors <span class="math inline">\(u(p)\)</span> and <span class="math inline">\(v(p)\)</span> are used to represent fermions and antifermions respectively.</p>
 </section>
 </section>
 <section id="comparison-with-qed" class="level1">
@@ -525,7 +528,7 @@ Figure&nbsp;10: One of the two correlated emission diagrams. The gluon-gluon cou
 M_{q\bar{q}gg}=\epsilon_\mu(q)\bar{u}(p_1)ie\gamma^\mu (-i)\frac{(\not{p_2}+\not{k_a}+\not{k_b})}{(p_2+k_a+k_b)^2} i g_s\gamma^\nu t^d\frac{(-ig_{\nu\rho}\delta^{dc})}{(k_a+k_b)^2}(-1)g_s f^{abc}\\\left[g^{\rho\beta}(2k_a+k_b)^\gamma +g^{\beta\gamma}(-k_a+k_b)^\rho +g^{\gamma\rho} (-2k_b-k_a)^\beta \right]\epsilon_\beta^*(k_a) \epsilon_\gamma^* (k_b)v(p_2)
 \end{align*}
 \]</span></p>
-<p>We apply the <q>second gluon is softer</q> condition so that we can ignore <span class="math inline">\(k_b\)</span> in the propagator and applying the other assumptions we get</p>
+<p>We apply the ‘second gluon is softer’ condition so that we can ignore <span class="math inline">\(k_b\)</span> in the propagator and applying the other assumptions we get</p>
 <p><span class="math display">\[
 \begin{align*}
 M_{q\bar{q}gg}&amp;=M_{q\bar{q}} i f^{abc}g_s^2 t^c \frac{(\not{p_2}+\not{k_a})}{2p_2.k_a}\frac{\gamma^\nu g_{\nu\rho}}{2k_a.k_b}\\

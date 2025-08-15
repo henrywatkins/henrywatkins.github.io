@@ -22,7 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-q { quotes: "“" "”" "‘" "’"; }
 </style>
 
 
@@ -111,6 +110,10 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
   <li class="nav-item">
     <a class="nav-link" href="../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../monograph/index.html"> 
+<span class="menu-text">Extratemporal Dimensions</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -208,25 +211,25 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <p>Git is the go-to program for version control and collaborative software projects.</p>
 <p><code>git init</code> - initialize repository</p>
 <p><code>git status</code> - view repo status</p>
-<p><code>git add &lt;name&gt;</code> - add (<q>stage</q>) file/change to project</p>
+<p><code>git add &lt;name&gt;</code> - add (“stage”) file/change to project</p>
 <p><code>git commit -m "comment"</code> - commit change to repo</p>
 <p><code>git log</code> - view log of all changes/commits</p>
 <p><code>git remote add &lt;name&gt; &lt;repo_url&gt;</code> - add remote github repository to local repo</p>
 <p><code>git push</code> - push commits to remote repo</p>
 <p><code>git pull &lt;repo_name&gt; master</code> - pull down master branch from remote repo</p>
 <p><code>git diff</code> - compare differences between commits</p>
-<p><code>git reset &lt;name&gt;</code> - unstage file <q>name</q></p>
-<p><code>git checkout &lt;name&gt;</code> - change current branch to <q>name</q></p>
-<p><code>git branch &lt;name&gt;</code> - create new branch called <q>name</q></p>
+<p><code>git reset &lt;name&gt;</code> - unstage file “name”</p>
+<p><code>git checkout &lt;name&gt;</code> - change current branch to “name”</p>
+<p><code>git branch &lt;name&gt;</code> - create new branch called “name”</p>
 <p><code>git merge &lt;name&gt;</code> - merge branch into current branch, usually used for merging a branch of development into the master when testing is complete</p>
 <p><code>git branch -d &lt;name&gt;</code> - delete branch</p>
 <p><code>git revert &lt;id&gt;</code> - revert to a previous commit</p>
-<p><code>git reset --hard &lt;id&gt;</code> - reset repo to previous state defined by commit with <q>id</q>. WARNING: this will delete everything from the state onwards, use with caution.</p>
+<p><code>git reset --hard &lt;id&gt;</code> - reset repo to previous state defined by commit with “id”. WARNING: this will delete everything from the state onwards, use with caution.</p>
 <section id="dev-process" class="level3">
 <h3 class="anchored" data-anchor-id="dev-process">Dev process</h3>
 <ul>
 <li>Never mess with the master branch</li>
-<li>When starting new features, create a branch, commit changes regularly when a <q>unit</q> of work has been completed. Commit also when you have made changes you may want to undo.</li>
+<li>When starting new features, create a branch, commit changes regularly when a ‘unit’ of work has been completed. Commit also when you have made changes you may want to undo.</li>
 <li>Once you are happy with the changes and all tests pass, then merge the branch with the master.</li>
 <li>Push to remote at the end of the day or after major commit.</li>
 <li>When undoing changes, prefer to use <code>revert</code> , this will create a new commit that restores a previous state.</li>

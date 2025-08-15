@@ -22,7 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-q { quotes: "“" "”" "‘" "’"; }
 /* CSS for syntax highlighting */
 html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -146,6 +145,10 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
   <li class="nav-item">
     <a class="nav-link" href="../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../monograph/index.html"> 
+<span class="menu-text">Extratemporal Dimensions</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -307,10 +310,10 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <li>Copy the script template</li>
 <li>decide on the task of the script, define the desired input and output</li>
 <li>Analysis scripts are best when modular, this means that if it is getting too large, split the analysis into separate scripts doing a particular task with well defined inputs and outputs.</li>
-<li>The key is iteration rate, make sure there is a <q>fast</q> mode, or a small input size for development and debugging before the <q>big</q> run.</li>
+<li>The key is iteration rate, make sure there is a ‘fast’ mode, or a small input size for development and debugging before the ‘big’ run.</li>
 <li>Debug with pdb or IDE debugger as you go</li>
 </ol>
-<p>A python project can be a single script, a pure library, a library with a single <q>run</q> or <q>main</q> script or a set of scripts together with a library of common code utilities. Avoid using debugging for library modules, instead prefer a good set of unit tests. Scripts are the reverse, rely on a debugger. You shouldn’t need a lot of unit tests for the components of a script, if you do, this is a sign that function or class might be better added to a library of utilities and covered by unit tests.</p>
+<p>A python project can be a single script, a pure library, a library with a single “run” or “main” script or a set of scripts together with a library of common code utilities. Avoid using debugging for library modules, instead prefer a good set of unit tests. Scripts are the reverse, rely on a debugger. You shouldn’t need a lot of unit tests for the components of a script, if you do, this is a sign that function or class might be better added to a library of utilities and covered by unit tests.</p>
 <p>Developing a notebook</p>
 <p>The purpose of a notebook is interactive, procedural analysis. Usually this will be in jupyter notebooks but I prefer using pycharm’s code cells and standard python scripts.</p>
 <ul>
@@ -427,7 +430,7 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <ol type="1">
 <li>open the debugger</li>
 <li>create breakpoints</li>
-<li>start the debugger by using <q>Run and debug</q>, selecting the script you want to debug</li>
+<li>start the debugger by using “Run and debug”, selecting the script you want to debug</li>
 <li>step through the lines of code to view variable values</li>
 </ol>
 <p>The debugger is a fully functioning interpreter, so you can inspect variables, and reset others.</p>
@@ -972,7 +975,7 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <p>Multiple except statements can be used with specific errors like <code>NameError</code>, <code>ValueError</code>, <code>TypeError</code>,<code>ZeroDivisionError</code>.</p>
 <p>The <code>raise</code> keyword will force a particular error to occur. Usually this is used to produce a specific error to inform the user</p>
 <ul>
-<li>pattern matching is done with <q>match</q></li>
+<li>pattern matching is done with ‘match’</li>
 </ul>
 <div class="sourceCode" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_value(value):</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">match</span> value:</span>
@@ -990,12 +993,12 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <section id="classes-objects" class="level3">
 <h3 class="anchored" data-anchor-id="classes-objects">Classes &amp; objects</h3>
 <ul>
-<li><q>classes</q> act as factories for generating objects (often called instances) and define unique types.</li>
+<li>‘classes’ act as factories for generating objects (often called instances) and define unique types.</li>
 <li>Classes may inherit from other classes (their parents), inheriting both data (fields) and behaviour (methods)</li>
 <li>If B inherits from A, then an instance of B can be passed to something expecting A (subtyping)</li>
 <li>An object should hide its data (encapsulation), which can only be operated on with methods.</li>
 </ul>
-<p>Object-oriented design is then about identifying the classes (the <q>nouns</q>) and the methods (the <q>verbs</q>) and then establishing relationships between them, is-a and has-a.</p>
+<p>Object-oriented design is then about identifying the classes (the ‘nouns’) and the methods (the ‘verbs’) and then establishing relationships between them, is-a and has-a.</p>
 <p>Favour class composition over inheritance. Create more abstract classes by building them form less-abstract classes with has-a relationships.</p>
 <p>Pythonic getters and setters with property decorator. properties should only be used when no calculation is performed i.e just simple getting of info. Use full method when some work is being done.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> House:</span>

@@ -23,7 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-q { quotes: "“" "”" "‘" "’"; }
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -133,6 +132,10 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
     <a class="nav-link" href="../../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../monograph/index.html"> 
+<span class="menu-text">Extratemporal Dimensions</span></a>
+  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Code Notes</span>
@@ -235,7 +238,7 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <li>Enhance knowledge representation for electronic health records (EHRs), enabling better decision-making tools for clinicians.</li>
 </ul>
 <p>The approach begins with the extraction of terms and phrases from a corpus of neurological texts, followed by the computation of PMI to identify statistically significant co-occurrences of terms. These co-occurrences are represented as a weighted graph, where nodes are terms and weighted edges reflect their mutual information. A graph model is trained on this graph to identify higher-order structures and patterns. Semantic sub-networks can be extracted and analysed, focusing on the relationships between conditions, interventions, and descriptors. We extracted terms and phrases from a large corpus of neurological texts—including over 300,000 MRI head scans collected during 25 years of clinical practice at Queen Square—to capture the diverse language used in radiological reports. High PMI values might indicate meaningful relationships, such as common co-morbidities or symptom-disease relationships.</p>
-<p>With the graph constructed, we can then move onto applying node clustering algorithms. I used soft Louvain clustering to identify communities within the network, allowing for the detection of non-exclusive thematic groups. Unlike traditional Louvain clustering, soft Louvain clustering ascribes a probability of membership to each node in the graph, therefore I can use this parameter to find non-exclusive communities of nodes in the graph. The value of non-exclusive community detection is that it allows each node to belong to more than one community. This is certainly the case for non-specific terminology such as <q>inflammation</q> that can co-occur alongside multiple different conditions or diagnoses. These communities might correspond to thematic areas within a corpus, such as specific branches of medicine or research clusters. Investigating these communities can reveal how different topics are interconnected and identify potential interdisciplinary research areas. A threshold was applied to aggregate nodes for clarity, while Eigenvector Centrality was used to pinpoint the most influential terms within each cluster. These high-centrality primary nodes served as the <q>head</q> terms in an ontology, with the associated clusters forming templates that describe pathological conditions, imaging presentations, and key anatomical locations.</p>
+<p>With the graph constructed, we can then move onto applying node clustering algorithms. I used soft Louvain clustering to identify communities within the network, allowing for the detection of non-exclusive thematic groups. Unlike traditional Louvain clustering, soft Louvain clustering ascribes a probability of membership to each node in the graph, therefore I can use this parameter to find non-exclusive communities of nodes in the graph. The value of non-exclusive community detection is that it allows each node to belong to more than one community. This is certainly the case for non-specific terminology such as “inflammation” that can co-occur alongside multiple different conditions or diagnoses. These communities might correspond to thematic areas within a corpus, such as specific branches of medicine or research clusters. Investigating these communities can reveal how different topics are interconnected and identify potential interdisciplinary research areas. A threshold was applied to aggregate nodes for clarity, while Eigenvector Centrality was used to pinpoint the most influential terms within each cluster. These high-centrality primary nodes served as the “head” terms in an ontology, with the associated clusters forming templates that describe pathological conditions, imaging presentations, and key anatomical locations.</p>
 <p>In addition to community detection, other graph metrics such as the clustering coefficient can be applied to the terminology graph to uncover structure. High clustering coefficients suggest the presence of specialised subtopics or highly focused areas within the medical texts. These cliques could represent highly interconnected fields, such as specific diseases with multiple associated symptoms or treatments.</p>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
@@ -298,7 +301,7 @@ Figure&nbsp;5: The demyelination group shows a short graph distance to terms inv
 <img src="Stroke_group.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stroke-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: The stroke group shows the key terminology in the centre, in this case <q>infarction</q> and <q>haemorrhage</q>, with the associated descriptive and anatomical terms.
+Figure&nbsp;6: The stroke group shows the key terminology in the centre, in this case ‘infarction’ and ‘haemorrhage’, with the associated descriptive and anatomical terms.
 </figcaption>
 </figure>
 </div>
