@@ -1,0 +1,18 @@
+project:
+  type: manuscript
+  output-dir: ../docs/monograph
+
+manuscript:
+  article: index.qmd
+
+format:
+  html:
+    toc: true
+    comments:
+      hypothesis: true
+
+execute:
+  freeze: true
+
+
+

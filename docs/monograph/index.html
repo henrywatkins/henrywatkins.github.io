@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-08-15">
+
+<title>Beyond One-Time Physics: Applications Of Extra Temporal Dimensions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-7ec828f9407e6d7822a32d8c0b98272e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta name="citation_title" content="Beyond One-Time Physics: Applications Of Extra Temporal Dimensions">
+<meta name="citation_abstract" content="Extra time–like dimensions offer an intriguing, if controversial, arena in which to probe long-standing puzzles such as the hierarchy problem, the cosmological-constant puzzle and the arrow of time, all of which remain unsolved within the Standard Model and general relativity. We present a coherent survey  of relativistic and quantum frameworks that extend space-time to 3+N spatial and 1+N temporal directions. After reviewing the canonical pathologies—ill-posed ultrahyperbolic dynamics, causality violation, unitarity breakdown, and tachyon/ghost instabilities—we analyse three complementary strategies for mitigating them. (1) Modified metrics and warped or re-parameterised time directions. By embedding an additional time coordinate in Randall–Sundrum-style or compact polar geometries we show how apparent instabilities can be deferred to otherwise unobservable scales, albeit at the cost of new imaginary terms in the dispersion relation. (2) Symmetry structure of the extended Lorentz group. A detailed algebraic study of SO(3,2) and SO(3,3) reveals a continuous bridge between proper and improper transformations and predicts additional conserved quantities associated with “time rotations”, highlighting fresh directions for representation theory and phenomenology. (3) Potentials generated by scalar exchange in D+N space-times. Dimensional analysis and explicit Fourier transforms demonstrate how extra temporal modes alter the r-dependence and unitarity properties of Yukawa-type potentials, placing tight bounds on any macroscopic extra time dimension. We argue that while extra-time models are heavily constrained by present laboratory, astrophysical and proton-decay limits, they remain a fertile theoretical test-bed for questions at the foundations of cosmology and quantum gravity.">
+<meta name="citation_author" content="Henry Watkins">
+<meta name="citation_publication_date" content="2025-08-15">
+<meta name="citation_cover_date" content="2025-08-15">
+<meta name="citation_year" content="2025">
+<meta name="citation_online_date" content="2025-08-15">
+<meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=The arrow of time;,citation_author=D Layzer;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_volume=233(6);,citation_journal_title=Scientific American;">
+<meta name="citation_reference" content="citation_title=Classical mechanics;,citation_author=Thomas Walter Bannerman Kibble;,citation_author=Frank H Berkshire;,citation_author=TWB Kibble;,citation_publication_date=2004;,citation_cover_date=2004;,citation_year=2004;,citation_volume=5;">
+<meta name="citation_reference" content="citation_title=Special relativity;,citation_author=Nicholas Michael John Woodhouse;,citation_publication_date=2003;,citation_cover_date=2003;,citation_year=2003;">
+<meta name="citation_reference" content="citation_title=The large scale structure of space-time;,citation_author=Stephen W Hawking;,citation_publication_date=1973;,citation_cover_date=1973;,citation_year=1973;,citation_volume=1;">
+<meta name="citation_reference" content="citation_title=Quantum field theory in a nutshell;,citation_author=Anthony Zee;,citation_publication_date=2010;,citation_cover_date=2010;,citation_year=2010;">
+<meta name="citation_reference" content="citation_title=Problem of time in quantum gravity;,citation_author=Edward Anderson;,citation_publication_date=2012;,citation_cover_date=2012;,citation_year=2012;,citation_issue=12;,citation_volume=524;,citation_journal_title=Annalen der Physik;,citation_publisher=Wiley Online Library;">
+<meta name="citation_reference" content="citation_title=Sitzungsber. Preuss. Akad. Wiss. Berlin (math. Phys.) K1, 966 (1921); o. klein;,citation_author=Th Kaluza;,citation_publication_date=1926;,citation_cover_date=1926;,citation_year=1926;,citation_issue=985;,citation_volume=37;,citation_journal_title=Z. Phys;">
+<meta name="citation_reference" content="citation_title=An introduction to extra dimensions;,citation_author=Abdel Perez-Lorenzana;,citation_publication_date=2005;,citation_cover_date=2005;,citation_year=2005;,citation_volume=18;,citation_conference_title=Journal of physics: Conference series;,citation_conference=IOP Publishing;">
+<meta name="citation_reference" content="citation_title=Introduction to extra dimensions;,citation_author=Thomas G Rizzo;,citation_publication_date=2010;,citation_cover_date=2010;,citation_year=2010;,citation_journal_title=arXiv preprint arXiv:1003.1698;">
+<meta name="citation_reference" content="citation_title=Phenomenology, astrophysics, and cosmology of theories with submillimeter dimensions and TeV scale quantum gravity;,citation_author=Nima Arkani-Hamed;,citation_author=Savas Dimopoulos;,citation_author=Gia Dvali;,citation_publication_date=1999;,citation_cover_date=1999;,citation_year=1999;,citation_issue=8;,citation_volume=59;,citation_journal_title=Physical Review D;,citation_publisher=APS;">
+<meta name="citation_reference" content="citation_title=New dimensions at a millimeter to a fermi and superstrings at a TeV;,citation_author=Ignatios Antoniadis;,citation_author=Nima Arkani-Hamed;,citation_author=Savas Dimopoulos;,citation_author=Gia Dvali;,citation_publication_date=1998;,citation_cover_date=1998;,citation_year=1998;,citation_issue=3;,citation_volume=436;,citation_journal_title=Physics Letters B;,citation_publisher=Elsevier;">
+<meta name="citation_reference" content="citation_title=Time-like vs space-like extra dimensions;,citation_author=Israel Quiros;,citation_publication_date=2007;,citation_cover_date=2007;,citation_year=2007;,citation_journal_title=arXiv preprint arXiv:0707.0714;">
+<meta name="citation_reference" content="citation_title=Experimental limits on the fundamental planck scale in large extra dimensions;,citation_author=Douglas Gingrich;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_journal_title=arXiv preprint arXiv:1210.5923v3;">
+<meta name="citation_reference" content="citation_title=The dimensionality of time;,citation_author=J Dorling;,citation_publication_date=1970;,citation_cover_date=1970;,citation_year=1970;,citation_issue=4;,citation_volume=38;,citation_journal_title=American Journal of Physics;,citation_publisher=American Association of Physics Teachers;">
+<meta name="citation_reference" content="citation_title=Methods of mathematical physics;,citation_author=Richard Courant;,citation_author=David Hilbert;,citation_publication_date=1966;,citation_cover_date=1966;,citation_year=1966;,citation_volume=1;">
+<meta name="citation_reference" content="citation_title=On determinism and well-posedness in multiple time dimensions;,citation_author=Walter Craig;,citation_author=Steven Weinstein;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;,citation_issue=2110;,citation_volume=465;,citation_journal_title=Proceedings of the Royal Society A: Mathematical, Physical and Engineering Science;,citation_publisher=The Royal Society;">
+<meta name="citation_reference" content="citation_title=Multiple time dimensions;,citation_author=Steven Weinstein;,citation_publication_date=2008;,citation_cover_date=2008;,citation_year=2008;,citation_journal_title=arXiv preprint arXiv:0812.3869;">
+<meta name="citation_reference" content="citation_title=Physics with two time dimensions;,citation_author=Jacob G Foster;,citation_author=Berndt Müller;,citation_publication_date=2010;,citation_cover_date=2010;,citation_year=2010;,citation_journal_title=arXiv preprint arXiv:1001.2485;">
+<meta name="citation_reference" content="citation_title=Disappearance of matter due to causality and probability violations in theories with extra timelike dimensions;,citation_author=FJ Yndurain;,citation_publication_date=1991;,citation_cover_date=1991;,citation_year=1991;,citation_issue=1;,citation_volume=256;,citation_journal_title=Physics Letters B;,citation_publisher=Elsevier;">
+<meta name="citation_reference" content="citation_title=Constraints on extra time dimensions;,citation_author=Gia Dvali;,citation_author=Gregory Gabadadze;,citation_author=Goran Senjanovic;,citation_publication_date=1999;,citation_cover_date=1999;,citation_year=1999;,citation_journal_title=arXiv preprint hep-ph/9910207;">
+<meta name="citation_reference" content="citation_title=Reconsidering extra time-like dimensions;,citation_author=Recai Erdem;,citation_author=CS Ün;,citation_publication_date=2006;,citation_cover_date=2006;,citation_year=2006;,citation_issue=3;,citation_volume=47;,citation_journal_title=The European Physical Journal C-Particles and Fields;,citation_publisher=Springer;">
+<meta name="citation_reference" content="citation_title=On the dimensionality of spacetime;,citation_author=Max Tegmark;,citation_publication_date=1997;,citation_cover_date=1997;,citation_year=1997;,citation_issue=4;,citation_volume=14;,citation_journal_title=Classical and Quantum Gravity;,citation_publisher=IOP Publishing;">
+<meta name="citation_reference" content="citation_title=Survey of two-time physics;,citation_author=Itzhak Bars;,citation_publication_date=2001;,citation_cover_date=2001;,citation_year=2001;,citation_issue=16;,citation_volume=18;,citation_journal_title=Classical and Quantum Gravity;,citation_publisher=IOP Publishing;">
+<meta name="citation_reference" content="citation_title=Theories with two times;,citation_author=Itzhak Bars;,citation_author=Costas Kounnas;,citation_publication_date=1997;,citation_cover_date=1997;,citation_year=1997;,citation_issue=1;,citation_volume=402;,citation_journal_title=Physics Letters B;,citation_publisher=Elsevier;">
+<meta name="citation_reference" content="citation_title=Standard model of particles and forces in the framework of two-time physics;,citation_author=Itzhak Bars;,citation_publication_date=2006;,citation_cover_date=2006;,citation_year=2006;,citation_issue=8;,citation_volume=74;,citation_journal_title=Physical Review D;,citation_publisher=APS;">
+<meta name="citation_reference" content="citation_title=Extra time-like dimensions lead to a vanishing cosmological constant;,citation_author=I Ya Aref’eva;,citation_author=BG Dragović;,citation_author=IV Volovich;,citation_publication_date=1986;,citation_cover_date=1986;,citation_year=1986;,citation_issue=3;,citation_volume=177;,citation_journal_title=Physics Letters B;,citation_publisher=Elsevier;">
+<meta name="citation_reference" content="citation_title=Extra dimensions in space and time;,citation_author=Itzhak Bars;,citation_author=John Terning;,citation_author=Farzad Nekoogar;,citation_author=Lawrence Maxwell Krauss;,citation_publication_date=2010;,citation_cover_date=2010;,citation_year=2010;">
+<meta name="citation_reference" content="citation_title=Symmetry and the standard model;,citation_author=Matthew Robinson;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;">
+<meta name="citation_reference" content="citation_title=General relativity;,citation_author=Nicholas Michael John Woodhouse;,citation_publication_date=2007;,citation_cover_date=2007;,citation_year=2007;">
+<meta name="citation_reference" content="citation_title=A first course in string theory;,citation_author=Barton Zwiebach;,citation_publication_date=2004;,citation_cover_date=2004;,citation_year=2004;">
+<meta name="citation_reference" content="citation_title=Group theory in physics;,citation_author=Wu-Ki Tung;,citation_author=Michael Aivazis;,citation_publication_date=1985;,citation_cover_date=1985;,citation_year=1985;,citation_volume=1;">
+<meta name="citation_reference" content="citation_title=Extra time like dimensions, superluminal motion, and dark matter;,citation_author=Matej Pavšič;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_journal_title=arXiv preprint arXiv:1110.4754;">
+<meta name="citation_reference" content="citation_title=Relativistic mechanics in multiple time dimensions;,citation_author=Milen V Velev;,citation_publication_date=2012;,citation_cover_date=2012;,citation_year=2012;,citation_issue=3;,citation_volume=25;,citation_journal_title=Physics Essays;">
+<meta name="citation_reference" content="citation_title=Path integral methods and applications;,citation_author=Richard MacKenzie;,citation_publication_date=2000;,citation_cover_date=2000;,citation_year=2000;,citation_journal_title=arXiv preprint quant-ph/0004090;">
+<meta name="citation_reference" content="citation_title=Search for proton decay via p→ $\nu$ k+ using 260 kiloton year data of super-kamiokande;,citation_author=K Abe;,citation_author=Y Hayato;,citation_author=K Iyogi;,citation_author=J Kameda;,citation_author=M Miura;,citation_author=S Moriyama;,citation_author=M Nakahata;,citation_author=S Nakayama;,citation_author=RA Wendell;,citation_author=H Sekiya;,citation_author=others;,citation_publication_date=2014;,citation_cover_date=2014;,citation_year=2014;,citation_issue=7;,citation_volume=90;,citation_journal_title=Physical Review D;,citation_publisher=APS;">
+<meta name="citation_reference" content="citation_title=Superluminal waves and objects: An overview of the relevant experiments;,citation_author=Erasmo Recami;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;,citation_volume=196;,citation_conference_title=Journal of physics: Conference series;,citation_conference=IOP Publishing;">
+<meta name="citation_reference" content="citation_title=A viable superluminal hypothesis: Tachyon emission from orthopositronium;,citation_author=M. Skalsey;,citation_author=R. S. Conti;,citation_author=J. J. Engbrecht;,citation_author=D. W. Gidley;,citation_author=R. S. Vallery;,citation_author=P. W. Zitzewitz;,citation_publication_date=2000;,citation_cover_date=2000;,citation_year=2000;,citation_issue=1;,citation_doi=10.1063/1.1290916;,citation_volume=504;,citation_journal_title=AIP Conference Proceedings;">
+<meta name="citation_reference" content="citation_title=Search for dark matter and large extra dimensions in p p collisions yielding a photon and missing transverse energy;,citation_author=Serguei Chatrchyan;,citation_author=V Khachatryan;,citation_author=AM Sirunyan;,citation_author=A Tumasyan;,citation_author=W Adam;,citation_author=T Bergauer;,citation_author=M Dragicevic;,citation_author=J Erö;,citation_author=C Fabjan;,citation_author=M Friedl;,citation_author=others;,citation_publication_date=2012;,citation_cover_date=2012;,citation_year=2012;,citation_issue=26;,citation_volume=108;,citation_journal_title=Physical review letters;,citation_publisher=APS;">
+<meta name="citation_reference" content="citation_title=Search for extra dimensions using diphoton events in 7 TeV proton–proton collisions with the ATLAS detector;,citation_author=Georges Aad;,citation_author=Brad Abbott;,citation_author=Jalal Abdallah;,citation_author=Ahmed Ali Abdelalim;,citation_author=Abdelouahab Abdesselam;,citation_author=Ovsat Abdinov;,citation_author=Babak Abi;,citation_author=Maris Abolins;,citation_author=OS AbouZeid;,citation_author=Halina Abramowicz;,citation_author=others;,citation_publication_date=2012;,citation_cover_date=2012;,citation_year=2012;,citation_issue=4;,citation_volume=710;,citation_journal_title=Physics Letters B;,citation_publisher=Elsevier;">
+<meta name="citation_reference" content="citation_title=The theory of quark and gluon interactions;,citation_author=Francisco J Ynduráin;,citation_publication_date=2007;,citation_cover_date=2007;,citation_year=2007;">
+<meta name="citation_reference" content="citation_title=Mathematical methods for physics and engineering: A comprehensive guide;,citation_author=Kenneth Franklin Riley;,citation_author=Michael Paul Hobson;,citation_author=Stephen John Bence;,citation_publication_date=2006;,citation_cover_date=2006;,citation_year=2006;">
+<meta name="citation_reference" content="citation_title=Modern cosmology;,citation_author=Scott Dodelson;,citation_publication_date=2003;,citation_cover_date=2003;,citation_year=2003;">
+<meta name="citation_reference" content="citation_title=Modern quantum mechanics;,citation_author=Jun John Sakurai;,citation_author=Jim Napolitano;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;">
+<meta name="citation_reference" content="citation_title=String theory;,citation_author=Joseph Polchinski;,citation_publication_date=2005;,citation_cover_date=2005;,citation_year=2005;">
+<meta name="citation_reference" content="citation_title=The hierarchy problem: From the fundamentals to the frontiers;,citation_author=Seth Koren;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_journal_title=arXiv preprint arXiv:2009.11870;">
+<meta name="citation_reference" content="citation_title=The cosmological constant problem;,citation_author=Steven Weinberg;,citation_publication_date=1989;,citation_cover_date=1989;,citation_year=1989;,citation_issue=1;,citation_volume=61;,citation_journal_title=Reviews of modern physics;,citation_publisher=APS;">
+<meta name="citation_reference" content="citation_title=On the electrodynamics of moving bodies;,citation_author=Albert Einstein;,citation_author=others;,citation_publication_date=1905;,citation_cover_date=1905;,citation_year=1905;,citation_issue=10;,citation_volume=17;,citation_journal_title=Annalen der physik;">
+<meta name="citation_reference" content="citation_title=A review on extended special and general theory of relativity for superluminal particles and their cosmological applications;,citation_author=Vivek Kumar Srivastava;,citation_author=Alok Kumar Verma;,citation_author=Garima Vaish;,citation_author=Sudhaker Upadhyay;,citation_publication_date=2025;,citation_cover_date=2025;,citation_year=2025;,citation_issue=2;,citation_volume=80;,citation_journal_title=Zeitschrift für Naturforschung A;,citation_publisher=De Gruyter;">
+<meta name="citation_reference" content="citation_title=Non semisimple gauge models: I. Classical theory and the properties of ghost states;,citation_author=G Bandelloni;,citation_author=C Becchi;,citation_author=A Blasi;,citation_author=R Collina;,citation_publication_date=1978;,citation_cover_date=1978;,citation_year=1978;,citation_volume=28;,citation_conference_title=Annales de l’institut henri poincaré. Section a, physique théorique;">
+<meta name="citation_reference" content="citation_title=Some remarks on anthropic approaches to the strong CP problem;,citation_author=Michael Dine;,citation_author=Laurel Stephenson Haskins;,citation_author=Lorenzo Ubaldi;,citation_author=Di Xu;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_issue=5;,citation_volume=2018;,citation_journal_title=Journal of High Energy Physics;,citation_publisher=Springer;">
+<meta name="citation_reference" content="citation_title=Quantum entanglement without nonlocal causation in (3, 2)-dimensional spacetime;,citation_author=Marco Pettini;,citation_publication_date=2025;,citation_cover_date=2025;,citation_year=2025;,citation_issue=1;,citation_volume=7;,citation_journal_title=Physical Review Research;,citation_publisher=APS;">
+<meta name="citation_reference" content="citation_title=The friedmann–lemaı̂tre–robertson–walker metric;,citation_author=Fulvio Melia;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_issue=03;,citation_volume=37;,citation_journal_title=Modern Physics Letters A;,citation_publisher=World Scientific;">
+<meta name="citation_reference" content="citation_title=Towards a coherent theory of physics and mathematics;,citation_author=Paul Benioff;,citation_publication_date=2002;,citation_cover_date=2002;,citation_year=2002;,citation_volume=32;,citation_journal_title=Foundations of Physics;,citation_publisher=Springer;">
+<meta name="citation_reference" content="citation_title=Gravity particles from warped extra dimensions, a review. Part i-KK graviton;,citation_author=Alexandra Oliveira;,citation_publication_date=2014;,citation_cover_date=2014;,citation_year=2014;,citation_journal_title=arXiv preprint arXiv:1404.0102;,citation_publisher=Citeseer;">
+<meta name="citation_reference" content="citation_title=Searches for extra spatial dimensions with the CMS detector at the LHC;,citation_author=Greg Landsberg;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_issue=15;,citation_volume=30;,citation_journal_title=Modern Physics Letters A;,citation_publisher=World Scientific;">
+<meta name="citation_reference" content="citation_title=Geometry, physics, and phenomenology of the randall-sundrum model;,citation_author=EE Boos;,citation_author=VE Bunichev;,citation_author=IP Volobuev;,citation_author=MN Smolyakov;,citation_publication_date=2012;,citation_cover_date=2012;,citation_year=2012;,citation_volume=43;,citation_journal_title=Physics of Particles and Nuclei;,citation_publisher=Springer;">
+<meta name="citation_reference" content="citation_title=Group theory and quantum mechanics;,citation_author=Michael Tinkham;,citation_publication_date=2003;,citation_cover_date=2003;,citation_year=2003;">
+<meta name="citation_reference" content="citation_title=On the interaction of elementary particles. i;,citation_author=Hideki Yukawa;,citation_publication_date=1935;,citation_cover_date=1935;,citation_year=1935;,citation_volume=17;,citation_journal_title=Proceedings of the Physico-Mathematical Society of Japan. 3rd Series;,citation_publisher=The Physical Society of Japan, The Mathematical Society of Japan;">
+<meta name="citation_reference" content="citation_title=Quantum theory of non-local fields. Part i. Free fields;,citation_author=Hideki Yukawa;,citation_publication_date=1950;,citation_cover_date=1950;,citation_year=1950;,citation_issue=2;,citation_volume=77;,citation_journal_title=Physical Review;,citation_publisher=APS;">
+<meta name="citation_reference" content="citation_title=An introduction to quantum field theory;,citation_author=Michael E Peskin;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;">
+</head>
+
+<body class="quarto-light">
+
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Beyond One-Time Physics: Applications Of Extra Temporal Dimensions</h1>
+          </div>
+
+    
+    <div class="quarto-title-meta-container">
+      <div class="quarto-title-meta-column-start">
+            <div class="quarto-title-meta-author">
+          <div class="quarto-title-meta-heading">Author</div>
+          <div class="quarto-title-meta-heading">Affiliation</div>
+          
+                <div class="quarto-title-meta-contents">
+            <p class="author">Henry Watkins <a href="https://orcid.org/0000-0001-6330-6195" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+                <div class="quarto-title-meta-contents">
+                    <p class="affiliation">
+                        University College London
+                      </p>
+                  </div>
+                    </div>
+        
+        <div class="quarto-title-meta">
+
+                      
+                <div>
+            <div class="quarto-title-meta-heading">Published</div>
+            <div class="quarto-title-meta-contents">
+              <p class="date">August 15, 2025</p>
+            </div>
+          </div>
+          
+                
+              </div>
+      </div>
+      <div class="quarto-title-meta-column-end quarto-other-formats-target">
+      </div>
+    </div>
+
+    <div>
+      <div class="abstract">
+        <div class="block-title">Abstract</div>
+        Extra time–like dimensions offer an intriguing, if controversial, arena in which to probe long-standing puzzles such as the hierarchy problem, the cosmological-constant puzzle and the arrow of time, all of which remain unsolved within the Standard Model and general relativity. We present a coherent survey of relativistic and quantum frameworks that extend space-time to 3+N spatial and 1+N temporal directions. After reviewing the canonical pathologies—ill-posed ultrahyperbolic dynamics, causality violation, unitarity breakdown, and tachyon/ghost instabilities—we analyse three complementary strategies for mitigating them. (1) Modified metrics and warped or re-parameterised time directions. By embedding an additional time coordinate in Randall–Sundrum-style or compact polar geometries we show how apparent instabilities can be deferred to otherwise unobservable scales, albeit at the cost of new imaginary terms in the dispersion relation. (2) Symmetry structure of the extended Lorentz group. A detailed algebraic study of SO(3,2) and SO(3,3) reveals a continuous bridge between proper and improper transformations and predicts additional conserved quantities associated with “time rotations”, highlighting fresh directions for representation theory and phenomenology. (3) Potentials generated by scalar exchange in D+N space-times. Dimensional analysis and explicit Fourier transforms demonstrate how extra temporal modes alter the r-dependence and unitarity properties of Yukawa-type potentials, placing tight bounds on any macroscopic extra time dimension. We argue that while extra-time models are heavily constrained by present laboratory, astrophysical and proton-decay limits, they remain a fertile theoretical test-bed for questions at the foundations of cosmology and quantum gravity.
+      </div>
+    </div>
+
+
+    <div class="quarto-other-links-text-target">
+    </div>  </div>
+</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link active" data-scroll-target="#sec-intro"><span class="header-section-number">1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#ultrahyperbolic-pdes" id="toc-ultrahyperbolic-pdes" class="nav-link" data-scroll-target="#ultrahyperbolic-pdes"><span class="header-section-number">1.1</span> Ultrahyperbolic PDEs</a></li>
+  <li><a href="#causality" id="toc-causality" class="nav-link" data-scroll-target="#causality"><span class="header-section-number">1.2</span> Causality</a></li>
+  <li><a href="#unitarity" id="toc-unitarity" class="nav-link" data-scroll-target="#unitarity"><span class="header-section-number">1.3</span> Unitarity</a></li>
+  <li><a href="#tachyonic-and-ghost-modes" id="toc-tachyonic-and-ghost-modes" class="nav-link" data-scroll-target="#tachyonic-and-ghost-modes"><span class="header-section-number">1.4</span> Tachyonic and Ghost Modes</a></li>
+  <li><a href="#alternative-interpretations" id="toc-alternative-interpretations" class="nav-link" data-scroll-target="#alternative-interpretations"><span class="header-section-number">1.5</span> Alternative Interpretations</a></li>
+  </ul></li>
+  <li><a href="#sec-investigations" id="toc-sec-investigations" class="nav-link" data-scroll-target="#sec-investigations"><span class="header-section-number">2</span> The Nature of Time</a>
+  <ul class="collapse">
+  <li><a href="#relative-nature-of-space-and-time" id="toc-relative-nature-of-space-and-time" class="nav-link" data-scroll-target="#relative-nature-of-space-and-time"><span class="header-section-number">2.1</span> Relative Nature of Space and Time</a></li>
+  </ul></li>
+  <li><a href="#sec-warped" id="toc-sec-warped" class="nav-link" data-scroll-target="#sec-warped"><span class="header-section-number">3</span> Warped Spaces and Non-Minkowski Metrics</a>
+  <ul class="collapse">
+  <li><a href="#a-reparameterised-extra-time-dimension" id="toc-a-reparameterised-extra-time-dimension" class="nav-link" data-scroll-target="#a-reparameterised-extra-time-dimension"><span class="header-section-number">3.1</span> A Reparameterised Extra Time Dimension</a></li>
+  <li><a href="#an-extra-time-dimension-with-a-different-speed-of-light" id="toc-an-extra-time-dimension-with-a-different-speed-of-light" class="nav-link" data-scroll-target="#an-extra-time-dimension-with-a-different-speed-of-light"><span class="header-section-number">3.2</span> An Extra Time Dimension with a Different Speed of Light</a></li>
+  </ul></li>
+  <li><a href="#sec-groups" id="toc-sec-groups" class="nav-link" data-scroll-target="#sec-groups"><span class="header-section-number">4</span> Groups and Symmetries</a>
+  <ul class="collapse">
+  <li><a href="#structure-of-the-lorentz-transformations-in-2t" id="toc-structure-of-the-lorentz-transformations-in-2t" class="nav-link" data-scroll-target="#structure-of-the-lorentz-transformations-in-2t"><span class="header-section-number">4.1</span> Structure of the Lorentz Transformations in 2T</a></li>
+  <li><a href="#group-theory-of-so32" id="toc-group-theory-of-so32" class="nav-link" data-scroll-target="#group-theory-of-so32"><span class="header-section-number">4.2</span> Group Theory of SO(3,2)</a></li>
+  <li><a href="#group-theory-of-so33" id="toc-group-theory-of-so33" class="nav-link" data-scroll-target="#group-theory-of-so33"><span class="header-section-number">4.3</span> Group Theory of SO(3,3)</a></li>
+  </ul></li>
+  <li><a href="#sec-potentialenergy" id="toc-sec-potentialenergy" class="nav-link" data-scroll-target="#sec-potentialenergy"><span class="header-section-number">5</span> Potentials in Extratemporal Dimensions</a>
+  <ul class="collapse">
+  <li><a href="#space-time" id="toc-space-time" class="nav-link" data-scroll-target="#space-time"><span class="header-section-number">5.1</span> 3+1 Space-Time</a></li>
+  <li><a href="#units-of-the-potential" id="toc-units-of-the-potential" class="nav-link" data-scroll-target="#units-of-the-potential"><span class="header-section-number">5.2</span> Units of the Potential</a></li>
+  <li><a href="#sec-dplus1" id="toc-sec-dplus1" class="nav-link" data-scroll-target="#sec-dplus1"><span class="header-section-number">5.3</span> D+1 Space-Time Dimensions</a></li>
+  <li><a href="#space-time-with-momentum-cutoff" id="toc-space-time-with-momentum-cutoff" class="nav-link" data-scroll-target="#space-time-with-momentum-cutoff"><span class="header-section-number">5.4</span> 4+1 Space-Time with Momentum Cutoff</a></li>
+  <li><a href="#d2-space-time" id="toc-d2-space-time" class="nav-link" data-scroll-target="#d2-space-time"><span class="header-section-number">5.5</span> D+2 Space-Time</a></li>
+  <li><a href="#special-cases" id="toc-special-cases" class="nav-link" data-scroll-target="#special-cases"><span class="header-section-number">5.6</span> Special Cases</a></li>
+  </ul></li>
+  <li><a href="#sec-phenomenology" id="toc-sec-phenomenology" class="nav-link" data-scroll-target="#sec-phenomenology"><span class="header-section-number">6</span> Phenomenological Consequences</a>
+  <ul class="collapse">
+  <li><a href="#unitarity-violation" id="toc-unitarity-violation" class="nav-link" data-scroll-target="#unitarity-violation"><span class="header-section-number">6.1</span> Unitarity Violation</a></li>
+  <li><a href="#gravity-law-modification" id="toc-gravity-law-modification" class="nav-link" data-scroll-target="#gravity-law-modification"><span class="header-section-number">6.2</span> Gravity Law Modification</a></li>
+  </ul></li>
+  <li><a href="#sec-conclusions" id="toc-sec-conclusions" class="nav-link" data-scroll-target="#sec-conclusions"><span class="header-section-number">7</span> Conclusions</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+  
+
+
+<section id="sec-intro" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>In the face of unsolved problems in physics, one avenue is to consider more exotic models like extra time-like dimensions. While models with extra dimensions of space are commonplace in approaches like string theory <span class="citation" data-cites="polchinski2005string">(<a href="#ref-polchinski2005string" role="doc-biblioref">Polchinski 2005</a>)</span>, comparatively less work have been accorded to the consequences of extra time dimensions. The Standard Model of particle physics has been very successful in describing the fundamental particles and interactions, but it does not explain all observed phenomena. For example, the existence of dark matter and dark energy, the hierarchy problem <span class="citation" data-cites="koren2020hierarchy">(<a href="#ref-koren2020hierarchy" role="doc-biblioref">Koren 2020</a>)</span>, and the cosmological constant problem <span class="citation" data-cites="weinberg1989cosmological">(<a href="#ref-weinberg1989cosmological" role="doc-biblioref">Weinberg 1989</a>)</span> are all issues that remain unresolved. This article will discuss the nature of time and how extra dimensions of time change particular aspects of physical processes.</p>
+<p>Since Kaluza-Klein theory first appeared in the 1920’s with its explanation of classical electromagnetism using higher dimensional general relativity <span class="citation" data-cites="kaluza1926sitzungsber">(<a href="#ref-kaluza1926sitzungsber" role="doc-biblioref">Kaluza 1926</a>)</span>, extra dimensions in space-time have become commonplace in physical theories going beyond the Standard Model. The most notable being String theory and M-theory that require 10 and 11 dimensions to be consistent. These and other theories however have only considered extra dimensions of space <span class="citation" data-cites="perez2005introduction rizzo2010introduction">(<a href="#ref-perez2005introduction" role="doc-biblioref">Perez-Lorenzana 2005</a>; <a href="#ref-rizzo2010introduction" role="doc-biblioref">Rizzo 2010</a>)</span>. While there has not been any experimental evidence for extra dimensions <span class="citation" data-cites="landsberg2015searches">(<a href="#ref-landsberg2015searches" role="doc-biblioref">Landsberg 2015</a>)</span>, they still remain a fruitful area of research. There has been comparatively little study into the possibility and behaviour of theories that incorporate extra time dimensions. The reason for this is that when one attempts to construct theories with extra time dimensions one is immediately presented with problems of interpretation and the violation of causality.</p>
+<p>Time can be be thought of as simply a parameter that allows the differentiation space-like hypersurfaces upon which exists a dynamical system. It is a parameter through which physical systems appear to change. This Newtonian view of absolute time is still the standard interpretation present in quantum physics and physics formulated before Einstein and Minkowski. Space and time dimensions clearly differ in obvious ways, notably that time appears unidirectional; this arrow of time has been generally linked with the second law of thermodynamics <span class="citation" data-cites="Layzer">(<a href="#ref-Layzer" role="doc-biblioref">Layzer 1975</a>)</span>. It is possible to also control the rate of change of a space dimension coordinate without requiring a change in rest frame, but to do so in time there must be another observer and transform to their frame of reference. Cosmologically, time has a origin at the beginning of the universe, but when asked <em>where</em> the universe began the Standard Model of Cosmology says it is <em>everywhere</em> <span class="citation" data-cites="dodelson2003modern">(<a href="#ref-dodelson2003modern" role="doc-biblioref">Dodelson 2003</a>)</span>. It is hard to think of causes for these differences in nature using the best descriptions of space-time, special and general relativity, wherein mathematically the only differences appear to be the signiture of the metric and the number of dimensions.</p>
+<p>In classical mechanics time is Newtonian absolute time. The evolution of systems is described through this parameter according to the equations of motion. In the Lagrangian formalism this is <span class="citation" data-cites="kibble2004classical">(<a href="#ref-kibble2004classical" role="doc-biblioref">Kibble, Berkshire, and Kibble 2004</a>)</span></p>
+<p><span class="math display">\[
+\frac{d}{dt}(\frac{\partial L}{\partial \dot{x_i}})=\frac{\partial L}{\partial x_i}.
+\]</span></p>
+<p>In his special theory of relativity, Einstein found that simultaneity required the elevation of time to the same status as the space dimensions <span class="citation" data-cites="einstein1905electrodynamics">(<a href="#ref-einstein1905electrodynamics" role="doc-biblioref">Einstein et al. 1905</a>)</span>. As a result it no longer followed the Newtonian absoluteness and became a changeable quantity that can dilate and change for different observers <span class="citation" data-cites="woodhouse2003special">(<a href="#ref-woodhouse2003special" role="doc-biblioref">Woodhouse 2003</a>)</span>. Minkowski expressed this idea geometrically in terms of the invariant interval between events in all reference frames</p>
+<p><span class="math display">\[
+ds^2=c^2 dt^2-dx^2-dy^2 -dz^2.
+\]</span></p>
+<p>The fact that in this metric space and time appear on equal terms exemplifies the connection between space and time. Furthermore, using this metric it is clear that adding extra dimensions of space or time can be done by simply modifying this metric with extra terms. This gives a window into how one can construct extra time theories. In general relativity space-time is now a dynamical field that curves depending on mass-energy distribution. The experience of time in general relativity is now the proper time that an observer’s position along a world-line and is dependent on the curvature of space-time <span class="citation" data-cites="hawking1973large">(<a href="#ref-hawking1973large" role="doc-biblioref">Hawking 1973</a>)</span>.</p>
+<p>In quantum mechanics time diverges from the close relationship with space that special relativity prescribes and is treated more closely to the Newtonian time as in classical mechanics. While there is a well defined operator and uncertainty relation for space dimensions and their momentum space dual, time has no operator and the energy-time uncertainty relation is harder to derive. This is in direct opposition with special relativity where time and space are treated equivalently. The fact that time is treated so differently in general relativity and quantum mechanics is known as <em>the problem of time</em> and presents a major obstacle to understanding how a fundamental theory of physics will arise. In looking at extra dimensions it may be possible to see how time can reconciled in the two regimes <span class="citation" data-cites="anderson2012problem">(<a href="#ref-anderson2012problem" role="doc-biblioref">Anderson 2012</a>)</span>. It is hoped that by extending space-time in some way to include extra time dimensions, perhaps compactified or included via some other mechanism, an extension of the Standard Model can be uncovered or a better understanding of the role of time within current theories found.</p>
+<p>Throughout this document the extra dimension of time will be given by the letter <span class="math inline">\(\sigma\)</span>, and the extra energy component associated with this dimension as <span class="math inline">\(\zeta\)</span>. Metrics shall have signature <span class="math inline">\(diag(+---)\)</span> i.e all time-like dimensions will be positive and space dimensions negative. In the cases of compactified dimensions the compactification size will be L; this will apply to both the compactification length of extra space dimensions and also the compactification period of extra times. Furthermore the convention of natural units will be used throughout. In this scheme the fundamental constants <span class="math inline">\(G=c=\hbar=1\)</span>. This means that both time and space have dimensions of length <span class="math inline">\([t]=[x]=L\)</span>. Also from Einstein’s mass-energy relation mass has units of energy <span class="math inline">\(E=m\)</span> and using the Planck energy-frequency relation energy has units of inverse length <span class="math inline">\(E=1/\lambda\)</span> since <span class="math inline">\([1/\lambda]=1/L\)</span>. Using this scheme the useful quantities of energy, mass, length and time can be given in terms of eV (electron volts) to some power.</p>
+<section id="ultrahyperbolic-pdes" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="ultrahyperbolic-pdes"><span class="header-section-number">1.1</span> Ultrahyperbolic PDEs</h2>
+<p>The first effect associated with extra time dimensions in classical physics is a mathematical problem. The primary equations in physics are in the form of partial differential equations (PDEs), these may be an equation of motion that contains derivatives with respect to space and time. As such the equation of motion of a physical system will be changed when an extra dimension of time is introduced. The solutions of these equations are used to predict physical systems. Mathematically, these PDEs are in general <em>initial value problems</em> or <em>boundary value problems</em> and the condition that these yield valid solutions are that these problems are <em>well posed</em><span class="citation" data-cites="courant1966methods">(<a href="#ref-courant1966methods" role="doc-biblioref">Courant and Hilbert 1966</a>)</span>. Simply, this means the solution exists, is unique and the solution is continuous with the boundary conditions. One of the most important PDEs in physics and quantum field theory in particular is the wave equation. If there is more than one time dimension the equation reads</p>
+<p><span class="math display">\[
+\sum_{i=1}^n \frac{\partial^2 u}{\partial t_i^2}=\frac{\partial^2 u}{\partial x^2}+\frac{\partial^2 u}{\partial y^2}+\frac{\partial^2 u}{\partial z^2}
+\]</span></p>
+<p>In two or more <span class="math inline">\((n&gt;1)\)</span> time dimensions this equation was not believed to sustain a well-posed initial value problem <span class="citation" data-cites="tegmark1997dimensionality">(<a href="#ref-tegmark1997dimensionality" role="doc-biblioref">Tegmark 1997</a>)</span>. This is simply that for initial-value boundary conditions in codimension 1 (one less dimension than the full space) <span class="math inline">\(u(0,t_2,x,y,z)=f(t_2,x,y,z)\)</span>, the solution is not continuous with the initial data. It is thus non-predictive since one cannot construct a well-posed initial problem for the equation. It has been shown <span class="citation" data-cites="weinstein2008multiple craig2009determinism">(<a href="#ref-weinstein2008multiple" role="doc-biblioref">Weinstein 2008</a>; <a href="#ref-craig2009determinism" role="doc-biblioref">Craig and Weinstein 2009</a>)</span> that when the domain of the initial data for the problem is constrained to a definite region then there exist unique, stable solutions. If the Fourier transform of the initial data is constrained so that</p>
+<p><span class="math display">\[
+\vert k^2\vert-\vert\omega^2\vert\geq 0
+\]</span></p>
+<p>Then it is a well posed problem. As noted by <span class="citation" data-cites="foster2010physics">Foster and Müller (<a href="#ref-foster2010physics" role="doc-biblioref">2010</a>)</span> a problem with this approach is that this does not extend to interacting fields and as such it is difficult to foresee how this method can be applied to real physical scenarios.</p>
+</section>
+<section id="causality" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="causality"><span class="header-section-number">1.2</span> Causality</h2>
+<p>It is axiomatic in physics that effects must follow causes and this must be so in all reference frames. If causality is violated physics faces serious conceptual problems like the Grandfather Paradox. In two time dimensions it is always possible to construct closed timeline curves and so causality can be violated <span class="citation" data-cites="foster2010physics">(<a href="#ref-foster2010physics" role="doc-biblioref">Foster and Müller 2010</a>)</span>. <span class="citation" data-cites="yndurain1991disappearance">Yndurain (<a href="#ref-yndurain1991disappearance" role="doc-biblioref">1991</a>)</span> argues that in a space-time with one extra Kaluza-Klein time dimension, dispersion relations are modified by an extra term. As a result propagators would become</p>
+<p><span class="math display">\[
+G'(k,\zeta)=\frac{1}{k^2 +\zeta^2 -m^2 +i\epsilon}
+\]</span></p>
+<p>Using a compactified time dimension of size L Yndurain finds that <span class="math inline">\(\zeta^2\)</span> has the form <span class="math inline">\(n^2/L^2\)</span>. In the case of extra space dimensions the denominator would be <span class="math inline">\(k^2 -\zeta^2 -m^2 +i\epsilon\)</span> and this extra term is interpreted as the Kaluza-Klein tower of excitations. Causality violation implies dispersion relations no longer hold, but since these have been verified up to very high energies in modern experiments it is unlikely that it occurs. <span class="citation" data-cites="foster2010physics">Foster and Müller (<a href="#ref-foster2010physics" role="doc-biblioref">2010</a>)</span> attempts to solve the problem of causality by taking the second time dimension to be <em>ergodic</em> so that the extra energy component is thermal with a very high temperature T. This means that dynamics in the second dimension are unstable and diffusive instead of ballistic.</p>
+<p>An interesting re-interpretation from <span class="citation" data-cites="quiros2007time">Quiros (<a href="#ref-quiros2007time" role="doc-biblioref">2007</a>)</span> that tackles this and other problems in extra time physics is the treatment of the extra term in the energy momentum relation of a compactified time theory as a correction to the energy. This means that instead of considering the <span class="math inline">\(\zeta^2\)</span> term as a correction to the mass leading to a Kaluza-Klein tower of modes, instead</p>
+<p><span class="math display">\[
+E^2 + n^2/L^2-p^2=m^2
+\]</span></p>
+<p>and the new energy of a particle is</p>
+<p><span class="math display">\[
+E'^2=E^2+n^2/L^2
+\]</span></p>
+<p>Thus there exist excited states of the same particle and no conflict with causality. Thusfar no such particle states have been observed.</p>
+</section>
+<section id="unitarity" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="unitarity"><span class="header-section-number">1.3</span> Unitarity</h2>
+<p>In a quantum mechanical system the sum of all the probabilities of the possible states that the system can occupy must equal unity, this is simply a statement of the conservation of probability. When a compactified extra time is introduced, <span class="citation" data-cites="yndurain1991disappearance">Yndurain (<a href="#ref-yndurain1991disappearance" role="doc-biblioref">1991</a>)</span> showed there are poles at <span class="math inline">\(k^2 =-\zeta^2+ m^2 -i\epsilon\)</span>, which in the interaction of two charged particles via the electromagnetic field (such that <span class="math inline">\(\alpha\)</span> is the electromagnetic coupling constant) makes the Coulomb potential complex,</p>
+<p><span class="math display">\[
+V(r)= \frac{\alpha}{r}\left( 1+2\sum_n exp(-inr/L)\right)
+\]</span></p>
+<p>leading to the violation of unitarity because the resulting amplitude will be complex, the interpretation of this being matter has disappeared. It has been suggested by <span class="citation" data-cites="dvali1999constraints">Dvali, Gabadadze, and Senjanovic (<a href="#ref-dvali1999constraints" role="doc-biblioref">1999</a>)</span> that Standard Model states are localised in the extra time dimension but free to occupy the other dimensions. In this approach the Kaluza -Klein modes for the standard model particles (tachyons) are absent, tachyonic gravitons however still remain. The gravitational potential that arises from the exchange of tachyonic Kaluza-Klein mode gravitons is still plagued by an imaginary part,</p>
+<p><span class="math display">\[
+V_n(r)=G \frac{m^2}{r} exp(-in\frac{r}{L}),
+\]</span></p>
+<p>leading to a tachyonic decay into nothing. When Quiros applies the same re-interpretation to the problem of unitarity the real energy is taken to be <span class="math inline">\(E'\)</span>. Thus instead of finding a wave like <span class="math inline">\(\psi_n\varpropto exp(\sqrt{n^2/L^2 -m^2}t)\)</span> where <span class="math inline">\(\vert\psi_n\vert^2\)</span> can be negative or imaginary we find <span class="math inline">\(\psi_n \varpropto exp(imt)\Rightarrow\vert\psi_n\vert^2\varpropto1\)</span> as it should be. The phenomenology of this approach yields a standard propagator but the particle in question would have a tower of excited states. Returning to the thermal time dimension view of Foster. The potential in <span class="citation" data-cites="yndurain1991disappearance">Yndurain (<a href="#ref-yndurain1991disappearance" role="doc-biblioref">1991</a>)</span> is re-calculated in a thermal bath rather than a vacuum wherein <span class="math inline">\(\zeta=2\pi i T\)</span> and finds the potential is no longer complex</p>
+<p><span class="math display">\[
+V(r)= -\frac{\alpha}{r}\left( 1+2\sum_n exp(-Tnr)\right).
+\]</span></p>
+<p>For a high temperature the corresponds to the familiar potential and this is comparable with a potential for a theory compactified with size <span class="math inline">\(L=1/T\)</span>. In this way tachyonic and ghost modes are eliminated. It is suggested by <span class="citation" data-cites="dorling1970dimensionality">Dorling (<a href="#ref-dorling1970dimensionality" role="doc-biblioref">1970</a>)</span> that an extra time dimension would make fundamental particles like the electron unstable. Since in a decay the vector sum of the energy-momentum four vectors must be equal to the energy-momentum four-vector of the original particle. In two-times we see that the rest masses of the decay products can be more than the original particle. This means particles such as electrons would not be stable against decay.</p>
+<p>Unitary evolution of a quantum state is determined by the Schrodinger equation <span class="citation" data-cites="sakurai2011modern">(<a href="#ref-sakurai2011modern" role="doc-biblioref">Sakurai and Napolitano 2011</a>)</span>. However, in an extra dimension of time it is not very clear if the evolution follows the same rules. Group theory and Noether’s theorem imply that there would be another Hamiltonian to correspond to the section temporal evolution, and a second Schrodinger equation for this extra dimension; there would be another unitary evolution operator for evolution in this extra time. Alternitively one could construct a Schrodinger equation that includes both time derivatives</p>
+<p><span class="math display">\[
+H\ket{\phi} =i \hbar \dfrac{\partial \ket{\phi}}{\partial t}+i \hbar \dfrac{\partial \ket{\phi}}{\partial \sigma}
+\]</span></p>
+<p>Unitary evolution is very important to the path integral formulation that considers an infinite number of infinitesimal unitary evolutions along an infinite number of paths. If there exists another dimension of time, how can a state evolve while conserving unitarity in such a space-time? In the path integral formulation the amplitude is derived considering an infinite product of paths</p>
+<p><span class="math display">\[
+\bra{q_i}e^{-iH\delta t}\ket{q_j}
+\]</span></p>
+<p>which are the unitary evolutions in the time step <span class="math inline">\(\delta t\)</span> between states <span class="math inline">\(q_i,q_j\)</span> <span class="citation" data-cites="zee2010quantum">(<a href="#ref-zee2010quantum" role="doc-biblioref">Zee 2010</a>)</span>. In an extra dimension of time, how can we derive a path integral formulation when two unitary operators exist? The path integral formulation is based on the idea that the amplitude of a path is given by the product of the amplitudes of each infinitesimal step along the path. If there are two time dimensions, then there are two infinitesimal steps to consider, one in each time dimension.</p>
+</section>
+<section id="tachyonic-and-ghost-modes" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="tachyonic-and-ghost-modes"><span class="header-section-number">1.4</span> Tachyonic and Ghost Modes</h2>
+<p>Tachyons are states with imaginary mass and a can only move faster than the speed of light <span class="citation" data-cites="srivastava2025review">(<a href="#ref-srivastava2025review" role="doc-biblioref">Srivastava et al. 2025</a>)</span>. With an extra time dimension comes an extra term in the energy-momentum relation. Looking again at the energy-momentum relation there is a Kaluza-Klein tower of tachyonic modes with imaginary masses quantised in units of i/L.</p>
+<p><span class="math display">\[
+G'(k,\zeta)=\frac{1}{k^2 +n^2/L^2 -m^2 +i\epsilon}
+\]</span></p>
+<p>These tachyons severely constrict models since it would be possible for a stable particle to spontaneously decay <span class="citation" data-cites="dvali1999constraints erdem2006reconsidering">(<a href="#ref-dvali1999constraints" role="doc-biblioref">Dvali, Gabadadze, and Senjanovic 1999</a>; <a href="#ref-erdem2006reconsidering" role="doc-biblioref">Erdem and Ün 2006</a>)</span>. It is possible to again use the Quiros interpretation described above. This removes the need for tachyonic modes and the problems associated with causality since tachyons move faster than the speed of light. Foster notes that modes in this kinematic regime also are seen to grow exponentially with (standard) time since an imaginary mass in <span class="math inline">\(\psi\varpropto exp(imt)+exp(-imt)\)</span> makes <span class="math inline">\(\psi\)</span> a real exponential, implying serious phenomenological problems. When another time-like term is added to the metric, we find an extra term in the denominator of the propagator for a massless vector particle that results in modes with negative norm. These are ghosts <span class="citation" data-cites="bandelloni1978non">(<a href="#ref-bandelloni1978non" role="doc-biblioref">Bandelloni et al. 1978</a>)</span>. Ghosts are already present in 3+1 dimensional quantum field theories formulated in the path integral formulation, but they are normally are removed when calculating processes. In the case of higher time dimensional theories however they, as <span class="citation" data-cites="foster2010physics">Foster and Müller (<a href="#ref-foster2010physics" role="doc-biblioref">2010</a>)</span> points out, are not eliminated by the constraint <span class="math inline">\(k_\mu A^\mu=0\)</span>. This is a serious problem as this allows the existence of particles that do not conserve probability. Their existence violates unitarity.</p>
+</section>
+<section id="alternative-interpretations" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="alternative-interpretations"><span class="header-section-number">1.5</span> Alternative Interpretations</h2>
+<p>An alternative approach formulated by Bars <span class="citation" data-cites="bars2006standard bars2010extra">(<a href="#ref-bars2006standard" role="doc-biblioref">Bars 2006</a>; <a href="#ref-bars2010extra" role="doc-biblioref">Bars et al. 2010</a>)</span> is to introduce an extra space and time dimension so that space-time is 4+2 dimensional but treat the extra dimensions as ‘gauge’. A state has to satisfy a Sp(2,R) group gauge constraint that reduces the allowed dynamics to that of 3+1 dimensional space. Using this gauge constraint bars avoids using compactification which is the most common interpretation in the literature <span class="citation" data-cites="rizzo2010introduction">(<a href="#ref-rizzo2010introduction" role="doc-biblioref">Rizzo 2010</a>)</span>. The argument to this however is that if the extra dimension is removed by this constraint then it is not a true dimension but rather another arbitrary degree of freedom that may not be associated with time as we know it. <span class="citation" data-cites="bars2010extra">Bars et al. (<a href="#ref-bars2010extra" role="doc-biblioref">2010</a>)</span> has in this model introduced a way to explain the strong CP problem without needing the axion <span class="citation" data-cites="dine2018some">(<a href="#ref-dine2018some" role="doc-biblioref">Dine et al. 2018</a>)</span>. This approach has additional applications within the study of entanglement, where <span class="citation" data-cites="pettini2025quantum">Pettini (<a href="#ref-pettini2025quantum" role="doc-biblioref">2025</a>)</span> uses an extra-temporal model to explore non locality in quantum mechanics.</p>
+<p>Another use of extra time dimensions involves the cosmological constant. The cosmological constant problem arises when we find the observed value for the cosmological constant is many orders or magnitude lower than the prediction vacuum energy from quantum field theory <span class="citation" data-cites="weinberg1989cosmological">(<a href="#ref-weinberg1989cosmological" role="doc-biblioref">Weinberg 1989</a>)</span>. It has been suggested that in a universe with an extra compactified time dimension <span class="citation" data-cites="aref1986extra quiros2007time">(<a href="#ref-aref1986extra" role="doc-biblioref">Aref’eva, Dragović, and Volovich 1986</a>; <a href="#ref-quiros2007time" role="doc-biblioref">Quiros 2007</a>)</span> that the calculation of the vacuum energy would feature another term. This results in a a value for the vacuum energy density that is a function of the time dimension size and the momentum cut-off; these can be varied until the energy density predication equals that of observation, potentially providing an explanation for the cosmological constant problem.</p>
+<p>Considering previous work, it is clear adding extra time dimensions to physics results in serious phenomenological, mathematical and conceptual problems. Models are required to maintain unitarity and causality at all energy scales, and any theory incorporating extra times must keep these two fundamental concepts. Therefore in this work I constrain extra-time models to the very small scale and high energy regions, since these are the area that lie outside the region available to current experiments.</p>
+</section>
+</section>
+<section id="sec-investigations" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> The Nature of Time</h1>
+<p>Time is an intuitive quantity is used to differentiate two spatial hypersurfaces. If there were two time dimensions that an observer were capable of experiencing on the macroscopic scale then they must see two concurrent evolutions or paths of a system. If there was no different behaviour between the two dimensions then there would be no reason to use two dimensions. In particular in the case of chaotic systems it would hypothetically possible to see a single system with very similar initial state in the two times evolving to very divergent end states. This approach of considering time as parameterising the path of evolution then raises the question of why do systems evolve in one way and not another, as would be seen in two dimensions of concurrent but separate time evolution? There may be one dimension because there is only one way a system can evolve. It seems that it may be more useful to treat time as a parameter of evolution as it is in quantum mechanics rather than an extra component of space-time as Einstein tells us in relativity.</p>
+<section id="relative-nature-of-space-and-time" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="relative-nature-of-space-and-time"><span class="header-section-number">2.1</span> Relative Nature of Space and Time</h2>
+<p>If one were to solve Einstein’s field equations to find the metric describing the curvature of space-time in the Sun-Earth system, one would expect in normal 3+1 dimensional space-time to find the region curved in the Schwarzschild or Kerr <span class="citation" data-cites="woodhouse2007general">(<a href="#ref-woodhouse2007general" role="doc-biblioref">Woodhouse 2007</a>)</span> manner (this being the sun’s gravitational field) and a smaller region of curvature orbiting around it (the earth’s gravitational field) within the larger well. This metric would be time-dependent in the spatial part since the orbiting earth changes its position. If one were to then consider 3+2 dimensional space-time and (hypothetically) solve for the metric in this case one would assume that the spatial elements would be the same albeit with some new dependence on the new time dimension. It would be possible to create a whole range of orbits of the same spatial but temporally different profiles based on the way you change the two time dimension values. How can two separate paths of evolution as one assumes above match up with this system in which both times are part of the same manifold together to create the particular result?</p>
+<p>The only mathematical difference in relativity between space-like and time-like dimensions are the signs in the metric and the number of each type of dimension. Is there something missing in the mathematical description of space and time that would give a more complete description of the different properties of space and time? We can list the differences between space and time:</p>
+<ul>
+<li>3 dimensions of space, 1 dimension of time</li>
+<li>Space is bidirectional, time appears unidirectional</li>
+<li>Cosmologically, there is a well defined moment when the universe began but the scale parameter in the FLRW metric of standard cosmology implies that there is no spatial origin. There is a special point for time but not space <span class="citation" data-cites="melia2022friedmann">(<a href="#ref-melia2022friedmann" role="doc-biblioref">Melia 2022</a>)</span>.</li>
+<li>Subjective comprehension of time is limited one moment of time at a time but can comprehend the extent of space.</li>
+</ul>
+<p>How can these differences be encoded mathematically in current theories of physics?</p>
+<p>One could try thinking of reasons why there is only one dimension of time: 1. The evolution of systems as we know it cannot happen in more than one time. 2. Some physical law restricts the number to one. 3. Life cannot exist in extra time spaces and so the only dimensionalities that are observed are one-time spaces. 4. Following <span class="citation" data-cites="tegmark1997dimensionality">(<a href="#ref-tegmark1997dimensionality" role="doc-biblioref">Tegmark 1997</a>)</span> physics is not predictive in <span class="math inline">\(&gt;1\)</span> time, is the link with mathematics so deep as to prevent non-predictive universes from existing? 5. Would two times lead to two evolutions? If there were two ways a system could evolve then maybe the two paths would quickly become divergent and fall away from one another thus the two times are not apparent. 6. Because there simply is no dependence on extra dimensions, if no dependence of physics on an extra dimension then it would be unobservable even if it did exist. The requirement for existence is that the is a dependence or interaction between different parts of a system.<br>
+7. String theorists have found that their theories require extra dimensions of space to be consistent <span class="citation" data-cites="zwiebach2004first">(<a href="#ref-zwiebach2004first" role="doc-biblioref">Zwiebach 2004</a>)</span>. If there exists a theory of everything then it may be found to be only consistent in one dimension of time in the same way as String theories in extra space dimensions.</p>
+<p>Expanding on #5, possibly there is one dimension because in two times there would be two kinds of evolution with different paths and end results for us to differentiate the two (if they followed the same path there would be no need to use two times). Since physical systems follow specific laws and those laws have unique solutions, then only one kind of evolution to the end state is possible. Hence even if there were 100 times we could not discern them from each other. Physical laws only act in one way and so only one beginning to end path. One evolution, one time.</p>
+<p>Number #3 above follows <span class="citation" data-cites="tegmark1997dimensionality">Tegmark (<a href="#ref-tegmark1997dimensionality" role="doc-biblioref">1997</a>)</span> and introduces an anthropic principle argument. One invokes the anthropic principle in considering dimensionality by first saying that through the Strong Anthropic Principle: The dimensionality is such that the universe can hold sentient observers <span class="citation" data-cites="benioff2002towards">(<a href="#ref-benioff2002towards" role="doc-biblioref">Benioff 2002</a>)</span>. Or the Weak: The dimensionality is such that it is restricted by the requirement that there must exist sites where life can evolve. The dimensionality is suitable for life to evolve so observers can exist. Thus in our universe we appear to see (3+1) dimensions.</p>
+<p>In theories with extra dimensions of space, it is conventional to apply Kaluza-Klein compactification <span class="citation" data-cites="kaluza1926sitzungsber">(<a href="#ref-kaluza1926sitzungsber" role="doc-biblioref">Kaluza 1926</a>)</span> where the extra dimension is compactified onto a manifold of very small size (see <a href="#fig-compactification" class="quarto-xref">Figure&nbsp;1</a>). In effect, one takes the extra dimension y, and curl it into a circle of radius L so that the point <span class="math inline">\(y= \pi L\)</span> is the same as <span class="math inline">\(y= -\pi L\)</span>. This gives the dimension a periodic character. As a result any field variable <span class="math inline">\(\phi(x)\)</span> will satisfy: <span class="math inline">\(\phi(x,y)=\phi(x,y+2\pi L)\)</span>. This allows the decomposition of a state <span class="math inline">\(\phi\)</span> <span class="citation" data-cites="quiros2007time">(<a href="#ref-quiros2007time" role="doc-biblioref">Quiros 2007</a>)</span>,</p>
+<p><span class="math display">\[
+\phi(x,y)=\sum_n \phi_n (x)e^{iny/L}, n\in (0,\pm 1,\pm2,...).
+\]</span></p>
+<p>Then L is taken to be so small that it is out of reach of observation and at macroscopic scales space-time appears 4-dimensional. So far there has been no evidence to support extra compactified dimension models like the ADD model <span class="citation" data-cites="dvali1999constraints Gingrichlimits">(<a href="#ref-dvali1999constraints" role="doc-biblioref">Dvali, Gabadadze, and Senjanovic 1999</a>; <a href="#ref-Gingrichlimits" role="doc-biblioref">Gingrich 2015</a>)</span>.</p>
+<div id="fig-compactification" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-compactification-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="plots/compactification.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: A compactified dimension is curled up so that at larger scales 2 dimensions look like one dimension"><img src="plots/compactification.png" class="img-fluid figure-img" style="width:50.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-compactification-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A compactified dimension is curled up so that at larger scales 2 dimensions look like one dimension
+</figcaption>
+</figure>
+</div>
+<p>When one uses a Kaluza-Klein compactification approach <span class="citation" data-cites="yndurain1991disappearance quiros2007time dvali1999constraints">(<a href="#ref-yndurain1991disappearance" role="doc-biblioref">Yndurain 1991</a>; <a href="#ref-quiros2007time" role="doc-biblioref">Quiros 2007</a>; <a href="#ref-dvali1999constraints" role="doc-biblioref">Dvali, Gabadadze, and Senjanovic 1999</a>)</span> as in many extra space theories, it is impossible for this extra time to be macroscopically visible. However, this introduces an added conceptual problem shared with other extra-space dimensional theories; this being what mechanism causes this compactification and why compactify a seemingly arbitrary number of the dimensions available? This method of dealing with extra dimensions has been utilised in <a href="#sec-potentialenergy" class="quarto-xref">Section&nbsp;5</a> to study potential energies in extra dimensions. It is found that the compactification method introduces particular side-effects on physics, this implies the method of compactification or whatever way of reducing the extra dimensions out of macroscopic view is very important in the resulting physical theory.</p>
+<p>It has been suggested by <span class="citation" data-cites="dorling1970dimensionality">Dorling (<a href="#ref-dorling1970dimensionality" role="doc-biblioref">1970</a>)</span> that an extra time dimension would make fundamental particles like the electron unstable. Since in a decay the vector sum of the energy-momentum four-vectors must be equal to the energy-momentum four-vector of the original particle. In two-times we see that the rest masses of the decay products can be more than the original particle. This means particles such as electrons would not be stable against decay.</p>
+<p><a href="#fig-lightcone" class="quarto-xref">Figure&nbsp;2 (a)</a> shows the light-cone in the three dimensions of x, t and the extra time <span class="math inline">\(\sigma\)</span>. This shows clearly how one can create a closed time-like curve in the t-<span class="math inline">\(\sigma\)</span> plane. <a href="#fig-lightconecompact" class="quarto-xref">Figure&nbsp;2 (b)</a> shows the reduced lightcone where the extra time is compactified. If the extra time is compactified it only allows a finite range of values and so any closed time-like curves will be contained in a small region. The argument of causality violation via closed time-like curves can be weakened by assuming the effect of the causality violation is reduced because the range of values that the extra time can take is very small and so possible non-detectable in current experiments.</p>
+<div id="fig-cones" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cones-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cones" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-lightcone" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-lightcone-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="plots/Lightconediag.png" class="lightbox" data-gallery="fig-cones" title="Figure&nbsp;2&nbsp;(a): Lightcone in the two-time plane"><img src="plots/Lightconediag.png" class="img-fluid figure-img" data-ref-parent="fig-cones"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-lightcone-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Lightcone in the two-time plane
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cones" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-lightconecompact" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-lightconecompact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="plots/lightconediag2.png" class="lightbox" data-gallery="fig-cones" title="Figure&nbsp;2&nbsp;(b): Lightcone in the two-time plane with one time compactified"><img src="plots/lightconediag2.png" class="img-fluid figure-img" data-ref-parent="fig-cones"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-lightconecompact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Lightcone in the two-time plane with one time compactified
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cones-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Lightcones in two-time dimensional spaces
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-warped" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Warped Spaces and Non-Minkowski Metrics</h1>
+<p>In this section I investigate incorporating extra dimensions of time by using a modified non-Minkowski metric. Here the extra dimension is warped or has a some property that allows it to be removed or reduced in size so that it is not observable. Warped extra dimensions follow the approach of the Randall-Sundrum model <span class="citation" data-cites="boos2012geometry rizzo2010introduction">(<a href="#ref-boos2012geometry" role="doc-biblioref">Boos et al. 2012</a>; <a href="#ref-rizzo2010introduction" role="doc-biblioref">Rizzo 2010</a>)</span>; these models were originally introduced to explain the hierarchy problem by introducing a warped extra dimension into the metric. Furthermore, <span class="citation" data-cites="oliveira2014gravity">Oliveira (<a href="#ref-oliveira2014gravity" role="doc-biblioref">2014</a>)</span> introduced warped extra dimensionas as a means of exploring beyond standard model physics. It is an interesting way to introduce new dimensions and here I extend it to extra dimensions of time.</p>
+<p>The general line element describing a spacetime with metric tensor g is</p>
+<p><span class="math display">\[
+ds^2=g_{\mu \nu}dx^\mu dx^\nu.
+\]</span></p>
+<p>The Randall-Sundrum metric is</p>
+<p><span class="math display">\[
+ds^2=e^{-2\kappa y} \eta_{\mu \nu} dx^\mu dx^\nu -dy^2
+\]</span></p>
+<p>It is simple to take the extra dimension and make it a time dimension by changing the sign. For a conformally flat metric</p>
+<p><span class="math display">\[
+dy^2=e^{-\kappa y} d\sigma^2
+\]</span></p>
+<p>this means that our metric that we will use is</p>
+<p><span class="math display">\[
+ds^2=\dfrac{1}{\kappa^2 \sigma^2} (\eta_{\mu \nu} dx^\mu dx^\nu + d\sigma^2).
+\]</span></p>
+<p>With this metric within the Lagrangian for a massive scalar field we arrive at a wave equation of the form</p>
+<p><span class="math display">\[
+-m^2 \phi =\dfrac{1}{\kappa^2 \sigma^2}( \partial_x^2 \phi + \partial_y^2 \phi+\partial_z^2 \phi -\partial_t^2 \phi) -\dfrac{1}{\kappa^2 \sigma^2}\partial_\sigma^2 \phi+\dfrac{2}{\kappa^2 \sigma^3} \partial_\sigma \phi
+\]</span></p>
+<p>which when we apply a fourier transform of <span class="math inline">\(\phi\)</span> we find a dispersion relation like</p>
+<p><span class="math display">\[
+\omega^2+\zeta^2=\kappa^2 \sigma^2 m^2 +k^2 +2\dfrac{\zeta i}{\sigma}
+\]</span></p>
+<p>This dispersion relation has terms that are dependent on the extra dimension and it is clear that it produces effectively an increasing mass term that belies any real physicality. The imaginary term can be considered to vanish for large <span class="math inline">\(\sigma\)</span> but it fails to describe a real particle since imaginary terms in the dispersion relation to not have any conventional meaning.</p>
+<section id="a-reparameterised-extra-time-dimension" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="a-reparameterised-extra-time-dimension"><span class="header-section-number">3.1</span> A Reparameterised Extra Time Dimension</h2>
+<p>In this section a parameterisation of an extra dimension of time is explored whereby the extra dimension is parameterised by a polar coordinate <span class="math inline">\(\theta\)</span> with a constant radius. The intention being that the dimension is restricted to a small region but without adhering to the compactification description of other extra dimensional theories. A potential metric of this kind is</p>
+<p><span class="math display">\[
+ds^2 =\eta_{\mu \nu} dx^\mu dx^\nu +L^2 d\theta^2.
+\]</span></p>
+<p>The values L is a constant radius or period of the extra dimension; the dimension takes the form of a polar angular dimension but with a constant radius to ensure a small size. Then the connection to the real dimension <span class="math inline">\(\sigma\)</span> is taken to be</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sigma = \tan(\theta/2) &amp;&amp; \theta \in [ -\pi ,\pi ] \Rightarrow \sigma \in [ -\infty,\infty ]
+\end{aligned}
+\]</span></p>
+<p>This is chosen so that <span class="math inline">\(\sigma\)</span> goes from minus infinity to plus infinity as would be expected of a dimension of space-time but is confined so that the entire range fits within a finite range of <span class="math inline">\(\theta\)</span>. This particular parameterisation has been chosen as it is simple but any where <span class="math inline">\(\sigma\)</span> goes from minus infinity to infinity in a finite range of <span class="math inline">\(\theta\)</span> will suffice. This results in</p>
+<p><span class="math display">\[
+ds^2 =\eta_{\mu \nu} dx^\mu dx^\nu +4L^2\left( \dfrac{1}{1+\sigma^2}\right) ^2 d\sigma^2
+\]</span></p>
+<p>Since this is merely a change of coordinates, there is no warped space-time and this metric still satisfies the Einstein vacuum equation. This leads to a geodesic equation.</p>
+<p><span class="math display">\[
+\ddot{\sigma}+\dfrac{2\sigma}{4L^2 +\sigma^2}\dot{\sigma}^2=0
+\]</span></p>
+<p>When looking at a light-like geodesic it is possible to derive</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dot{t}^2-\dot{x}^2-\dot{y}^2-\dot{z}^2+\dfrac{4L^2}{(1+\sigma^2)^2}\dot{\sigma}^2=0 \\
+A^2-B^2-C^2-D^2+\dfrac{4L^2}{(1+\sigma^2)^2}\dot{\sigma}^2=0\\
+\dot{\sigma}^2 =\dfrac{(1+\sigma^2)}{2L}\sqrt{D^2+C^2+B^2-A^2}\\
+\sigma=tan\left(\dfrac{\sqrt{D^2+C^2+B^2-A^2}}{2L}\tau + C' \right).
+\end{aligned}
+\]</span></p>
+<p>Where A,B,C,D are constants as a result of the other coordinates being constant with respect to proper time. From these equations one can see that the path of a photon is straight in the unwarped dimensions, but in the extra dimension of time the path is determined by the size L and follow a tan curve parameterised by proper time. For L very large <span class="math inline">\(\sigma\)</span> can be considered proportional to proper time and so in the limit of infinite-sized (unconfined) <span class="math inline">\(\sigma\)</span> there is a correspondence between proper time and this extra time. To see what happens when this metric is used in the Klein-Gordon equation, consider the requirement that the action is invariant under general coordinate transformations.</p>
+<p><span class="math display">\[
+\dfrac{2L}{(1+\sigma^2)}\left[-m^2 \phi -\partial_\mu \partial^\mu \phi\right] =\dfrac{(1+\sigma^2)}{2L}\partial^2_\sigma  \phi +\dfrac{\sigma}{L}\partial_\sigma \phi.
+\]</span></p>
+<p>Where <span class="math inline">\(\mu\)</span> goes from 0-3 and doesn’t include the extra time. Using a standard wave-like <span class="math inline">\(\phi=expi(Et+\zeta \sigma - k_x x-k_y y- k_z z)\)</span>. This equation leads to a dispersion relation</p>
+<p><span class="math display">\[
+E^2 + \dfrac{(1+\sigma^2)^2}{4L^2} \zeta^2 -2\sigma\dfrac{(1+\sigma^2)}{2L^2} i\zeta=m^2+k^2.
+\]</span></p>
+<p>As in the Randall-Sundrum model, this dispersion relation also includes an imaginary term. However in this case the normal terms found in a dispersion relation E, k and m are unchanged and for the limit <span class="math inline">\(L\rightarrow \infty\)</span> the conventional 3+1 dimensional dispersion relation is returned. Both the extra terms arising from the extra dimension are dependent of <span class="math inline">\(\sigma\)</span> and so are not constant. This is problematic because we expect the energy-momentum relation to be constant and frame invariant, but if the <span class="math inline">\(\sigma\)</span> increases then the other terms must change to satisfy the equality, leading to non-physical changes in the other terms in the relation. We expect the relation <span class="math inline">\(E^2=m^2+k^2\)</span> still holds in normal time. If <span class="math inline">\(\sigma\)</span> changes in t- time then the other terms must also change to satisfy the relation but the relation <span class="math inline">\(E^2=m^2+k^2\)</span> must hold regardless of changes in <span class="math inline">\(\sigma\)</span>. This dispersion relation in turn leads to the propagator</p>
+<p><span class="math display">\[
+D(k)=\left[ E^2 + \dfrac{(1+\sigma^2)^2}{4L^2} \zeta^2 -2\sigma\dfrac{(1+\sigma^2)^2}{4L^2} i\zeta-m^2-k^2+i\epsilon \right] ^{-1}
+\]</span></p>
+<p>This propagator does not have any trivial simple poles so finding useful observables would be highly non-trivial for this case.</p>
+</section>
+<section id="an-extra-time-dimension-with-a-different-speed-of-light" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="an-extra-time-dimension-with-a-different-speed-of-light"><span class="header-section-number">3.2</span> An Extra Time Dimension with a Different Speed of Light</h2>
+<p>This section explores the possibility of an extra dimension of time in which light travels at a different speed as in our standard time. Henceforth the letter <span class="math inline">\(a\)</span> will mean the speed of light in the extra dimension of time. If light travels slower in one dimension of time relative to another dimension of time, then all behaviour in the extra dimension of time will occur on a much slower time-scale. As a result, this dimension will appear to be slowed down with respect to the other time dimension. In theory the parameter <span class="math inline">\(a\)</span> can be reduced to such a small scale that in effect no time passes in the extra time dimension. Observable effects would be limited to very long-term cosmological observations. What effects would be apparent if the speed of light was smaller in the extra dimension of time? Considering the metric</p>
+<p><span class="math display">\[
+ds^2=c^2dt^2 +a^2 d\sigma^2 -dx^2 -dy^2 -dz^2
+\]</span></p>
+<p>where <span class="math inline">\(a&lt;&lt;c\)</span>. In this case it is expected small scale motion in the extra dimension, held out of sight of previous experimental bounds is the norm. It may be possible to observe these changes in the decays of unstable particles with lifetimes of a similar order to the timescale of the occupation of this extra dimension. If a wave-like exponent solution <span class="math inline">\(Ae^{ipx}\)</span> is used as a solution to the wave equation with this extra ‘slow’ time then the dispersion relation is</p>
+<p><span class="math display">\[
+\dfrac{\omega^2}{c^2}+\dfrac{\zeta^2}{a^2}=k^2.
+\]</span></p>
+<p>The second dimension of time can be reduced to an infinitesimal, unmeasurable scale by increasing the value of <span class="math inline">\(a\)</span>. So instead taking the opposite limit of large <span class="math inline">\(a\)</span> results in the correspondence with conventional, unitemporal physics. Going back to the idea of a slow time, since the limit of <span class="math inline">\(c\rightarrow 0\)</span> corresponds to increased gravitational strength, then perhaps in a slow time the force of gravity would become much stronger. In the Einstein Field equations the coupling constant between matter and geometry is <span class="math inline">\(8 \pi G/c^4\)</span> so changes to the speed of light in one or more time dimensions produces a consequential, observable signal in the strength of gravity.</p>
+</section>
+</section>
+<section id="sec-groups" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Groups and Symmetries</h1>
+<p>In an extra dimension of time there is a new degree of freedom that a particle can explore. When one introduces another dimension one also introduces extra symmetries asrising from an extra degree of freedom. One cna accordingly study the group theory of extratemporal Lorentz transformations <span class="citation" data-cites="tung1985group">(<a href="#ref-tung1985group" role="doc-biblioref">Tung and Aivazis 1985</a>)</span>. The Lorentz group is the group of transformations that leave the Minkowski metric invariant, and so in 3+1 dimensions it is the group of transformations that leave the Minkowski metric invariant. In 3+2 dimensions this is the group of transformations that leave the Minkowski metric invariant in 5 dimensions. Furthermore, when the new dimension is time-like Noether’s theorem implies <span class="citation" data-cites="robinson2011symmetry">(<a href="#ref-robinson2011symmetry" role="doc-biblioref">Robinson 2011</a>)</span> there is a brand new quantity of an extra energy and the new quantity associated with the new angle between the time dimensions. The question is how we interpret these quantities.</p>
+<p>The extra quantity associated with the linear translation in the new time has the units of energy. The extra quantity associated with time rotations has the units of angular momentum. How to measure the existence and value of these quantities is also an open question. The extra energy may be observable not as a conserved quantity, since the quantity would be conserved only with respect to the extra time and not the other normal time. As such under some compactified time situation the extra energy may exist as very small modifications to the energy spectrum as noted by <span class="citation" data-cites="quiros2007time">Quiros (<a href="#ref-quiros2007time" role="doc-biblioref">2007</a>)</span>.</p>
+<p>In this section I develop the group theory of the extra time dimension and the new quantities that arise therefrom. An initial look at adding an extra time dimension will mean the Minkowski metric becomes <span class="math inline">\(\eta=diag(1,1,-1,-1,-1)\)</span>. So equations like the wave equation contain extra terms. Importantly, the dispersion/energy-momentum relation acquires another energy,</p>
+<p><span class="math display">\[
+E^2+\zeta^2-p^2=m^2.
+\]</span></p>
+<p>What is this extra energy and how is it manifest? In addition to this when the Euclidean group transformations are considered and invoke Noether’s theorem, the conserved current (which for Euclidean group transformations is the energy-momentum tensor)</p>
+<p><span class="math display">\[
+T^\mu_\nu=\dfrac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)} \partial_\nu \phi -\delta^\mu_\nu \mathcal{L}
+\]</span></p>
+<p>contains extra terms that are unlike momentum or energy. This introduces extra difficulty in interpretation. The energy momentum tensor derived from Noether’s theorem in 3+2 dimensions is (where the extra dimension is denoted by <span class="math inline">\(\sigma\)</span>),</p>
+<p><span class="math display">\[
+T^M_N=\begin{pmatrix}
+\mathcal{H}_\sigma &amp; \mathcal{P}_{\sigma,t} &amp; \mathcal{P}_{\sigma,x} &amp; \mathcal{P}_{\sigma,y} &amp; \mathcal{P}_{\sigma,z} \\
+\mathcal{P}_{\sigma,t} \\
+\mathcal{P}_{\sigma,x} &amp; &amp; T^\mu_\nu \\
+\mathcal{P}_{\sigma,y} \\
+\mathcal{P}_{\sigma,z}
+\end{pmatrix}
+\]</span></p>
+<p><span class="math inline">\(T^\mu_\nu\)</span> is the familiar energy momentum tensor. The full form has been omitted for brevity but it is a <span class="math inline">\(4\times4\)</span> tensor. The second quantity to look at is the angular momentum-like quantity that results from invariance in changes of time-angle, this provides another difficulty in interpretation. Angles between two space dimensions can be interpreted as the relative occupation of each dimension. Zero degrees meaning no occupation and 45 degrees mean 50/50 occupation of both space dimensions.If we extend this interpretation to time dimensions, we can choose the time-angle to be arbitrarily small and experimentally difficult to detect.</p>
+<p>The conserved quantity associated with time rotations is found to be of the form <span class="math inline">\(t\zeta-E\sigma\)</span>. This is from considering the representation of the rotation operator in SO(3,3) associated with time rotation and its application to some arbitrary quantum state. In the context of an electron in the H atom, the electron is spatially bound but temporally unbound and with a fixed energy for some energy level. Therefore as t increases and E is constant and <span class="math inline">\(\zeta\)</span> is assumed also constant (assuming linear translation invariance in <span class="math inline">\(\sigma\)</span> ) then for this quantity to be constant then changes in sigma are positive <span class="math inline">\(\Delta\sigma&gt;0\)</span> and <span class="math inline">\(\sigma\propto t\)</span>. The trivial interpretation is to say that <span class="math inline">\(\sigma=t\)</span> and <span class="math inline">\(E=\zeta\)</span>, in which case there is no extra quantity of time rotation and no extra time.</p>
+<section id="structure-of-the-lorentz-transformations-in-2t" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="structure-of-the-lorentz-transformations-in-2t"><span class="header-section-number">4.1</span> Structure of the Lorentz Transformations in 2T</h2>
+<p>For extra time dimensions space-time must still satisfy the definition of a Lorentz transformation <span class="citation" data-cites="robinson2011symmetry">(<a href="#ref-robinson2011symmetry" role="doc-biblioref">Robinson 2011</a>)</span></p>
+<p><span class="math display">\[
+\eta_{\mu \nu} \Lambda^\mu_\rho \Lambda^\nu_\lambda =\eta_{\rho \lambda}
+\]</span></p>
+<p>in order to maintain the interval <span class="math inline">\(-t^2-\sigma^2+x^2+y^2+z^2=-t'^2-\sigma'^2+x'^2+y'^2+z'^2\)</span>. When the two times are taken to be equivalent, so that there exists a rotation between the two times that follows SO(2), there is a boost for the extra time as well. It is difficult as to how to interpret velocity in two times and so it is more useful to use the rapidity rather than velocity in the transformation, thus another rapidity is introduced corresponding to boosts in the second time dimension. In this system, there are 2 new kinds of transformations in 2T; one new rotation parameterised by a time angle and three new boosts associated the new time dimension parameterised by the rapidity, the hyperbolic angle between the new time and the space dimension. Looking at the determinant of the definition of the Lorentz group</p>
+<p><span class="math display">\[
+\begin{aligned}
+det(\eta_{\mu \nu} \Lambda^\mu_\rho \Lambda^\nu_\lambda)=det(\eta_{\rho \lambda}) \\
+\Rightarrow det(\eta_{\mu \nu}) det(\Lambda^\mu_\rho \Lambda^\nu_\lambda)=det(\eta_{\rho \lambda}) \\
+\Rightarrow det(\Lambda)=\pm 1,
+\end{aligned}
+\]</span></p>
+<p>the Lorentz transformations normally considered are orthochronous, i.e have <span class="math inline">\(det=1\)</span> and when <span class="math inline">\(det =-1\)</span> they are improper and do not describe physical frame transformations. If there is the extension to two times, will it allow the Lorentz transformations to bridge the gap across the proper and improper regions? Normally, in 1 time dimension</p>
+<p><span class="math display">\[
+\begin{aligned}
+\eta_{00} = \Lambda^\mu_0 \Lambda^\nu_0 \eta_{\mu \nu} \\
+\Rightarrow ( \Lambda^0_0)^2 - \sum^3_i (\Lambda^i_0)^2 =1 \\
+\Rightarrow  |\Lambda^0_0| \geq 1
+\end{aligned}
+\]</span></p>
+<p>but in two time dimensions</p>
+<p><span class="math display">\[
+\begin{aligned}
+( \Lambda^0_0)^2 +(\Lambda^5_0)^2 -\sum^3_i (\Lambda^i_0)^2 =1 \\
+\Rightarrow ( \Lambda^0_0)^2 +(\Lambda^5_0)^2 \geq 1
+\end{aligned}
+\]</span></p>
+<p>Where the index 5 represents the extra time <span class="math inline">\(\sigma\)</span>. This means that even if <span class="math inline">\(-1\leq \Lambda^0_0 \leq 1\)</span> then the relation above can still be satisfied so there is a union of the proper (orthochronous) and improper Lorentz transformations in two or more time dimensions. This allows what would be a time reversal transformation in 3+1 dimensions to become a proper Lorentz transformation for some adequate value of <span class="math inline">\(\Lambda^5_0\)</span>. Parity transformations could be merged into proper Lorentz boosts.</p>
+</section>
+<section id="group-theory-of-so32" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="group-theory-of-so32"><span class="header-section-number">4.2</span> Group Theory of SO(3,2)</h2>
+<p>In order to properly study extra dimensions one must look at the group theory of the extended Lorentz group. Since the Lorentz transformation restricts the form of our equations through Lorentz invariance, it can determine much of the behaviour when making changes of frame. The SO(3,1) group has representations in 4 dimension space-time <span class="citation" data-cites="tung1985group">(<a href="#ref-tung1985group" role="doc-biblioref">Tung and Aivazis 1985</a>)</span>. There are two types of representation, those of boosts and those of rotations. These have the form:</p>
+<p>Rotations:</p>
+<p><span class="math display">\[
+R_z(\theta_x)=\begin{pmatrix}
+  1 &amp; &amp;   \\
+   &amp; 1 &amp; \\
+     &amp; cos \theta_x &amp; sin \theta_x  \\
+   &amp; -sin \theta_x &amp; cos \theta_x
+\end{pmatrix}
+\]</span></p>
+<p>with similar representation for the other dimensions. The boosts then have the form: Boosts:</p>
+<p><span class="math display">\[
+B_x(\phi_x)=\begin{pmatrix}
+  cosh \phi_x &amp; -sinh \phi_x &amp; &amp; \\
+  -sinh \phi_x &amp; cosh \phi_x &amp; &amp; \\
+  &amp; &amp; 1 &amp;  \\
+  &amp; &amp; &amp; 1
+\end{pmatrix}
+\]</span></p>
+<p>The generators of the group can be found using</p>
+<p><span class="math display">\[
+J_i=-i\frac{dR_i (\theta_i)}{d \theta_i}\vert_{\theta_i =0}
+\]</span></p>
+<p>and in general</p>
+<p><span class="math display">\[
+\begin{aligned}
+R(\theta)=e^{i \theta \cdot J}\\
+B(\phi)= e^{i \phi \cdot K}
+\end{aligned}
+\]</span></p>
+<p>The lie algebra of SO(3,1) is then</p>
+<p><span class="math display">\[
+\begin{aligned}
+\left[ J_i,J_j \right]=i \epsilon_{ijk} J_k \\
+\left[ J_i,K_j \right]=i\epsilon_{ijk} K_k \\
+\left[ K_i, K_j \right] =-i\epsilon_{ijk} J_k
+\end{aligned}
+\]</span></p>
+<p>If one re-writes these in a new basis of <span class="math inline">\(N_i^\pm =\frac{1}{2}(J_i \pm K_i)\)</span>, then one finds that the <span class="math inline">\(N_i\)</span> satisfy the lie algebra if <span class="math inline">\(SU(2)\times SU(2)\)</span> so there is an isomorphism between SO(3,1) and <span class="math inline">\(SU(2)\times SU(2)\)</span>. If extra time dimensions are introduced so that there is the SO(3,3)group as the Lorentz group say, then it would be useful in terms of representation to find an isomorphism between this group and some product of smaller groups. In two times there are 4 rotations (3 space +1 time) and 6 boosts described by the representations of SO(3,2). When working from the representations one can compute generators and find the Lie algebra. If the rotation in time is given the letter Q and the extra boosts are given the letter M then the lie algebra of SO(3,2) is found to be</p>
+<p><span class="math display">\[
+\begin{aligned}
+\left[ J_i,K_j \right]=i\epsilon_{ijk} K_k \\
+\left[ J_i,J_j \right] = i \epsilon_{ijk} J_k\\
+\left[ K_i,K_j \right] = -i \epsilon_{ijk} J_k \\
+\left[ K_i, M_i \right] = -i Q_{\sigma t} \\
+\left[ M_i,M_j \right] = -i \epsilon_{ijk} J_k \\
+\left[ Q_{\sigma t} , J_i \right] =0
+\end{aligned}
+\]</span></p>
+<p>The first commutation relation means two boosts of different time dimensions-but with the same space dimension-result in a time rotation.</p>
+</section>
+<section id="group-theory-of-so33" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="group-theory-of-so33"><span class="header-section-number">4.3</span> Group Theory of SO(3,3)</h2>
+<p>In a 3+3 dimensional space there are 5 types of transformations within the general Lorentz transformation SO(3,3). There are space rotations, time rotations and three types of boosts corresponding to the three time dimensions. From the general dimensional commutator one finds all the commutation relations of the SO(3,3) generators. An arbitrary dimensional Lorentz group generator is given by <span class="citation" data-cites="robinson2011symmetry">Robinson (<a href="#ref-robinson2011symmetry" role="doc-biblioref">2011</a>)</span></p>
+<p><span class="math display">\[
+(J^{\mu \nu})^{a b} =-i(\eta^{\mu a} \eta^{\nu b}-\eta^{\nu a} \eta^{\mu b})
+\]</span></p>
+<p>and the general commutation relations are</p>
+<p><span class="math display">\[
+\left[ J^{\mu \nu} ,J^{\rho \lambda}\right] =i(\eta^{\lambda \mu} J^{\rho \nu}-\eta^{\lambda \nu} J^{\rho \mu}-\eta^{\rho \mu} J^{\lambda \nu}+\eta^{\rho \nu} J^{\lambda \mu}).
+\]</span></p>
+<p>Where the indices are the two dimensions that the transformations works between. They have values 0,1,2,3,4,5 where 4 and 5 are the extra time dimensions. The commutation relations between the five generators of the five types of transformation can thus be found (using the letters <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\rho\)</span> to signify the new time dimensions). In the generators the letters J shall represent generators of space rotations, Q for time rotations, K will be associated with boosts in the t- direction, M with boosts in the <span class="math inline">\(\sigma\)</span>-direction and N for <span class="math inline">\(\rho\)</span> boosts. One finds</p>
+<p><span class="math display">\[
+\begin{aligned}
+\left[J_i,J_j\right] &amp;=i \epsilon_{ijk}J_k\\
+\left[Q_i,Q_j\right] &amp;=i \epsilon_{ijk}Q_k\\
+\left[K_i,K_j\right] &amp;=-i \epsilon_{ijk}K_k\\
+\left[M_i,M_j\right] &amp;=-i \epsilon_{ijk}M_k\\
+\left[N_i,N_j\right] &amp;=-i \epsilon_{ijk}N_k\\
+\left[J_i,Q_j\right] &amp;=0\\
+\left[J_i,K_j\right] &amp;=i \epsilon_{ijk}K_k\\
+\left[J_i,M_j\right] &amp;=i \epsilon_{ijk}M_k\\
+\left[J_i,N_j\right] &amp;=i \epsilon_{ijk}N_k\\
+\left[Q_t,K_j\right] &amp;=0 \\
+\left[Q_\sigma,M_j\right] &amp;=0 \\
+\left[Q_\rho,N_j\right] &amp;=0 \\
+\left[Q^{ij},K^{in}\right] &amp;=i K^{jn}\\
+\left[K^{ij},M^{mn}\right] &amp;=
+\begin{cases}
+  -i Q^{im}, &amp; \text{if } j=n \\
+  0,  \text{if } j\neq n
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>One can see that two boosts can produce a time rotation. When trying to find the irreducible representations of SO(3,1), one can reintroduce the generators in such a way that make the isomorphism of SO(3,1) with <span class="math inline">\(SU(2)\times SU(2)\)</span> more apparent and use the irreducible representations of SU(2). For SO(3,3) one recombines the generators of SO(3,3) in a similar way to find the irreducible representations. We create raising and lowering operators out of the generators of SO(3,3). I follow the approach in <span class="citation" data-cites="tinkham2003group">Tinkham (<a href="#ref-tinkham2003group" role="doc-biblioref">2003</a>)</span> to extract SO(3,1) raising operators out of the boost and rotation generators:</p>
+<p><span class="math display">\[
+A_i^\pm=\dfrac{1}{2}(J_i\pm K_i)
+\]</span></p>
+<p>which satisfies the Lie algebra of <span class="math inline">\(SU(2)\times SU(2)\)</span>. We would like to follow the same approach and so one introduces 12 new operators (6 raising 6 lowering) for SO(3,3) as follows:</p>
+<p><span class="math display">\[
+\begin{aligned}
+A_i^\pm=\dfrac{1}{2}(J_i\pm K_i)\\
+B_i^\pm=\dfrac{1}{2}(J_i\pm M_i)\\
+C_i^\pm=\dfrac{1}{2}(J_i\pm N_i)\\
+D_i^\pm=\dfrac{1}{2}(Q_i\pm K_i)\\
+E_i^\pm=\dfrac{1}{2}(Q_i\pm M_i)\\
+F_i^\pm=\dfrac{1}{2}(Q_i\pm N_i)
+\end{aligned}
+\]</span></p>
+<p>It is expected these operators to follow <span class="math inline">\(SU(2)\times SU(2)\)</span> but it may not necessarily be the case because of the commutation relations between time rotation generators may introduce new behaviour. After making these changes of basis it is clear that A, B, and C satisfy a <span class="math inline">\(SU(2)\times SU(2)\)</span> Lie algebra but D,E and F satisfy a different Lie algebra</p>
+<p><span class="math display">\[
+\left[D^+_i,D^+_j\right] =\frac{i}{4}\epsilon_{ijk}(Q_k +J_k) \;
+\left[D^+_i,D^-_j\right] =0 \;
+\left[D^-_i,D^-_j\right] =-\frac{i}{4}\epsilon_{ijk}(Q_k +J_k) \;
+\]</span></p>
+<p>and similar for E and F.</p>
+</section>
+</section>
+<section id="sec-potentialenergy" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Potentials in Extratemporal Dimensions</h1>
+<p>This section is concerned with finding the potentials that arise from scalar fields in extra dimensional space-times. The aim is to study the effect of extra dimensions of both space and time on the form of the interaction potential. Using the methods of the previous chapter the general extra dimensional potential are derived and the particular forms of certain cases discussed. Although this section will focus on scalar fields, the effects of extra dimensions will be similar to higher-spin fields since the spin of the exchange particle does not effect the r-dependence of the potential. Though this is a toy model, it allows insight into how extra dimensions can affect physics.</p>
+<p>In quantum field theory, potentials arise from the interaction between two particles exchanging a virtual particle <span class="citation" data-cites="zee2010quantum">(<a href="#ref-zee2010quantum" role="doc-biblioref">Zee 2010</a>)</span>. The result of the particle exchange is the repulsion or attraction that is observed when two particle are close to one another. As illustrated in <a href="#fig-virtual" class="quarto-xref">Figure&nbsp;3</a> where an incoming electron exchanges a virtual photon with another electron. They repel one another as they move in each other’s potential well that arises from these propagating photons.</p>
+<div id="fig-virtual" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-virtual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="plots/virtual.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;3: Two electron repulsion by exchanging a virtual photon"><img src="plots/virtual.png" class="img-fluid figure-img" style="width:50.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-virtual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Two electron repulsion by exchanging a virtual photon
+</figcaption>
+</figure>
+</div>
+<p>This section begins with the case of the Yukawa potential and its derivation 3+1 space dimensions. Then I extend the analysis to an arbitrary number D dimensions. The following section looks into the effect of momentum cutoffs as a way of modifying the effect of extra dimensions. Finally extra time cases are considered and particular examples discussed.</p>
+<section id="space-time" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="space-time"><span class="header-section-number">5.1</span> 3+1 Space-Time</h2>
+<p>The standard Yukawa potential is derived for a non-interacting massive scalar field theory <span class="citation" data-cites="yukawa1935interaction yukawa1950quantum">(<a href="#ref-yukawa1935interaction" role="doc-biblioref">Yukawa 1935</a>, <a href="#ref-yukawa1950quantum" role="doc-biblioref">1950</a>)</span> in 3 space and one time dimension. In the standard quantum field theoretical approach, it is derived from the spatial Fourier transform of the propagator <span class="citation" data-cites="zee2010quantum">(<a href="#ref-zee2010quantum" role="doc-biblioref">Zee 2010</a>)</span>. The propagator used will be <span class="math inline">\(\tilde{D(k)}=\dfrac{1}{k^2+m^2}\)</span>; this is the general propagator for a massive scalar field with mass <span class="math inline">\(m\)</span>. The Fourier transform is calculated in spherical coordinates with <span class="math inline">\(k^2=k^2_x+k_y^2+k_z^2\)</span>, the spatial momenta magnitude in polar coordinates and the volume element is <span class="math inline">\(k^2 dkd\theta \sin\theta d\phi\)</span>. The integral is thus</p>
+<p><span class="math display">\[
+\begin{aligned}
+V(r)&amp;=\int \dfrac{d^3 k}{(2\pi)^3} \dfrac{e^{ik\cdot r}}{k^2+m^2}\\
+&amp;=\int_0^{2\pi} d\phi \int_0^{\pi} \sin\theta d\theta \int_0^\infty \dfrac{k^2 dk}{(2\pi)^3}\dfrac{ e^{ikr\cos\theta}}{k^2+m^2}
+\end{aligned}
+\]</span></p>
+<p>Using <span class="math inline">\(u=\cos\theta\)</span>, such that <span class="math inline">\(du=-\sin\theta d\theta\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+V(r)&amp;=\int_{-1}^1 du \int_0^\infty \dfrac{k^2 dk}{(2\pi)^2}\dfrac{ e^{ikru}}{k^2+m^2}\\
+&amp;=\dfrac{2i}{(2\pi)^2 i r} \int_0^\infty \dfrac{k dk}{k^2+m^2}\left[e^{ikr}-e^{-ikr} \right]
+\end{aligned}
+\]</span></p>
+<p>and the exponential definition of Sine</p>
+<p><span class="math display">\[
+V(r)=\dfrac{2}{(2\pi)^2  r} \int_0^\infty \dfrac{k dk}{k^2+m^2} \sin kr
+\]</span></p>
+<p>Sine can be replaced since it is not symmetric across <span class="math inline">\(k=0\)</span> so it becomes <span class="math inline">\(e^{ikr}\)</span> with the limits changed to plus and minus infinity.</p>
+<p><span class="math display">\[
+V(r)=\dfrac{1}{(2\pi)^2 i r} \int_{-\infty}^\infty \dfrac{k dk}{k^2+m^2} e^{ikr}
+\]</span></p>
+<p>This integral can be evaluated using the residue theorem to yield</p>
+<p><span class="math display">\[
+\dfrac{1}{4\pi r}e^{-mr}.
+\]</span></p>
+<p>Where the upper pole im has been used. In the massless case <span class="math inline">\(m=0\)</span> the familiar <span class="math inline">\(1/r\)</span> form that occurs in Newton’s and Coulomb’s laws is found. The potential is shown in <a href="#fig-yukawa" class="quarto-xref">Figure&nbsp;4</a> where the familiar decaying shape for a repulsive potential is evident.</p>
+<div id="fig-yukawa" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-yukawa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="plots/4dplot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;4: Plot of the potential in 3+1 space-time for a massive scalar field"><img src="plots/4dplot.png" class="img-fluid figure-img" style="width:50.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-yukawa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Plot of the potential in 3+1 space-time for a massive scalar field
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="units-of-the-potential" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="units-of-the-potential"><span class="header-section-number">5.2</span> Units of the Potential</h2>
+<p>Closer inspection of the way potentials are calculated reveals a problem that arises in the units of the potential in higher dimensions. The units for the potential in higher dimensions are <span class="math inline">\(1/L^{D-2}\)</span> (where D is the number of space dimensions) when a true potential should have the units of energy (<span class="math inline">\(1/L\)</span>). In the ADD model <span class="citation" data-cites="arkani1999phenomenology">(<a href="#ref-arkani1999phenomenology" role="doc-biblioref">Arkani-Hamed, Dimopoulos, and Dvali 1999</a>)</span> factors with dimensions of length appear in the form of multiples of the size of the compactified dimensions. This is because the fundamental Planck scale is determined by the number of dimensions through</p>
+<p><span class="math display">\[
+M_{Pl}^2=8\pi L^n M_D^{2+n}
+\]</span></p>
+<p>where n is the number of extra dimensions and L is the extra dimension size and <span class="math inline">\(M_{Pl}\)</span> is the Planck scale in 4d space-time. In the potentials derived below, there are no constants that scale in this way, but <span class="citation" data-cites="dvali1999constraints">Dvali, Gabadadze, and Senjanovic (<a href="#ref-dvali1999constraints" role="doc-biblioref">1999</a>)</span> shows that in an extra time in the framework of gravity the right dimensionality is maintained thanks to this scaling. However the question now is does there exist an equivalent law for other forces, since if extra dimensions other force laws would be affected and would also need to find a similar relation so that the units of the potential are correct. One possibility is the inclusion of some dimensionful energy cutoff scale <span class="math inline">\(\Lambda\)</span> appearing in the potential which makes the overall units correct. The solution to this unit problem may come from considering the dimensionality of the Lagrangian. The action must be dimensionless in natural units, and from the definition of the Lagrangian density in some arbitrary number of dimensions it is</p>
+<p><span class="math display">\[
+S=\int d^{N+D} x \mathcal{L}
+\]</span></p>
+<p>where N is the number of time dimensions and D is the number of space dimensions. The Lagrangian density has units of <span class="math inline">\([\mathcal{L}]=E^{N+D}\)</span>.This is energy to the power of the number of dimensions. In order to find a potential with the right units with a cutoff scale, we can study a toy scalar field model. In this model the scalar field <span class="math inline">\(\phi\)</span> of mass <span class="math inline">\(m_1\)</span> interacts with some fermionic field <span class="math inline">\(\psi\)</span> of mass <span class="math inline">\(m_2\)</span> where the Lagrangian density is</p>
+<p><span class="math display">\[
+\mathcal{L}= -\frac{1}{2}\phi(\partial^2+m_1^2)\phi +\overline{\psi}(i\gamma^\mu\partial_\mu-m_2)\psi+g'\phi\overline{\psi}\psi
+\]</span></p>
+<p>where the interaction term has some coupling constant <span class="math inline">\(g'\)</span>. The interaction between these fields is illustrated in <a href="#fig-toy" class="quarto-xref">Figure&nbsp;5</a></p>
+<div id="fig-toy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-toy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="plots/toy.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;5: The tree-level interaction diagram of the toy model"><img src="plots/toy.png" class="img-fluid figure-img" style="width:50.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-toy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: The tree-level interaction diagram of the toy model
+</figcaption>
+</figure>
+</div>
+<p>Since the Lagrangian density must be of units <span class="math inline">\(E^{N+D}\)</span>, the fields in the Lagrangian density must have units <span class="math inline">\([\phi]=E^{(N+D-2)/2}\)</span> and <span class="math inline">\([\psi]=E^{(N+D-1)/2}\)</span>. This is implied from he first two terms in the Lagrangian density. This means the coupling constant in the interaction term must have units <span class="math inline">\([g']=E^{2-\frac{N+D}{2}}\)</span>. In the familiar case of <span class="math inline">\(N=1\)</span> and <span class="math inline">\(M=3\)</span> the coupling constant is dimensionless. When a cutoff energy scale <span class="math inline">\(\Lambda\)</span> is added to the coupling constant that satisfies</p>
+<p><span class="math display">\[
+g'=\frac{g}{\Lambda^{(N+D)/2-2}}
+\]</span></p>
+<p>(where g is the 4-dimensional space coupling constant), it allows the potential associated with the interaction of the fermionic field <span class="math inline">\(\psi\)</span> via the scalar field to be of the form</p>
+<p><span class="math display">\[
+V(r)=\frac{g^2}{\Lambda^{(N+D)-4}}\int d^D k \frac{e^{i\vec{k}.\vec{x}}}{k^2+m^2}.
+\]</span></p>
+<p>The units of this potential now satisfy <span class="math inline">\([V]=E^{2-N}\)</span>. So for N=2 time dimensions the potential has units of energy for <span class="math inline">\(\forall D\)</span>. However, this allows the number of time dimensions N to alter the units of the potential. It is possible to avoid this problem by considering compactified time dimensions that do not introduce an integration over the corresponding momenta k, and so does not alter the units of the overall potential.</p>
+</section>
+<section id="sec-dplus1" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-dplus1"><span class="header-section-number">5.3</span> D+1 Space-Time Dimensions</h2>
+<p>In this section the focus shall be on large extra dimensions of space and the effect on the potential for a massive scalar field. I begin with the Fourier transform of the propagator that is familiar to the Yukawa case above, but instead with D space dimensions in the integral.</p>
+<p><span class="math display">\[
+V(r)=\int \dfrac{d^D k}{(2\pi)^D} \dfrac{e^{ik\cdot r}}{k^2+m^2}
+\]</span></p>
+<p>The volume element in D space dimensions requires definition. In D space dimensions the volume element of the hypersphere is</p>
+<p><span class="math display">\[
+d^D k=k^{D-1}\sin^{D-2}\phi_{D-1} \sin^{D-3}\phi_{D-2} ...\sin\phi_2 dk d\phi_{D-1} ....d\phi_1.
+\]</span></p>
+<p>Since this is an integral in momentum space, k is the radial coordinate. As there are D-1 angles in D dimensional space these are defined as $ _n$ for the nth angle.</p>
+<p><span class="math display">\[
+V(r)=\int \dfrac{1}{(2\pi)^D} \dfrac{e^{ik\cdot r}}{k^2+m^2} k^{D-1}\sin^{D-2}\phi_{D-1} \sin^{D-3}\phi_{D-2} ...\sin\phi_2 dk d\phi_{D-1} ....d\phi_1
+\]</span></p>
+<p>It is now possible to represent the integrals over the angles <span class="math inline">\(\phi_n\)</span> for <span class="math inline">\(2\leq n \leq D-1\)</span> as a product just to simplify the notation.</p>
+<p><span class="math display">\[
+V(r)=\dfrac{1}{(2\pi)^D}\int_0^\infty \dfrac{k^{D-1} dk}{k^2+m^2} \int_0^{2\pi}\sin^{D-2}\phi_1d\phi_1 \prod_{n=1}^{D-2} \int_0^\pi \sin^{D-(n+1)}\phi_{D-n}d\phi_{D-n} e^{ikr\cos \phi_{D-1}}
+\]</span></p>
+<p>Now use the same substitution as above but instead with the angle <span class="math inline">\(\phi_{D-1}\)</span>, since this angle is the angle with the highest power of sine in the volume element.</p>
+<p><span class="math display">\[
+\begin{aligned}
+u &amp;=cos\phi_{D-1},\\
+du &amp;=-\sin\phi_{D-1} d\phi_{D-1},\\
+V(r)&amp;=\dfrac{1}{(2\pi)^D}\int_0^\infty \dfrac{k^{D-1} dk}{k^2+m^2} \int_0^{2\pi}\sin^{D-2}\phi_1 d\phi_1\\ &amp;\prod_{n=2}^{D-2} \int_0^\pi \sin^{D-(n+1)}\phi_{D-n}d\phi_{D-n} \int_{-1}^1 \frac{\sin^{D-2} \phi_{D-1}}{\sin \phi_{D-1}} e^{ikr\cos u}du
+\end{aligned}
+\]</span></p>
+<p>It is now possible to replace the sine with <span class="math inline">\((1-u^2)\)</span> in the integral</p>
+<p><span class="math display">\[
+V(r)=\dfrac{1}{(2\pi)^{D-1}}\int_0^\infty \dfrac{k^{D-1} dk}{k^2+m^2} \prod_{n=2}^{D-2} \int_0^\pi \sin^{D-(n+1)}\phi_{D-n}d\phi_{D-n} \int_{-1}^1 (1-u^2)^{(D-3)/2} e^{ikr\cos u}du
+\]</span></p>
+<p>Now finally the integral with the product when calculated yields a product of fractions with Gamma functions.</p>
+<p><span class="math display">\[
+\prod_{n=2}^{D-2} \int_0^\pi \sin^{D-(n+1)}\phi_{D-n}d\phi_{D-n}= \sqrt{\pi}^{D-3} \prod_{n=2}^{D-2} \frac{\Gamma((D-n)/2)}{\Gamma((D-n+1)/2)}
+\]</span></p>
+<p>When this result is input into the total calculation this gives the general result</p>
+<p><span class="math display">\[
+V(r)=\frac{1}{2^{D-1}\sqrt{\pi}^{D+1}}\prod_{n=2}^{D-2} \frac{\Gamma((D-n)/2)}{\Gamma((D-n+1)/2)}\int_0^\infty \dfrac{k^{D-1} dk}{k^2+m^2}\int_{-1}^1 (1-u^2)^{(D-3)/2} e^{ikr\cos u}du.
+\]</span></p>
+<p>In the case of even dimension spaces then the <span class="math inline">\(u\)</span> integral is found to be a Bessel function of the first kind. Therefore if the number of space dimensions D is even, then the potential takes the form:</p>
+<p><span class="math display">\[
+V(r)=\frac{\sqrt{\pi}^{D-3}}{2^{D-1}}\prod_{n=2}^{D-2} \frac{\Gamma((D-n)/2)}{\Gamma((D-n+1)/2)}\int_0^\infty \dfrac{k^{D-1} dk}{k^2+m^2} \frac{\pi}{(kr)^{(D-2)/2}} J_{(D-2)/2}(kr) C_D
+\]</span></p>
+<p>where <span class="math inline">\(C_D\)</span> is a constant found in the integration over <span class="math inline">\(u\)</span> and is dependent on the dimension <span class="math inline">\(D\)</span>. The first few values are <span class="math inline">\(C_2=1,C_4=1,C_6=3,C_8=15,C_{10}=105\)</span>. In the case of odd <span class="math inline">\(D\)</span> the integration over <span class="math inline">\(u\)</span> is always a hypergeometric function, the particular form of which is defined by a series expansion.</p>
+<p>We can also derive the D-space dimensional potential for a massless scalar field in the following simpler way. Again the potential is derived from the Fourier transform of a propagator, but this time the massless scalar propagator is <span class="math inline">\(1/k^2\)</span>.</p>
+<p><span class="math display">\[
+V(r)=\int \dfrac{d^D k}{(2\pi)^D} \dfrac{e^{ik\cdot r}}{k^2}
+\]</span></p>
+<p>Making the substitution for the <span class="math inline">\(1/k^2\)</span> that allows it to be represented as an exponent using a dummy variable <span class="math inline">\(\lambda\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{1}{k^2}&amp;=\int_0^\infty e^{-\lambda k^2} d\lambda
+\\
+V(r)&amp;=\int \dfrac{d^D k}{(2\pi)^D}\int_0^\infty e^{-\lambda k^2+ik\cdot r} d\lambda.
+\end{aligned}
+\]</span></p>
+<p>This then allows the calculation to contain a Gaussian integral</p>
+<p><span class="math display">\[
+\begin{aligned}
+V(r)&amp;=\int_0^\infty d\lambda e^{-\frac{r^2}{4 \lambda}}\int \dfrac{d^D k}{(2\pi)^D} e^{-\lambda (k-\frac{ir}{2\lambda})^2}\\
+&amp;=\dfrac{1}{(4\pi)^{D/2}}\int_0^\infty d\lambda \lambda^{-D/2} e^{-\frac{r^2}{4 \lambda} }
+\end{aligned}
+\]</span></p>
+<p>Then use the integral definition of the Gamma function</p>
+<p><span class="math display">\[
+\begin{aligned}
+\alpha &amp;=\frac{r^2}{4 \lambda}\\
+d\alpha &amp;= \frac{-r^2}{4 \lambda^2}d\lambda\\
+\Rightarrow V(r)&amp;=\dfrac{1}{(4\pi)^{D/2}} \int_\infty^0 d\alpha (-\frac{r^2}{4\alpha^2})(\frac{r^2}{4\alpha^2})^{-D/2} e^{-\alpha}\\
+&amp;=\dfrac{1}{4(\pi)^{D/2}} \frac{1}{r^{D-2}}\int_0^\infty d\alpha \alpha^{D/2-1} e^{-\alpha}\\
+&amp;=\frac{\Gamma(D/2-1)}{4(\pi)^{D/2}}\frac{1}{r^{D-2}}
+\end{aligned}
+\]</span></p>
+<p>In the massive scalar field case the replacement <span class="math inline">\(k^2 \rightarrow k^2 +m^2\)</span> is made and the result below follows from the same calculation</p>
+<p><span class="math display">\[
+V(r)=\frac{1}{(2\pi)^{D/2}} \left(\frac{m}{r}\right)^{D/2-1} \int_0^\infty d\alpha e^{-mr\cosh \alpha} \cosh(D/2-1)\alpha
+\]</span></p>
+<p>The integral over <span class="math inline">\(\alpha\)</span> is just the integral definition of the modified Bessel function of the second kind (<span class="math inline">\(K\)</span>).</p>
+<p><span class="math display">\[
+V(r)=\frac{1}{(2\pi)^{D/2}}\left(\frac{m}{r}\right)^{D/2-1} K_{D/2-1}(mr)  
+\]</span></p>
+<p>This is the general D space dimension massive scalar field potential. This general potential is in the form of a modified Bessel function of the second kind, and this is illustrated in <a href="#fig-bessel" class="quarto-xref">Figure&nbsp;6</a>. The potential falls away faster for higher dimensional cases.</p>
+<div id="fig-bessel" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bessel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="plots/Plots.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;6: Plots of the potential in D=3,4,5,6"><img src="plots/Plots.png" class="img-fluid figure-img" style="width:50.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bessel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Plots of the potential in D=3,4,5,6
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="space-time-with-momentum-cutoff" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="space-time-with-momentum-cutoff"><span class="header-section-number">5.4</span> 4+1 Space-Time with Momentum Cutoff</h2>
+<p>We can extend our analysis to include a momentum cutoff in the potential. This is a common technique in quantum field theory to avoid divergences in integrals over momenta <span class="citation" data-cites="peskin2018introduction">(<a href="#ref-peskin2018introduction" role="doc-biblioref">Peskin 2018</a>)</span>. The cutoff <span class="math inline">\(\Lambda\)</span> is the maximum momentum that can be considered in the integral. For 4 space dimensions with a massless scalar field, where the momentum has an upper limit cutoff <span class="math inline">\(\Lambda\)</span>. I begin with the Fourier transform of the propagator in 4 space dimensions</p>
+<p><span class="math display">\[
+V(r)=\int \dfrac{d^4 k}{(2\pi)^4} \dfrac{e^{ik\cdot r}}{k^2}.
+\]</span></p>
+<p>We proceed as above with the 4 space dimensional volume element</p>
+<p><span class="math display">\[
+V(r)= \dfrac{1}{(2\pi)^4} \int_0^\pi \sin\phi_2 d\phi_2 \int_0^{2\pi} d\phi_3 \int_0^\Lambda \dfrac{k^3 dk}{k^2} \int_0^\phi d\phi_1 \sin^2 \phi_1 e^{ikr\cos\phi_1}
+\]</span></p>
+<p>using the same volume element substitution</p>
+<p><span class="math display">\[
+V(r)= \dfrac{2}{(2\pi)^3}\int_0^\Lambda kdk \int_{-1}^1 du \sin \phi_1 e^{ikru}.
+\]</span></p>
+<p>This now leads to an integral definition of a Bessel function of the first kind.</p>
+<p><span class="math display">\[
+V(r)=\dfrac{2}{(2\pi)^3}\int_0^\Lambda kdk \int_{-1}^1 du \sqrt{1-u^2} e^{ikru}
+\]</span></p>
+<p>Using the integral definition to replace the integral involving <span class="math inline">\(u\)</span> yields</p>
+<p><span class="math display">\[
+\begin{aligned}
+V(r)&amp;=\dfrac{2}{(2\pi)^3}\int_0^\Lambda kdk \dfrac{\pi J_1(kr)}{kr}\\
+&amp;=\dfrac{1}{(2\pi)^2 r}\int_0^\Lambda dk J_1(kr)
+\end{aligned}
+\]</span></p>
+<p>Finally the integral over k is calculated up to the chosen momentum cutoff <span class="math inline">\(\Lambda\)</span>. This takes into account that the integral of a Bessel function of the first kind equals the lower-indexed Bessel function.</p>
+<p><span class="math display">\[
+V(r)=\dfrac{1}{(2\pi)^2 r^2}\left[ 1-J_0(\Lambda r)\right]\rightarrow \dfrac{1}{(2\pi)^2 r^2}\; \text{for} \; \Lambda\rightarrow\infty
+\]</span></p>
+<p>This gives the expected dependence on r in the limit of <span class="math inline">\(\Lambda\rightarrow \infty\)</span> and this can be generalised to <span class="math inline">\(D\)</span> dimensions by using the derivation of the general potential and including a momentum cutoff. For finite momentum cutoff the potential has a second term that suppresses the infinite-Lambda solution and introduces a wavy modification to the potential. This is shown in <a href="#fig-cutoff" class="quarto-xref">Figure&nbsp;7</a>. The Bessel function contribution also leads to a finite potential at <span class="math inline">\(r=0\)</span>. The wavy behaviour becomes more pronounced for high values of <span class="math inline">\(\Lambda\)</span> and can eventually lead to small potential wells at several points along the potential curve.</p>
+<div id="fig-cutoff" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cutoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="plots/Plotcutoff.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;7: Plot of the 4+1 cutoff potential. The incorporation of a cutoff as a wavy Bessel contribution to the potential."><img src="plots/Plotcutoff.png" class="img-fluid figure-img" style="width:50.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cutoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Plot of the 4+1 cutoff potential. The incorporation of a cutoff as a wavy Bessel contribution to the potential.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="d2-space-time" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="d2-space-time"><span class="header-section-number">5.5</span> D+2 Space-Time</h2>
+<p>With the general D+1 space dimensional potential derived, it is now possible to extend the analysis to D+2 space dimensions. In what follows it is assumed that one of the time-like dimensions is compactified as described in <a href="#sec-investigations" class="quarto-xref">Section&nbsp;2</a> whilst the other time dimension is not. This means the propagator has an extra compactified term <span class="math inline">\(-\frac{n^2}{L^2}\)</span> in the denominator. This is the primary difference in the extra time case. The calculation in D space dimensions follows the same form as the D+1 case of <a href="#sec-dplus1" class="quarto-xref">Section&nbsp;5.3</a>. In the compactified time case for a massless field it is possible to make the substitution <span class="math inline">\(m\rightarrow in/L\)</span> into the general D-space expression and sum over all <span class="math inline">\(n\)</span> Kaluza-Klein modes.</p>
+<p><span class="math display">\[
+V(r)=\frac{1}{(2\pi)^{D/2}}\sum_n \left(\frac{in}{Lr}\right)^{D/2-1} K_{D/2-1}(inr/L)
+\]</span></p>
+<p>The explicit sum is non-trivial but the potential is always complex for <span class="math inline">\(\forall D\)</span>. In certain special cases the sum is evaluated and found to be finite, but the general case for arbitrary D there is no closed form. If the the field is massive then we replace <span class="math inline">\(m\rightarrow Q=\sqrt{m^2-n^2 /L^2}\)</span> and again sum over the <span class="math inline">\(n\)</span> Kaluza-Klein modes. Thus the potential for one extra compactified time and <span class="math inline">\(D\)</span> space dimensions will be</p>
+<p><span class="math display">\[
+V(r)=\frac{1}{(2\pi)^{D/2}}\sum_n \left(\frac{Q}{r}\right)^{D/2-1} K_{D/2-1}(Qr)
+\]</span></p>
+<p>A few observations can be made of this potential. Firstly, in the case where $m^2 &lt; n^2 /L^2 $ the potential is complex for all D. The form of <span class="math inline">\(Q\)</span> also makes the new time dimension component look like a contribution to the mass of the particle. For both the massive and massless cases the potential is possibly complex and introduces unitarity violation. Furthermore, one may expand this result to an arbitrary number of compactified time dimensions; however, if <span class="math inline">\(s\)</span> extra compactified time dimensions are introduced then then the dispersion relation acquires <span class="math inline">\(s\)</span> extra terms</p>
+<p><span class="math display">\[
+\sum_i^s \frac{n_i^2}{L_i^2}.
+\]</span></p>
+<p>If every extra time dimension has the same compactification size <span class="math inline">\(L\)</span>, then the result is a sum over the mode indices and replaced by an overall constant</p>
+<p><span class="math display">\[
+\frac{n^2}{L^2}=\frac{1}{L^2}\sum_i^s n_i^2.
+\]</span></p>
+</section>
+<section id="special-cases" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="special-cases"><span class="header-section-number">5.6</span> Special Cases</h2>
+<p>The general potential derived in the previous section is now considered in the context of special cases. The aim is to explore how the potential behaves in different space-time dimensions and with different compactification conditions. In particular the 3+2 massless potential is</p>
+<p><span class="math display">\[
+V(r)=\frac{1}{4\pi r}\sum_n^\infty e^{-inr/L}
+\]</span></p>
+<p>This is a geometric series which can be summed to yield</p>
+<p><span class="math display">\[
+\begin{aligned}
+V(r)&amp;=\dfrac{1}{4\pi r} \sum_n (e^{-ir/L})^n\\
+&amp;=\dfrac{1}{8\pi r}\left[ 1-i\frac{\sin r/L}{1-\cos r/L} \right]
+\end{aligned}
+\]</span></p>
+<p>This potential is complex-valued and its real and imaginary parts are plotted in <a href="#fig-4dt" class="quarto-xref">Figure&nbsp;8</a>. From this figure several questions come to mind. The real part of the potential shows the decaying profile that is expected from a potential but the imaginary part has a very odd Tan-like behaviour with asymptotes at the values of the compactified circumference (the dimension has size L and so circumference <span class="math inline">\(2\pi L\)</span>).</p>
+<div id="fig-4dt" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4dt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="plots/4dtplot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;8: Plot of the Real (blue) and Imaginary (purple) parts of the potential in 3+2 dimensions"><img src="plots/4dtplot.png" class="img-fluid figure-img" style="width:50.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4dt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Plot of the Real (blue) and Imaginary (purple) parts of the potential in 3+2 dimensions
+</figcaption>
+</figure>
+</div>
+<p>The sum over the Kaluza-Klein modes in the massless potential for even-number space dimensions cannot be done for <span class="math inline">\(D&gt;2\)</span> but odd-D spaces provide convergent results. For a 5+2 space time the potential is</p>
+<p><span class="math display">\[
+V(r)=\frac{-e^{-ir/L} L((-1+e^{ir/L})L+ir)(i/(Lr))^{5/2}}{8(-1+e^{ir/L})^2 \pi^2 \sqrt{ir/L}}
+\]</span></p>
+<p>This potential is plotted in <a href="#fig-5dt" class="quarto-xref">Figure&nbsp;9</a> and again the real part acts as expected, but again there are asymptotes at the values <span class="math inline">\(2 \pi nL\)</span> in the imaginary part. In the potentials for massive fields, the sum over the Kaluza-Klein modes cannot be performed and so it is difficult to find a closed form with which to represent the potential.</p>
+<div id="fig-5dt" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5dt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="plots/5dtplot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;9: Plot of the Real (blue) and Imaginary (red) parts of the potential in 5+2 dimensions"><img src="plots/5dtplot.png" class="img-fluid figure-img" style="width:50.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5dt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Plot of the Real (blue) and Imaginary (red) parts of the potential in 5+2 dimensions
+</figcaption>
+</figure>
+</div>
+<p>The relative contributions of compactified space and compactified time dimensions is an additional factor to explore and warrants a particular example. The potential for one extra compactified time (3+2 space) for a massless field is derived from to be</p>
+<p><span class="math display">\[
+V(r)=\frac{1}{4\pi r}e^{-inr/L}
+\]</span></p>
+<p>However for a compactified space dimension the result is</p>
+<p><span class="math display">\[
+V(r)=\frac{1}{4\pi r}e^{-nr/L}
+\]</span></p>
+<p>which is real but still retains the tower of modes. The most important point in this comparison and others above is that the <span class="math inline">\(r\)</span>-dependence is determined only by the number of un-compactified space dimensions that are integrated over in the calculation. Extra compactified dimensions introduce exponential factors that in the case of extra times are complex and in extra spaces are real. In summary, the effect of the extra times on the potential is to introduce complex-valued terms and a sum over the Kaluza-Klein tachyonic modes of the of the mediating particle. This means as-yet unobserved new behaviour is present within the potential for this toy model scalar field. It is expected that even though this was a toy model scalar field, since the spin of the particle does not effect the r-dependence and the mass of the particle can be removed, the effect does apply to other, more realistic fields and potentials.</p>
+</section>
+</section>
+<section id="sec-phenomenology" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Phenomenological Consequences</h1>
+<p>The phenomenological consequences of the potentials derived in this chapter are now considered. The aim is to explore how these potentials can be used to constrain extra time theories and what experimental observables can be derived from them. The potentials derived above are a starting point for understanding the effects of extra dimensions on particle interactions and can be used to make predictions about the behaviour of particles in these theories. These phenomenological consequences can be used to gauge the validity of the theory. The major source of experimental observables in this work is the effect on the potentials in extra dimensions. The potentials derived above and those already covered in the literature can be used to constrain extra time models either directly through force law measurements or indirectly through decay processes and bound-system processes.</p>
+<p>There are also other sources of constraints arising from the symmetry properties described in <a href="#sec-groups" class="quarto-xref">Section&nbsp;4</a> and from causality violation described in <a href="#sec-intro" class="quarto-xref">Section&nbsp;1</a>. Scalar fields have been the toy model throughout this work; however, the spin of the field has no effect on the r-scaling and so the consequences of extra time dimensions remain valid when comparing field theories with experimental observations. The following section will look in depth at possible constraints and the current experimental bounds that exist thereon.</p>
+<section id="unitarity-violation" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="unitarity-violation"><span class="header-section-number">6.1</span> Unitarity Violation</h2>
+<p>Unitarity violation is one of the primary problems associated with extra time theories. The violation of the conservation of probability must be accounted for in any viable theory; however, this course of research has not been able to find a way of introducing extra time dimensions without introducing unitarity violation. This effect then, although physically discomforting for the consistency of quantum mechanics is thus a good measure of the existence of extra dimensions of time. Extra time dimensions and unitarity violation has been explored by <span class="citation" data-cites="erdem2006reconsidering">Erdem and Ün (<a href="#ref-erdem2006reconsidering" role="doc-biblioref">2006</a>)</span> and <span class="citation" data-cites="yndurain1991disappearance">Yndurain (<a href="#ref-yndurain1991disappearance" role="doc-biblioref">1991</a>)</span>, where the consequences of the potential could be seen in proton scattering in the nucleus and the decay of protons. This corresponds to unitarity violation since there are no non-tachyonic particles the proton can decay into. The decay is interpreted as a decay into nothing, leading to the disappearance of matter.</p>
+<div id="fig-scatter" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="plots/feyndiag.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;10: The proton-proton scattering diagram in a modified Coulomb potential"><img src="plots/feyndiag.png" class="img-fluid figure-img" style="width:50.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: The proton-proton scattering diagram in a modified Coulomb potential
+</figcaption>
+</figure>
+</div>
+<p>In <span class="citation" data-cites="yndurain2007theory">Ynduráin (<a href="#ref-yndurain2007theory" role="doc-biblioref">2007</a>)</span> the approach taken was to consider the scattering of two protons in a nucleus (see <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;10</a>). Then finding the decay width of the proton into nothing via tachyonic modes by finding</p>
+<p><span class="math display">\[
+\Gamma=-Im\bra{\psi}V(r)\ket{\psi}
+\]</span></p>
+<p>which can be interpreted as the rate at which probability leaks out of the system. The wavefunction of the nuclear protons is</p>
+<p><span class="math display">\[
+\psi=\frac{\sqrt{m_\pi^3}}{\sqrt{\pi}}e^{-m_\pi r}.
+\]</span></p>
+<p>This wavefunction is a bound state, and the decay is the change from the nuclear proton via the electromagnetic potential with tachyonic modes in which it sits to the proton state. Fermi’s Golden Rule is used to calculate transition rates, and it is proportional to <span class="math inline">\(\mid \bra{\psi_f}H'\ket{\psi_i}\mid ^2\)</span> <span class="citation" data-cites="sakurai2011modern">(<a href="#ref-sakurai2011modern" role="doc-biblioref">Sakurai and Napolitano 2011</a>)</span>. The fact that the potential is complex gives this imaginary part, leading to decay into nothing and hence unitarity violation. If particles disappear then probability conservation is violated.</p>
+<p>We can repeat the calculation with a photonic potential (such that the <span class="math inline">\(\alpha\)</span> is the fine-structure constant) in an extra time dimension by summing over the Kaluza-Klein modes <span class="citation" data-cites="yndurain1991disappearance">(<a href="#ref-yndurain1991disappearance" role="doc-biblioref">Yndurain 1991</a>)</span>. This yields the potential</p>
+<p><span class="math display">\[
+V(r)=\frac{\alpha}{r}\left[ 1+2\sum_{m=1}^\infty \exp{-inr/L} \right]
+\]</span></p>
+<p>and the decay width becomes</p>
+<p><span class="math display">\[
+\Gamma= -8\alpha m_\pi^3 \text{Im}\int_0^\infty r \left[exp(-2m_\pi r)+2\sum_{n=1}^\infty exp(-2m_\pi +in/L )\right] dr
+\]</span></p>
+<p>The integral is done in spherical polar coordinates; since the potential and wavefunctions are dependent on r only the integral over solid angle simply gives <span class="math inline">\(4\pi\)</span>. Integrating over r gives</p>
+<p><span class="math display">\[
+\Gamma=-8\alpha m_\pi^3 \text{Im} \left[\frac{1}{4m_\pi^2}+2\sum_{n=1}^\infty\frac{1}{(2m_\pi+in/L)^2}\right].
+\]</span></p>
+<p>Only the imaginary part matters so the first term is dropped and re-arranging the second part gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Gamma&amp;=32 \alpha m_\pi^4 \sum_{n=1}^\infty \frac{n/L}{(4m_\pi^2+n^2/L^2)^2}
+\notag\\
+&amp;=32 \alpha m_\pi^4L^3 \sum_{n=1}^\infty \frac{n}{(4m_\pi^2 L^2+n^2)^2}.
+\end{aligned}
+\]</span></p>
+<p>If the assumption is made that <span class="math inline">\(4m_\pi^2 L^2&lt;&lt;1\)</span> (this is valid in this case of small compactified dimensions) then the sum can be simplified to</p>
+<p><span class="math display">\[
+\Gamma=32 \alpha (m_\pi L)^3 m_\pi \sum_{n=1}^\infty \frac{1}{n^3}.
+\]</span></p>
+<p>Finally using the definition of the Riemann Zeta function yields</p>
+<p><span class="math display">\[
+\Gamma=32 \alpha (m_\pi L)^3 m_\pi \zeta(3).
+\]</span></p>
+<p>Current experimental bounds on the lifetime of proton puts the lower limit at <span class="math inline">\(\tau=5.9\times 10^{33}\)</span> yrs <span class="citation" data-cites="abe2014search">(<a href="#ref-abe2014search" role="doc-biblioref">Abe et al. 2014</a>)</span>. Yndurain’s prediction for proton decay above has a lifetime of <span class="math inline">\(\tau=(G_N^{1/2}/L)^3 \times 4\times 10^{29}\)</span> yrs where L is the size of the dimension and G is Newtons constant <span class="citation" data-cites="yndurain1991disappearance">(<a href="#ref-yndurain1991disappearance" role="doc-biblioref">Yndurain 1991</a>)</span>. This gives limit on L to be no more than <span class="math inline">\(0.0407 G^{1/2}_N\)</span>. We can also extend this analysis to other potentials. In particular, considering the potential for a photon in an extra large space dimension</p>
+<p><span class="math display">\[
+V(r)=\frac{\alpha}{\pi r^2}.
+\]</span></p>
+<p>So calculating <span class="math inline">\(\Gamma\)</span> with the same wavefunctions as above yields</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Gamma&amp;=\bra{\psi}V(r)\ket{\psi}\\
+&amp;=\int_0^\infty dr \frac{4 \alpha m^3_\pi}{\pi} e^{-2m_\pi r}\\
+&amp;=- 4m_\pi/\pi
+\end{aligned}
+\]</span></p>
+<p>This is real-valued, but <span class="math inline">\(\Gamma\)</span> takes only the imaginary part so is no decay. For a compactified space dimension the potential is</p>
+<p><span class="math display">\[
+V(r)=\frac{\alpha}{r}\sum_n^\infty e^{-nr/L}
+\]</span></p>
+<p>and this gives the calculation (using a geometric series sum)</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Gamma&amp;=\bra{\psi}V(r)\ket{\psi}\\
+&amp;=4\alpha m^3_\pi \int_0^\infty rdr e^{-2m_\pi r} \frac{e^{r/L}}{e^{r/L}-1}
+\end{aligned}
+\]</span></p>
+<p>Which when utilising the integral definition of the Generalised or Hurwitz Zeta function, one arrives at</p>
+<p><span class="math display">\[
+\Gamma=4\alpha m^3_\pi L^2 \zeta(2,2Lm_\pi).
+\]</span></p>
+<p>In both these cases it is clear there is no imaginary part of the decay width as was found in the extra-time case. Overall, no decay of protons have been observed <span class="citation" data-cites="abe2014search">(<a href="#ref-abe2014search" role="doc-biblioref">Abe et al. 2014</a>)</span> nor have any other particles like nuclear neutrons <span class="citation" data-cites="dvali1999constraints">(<a href="#ref-dvali1999constraints" role="doc-biblioref">Dvali, Gabadadze, and Senjanovic 1999</a>)</span> or the disappearance of matter in other situations. There have also been no sightings or evidence for tachyons that arise in extra time theories <span class="citation" data-cites="recami2009superluminal skalsey2000viable">(<a href="#ref-recami2009superluminal" role="doc-biblioref">Recami 2009</a>; <a href="#ref-skalsey2000viable" role="doc-biblioref">Skalsey et al. 2000</a>)</span>. The constraint thus on the unitarity violating nature of extra time theories is thus very strong.</p>
+</section>
+<section id="gravity-law-modification" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="gravity-law-modification"><span class="header-section-number">6.2</span> Gravity Law Modification</h2>
+<p>A second source of phenomenological consequences of extra time theories is the modification of the gravitational potential. The modification of the gravitational potential in extra dimensions can be used to constrain the size and number of extra dimensions, including time dimensions. Since the potential can be measured directly then the form of the force laws can also provide a good probe to test extra time dimensions. The potential will be affected by the dimensionality regardless of the force it is mediating. In particular the gravitational potential has been studied in depth to test for extra dimensions of space. The potential for n-extra KK space dimensions for <span class="math inline">\(r&gt;&gt;L\)</span></p>
+<p><span class="math display">\[
+V(r)=G_N \dfrac{m_1 m_2}{r} \sum_{k_1,k_2,k_n} e^{-2 \pi k r/L}
+\]</span></p>
+<p>and for <span class="math inline">\(r&lt;&lt;L\)</span></p>
+<p><span class="math display">\[
+V(r)=G_{N(4+n)} \dfrac{m_1 m_2}{r^{n+1}}
+\]</span></p>
+<p>and experiments have put bounds on the fundamental Planck scale for different numbers of space dimensions<span class="citation" data-cites="Gingrichlimits">(<a href="#ref-Gingrichlimits" role="doc-biblioref">Gingrich 2015</a>)</span>. If there exists one extra space dimension it is limited to a size of less than <span class="math inline">\(L\leq 44 \mu m\)</span> and if there are two then the limit is the size <span class="math inline">\(L\leq 30\mu m\)</span>. Thus so far there is no evidence for the divergence of the gravity law from the familiar <span class="math inline">\(1/r\)</span> of Newton. Following the result of the ADD model <span class="citation" data-cites="arkani1999phenomenology">(<a href="#ref-arkani1999phenomenology" role="doc-biblioref">Arkani-Hamed, Dimopoulos, and Dvali 1999</a>)</span> wherein Newton’s gravity law is modified by the existence of extra space dimensions, <span class="citation" data-cites="dvali1999constraints">Dvali, Gabadadze, and Senjanovic (<a href="#ref-dvali1999constraints" role="doc-biblioref">1999</a>)</span> explores the time-like case and its effect on the r dependence. The potential for gravity in one extra KK time calculated by Dvali <span class="citation" data-cites="dvali1999constraints">(<a href="#ref-dvali1999constraints" role="doc-biblioref">Dvali, Gabadadze, and Senjanovic 1999</a>)</span> is</p>
+<p><span class="math display">\[
+V(r)=G_N \dfrac{m_1 m_2}{r} \sum_n e^{-inr/L}
+\]</span></p>
+<p>Since this potential is complex there is also the question of how to measure the imaginary as well as the real part. It may be interpreted that the imaginary part can be discarded as unphysical, in which case limiting the extra-time behaviour will surmount to putting a limit on L so that the gravity law bounds mentioned above still hold. However if the imaginary term is not ignored then the contribution to the energy could be observable.</p>
+</section>
+</section>
+<section id="sec-conclusions" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Conclusions</h1>
+<p>In this work we have explored methods of incorporating extra dimensions of time into physical theories and the consequences that arise both theoretically and phenomenologically. Although this work has only covered a limited range of the possible avenues into the nature of extra time dimensional space-times, it is already clear that considerable barriers are encountered not just in conceptual interpretation but also in the way we calculate observable quantities.</p>
+<p>In <a href="#sec-intro" class="quarto-xref">Section&nbsp;1</a> several major problems associated with extra times were isolated and throughout this project several more were found. In particular the phenomena of causality and unitarity violation were isolated as two significant problems associated with two time theories. It seems that it is not possible to include extra times without also relinquishing unitarity and causality in quantum mechanics. This does however provide a good measure of discovering extra dimensions of time.</p>
+<p>The conceptual basis of an extra dimension of time was explored and the relationship time has with physics discussed. In particular the fact that space-time has only one dimension of time and its relative nature to space was investigated and a list of apparent ideas proposed as to the cause of the dimensionality of space-time. Also discussed was what evolution means in extratemporal theories. Since time and the evolution of physical systems are so finely connected, adding an extra time changes the meaning of time as an evolution parameter.</p>
+<p><a href="#sec-warped" class="quarto-xref">Section&nbsp;3</a> investigated extra dimensions by modifying the metric. The possibility of using this method to introduce extra times was found to be promising but can produce complicated mathematical forms if the metric is not carefully chosen. The primary example of this approach consisted of introducing a scale factor to produce an alternative method of compacting a dimension. This approach in the future may prove fruitful in adding extra dimensions.</p>
+<p><a href="#sec-groups" class="quarto-xref">Section&nbsp;4</a> explored the group and symmetry properties of physics in extratemporal space-times. The Lorentz group and its Lie algebra were studied for both two and three times. The Lie algebra was found to contain new connections between the generators, this encodes the new behaviour of the extra times. For example, it is made clear that different time boosts lead to a rotation in the time plane. There is likely more behaviour that is unstudied in this extended Lorentz group, in particular the representations of the group and how they are connected to different kinds of particle behaviour warrants further study. Furthermore, it is argued that the extra symmetries that exist in extra times correspond to extra conserved quantities via Noether’s theorem. The form that these quantities is found to be unlike current energy or angular momentum and the problems these quantities face to be realistic is discussed. These quantities could be measurable and act as an experimental signal for extra dimensions.</p>
+<p>The focus of <a href="#sec-potentialenergy" class="quarto-xref">Section&nbsp;5</a> was on massive scalar fields in the path integral formulation of QFT. It was found that the best way to explore the effect of extra times was to consider the potentials that arise from particle propagation. These potentials derivable from the theory contain information about the dimensionality of the space they inhabit and also have real measurable consequences. As such the potentials have yielded notable insights into the world of extra time dimensions. The most interesting points have been the form of the potentials, their complexity and how the mass and the sum over Kaluza-Klein modes give the final potential.</p>
+<p>The tests of extra-time models of this kind focused on unitarity violation and particle decay, and the form of the gravitational force law. In the analysis it was found there are severe phenomenological constraints on the size of the extra dimension coming from experiments on the gravitational force law and on the lifetime of proton decay. The extra quantities that have been described may exist but as yet there is no evidence for extra dimensions, space or time <span class="citation" data-cites="aad2012search chatrchyan2012search">(<a href="#ref-aad2012search" role="doc-biblioref">Aad et al. 2012</a>; <a href="#ref-chatrchyan2012search" role="doc-biblioref">Chatrchyan et al. 2012</a>)</span>.</p>
+<p>In conclusion, theories that involve extra dimensions of time are challenging to construct and are limited by phenomenological constraints. However, they provide a valuable testbed for investigating the nature of the Lorentz group and for exploring other major problems in physics such as the Problem of Time <span class="citation" data-cites="anderson2012problem">(<a href="#ref-anderson2012problem" role="doc-biblioref">Anderson 2012</a>)</span> and the The Arrow of Time <span class="citation" data-cites="Layzer">(<a href="#ref-Layzer" role="doc-biblioref">Layzer 1975</a>)</span>. As such they may not be useful for extending the Standard Model but are nonetheless useful in the study of the foundations of physics.</p>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-aad2012search" class="csl-entry" role="listitem">
+Aad, Georges, Brad Abbott, Jalal Abdallah, Ahmed Ali Abdelalim, Abdelouahab Abdesselam, Ovsat Abdinov, Babak Abi, et al. 2012. <span>“Search for Extra Dimensions Using Diphoton Events in 7 TeV Proton–Proton Collisions with the ATLAS Detector.”</span> <em>Physics Letters B</em> 710 (4): 538–56.
+</div>
+<div id="ref-abe2014search" class="csl-entry" role="listitem">
+Abe, K, Y Hayato, K Iyogi, J Kameda, M Miura, S Moriyama, M Nakahata, et al. 2014. <span>“Search for Proton Decay via p→ <span class="math inline">\(\nu\)</span> k+ Using 260 Kiloton<span></span> Year Data of Super-Kamiokande.”</span> <em>Physical Review D</em> 90 (7): 072005.
+</div>
+<div id="ref-anderson2012problem" class="csl-entry" role="listitem">
+Anderson, Edward. 2012. <span>“Problem of Time in Quantum Gravity.”</span> <em>Annalen Der Physik</em> 524 (12): 757–86.
+</div>
+<div id="ref-aref1986extra" class="csl-entry" role="listitem">
+Aref’eva, I Ya, BG Dragović, and IV Volovich. 1986. <span>“Extra Time-Like Dimensions Lead to a Vanishing Cosmological Constant.”</span> <em>Physics Letters B</em> 177 (3): 357–60.
+</div>
+<div id="ref-arkani1999phenomenology" class="csl-entry" role="listitem">
+Arkani-Hamed, Nima, Savas Dimopoulos, and Gia Dvali. 1999. <span>“Phenomenology, Astrophysics, and Cosmology of Theories with Submillimeter Dimensions and TeV Scale Quantum Gravity.”</span> <em>Physical Review D</em> 59 (8): 086004.
+</div>
+<div id="ref-bandelloni1978non" class="csl-entry" role="listitem">
+Bandelloni, G, C Becchi, A Blasi, and R Collina. 1978. <span>“Non Semisimple Gauge Models: I. Classical Theory and the Properties of Ghost States.”</span> In <em>Annales de l’institut Henri Poincar<span>é</span>. Section a, Physique Th<span>é</span>orique</em>, 28:225–54. 3.
+</div>
+<div id="ref-bars2006standard" class="csl-entry" role="listitem">
+Bars, Itzhak. 2006. <span>“Standard Model of Particles and Forces in the Framework of Two-Time Physics.”</span> <em>Physical Review D</em> 74 (8): 085019.
+</div>
+<div id="ref-bars2010extra" class="csl-entry" role="listitem">
+Bars, Itzhak, John Terning, Farzad Nekoogar, and Lawrence Maxwell Krauss. 2010. <em>Extra Dimensions in Space and Time</em>. Springer.
+</div>
+<div id="ref-benioff2002towards" class="csl-entry" role="listitem">
+Benioff, Paul. 2002. <span>“Towards a Coherent Theory of Physics and Mathematics.”</span> <em>Foundations of Physics</em> 32: 989–1029.
+</div>
+<div id="ref-boos2012geometry" class="csl-entry" role="listitem">
+Boos, EE, VE Bunichev, IP Volobuev, and MN Smolyakov. 2012. <span>“Geometry, Physics, and Phenomenology of the Randall-Sundrum Model.”</span> <em>Physics of Particles and Nuclei</em> 43: 42–78.
+</div>
+<div id="ref-chatrchyan2012search" class="csl-entry" role="listitem">
+Chatrchyan, Serguei, V Khachatryan, AM Sirunyan, A Tumasyan, W Adam, T Bergauer, M Dragicevic, et al. 2012. <span>“Search for Dark Matter and Large Extra Dimensions in p p Collisions Yielding a Photon and Missing Transverse Energy.”</span> <em>Physical Review Letters</em> 108 (26): 261803.
+</div>
+<div id="ref-courant1966methods" class="csl-entry" role="listitem">
+Courant, Richard, and David Hilbert. 1966. <em>Methods of Mathematical Physics</em>. Vol. 1. CUP Archive.
+</div>
+<div id="ref-craig2009determinism" class="csl-entry" role="listitem">
+Craig, Walter, and Steven Weinstein. 2009. <span>“On Determinism and Well-Posedness in Multiple Time Dimensions.”</span> <em>Proceedings of the Royal Society A: Mathematical, Physical and Engineering Science</em> 465 (2110): 3023–46.
+</div>
+<div id="ref-dine2018some" class="csl-entry" role="listitem">
+Dine, Michael, Laurel Stephenson Haskins, Lorenzo Ubaldi, and Di Xu. 2018. <span>“Some Remarks on Anthropic Approaches to the Strong CP Problem.”</span> <em>Journal of High Energy Physics</em> 2018 (5): 1–17.
+</div>
+<div id="ref-dodelson2003modern" class="csl-entry" role="listitem">
+Dodelson, Scott. 2003. <em>Modern Cosmology</em>. Academic press.
+</div>
+<div id="ref-dorling1970dimensionality" class="csl-entry" role="listitem">
+Dorling, J. 1970. <span>“The Dimensionality of Time.”</span> <em>American Journal of Physics</em> 38 (4): 539–40.
+</div>
+<div id="ref-dvali1999constraints" class="csl-entry" role="listitem">
+Dvali, Gia, Gregory Gabadadze, and Goran Senjanovic. 1999. <span>“Constraints on Extra Time Dimensions.”</span> <em>arXiv Preprint Hep-Ph/9910207</em>.
+</div>
+<div id="ref-einstein1905electrodynamics" class="csl-entry" role="listitem">
+Einstein, Albert et al. 1905. <span>“On the Electrodynamics of Moving Bodies.”</span> <em>Annalen Der Physik</em> 17 (10): 891–921.
+</div>
+<div id="ref-erdem2006reconsidering" class="csl-entry" role="listitem">
+Erdem, Recai, and CS Ün. 2006. <span>“Reconsidering Extra Time-Like Dimensions.”</span> <em>The European Physical Journal C-Particles and Fields</em> 47 (3): 845–50.
+</div>
+<div id="ref-foster2010physics" class="csl-entry" role="listitem">
+Foster, Jacob G, and Berndt Müller. 2010. <span>“Physics with Two Time Dimensions.”</span> <em>arXiv Preprint arXiv:1001.2485</em>.
+</div>
+<div id="ref-Gingrichlimits" class="csl-entry" role="listitem">
+Gingrich, Douglas. 2015. <span>“Experimental Limits on the Fundamental Planck Scale in Large Extra Dimensions.”</span> <em>arXiv Preprint arXiv:1210.5923v3</em>.
+</div>
+<div id="ref-hawking1973large" class="csl-entry" role="listitem">
+Hawking, Stephen W. 1973. <em>The Large Scale Structure of Space-Time</em>. Vol. 1. Cambridge university press.
+</div>
+<div id="ref-kaluza1926sitzungsber" class="csl-entry" role="listitem">
+Kaluza, Th. 1926. <span>“Sitzungsber. Preuss. Akad. Wiss. Berlin (Math. Phys.) K1, 966 (1921); o. Klein.”</span> <em>Z. Phys</em> 37 (985): 985.
+</div>
+<div id="ref-kibble2004classical" class="csl-entry" role="listitem">
+Kibble, Thomas Walter Bannerman, Frank H Berkshire, and TWB Kibble. 2004. <em>Classical Mechanics</em>. Vol. 5. Imperial College Press London:
+</div>
+<div id="ref-koren2020hierarchy" class="csl-entry" role="listitem">
+Koren, Seth. 2020. <span>“The Hierarchy Problem: From the Fundamentals to the Frontiers.”</span> <em>arXiv Preprint arXiv:2009.11870</em>.
+</div>
+<div id="ref-landsberg2015searches" class="csl-entry" role="listitem">
+Landsberg, Greg. 2015. <span>“Searches for Extra Spatial Dimensions with the CMS Detector at the LHC.”</span> <em>Modern Physics Letters A</em> 30 (15): 1540017.
+</div>
+<div id="ref-Layzer" class="csl-entry" role="listitem">
+Layzer, D. 1975. <span>“The Arrow of Time.”</span> <em>Scientific American</em> 233(6): 56–59.
+</div>
+<div id="ref-melia2022friedmann" class="csl-entry" role="listitem">
+Melia, Fulvio. 2022. <span>“The Friedmann–Lema<span>ı̂</span>tre–Robertson–Walker Metric.”</span> <em>Modern Physics Letters A</em> 37 (03): 2250016.
+</div>
+<div id="ref-oliveira2014gravity" class="csl-entry" role="listitem">
+Oliveira, Alexandra. 2014. <span>“Gravity Particles from Warped Extra Dimensions, a Review. Part i-KK Graviton.”</span> <em>arXiv Preprint arXiv:1404.0102</em>, 4.
+</div>
+<div id="ref-perez2005introduction" class="csl-entry" role="listitem">
+Perez-Lorenzana, Abdel. 2005. <span>“An Introduction to Extra Dimensions.”</span> In <em>Journal of Physics: Conference Series</em>, 18:224. IOP Publishing.
+</div>
+<div id="ref-peskin2018introduction" class="csl-entry" role="listitem">
+Peskin, Michael E. 2018. <em>An Introduction to Quantum Field Theory</em>. CRC press.
+</div>
+<div id="ref-pettini2025quantum" class="csl-entry" role="listitem">
+Pettini, Marco. 2025. <span>“Quantum Entanglement Without Nonlocal Causation in (3, 2)-Dimensional Spacetime.”</span> <em>Physical Review Research</em> 7 (1): 013261.
+</div>
+<div id="ref-polchinski2005string" class="csl-entry" role="listitem">
+Polchinski, Joseph. 2005. <em>String Theory</em>.
+</div>
+<div id="ref-quiros2007time" class="csl-entry" role="listitem">
+Quiros, Israel. 2007. <span>“Time-Like Vs Space-Like Extra Dimensions.”</span> <em>arXiv Preprint arXiv:0707.0714</em>.
+</div>
+<div id="ref-recami2009superluminal" class="csl-entry" role="listitem">
+Recami, Erasmo. 2009. <span>“Superluminal Waves and Objects: An Overview of the Relevant Experiments.”</span> In <em>Journal of Physics: Conference Series</em>, 196:012020. IOP Publishing.
+</div>
+<div id="ref-rizzo2010introduction" class="csl-entry" role="listitem">
+Rizzo, Thomas G. 2010. <span>“Introduction to Extra Dimensions.”</span> <em>arXiv Preprint arXiv:1003.1698</em>.
+</div>
+<div id="ref-robinson2011symmetry" class="csl-entry" role="listitem">
+Robinson, Matthew. 2011. <em>Symmetry and the Standard Model</em>. Springer.
+</div>
+<div id="ref-sakurai2011modern" class="csl-entry" role="listitem">
+Sakurai, Jun John, and Jim Napolitano. 2011. <em>Modern Quantum Mechanics</em>. Addison-Wesley.
+</div>
+<div id="ref-skalsey2000viable" class="csl-entry" role="listitem">
+Skalsey, M., R. S. Conti, J. J. Engbrecht, D. W. Gidley, R. S. Vallery, and P. W. Zitzewitz. 2000. <span>“A Viable Superluminal Hypothesis: Tachyon Emission from Orthopositronium.”</span> <em>AIP Conference Proceedings</em> 504 (1): 1119–27. <a href="https://doi.org/10.1063/1.1290916">https://doi.org/10.1063/1.1290916</a>.
+</div>
+<div id="ref-srivastava2025review" class="csl-entry" role="listitem">
+Srivastava, Vivek Kumar, Alok Kumar Verma, Garima Vaish, and Sudhaker Upadhyay. 2025. <span>“A Review on Extended Special and General Theory of Relativity for Superluminal Particles and Their Cosmological Applications.”</span> <em>Zeitschrift f<span>ü</span>r Naturforschung A</em> 80 (2): 113–41.
+</div>
+<div id="ref-tegmark1997dimensionality" class="csl-entry" role="listitem">
+Tegmark, Max. 1997. <span>“On the Dimensionality of Spacetime.”</span> <em>Classical and Quantum Gravity</em> 14 (4): L69.
+</div>
+<div id="ref-tinkham2003group" class="csl-entry" role="listitem">
+Tinkham, Michael. 2003. <em>Group Theory and Quantum Mechanics</em>. Courier Corporation.
+</div>
+<div id="ref-tung1985group" class="csl-entry" role="listitem">
+Tung, Wu-Ki, and Michael Aivazis. 1985. <em>Group Theory in Physics</em>. Vol. 1. World Scientific Singapore.
+</div>
+<div id="ref-weinberg1989cosmological" class="csl-entry" role="listitem">
+Weinberg, Steven. 1989. <span>“The Cosmological Constant Problem.”</span> <em>Reviews of Modern Physics</em> 61 (1): 1.
+</div>
+<div id="ref-weinstein2008multiple" class="csl-entry" role="listitem">
+Weinstein, Steven. 2008. <span>“Multiple Time Dimensions.”</span> <em>arXiv Preprint arXiv:0812.3869</em>.
+</div>
+<div id="ref-woodhouse2003special" class="csl-entry" role="listitem">
+Woodhouse, Nicholas Michael John. 2003. <em>Special Relativity</em>. Springer Science &amp; Business Media.
+</div>
+<div id="ref-woodhouse2007general" class="csl-entry" role="listitem">
+———. 2007. <em>General Relativity</em>. Springer Science &amp; Business Media.
+</div>
+<div id="ref-yndurain1991disappearance" class="csl-entry" role="listitem">
+Yndurain, FJ. 1991. <span>“Disappearance of Matter Due to Causality and Probability Violations in Theories with Extra Timelike Dimensions.”</span> <em>Physics Letters B</em> 256 (1): 15–16.
+</div>
+<div id="ref-yndurain2007theory" class="csl-entry" role="listitem">
+Ynduráin, Francisco J. 2007. <em>The Theory of Quark and Gluon Interactions</em>. Springer Science &amp; Business Media.
+</div>
+<div id="ref-yukawa1935interaction" class="csl-entry" role="listitem">
+Yukawa, Hideki. 1935. <span>“On the Interaction of Elementary Particles. i.”</span> <em>Proceedings of the Physico-Mathematical Society of Japan. 3rd Series</em> 17: 48–57.
+</div>
+<div id="ref-yukawa1950quantum" class="csl-entry" role="listitem">
+———. 1950. <span>“Quantum Theory of Non-Local Fields. Part i. Free Fields.”</span> <em>Physical Review</em> 77 (2): 219.
+</div>
+<div id="ref-zee2010quantum" class="csl-entry" role="listitem">
+Zee, Anthony. 2010. <em>Quantum Field Theory in a Nutshell</em>. Princeton university press.
+</div>
+<div id="ref-zwiebach2004first" class="csl-entry" role="listitem">
+Zwiebach, Barton. 2004. <em>A First Course in String Theory</em>. Cambridge university press.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
