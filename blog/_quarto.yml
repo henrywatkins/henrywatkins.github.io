@@ -3,14 +3,14 @@ project:
   output-dir: ../docs
 
 website:
-  title: "Henry Watkins"
+  title: "Modulo"
   google-analytics: "G-4KRLE15B5S"
   navbar:
     right:
       - text: "Home"
         href: index.qmd   # Links to the homepage
-      - text: "Blog"
-        href: blog.qmd    # Links to the blog page
+      - text: "About"
+        href: about.qmd    # Links to the about page
       - text: "Plasma Book"
         href: ../book/index.html #chapters/index.qmd
       - text: "Extratemporal Dimensions"

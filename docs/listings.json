@@ -12,5 +12,24 @@
       "/posts/twoscientists/index.html",
       "/posts/reviews/index.html"
     ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/stochastic/index.html",
+      "/posts/stats/index.html",
+      "/posts/graph/index.html",
+      "/posts/gluonemissions/index.html",
+      "/posts/intro2qft/index.html",
+      "/posts/renormalization/index.html",
+      "/posts/termgraph/index.html",
+      "/posts/ionize/index.html",
+      "/posts/fluxlimiters/index.html",
+      "/posts/pathint2/index.html",
+      "/posts/statfield/index.html",
+      "/posts/projects/index.html",
+      "/posts/twoscientists/index.html",
+      "/posts/reviews/index.html"
+    ]
   }
 ]

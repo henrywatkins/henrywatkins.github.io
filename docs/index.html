@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – Henry Watkins</title>
+<title>Posts – Modulo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,15 +30,19 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dae3192f81785cf0e6fe7ca13257d296.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0b4226dda13982b4c7661a3d40776f41.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -66,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4KRLE15B5S"></script>
 
 <script type="text/javascript">
@@ -76,18 +109,49 @@ gtag('js', new Date());
 gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Henry Watkins</span>
+    <span class="navbar-title">Modulo</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -101,8 +165,8 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
-<span class="menu-text">Blog</span></a>
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./../book/index.html"> 
@@ -155,55 +219,479 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Posts</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(14)</span></div><div class="category" data-category="Z3JhcGhz">graphs <span class="quarto-category-count">(2)</span></div><div class="category" data-category="aHBj">hpc <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWV0YXNjaWVuY2U=">metascience <span class="quarto-category-count">(3)</span></div><div class="category" data-category="bmV1cm9sb2d5">neurology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bmxw">nlp <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGh5c2ljcw==">physics <span class="quarto-category-count">(8)</span></div><div class="category" data-category="c3RhdGlzdGljcw==">statistics <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<div class="quarto-about-solana column-body">
-  <div class="about-entity">
-    <div class="entity-contents">
-      <header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">About</h1>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header> <div class="about-links">
-  <a href="https://www.linkedin.com/in/henry-watkins/" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-  <a href="https://github.com/henrywatkins" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-  <a href="mailto:h.watkins@hotmail.com" class="about-link" rel="" target="">
-    <i class="bi bi-envelope"></i>
-     <span class="about-link-text">Email</span>
-  </a>
-  <a href="https://scholar.google.com/citations?user=cGVZMOcAAAAJ" class="about-link" rel="" target="">
-    <i class="bi bi-{{< ai google-scholar >}} Google Scholar"></i>
-     <span class="about-link-text">Google Scholar</span>
-  </a>
-  <a href="https://orcid.org/0000-0001-6330-6195" class="about-link" rel="" target="">
-    <i class="bi bi-{{< ai orcid >}} ORCID 0000-0001-6330-6195"></i>
-     <span class="about-link-text">ORCID</span>
-  </a>
-</div>
-      <div class="about-contents"><main class="content" id="quarto-document-content">
-<p>I am a Senior Researcher in the Computing Research Group at Fujitsu Research Europe. I work as an AI/ML researcher and computational scientist investigating the applications of high-performance computing and deep learning to address complex challenges. I studied Theoretical Physics at UCL before I completed my PhD in Computational Plasma Physics at Imperial College London. I have been a reviewer for a range journals, such as Imaging Neuroscience and Physics of Plasmas. I am a member of the Institute of Physics, and I have presented my work across both physics and neuroscience at conferences such as EPS Plasma Physics the Brain conference.</p>
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
-</main></div>
-    </div>
-    <img src="IMG_4426.jpg" class="about-image
-  rounded " style="width: 15em;">
-  </div>
+
+
+
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="cGh5c2ljcw==" data-listing-date-sort="1754866800000" data-listing-file-modified-sort="1758466854548" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2067">
+<div class="thumbnail"><a href="./posts/stochastic/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/stochastic/brownianmotion.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/stochastic/index.html" class="no-external">Notes on Stochastic Processes</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
+
 </div>
- <!-- /main -->
+<div class="delink listing-description"><a href="./posts/stochastic/index.html" class="no-external">
+<p>Brownian motion, stochastic processes and the Fokker-Planck Equation</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/stochastic/index.html" class="no-external">
+<div class="listing-date">
+Aug 11, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="c3RhdGlzdGljcw==" data-listing-date-sort="1753743600000" data-listing-file-modified-sort="1758466854548" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2869">
+<div class="thumbnail"><a href="./posts/stats/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/stats/gaussians-002.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/stats/index.html" class="no-external">Statistics Reference</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlzdGljcw=='); return false;">statistics</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/stats/index.html" class="no-external">
+<p>A reference for basic concepts in statistics, probability, and hypothesis testing.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/stats/index.html" class="no-external">
+<div class="listing-date">
+Jul 29, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="Z3JhcGhz" data-listing-date-sort="1752102000000" data-listing-file-modified-sort="1758466854509" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1435">
+<div class="thumbnail"><a href="./posts/graph/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/graph/networkdesign.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/graph/index.html" class="no-external">Graphs: A Primer</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Z3JhcGhz'); return false;">graphs</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/graph/index.html" class="no-external">
+<p>The mathematics of graphs and basic models</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/graph/index.html" class="no-external">
+<div class="listing-date">
+Jul 10, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="cGh5c2ljcw==" data-listing-date-sort="1750633200000" data-listing-file-modified-sort="1758466854508" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3502">
+<div class="thumbnail"><a href="./posts/gluonemissions/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/gluonemissions/decay.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/gluonemissions/index.html" class="no-external">Gluons in colliders</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/gluonemissions/index.html" class="no-external">
+<p>Gluon emission amplitudes in the soft collinear limit</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/gluonemissions/index.html" class="no-external">
+<div class="listing-date">
+Jun 23, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="cGh5c2ljcw==" data-listing-date-sort="1749942000000" data-listing-file-modified-sort="1758466854520" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1647">
+<div class="thumbnail"><a href="./posts/intro2qft/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/intro2qft/paths.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/intro2qft/index.html" class="no-external">Path Integrals in Quantum Field Theory</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/intro2qft/index.html" class="no-external">
+<p>An brief introduction</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/intro2qft/index.html" class="no-external">
+<div class="listing-date">
+Jun 15, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="cGh5c2ljcw==" data-listing-date-sort="1749942000000" data-listing-file-modified-sort="1758484101413" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2471">
+<div class="thumbnail"><a href="./posts/renormalization/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/renormalization/paths.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/renormalization/index.html" class="no-external">Renormalization</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/renormalization/index.html" class="no-external">
+<p>An brief introduction</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/renormalization/index.html" class="no-external">
+<div class="listing-date">
+Jun 15, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="bmxwJTJDbmV1cm9sb2d5JTJDZ3JhcGhz" data-listing-date-sort="1749510000000" data-listing-file-modified-sort="1758466854657" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1303">
+<div class="thumbnail"><a href="./posts/termgraph/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/termgraph/Tumour_Group.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/termgraph/index.html" class="no-external">Graphs of Neurological Terminology</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bmxw'); return false;">nlp</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('bmV1cm9sb2d5'); return false;">neurology</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Z3JhcGhz'); return false;">graphs</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/termgraph/index.html" class="no-external">
+<p>Uncovering semantic structures in neurological language using graph-based techniques</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/termgraph/index.html" class="no-external">
+<div class="listing-date">
+Jun 10, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-categories="cGh5c2ljcw==" data-listing-date-sort="1737158400000" data-listing-file-modified-sort="1758466854533" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="711">
+<div class="thumbnail"><a href="./posts/ionize/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/ionize/folder.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/ionize/index.html" class="no-external">The Statistics of Ionization</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/ionize/index.html" class="no-external">
+<p>Ionization in plasmas</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/ionize/index.html" class="no-external">
+<div class="listing-date">
+Jan 18, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-categories="cGh5c2ljcyUyQ2hwYw==" data-listing-date-sort="1737158400000" data-listing-file-modified-sort="1758466854507" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="527">
+<div class="thumbnail"><a href="./posts/fluxlimiters/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/fluxlimiters/folder.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/fluxlimiters/index.html" class="no-external">Flux limiters</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('aHBj'); return false;">hpc</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/fluxlimiters/index.html" class="no-external">
+<p>Ionization in plasmas</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/fluxlimiters/index.html" class="no-external">
+<div class="listing-date">
+Jan 18, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="9" data-categories="cGh5c2ljcw==" data-listing-date-sort="1737158400000" data-listing-file-modified-sort="1758466854534" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="657">
+<div class="thumbnail"><a href="./posts/pathint2/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/pathint2/folder.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/pathint2/index.html" class="no-external">Path integrals</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/pathint2/index.html" class="no-external">
+
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/pathint2/index.html" class="no-external">
+<div class="listing-date">
+Jan 18, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="10" data-categories="cGh5c2ljcw==" data-listing-date-sort="1737158400000" data-listing-file-modified-sort="1758466854547" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1343">
+<div class="thumbnail"><a href="./posts/statfield/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/statfield/folder.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/statfield/index.html" class="no-external">Notes on Statistical Field Theory</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/statfield/index.html" class="no-external">
+<p>Brownian motion, stochastic processes and the Fokker-Planck Equation</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/statfield/index.html" class="no-external">
+<div class="listing-date">
+Jan 18, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="11" data-categories="bWV0YXNjaWVuY2U=" data-listing-date-sort="1737158400000" data-listing-file-modified-sort="1758466854535" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1264">
+<div class="thumbnail"><a href="./posts/projects/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/projects/folder.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/projects/index.html" class="no-external">A Scientific Project Template</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWV0YXNjaWVuY2U='); return false;">metascience</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/projects/index.html" class="no-external">
+<p>Keeping your scientific projects organized</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/projects/index.html" class="no-external">
+<div class="listing-date">
+Jan 18, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="12" data-categories="bWV0YXNjaWVuY2U=" data-listing-date-sort="1736726400000" data-listing-file-modified-sort="1758466854661" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="803">
+<div class="thumbnail"><a href="./posts/twoscientists/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/twoscientists/twoscientists.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/twoscientists/index.html" class="no-external">The two scientists: hammers and nails</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWV0YXNjaWVuY2U='); return false;">metascience</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/twoscientists/index.html" class="no-external">
+<p>Approaches to research</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/twoscientists/index.html" class="no-external">
+<div class="listing-date">
+Jan 13, 2025
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="13" data-categories="bWV0YXNjaWVuY2U=" data-listing-date-sort="1733270400000" data-listing-file-modified-sort="1758466854544" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1292">
+<div class="thumbnail"><a href="./posts/reviews/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/reviews/articles.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/reviews/index.html" class="no-external">What is a literature review for?</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWV0YXNjaWVuY2U='); return false;">metascience</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/reviews/index.html" class="no-external">
+<p>Crafting a literature review for your research project</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/reviews/index.html" class="no-external">
+<div class="listing-date">
+Dec 4, 2024
+</div>
+<div class="listing-author">
+Henry Watkins
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     
@@ -246,13 +734,14 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

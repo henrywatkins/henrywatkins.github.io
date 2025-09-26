@@ -1,24 +1,15 @@
 ---
-title: "About"
-image: IMG_4426.jpg
-about:
-  template: solana
-  links:
-    - icon: linkedin
-      text: LinkedIn
-      href: https://www.linkedin.com/in/henry-watkins/
-    - icon: github
-      text: Github
-      href: https://github.com/henrywatkins
-    - icon: envelope
-      text: Email
-      href: mailto:h.watkins@hotmail.com
-    - icon: "{{< ai google-scholar >}} Google Scholar"
-      text: Google Scholar
-      href: https://scholar.google.com/citations?user=cGVZMOcAAAAJ
-    - icon: "{{< ai orcid >}} ORCID 0000-0001-6330-6195"
-      text: ORCID
-      href: https://orcid.org/0000-0001-6330-6195
+title: "Posts"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: true
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
 ---
 
-I am a Senior Researcher in the Computing Research Group at Fujitsu Research Europe. I work as an AI/ML researcher and computational scientist investigating the applications of high-performance computing and deep learning to address complex challenges. I studied Theoretical Physics at UCL before I completed my PhD in Computational Plasma Physics at Imperial College London. I have been a reviewer for a range journals, such as Imaging Neuroscience and Physics of Plasmas. I am a member of the Institute of Physics, and I have presented my work across both physics and neuroscience at conferences such as EPS Plasma Physics the Brain conference.
