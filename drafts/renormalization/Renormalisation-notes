@@ -1,0 +1,299 @@
+\[
+\frac{e^4}{4s^2} \, \text{Tr} \Big( \not{p}_a \delta_\nu (\not{p}_a + \not{p}_b) \gamma_\mu \not{p}_c \gamma^\nu (\not{p}_a + \not{p}_b)\delta^\mu \Big)
+\]
+
+\[
+= -2 e^4 \frac{u}{s}
+\]
+
+---
+
+## Renormalisation
+
+### Ultra violet singularities
+
+So far calculated at "one level" e.g.  
+\[
+e^+ e^- \to \mu^+ \mu^- 
+\]
+\[
+\mathcal{O}(e^2) \quad \mathcal{O}(\alpha)
+\]
+
+\[
+\mathcal{M} = \alpha M_0, \qquad \sigma = |\mathcal{M}|^2 = \alpha^2 |M_0|^2
+\]
+
+At next to leading order get:
+
+(diagram with loop correction to $e^+ e^- \to \mu^+ \mu^-$)
+
+---
+
+Another example:
+
+(diagrams with loop correction and box diagrams for $e^+ e^- \to \mu^+ \mu^-$)
+
+\[
+\mathcal{M} = \alpha M_0 + \alpha^2 M_1 + \alpha^3 M_2 + \dots
+\]
+
+one loop
+
+\[
+\sigma = |\mathcal{M}|^2 = \alpha^2 |M_0|^2 + \alpha^3 (M_1^* M_0 + M_0^* M_1) + \mathcal{O}(\alpha^4)
+\]
+
+Looks complicated but in some cases straightforward $\rightarrow$ know Feynman diagram $\rightarrow$ loop.  
+However something new happens.
+
+---
+
+**eg 1**
+
+(diagram with vertex factor, momentum $k$)
+
+vertex factor:
+\[
+\nu \sim e^3 \int \frac{d^4k}{(2\pi)^4} \frac{1}{k^2} \frac{1}{(k-p_a)^2 m} \frac{\not{p}_b - \not{k}}{(p_b - k)^2 m^2}
+\]
+
+In the limit $|k| \to \infty$, $m, p_a, p_b$ can be ignored.  
+
+So
+\[
+\nu \sim e^3 \int \frac{d^4k}{(2\pi)^4} \frac{1}{k^4} \sim e^3 \int \frac{k^3 dk}{k^4} \sim e^3 \int \frac{dk}{k} \to \infty
+\]
+
+---
+
+These are **UV divergences**.  
+Similar result from many other diagrams – next to leading order corrections are infinite.  
+The way to cure these infinities is by **renormalisation**.
+\[
+= -e
+\]
+
+### Infrared divergences
+
+---
+
+## Renormalisation
+
+It's not a problem of mathematical divergence. Appear when $|k| \to \infty$.  
+Assuming physics is unchanged up to infinite energy and momentum.  
+Could there be new particles, string theory etc. QFT (sensitive in principle to all of this).  
+
+Also notice what our text called $e, m$ are not physical quantities.  
+$e$ represents coupling of fermion, antifermion and photon.  
+
+---
+
+Full physical process:
+
+\[
+\text{(diagram expansion of scattering with loops and corrections)} \quad + \quad \text{etc.}
+\]
+
+At leading order contribution alone is a parameter in the Lagrangian $\rightarrow$ but not a physical or measurable quantity.
+
+---
+
+Call $e_0$ "bare" tree charge — what would be if you could measure the parameter in the Lagrangian.  
+The same for masses.  
+
+\[
+\begin{aligned}
+\not{p} - m_0 \quad &\longrightarrow \quad \text{higher order corrections change value} \\
+m_0 &= \text{bare mass} \\
+m_R &= \text{renormalised mass} \\
+A^R &= \text{wavefunction renormalisation}
+\end{aligned}
+\]
+
+---
+
+Calculate any physical process $S$, answer in terms of bare parameters:  
+\[
+S(e_0, m_0, \psi_0, A_0)
+\]
+
+At leading order:  
+\[
+S(e_0, m_0, \psi_0, A_0) \equiv S_0(e_R, m_R, \psi_R, A_R)
+\]
+
+since at lowest order $e_R = e_0$, $m_0 = m_R$ etc.  
+
+---
+
+\[
+S(e_0, m_0, \psi_0, A_0) + e_0^2 S_1(e_0, m_0, \psi_0, A_0) \quad \text{at next order}
+\]
+
+$S$ is formally divergent. Also need corrections to bare parameters:
+
+\[
+\begin{aligned}
+e_R &= e_0 + e_0^3 E_1(e_0, m_0, \psi_0, A_0) \\
+m_R &= m_0 + e_0^2 m_1(e_0, m_0, \psi_0, A_0) \\
+e_0 &= e_R - e_R^3 E_1(e_R, m_R, \psi_R, A_R) + \dots \\
+m_0 &= m_R - e_R^2 m_1(\dots)
+\end{aligned}
+\]
+
+$\rightarrow$ re-insert in whole expression for $S$.
+
+---
+
+Divergences in $S$ by using bare quantities, because the bare corrections are also divergent.
+
+Explicit divergences in $S$.  
+In a renormalisable theory these cancel, finite answer.
+
+\[
+e_R = e_0 + e_0^3 E_1
+\]
+
+(diagram: bare + corrections)
+
+Turns out these bare parameters are divergent. However for a renormalisable theory — arrange it so that divergences in bare parameters exactly cancel divergences in all matrix elements. Not always possible, but is for QED, SM etc.
+
+---
+
+### Relationship between renormalised and bare parameters by renormalisation constants $Z$
+
+In QED:
+
+\[
+A_Q = Z_3^{\tfrac{1}{2}} A_R, \quad \psi_0 = Z_2^{\tfrac{1}{2}} \psi_R, \quad m_0 = Z_m m_R
+\]
+
+\[
+e_0 = Z_1 Z_2 Z_3^{\tfrac{1}{2}} e_R
+\]
+
+— looks like 4 renormalisation constants.  
+
+- However due to gauge invariance there are only 3: $Z_1 = Z_2$.  
+- Choice of renormalised parameters is not unique.  
+- In QED choose $m_R$ to be physical electron mass, $e_R$ scattering strength photon $\to e^+ e^-$.  
+- Called the "on-shell" scheme.  
+
+---
+
+Redefine renormalised parameters, e.g.
+
+\[
+S = S(e_i, m_i, \psi_{iR}, A_{iR}) \quad \equiv \quad S(C_i^2, \mu_i^2, \psi_{iR}, A_{iR})
+\]
+
+Expanding in different variables.  
+
+First order:
+
+\[
+S = S_0(e_R, m_R) + e_R^2 S_1(e_R, m_R) + \dots
+\]
+
+or
+
+\[
+S = S_0(e_1, m_1) + e_1^2 S_1(e_1, m_1) + \dots
+\]
+
+(different at $\mathcal{O}(e^4)$)
+
+---
+
+I have
+
+\[
+f(x,a,b) = \frac{1}{1+ax+bx^2}, \qquad x,a,b \ll 1
+\]
+
+Can either expand in $x$.
+
+Define $y = x + \tfrac{b}{a} x^2$.  
+\[
+f = \frac{1}{1+ay}
+\]
+
+To lowest order $x \approx y$, can use either to expand.
+
+---
+
+\[
+f(x,a,b) = 1 - ax - bx^2 + (ax+bx^2)^2 = 1 - ax + (a^2 - b)x^2 + \dots
+\]
+
+\[
+f(a,y) = 1 - ay + a^2 y^2 + \dots
+\]
+
+The difference at $\mathcal{O}(e^4)$ is called **renormalisation scheme dependence**.
+
+
+Markdown
+
+
+## Regularisation
+
+To preserve normalization while making calculations finite, since loop diagrams are high power or regularised. Renormalization relates to the parameters, so the divergent parts of the diagram are eliminated. Then the regularisation is removed.
+
+Simplest one-loop regularisation can eliminate cutoff in the integrals.
+
+$$V_{R} = \int \frac{d^{4}k}{(k^{2})^{\alpha}} \frac{k\cdot k}{k^{2}} = h\ln\frac{k^{2}}{\mu^{2}} + \beta\ln(m^{2}, P^{2}, \dots) + \mathcal{O}(\frac{1}{k^{2}})$$
+
+(from poles)
+
+Calculate some matrix element S. Starts at $\mathcal{O}(e^{2})$. $S = A\ e_{0}^{2} + B e_{0}^{4} + \dots$
+
+$$S = A e_{0}^{2} + e_{0}^{4}(B\ln(\frac{\Lambda^{2}}{\mu^{2}}) + F_{S}(e_{0}^{2})) + \dots$$
+
+$\mu$ is the normalisation scale, separates the divergent and finite parts of a loop diagram.
+e.g. $A \to A_{R}$
+
+Calculate $L_{\mu} = e_{0}^{2} - e_{0}^{4}(C\ln(\frac{\Lambda^{2}}{\mu^{2}}) + F_{L}(e_{0}^{2}))$
+$\implies e_{0}^{2} = e_{R}^{2} + e_{R}^{4}(C\ln(\frac{\Lambda^{2}}{\mu^{2}}) + F_{L}(e_{R}^{2})) \to$ insert into S
+
+$$S = Ae_{R}^{2} + e_{R}^{4}(B\ln(\frac{\Lambda^{2}}{\mu^{2}}) + F_{S}(e_{R}^{2})) + e_{R}^{4}(B\ln(\frac{\Lambda^{2}}{\mu^{2}}) + F_{S}(e_{R}^{2})) + \dots$$
+$$= A e_{R}^{2} + e_{R}^{4}[B\ln(\frac{\Lambda^{2}}{\mu^{2}}) + F_{S}(e_{R}^{2})]$$
+$$= Ae_{R}^{2} + e_{R}^{4}[B + 4BC]\ln\frac{\Lambda^{2}}{\mu^{2}} + F_{S}(e_{R}^{2}) + A F_{L}(e_{R}^{2})] + \mathcal{O}(e_{R}^{6})$$
+$$= 0$$
+
+$S = Ae_{R}^{2} + e_{R}^{4}[F_{S}(\mu^{2}) + 4A F_{L}(\mu^{2})] + \mathcal{O}(e_{R}^{6})$ in one scheme for particular $\mu_{R}$
+now let $\Lambda \to \infty$
+
+use the common methods of regularisation - most common way is by using extra dimensions -
+**Dimensional regularisation** - change number of dimensions $D = 4-2\epsilon$ $\epsilon$ is infinitesimal,
+consider
+$$\int\frac{d^{D}k}{(k^{2})^{\alpha}} = \int\frac{d^{4-2\epsilon}k}{(k^{2})^{\alpha}} = \int k^{3-2\epsilon}dk \text{ for } D=4$$
+
+## Continuation of Notes on Regularisation
+
+
+
+The notes continue the discussion on regularisation, specifically dimensional regularisation, and its advantages.
+
+
+
+### Dimensional Regularisation
+
+
+
+The integral ∫kdk∼lnk→∞ if D=4−2ϵ.
+
+The integral ∫k4k3−2ϵdk=∫k1+2ϵdk→[−2ϵk−2ϵ]0∞→2ϵ1+F+O(ϵ)
+
+
+
+### Advantages
+
+
+
+The notes list three key advantages of this method:
+
+- It **maintains gauge invariance**, which is a crucial symmetry in quantum field theories.
+- It's **very simple to renormalise**. It introduces a common factor of 2ϵ1+ln4π−γE in all calculations, making the process straightforward.
+- It also **works for infrared (IR) divergences** as well if we let 4+2ϵ→4−2ϵ. IR divergences occur at low momenta or energies.
