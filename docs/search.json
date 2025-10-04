@@ -371,18 +371,18 @@
     "text": "Python 2 Rust\nRust code with vaguely similar python equivalents\n\npydoc/sphinx -&gt; rustdoc\nvirtualenv/pip/setuptools -&gt; rustup/cargo\nspecial methods (double underscore) -&gt; traits e.g. __del__-&gt; Drop::drop __add__-&gt; Add::add, as well as other arithmetic operations __str__/__repr__-&gt; Display::fmt __getitem__-&gt;Index::index\n\nErrors:\ntry:\n  x=foo()\nexcept SomeError as e:\n  raise NewError(e)\nin rust\nlet x = foo()?\nLoop: for i in range(n): -&gt; for i in 0..n {} iterable loop: for i in iterable: -&gt; for i in iterable.iter() {}"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "I am an AI/ML researcher and computational scientist investigating the applications of high-performance computing and deep learning to address complex challenges. I studied Theoretical Physics at UCL before I completed my PhD in Computational Plasma Physics at Imperial College London. I have been a reviewer for a range journals, such as Imaging Neuroscience and Physics of Plasmas. I am a member of the Institute of Physics, and I have presented my work across both physics and neuroscience at conferences such as EPS Plasma Physics the Brain conference."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Posts",
     "section": "",
     "text": "Notes on Stochastic Processes\n\n\n\nphysics\n\n\n\nBrownian motion, stochastic processes and the Fokker-Planck Equation\n\n\n\n\n\nAug 11, 2025\n\n\nHenry Watkins\n\n\n\n\n\n\n\n\n\n\n\n\nStatistics Reference\n\n\n\nstatistics\n\n\n\nA reference for basic concepts in statistics, probability, and hypothesis testing.\n\n\n\n\n\nJul 29, 2025\n\n\nHenry Watkins\n\n\n\n\n\n\n\n\n\n\n\n\nGraphs: A Primer\n\n\n\ngraphs\n\n\n\nThe mathematics of graphs and basic models\n\n\n\n\n\nJul 10, 2025\n\n\nHenry Watkins\n\n\n\n\n\n\n\n\n\n\n\n\nGluons in colliders\n\n\n\nphysics\n\n\n\nGluon emission amplitudes in the soft collinear limit\n\n\n\n\n\nJun 23, 2025\n\n\nHenry Watkins\n\n\n\n\n\n\n\n\n\n\n\n\nPath Integrals in Quantum Field Theory\n\n\n\nphysics\n\n\n\nAn brief introduction\n\n\n\n\n\nJun 15, 2025\n\n\nHenry Watkins\n\n\n\n\n\n\n\n\n\n\n\n\nGraphs of Neurological Terminology\n\n\n\nnlp\n\nneurology\n\ngraphs\n\n\n\nUncovering semantic structures in neurological language using graph-based techniques\n\n\n\n\n\nJun 10, 2025\n\n\nHenry Watkins\n\n\n\n\n\n\n\n\n\n\n\n\nA Scientific Project Template\n\n\n\nmetascience\n\n\n\nKeeping your scientific projects organized\n\n\n\n\n\nJan 18, 2025\n\n\nHenry Watkins\n\n\n\n\n\n\n\n\n\n\n\n\nThe two scientists: hammers and nails\n\n\n\nmetascience\n\n\n\nApproaches to research\n\n\n\n\n\nJan 13, 2025\n\n\nHenry Watkins\n\n\n\n\n\n\n\n\n\n\n\n\nWhat is a literature review for?\n\n\n\nmetascience\n\n\n\nCrafting a literature review for your research project\n\n\n\n\n\nDec 4, 2024\n\n\nHenry Watkins\n\n\n\n\n\nNo matching items\nReuseCC BY 4.0CopyrightCopyright © 2025 Henry Watkins. All Rights Reserved."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I am an AI/ML researcher and computational scientist investigating the applications of high-performance computing and deep learning to address complex challenges. I studied Theoretical Physics at UCL before I completed my PhD in Computational Plasma Physics at Imperial College London. I have been a reviewer for a range journals, such as Imaging Neuroscience and Physics of Plasmas. I am a member of the Institute of Physics, and I have presented my work across both physics and neuroscience at conferences such as EPS Plasma Physics the Brain conference."
   },
   {
     "objectID": "code_notes/sql-notes.html",
