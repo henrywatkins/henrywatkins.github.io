@@ -453,3 +453,41 @@ $$
 * **Critical point**
 
 
+## Statistical mechanics
+
+In **Statistical Physics** the path integral is used in the definition of the **partition function**:
+
+$$
+\mathcal{Z} = \sum_n e^{-\beta E_n}
+$$
+
+
+
+$$
+Z = \sum_n \langle n | e^{-\beta H} | n \rangle = \int dx \sum_n \langle n | x \rangle \langle x | e^{-\beta H} | n \rangle
+$$
+
+$$
+= \int dx \langle x | e^{-\beta H} | x \rangle = \int \mathcal{D}x(\tau) \, e^{-S}
+$$
+
+
+This is much like quantum mechanics but with a
+Wick rotation $t \rightarrow -i\tau$ — like a sum over closed paths.
+
+
+
+In field theory we have vacuum to vacuum transitions:
+
+$$
+\langle 0, \infty | 0, -\infty \rangle = Z[J]
+$$
+
+$$
+Z[J] = \frac{1}{Z_0} \int [d\phi] \exp \left\{ \int d^4x \left[ \mathcal{L}(\phi) + J(x)\phi + \frac{i\epsilon}{2} \phi^2 \right] \right\}
+$$
+
+$$
+Z_0 = Z[J = 0]
+$$
+

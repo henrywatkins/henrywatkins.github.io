@@ -108,6 +108,8 @@ You can also use brackets with `$`  to define more complicated, calculated varia
 
 `nl` - given a sequence of lines, add line numbers
 
+`comm` - compare two files line by line (or stdin). It is useful for finding the intersection and difference between two files with the options `-12`, `-23` respectively. 
+
 `jq` - simple interface to json files, use to quickly explore and process json files. e.g. `cat test.json | jq '.["key"]'`
 
 `yq` - similar to jq, but for yaml, toml files
@@ -146,6 +148,22 @@ You can also use brackets with `$`  to define more complicated, calculated varia
 
 `fmt` - simple text formatter, squishes everything into lines of some specified length
 
+`basename` - returns the top-level name of a path with all the upper directories removed, e.g. `/home/user/dir/file` -> `file`
+
+## Background jobs
+
+One can use `&` to send the command or job to run in the background. Then view the background running jobs with `jobs -l`. To pull it to the foreground again use `fg <job id>`. e.g.
+
+```bash
+job-command-1 & 
+jobs -l
+fg <job id>
+```
+
+Also use `wait` to ensure all background processes to finish before continuing. This is particularly useful if there are outputs of one stage that are required by the next stage.
+
+Note `jobs/fg/&` is limited to one session, and processes started with `&` will be terminated if the shell session ends. To run jobs in the background independently of the shell session, use `screen`, which acts as a terminal multiplexer to run long processes irrespective of the shell session.
+
 ## awk
 
 Useful for command-line exploration and basic processing of datasets. Use is to quickly view tables of data and basic processing in combination with `grep` , `cat`  and `|` `>` operators.
@@ -167,7 +185,7 @@ Print out the second column of the first 10 rows of a comma-separated-value data
 awk is especially powerful when used in combination with `grep` `sort` `uniq` . For example we can find the unique values in a column using
 
 ```bash
-awk -F -F ',' '{print $2}' | sort | uniq
+awk -F ',' '{print $2}' | sort | uniq
 ```
 
 Awk is particularly well suited to simple operations that one could do using pandas, but without needing to write a script or open jupyter
