@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Henry Watkins">
+<meta name="dcterms.date" content="2025-11-28">
+<meta name="description" content="Spontaneous symmetry breaking and the origin of mass">
 
-<title>Posts – Modulo</title>
+<title>What is the Higg’s mechanism? – Modulo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,29 +23,47 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0b4226dda13982b4c7661a3d40776f41.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-0b4226dda13982b4c7661a3d40776f41.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,35 +91,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4KRLE15B5S"></script>
 
 <script type="text/javascript">
@@ -148,9 +140,9 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Modulo</span>
     </a>
   </div>
@@ -161,19 +153,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./../book/index.html"> 
+    <a class="nav-link" href="../../../book/index.html"> 
 <span class="menu-text">Plasma Book</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./../monograph/index.html"> 
+    <a class="nav-link" href="../../../monograph/index.html"> 
 <span class="menu-text">Extratemporal Dimensions</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -182,31 +174,31 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-code-notes">    
         <li>
-    <a class="dropdown-item" href="./code_notes/python-notes.html">
+    <a class="dropdown-item" href="../../code_notes/python-notes.html">
  <span class="dropdown-text">Python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./code_notes/bash-notes.html">
+    <a class="dropdown-item" href="../../code_notes/bash-notes.html">
  <span class="dropdown-text">Command Line</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./code_notes/git-notes.html">
+    <a class="dropdown-item" href="../../code_notes/git-notes.html">
  <span class="dropdown-text">Git</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./code_notes/sql-notes.html">
+    <a class="dropdown-item" href="../../code_notes/sql-notes.html">
  <span class="dropdown-text">SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./code_notes/cython-notes.html">
+    <a class="dropdown-item" href="../../code_notes/cython-notes.html">
  <span class="dropdown-text">Cython</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./code_notes/docker-notes.html">
+    <a class="dropdown-item" href="../../code_notes/docker-notes.html">
  <span class="dropdown-text">Docker</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./code_notes/rust-notes.html">
+    <a class="dropdown-item" href="../../code_notes/rust-notes.html">
  <span class="dropdown-text">Rust</span></a>
   </li>  
     </ul>
@@ -221,376 +213,141 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Posts</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">What is the Higg’s mechanism?</h1>
+                  <div>
+        <div class="description">
+          Spontaneous symmetry breaking and the origin of mass
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">physics</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Henry Watkins </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 28, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(11)</span></div><div class="category" data-category="Z3JhcGhz">graphs <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bWV0YXNjaWVuY2U=">metascience <span class="quarto-category-count">(3)</span></div><div class="category" data-category="bmV1cm9sb2d5">neurology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bmxw">nlp <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGh5c2ljcw==">physics <span class="quarto-category-count">(5)</span></div><div class="category" data-category="c3RhdGlzdGljcw==">statistics <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setting-the-stage-spontaneous-symmetry-breaking" id="toc-setting-the-stage-spontaneous-symmetry-breaking" class="nav-link active" data-scroll-target="#setting-the-stage-spontaneous-symmetry-breaking">Setting the Stage: Spontaneous Symmetry Breaking</a>
+  <ul class="collapse">
+  <li><a href="#the-goldstone-model" id="toc-the-goldstone-model" class="nav-link" data-scroll-target="#the-goldstone-model">The Goldstone Model</a></li>
+  <li><a href="#the-new-lagrangian-and-goldstone-bosons" id="toc-the-new-lagrangian-and-goldstone-bosons" class="nav-link" data-scroll-target="#the-new-lagrangian-and-goldstone-bosons">The New Lagrangian and Goldstone Bosons</a></li>
+  <li><a href="#the-higgs-mechanism" id="toc-the-higgs-mechanism" class="nav-link" data-scroll-target="#the-higgs-mechanism">The Higgs Mechanism</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<p>The discovery of the Higg’s boson at CERN in 2012 is undoubtedly one of the most important physical discoveries in my lifetime. The role the boson (and its associated field) plays in by providing mass to other particles is such a fundamental phenomenon that any study of quantum field theory is not complete without it. In this post are a few short notes detailing the Higg’s mechanism, and how the coupling of the Higg’s field with other fields provides their mass. For a thorough treatment of this subject and quantum field theory in general, take a look at <span class="citation" data-cites="mandl2013quantum">Mandl and Shaw (<a href="#ref-mandl2013quantum" role="doc-biblioref">2013</a>)</span>.</p>
+<section id="setting-the-stage-spontaneous-symmetry-breaking" class="level1">
+<h1>Setting the Stage: Spontaneous Symmetry Breaking</h1>
+<p>Spontaneous symmetry breaking occurs when the equations governing a system possess certain symmetries, but the ground state (vacuum) of the system does not respect those same symmetries. This is only relevant when the vacuum state is not unique. For spontaneous symmetry breaking to occur, the vacuum expectation value must be non-zero:</p>
+<p><span class="math display">\[
+\langle 0|\phi(x)|0 \rangle = c \neq 0
+\]</span></p>
+<p>For this to satisfy Lorentz symmetry, it must be a scalar quantity.</p>
+<section id="the-goldstone-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-goldstone-model">The Goldstone Model</h2>
+<p>A simple example of spontaneous symmetry breaking is provided by the Goldstone model. Consider a complex scalar field with the Lagrangian:</p>
+<p><span class="math display">\[
+\mathcal{L} = \partial^\mu \phi \partial_\mu \phi^* - \mu^2 |\phi|^2 - \lambda |\phi|^4,\quad \phi = \frac{1}{\sqrt{2}}(\phi_1 + i\phi_2)
+\]</span></p>
+<p>This Lagrangian has invariance under <span class="math inline">\(U(1)\)</span> global phase transformations <span class="math inline">\(\phi \rightarrow \phi e^{i\alpha}\)</span>, but can break spontaneously depending on the sign of <span class="math inline">\(\mu^2\)</span>. We can rewrite this in terms of the potential:</p>
+<p><span class="math display">\[
+\mathcal{L} = \frac{1}{2} \partial^\mu \phi \partial_\mu \phi + \nabla \phi \cdot \nabla \phi + V(\phi),\quad V(\phi) = \mu^2 |\phi|^2 + \lambda |\phi|^4
+\]</span></p>
+<p>For the theory to be bounded from below, we need <span class="math inline">\(\lambda &gt; 0\)</span>. The behavior depends on the sign of <span class="math inline">\(\mu^2\)</span>:</p>
+<ul>
+<li><strong>If <span class="math inline">\(\mu^2 &gt; 0\)</span></strong>: No symmetry breaking occurs, similar to the complex Klein-Gordon field</li>
+<li><strong>If <span class="math inline">\(\mu^2 &lt; 0\)</span></strong>: We get the famous “Mexican hat” potential, which has a minimum at</li>
+</ul>
+<p><span class="math display">\[
+\phi_0 = \left( \frac{-\mu^2}{2\lambda} \right)^{1/2} e^{i\theta}
+\]</span></p>
+<p>In this case, the vacuum state is not unique since we can choose any value of <span class="math inline">\(\theta\)</span>. By convention, we often choose <span class="math inline">\(\theta = 0\)</span>, giving us <span class="math inline">\(\phi_0 = \frac{1}{\sqrt{2}} v\)</span> where <span class="math inline">\(v = \sqrt{-\mu^2/\lambda}\)</span>. To study fluctuations around this vacuum, we introduce real-valued fields to measure deviations:</p>
+<p><span class="math display">\[
+\phi(x) = \frac{1}{\sqrt{2}} [v + \sigma(x) + i \eta(x)]
+\]</span></p>
+</section>
+<section id="the-new-lagrangian-and-goldstone-bosons" class="level2">
+<h2 class="anchored" data-anchor-id="the-new-lagrangian-and-goldstone-bosons">The New Lagrangian and Goldstone Bosons</h2>
+<p>Substituting this expansion into the original Lagrangian yields:</p>
+<p><span class="math display">\[
+\mathcal{L} = \frac{1}{2} \partial^\mu \sigma \partial_\mu \sigma - \frac{1}{2} (2\lambda v^2) \sigma^2 + \frac{1}{2} \partial^\mu \eta \partial_\mu \eta - \lambda v \sigma (\sigma^2 + \eta^2) - \frac{\lambda}{4} (\sigma^2 + \eta^2)^2
+\]</span></p>
+<p>When quantized, this describes two coupled real Klein-Gordon fields: one (<span class="math inline">\(\sigma\)</span>) with mass <span class="math inline">\(\sqrt{2\lambda v^2}\)</span>, and one (<span class="math inline">\(\eta\)</span>) that is massless. The vacuum expectation value <span class="math inline">\(\phi_0 = \langle 0|\phi|0 \rangle = \frac{v}{\sqrt{2}}\)</span> satisfies the condition for symmetry breaking.</p>
+<p>The field <span class="math inline">\(\eta\)</span> is called a <strong>Goldstone boson</strong>; it has zero mass as a direct consequence of the vacuum degeneracy. This is a general result: whenever a continuous symmetry is spontaneously broken, massless Goldstone bosons appear.</p>
+</section>
+<section id="the-higgs-mechanism" class="level2">
+<h2 class="anchored" data-anchor-id="the-higgs-mechanism">The Higgs Mechanism</h2>
+<p>The situation becomes more interesting when we couple this to gauge fields, leading to the famous Higgs mechanism. In QED coupled to the Higgs field, we define the covariant derivative:</p>
+<p><span class="math display">\[
+D_\mu \phi = \partial_\mu \phi + iq A_\mu \phi
+\]</span></p>
+<p>The coupled Lagrangian becomes:</p>
+<p><span class="math display">\[
+\mathcal{L} = (D^\mu \phi)^* D_\mu \phi - \mu^2 |\phi|^2 - \lambda |\phi|^4 - \frac{1}{4} F_{\mu\nu} F^{\mu\nu}
+\]</span></p>
+<p>This has <span class="math inline">\(U(1)\)</span> gauge symmetry:</p>
+<p><span class="math display">\[
+\phi \rightarrow \phi' = \phi e^{iq\alpha(x)}, \quad \phi^* \rightarrow \phi'^* = \phi^* e^{-iq\alpha(x)}
+\]</span> <span class="math display">\[
+A_\mu \rightarrow A'_\mu = A_\mu + \partial_\mu \alpha
+\]</span></p>
+<p>However, when we expand around the vacuum, there are too many degrees of freedom. The solution is to use the <strong>unitary gauge</strong> where we set:</p>
+<p><span class="math display">\[
+\phi = \frac{1}{\sqrt{2}} (v + \sigma)
+\]</span></p>
+<p>This gives us the Lagrangian:</p>
+<p><span class="math display">\[
+\mathcal{L} = \frac{1}{2} \partial_\mu \sigma \partial^\mu \sigma - \frac{1}{2}(2\lambda v^2)\sigma^2 - \frac{1}{4}F_{\mu\nu}F^{\mu\nu} + \frac{1}{2}(qv)^2 A_\mu A^\mu + \text{interaction terms}
+\]</span></p>
+<p>The remarkable result is that we now have: - A <strong>Klein-Gordon field</strong> <span class="math inline">\(\sigma\)</span> (the Higgs boson) with mass <span class="math inline">\(\sqrt{2\lambda v^2}\)</span> - A <strong>massive vector field</strong> <span class="math inline">\(A^\mu\)</span> with mass <span class="math inline">\(qv\)</span></p>
+<p>We’ve transformed a system with a <strong>complex scalar + massless vector</strong> into a <strong>real scalar + massive vector field</strong>. This is the <strong>Higgs mechanism</strong> that generates mass for gauge bosons without breaking gauge invariance.</p>
 
 
 
+</section>
+</section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="cGh5c2ljcw==" data-listing-date-sort="1764288000000" data-listing-file-modified-sort="1763732927225" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="674">
-<div class="thumbnail"><a href="./posts/higgs/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/higgs/potential.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/higgs/index.html" class="no-external">What is the Higg’s mechanism?</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/higgs/index.html" class="no-external">
-<p>Spontaneous symmetry breaking and the origin of mass</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/higgs/index.html" class="no-external">
-<div class="listing-date">
-Nov 28, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="cGh5c2ljcw==" data-listing-date-sort="1763683200000" data-listing-file-modified-sort="1763716517193" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1608">
-<div class="thumbnail"><a href="./posts/renormalization/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/renormalization/tracks.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/renormalization/index.html" class="no-external">Renormalization in Quantum Field Theory</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/renormalization/index.html" class="no-external">
-<p>Understanding how quantum field theories deal with infinities</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/renormalization/index.html" class="no-external">
-<div class="listing-date">
-Nov 21, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="cGh5c2ljcw==" data-listing-date-sort="1754866800000" data-listing-file-modified-sort="1758466854548" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2067">
-<div class="thumbnail"><a href="./posts/stochastic/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/stochastic/brownianmotion.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/stochastic/index.html" class="no-external">Notes on Stochastic Processes</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/stochastic/index.html" class="no-external">
-<p>Brownian motion, stochastic processes and the Fokker-Planck Equation</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/stochastic/index.html" class="no-external">
-<div class="listing-date">
-Aug 11, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="c3RhdGlzdGljcw==" data-listing-date-sort="1753743600000" data-listing-file-modified-sort="1758466854548" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2869">
-<div class="thumbnail"><a href="./posts/stats/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/stats/gaussians-002.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/stats/index.html" class="no-external">Statistics Reference</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlzdGljcw=='); return false;">statistics</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/stats/index.html" class="no-external">
-<p>A reference for basic concepts in statistics, probability, and hypothesis testing.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/stats/index.html" class="no-external">
-<div class="listing-date">
-Jul 29, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="Z3JhcGhz" data-listing-date-sort="1752102000000" data-listing-file-modified-sort="1758466854509" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1435">
-<div class="thumbnail"><a href="./posts/graph/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/graph/networkdesign.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/graph/index.html" class="no-external">Graphs: A Primer</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Z3JhcGhz'); return false;">graphs</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/graph/index.html" class="no-external">
-<p>The mathematics of graphs and basic models</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/graph/index.html" class="no-external">
-<div class="listing-date">
-Jul 10, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="cGh5c2ljcw==" data-listing-date-sort="1750633200000" data-listing-file-modified-sort="1758466854508" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3502">
-<div class="thumbnail"><a href="./posts/gluonemissions/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/gluonemissions/decay.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/gluonemissions/index.html" class="no-external">Gluons in colliders</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/gluonemissions/index.html" class="no-external">
-<p>Gluon emission amplitudes in the soft collinear limit</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/gluonemissions/index.html" class="no-external">
-<div class="listing-date">
-Jun 23, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="cGh5c2ljcw==" data-listing-date-sort="1749942000000" data-listing-file-modified-sort="1763654752733" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2295">
-<div class="thumbnail"><a href="./posts/intro2qft/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/intro2qft/paths.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/intro2qft/index.html" class="no-external">Path Integrals in Quantum Field Theory</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/intro2qft/index.html" class="no-external">
-<p>An brief introduction</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/intro2qft/index.html" class="no-external">
-<div class="listing-date">
-Jun 15, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="bmxwJTJDbmV1cm9sb2d5JTJDZ3JhcGhz" data-listing-date-sort="1749510000000" data-listing-file-modified-sort="1758466854657" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1303">
-<div class="thumbnail"><a href="./posts/termgraph/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/termgraph/Tumour_Group.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/termgraph/index.html" class="no-external">Graphs of Neurological Terminology</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bmxw'); return false;">nlp</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bmV1cm9sb2d5'); return false;">neurology</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Z3JhcGhz'); return false;">graphs</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/termgraph/index.html" class="no-external">
-<p>Uncovering semantic structures in neurological language using graph-based techniques</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/termgraph/index.html" class="no-external">
-<div class="listing-date">
-Jun 10, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="bWV0YXNjaWVuY2U=" data-listing-date-sort="1737158400000" data-listing-file-modified-sort="1758466854535" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1264">
-<div class="thumbnail"><a href="./posts/projects/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/projects/folder.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/projects/index.html" class="no-external">A Scientific Project Template</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWV0YXNjaWVuY2U='); return false;">metascience</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/projects/index.html" class="no-external">
-<p>Keeping your scientific projects organized</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/projects/index.html" class="no-external">
-<div class="listing-date">
-Jan 18, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="bWV0YXNjaWVuY2U=" data-listing-date-sort="1736726400000" data-listing-file-modified-sort="1758466854661" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="803">
-<div class="thumbnail"><a href="./posts/twoscientists/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/twoscientists/twoscientists.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/twoscientists/index.html" class="no-external">The two scientists: hammers and nails</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWV0YXNjaWVuY2U='); return false;">metascience</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/twoscientists/index.html" class="no-external">
-<p>Approaches to research</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/twoscientists/index.html" class="no-external">
-<div class="listing-date">
-Jan 13, 2025
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-categories="bWV0YXNjaWVuY2U=" data-listing-date-sort="1733270400000" data-listing-file-modified-sort="1758466854544" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1292">
-<div class="thumbnail"><a href="./posts/reviews/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/reviews/articles.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/reviews/index.html" class="no-external">What is a literature review for?</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWV0YXNjaWVuY2U='); return false;">metascience</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/reviews/index.html" class="no-external">
-<p>Crafting a literature review for your research project</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/reviews/index.html" class="no-external">
-<div class="listing-date">
-Dec 4, 2024
-</div>
-<div class="listing-author">
-Henry Watkins
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-mandl2013quantum" class="csl-entry" role="listitem">
+Mandl, Franz, and Graham Shaw. 2013. <em>Quantum Field Theory</em>. John Wiley &amp; Sons.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

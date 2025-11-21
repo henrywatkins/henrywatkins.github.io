@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/higgs/index.html",
       "/posts/renormalization/index.html",
       "/posts/stochastic/index.html",
       "/posts/stats/index.html",

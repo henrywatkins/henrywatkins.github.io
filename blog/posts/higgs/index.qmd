@@ -2,9 +2,9 @@
 title: "What is the Higg's mechanism?"
 description: "Spontaneous symmetry breaking and the origin of mass"
 author: "Henry Watkins"
-date: "11/20/2025"
-image: paths.jpg
-draft: true
+date: "11/28/2025"
+image: potential.jpg
+draft: false
 toc: true
 bibliography: references.bib
 license: "CC BY"
@@ -13,10 +13,11 @@ categories:
   - physics
 ---
 
+The discovery of the Higg's boson at CERN in 2012 is undoubtedly one of the most important physical discoveries in my lifetime. The role the boson (and its associated field) plays in by providing mass to other particles is such a fundamental phenomenon that any study of quantum field theory is not complete without it. In this post are a few short notes detailing the Higg's mechanism, and how the coupling of the Higg's field with other fields provides their mass. For a thorough treatment of this subject and quantum field theory in general, take a look at @mandl2013quantum. 
 
 # Setting the Stage: Spontaneous Symmetry Breaking
 
-Before diving into renormalization proper, it's worth understanding spontaneous symmetry breaking, which plays a crucial role in modern field theory and provides context for the types of problems renormalization solves. Spontaneous symmetry breaking occurs when the equations governing a system possess certain symmetries, but the ground state (vacuum) of the system does not respect those same symmetries. This is only relevant when the vacuum state is not unique. For spontaneous symmetry breaking to occur, the vacuum expectation value must be non-zero:
+Spontaneous symmetry breaking occurs when the equations governing a system possess certain symmetries, but the ground state (vacuum) of the system does not respect those same symmetries. This is only relevant when the vacuum state is not unique. For spontaneous symmetry breaking to occur, the vacuum expectation value must be non-zero:
 
 $$
 \langle 0|\phi(x)|0 \rangle = c \neq 0
@@ -105,3 +106,4 @@ The remarkable result is that we now have:
 - A **massive vector field** $A^\mu$ with mass $qv$
 
 We've transformed a system with a **complex scalar + massless vector** into a **real scalar + massive vector field**. This is the **Higgs mechanism** that generates mass for gauge bosons without breaking gauge invariance.
+

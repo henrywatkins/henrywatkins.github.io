@@ -3,7 +3,7 @@ title: "Renormalization in Quantum Field Theory"
 description: "Understanding how quantum field theories deal with infinities"
 author: "Henry Watkins"
 date: "11/21/2025"
-image: paths.jpg
+image: tracks.jpg
 draft: false
 toc: true
 bibliography: references.bib
