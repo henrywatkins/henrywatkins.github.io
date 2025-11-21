@@ -208,6 +208,7 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
   <li><a href="#command-line-extras" id="toc-command-line-extras" class="nav-link" data-scroll-target="#command-line-extras">Command line extras</a></li>
   <li><a href="#useful-programs" id="toc-useful-programs" class="nav-link" data-scroll-target="#useful-programs">Useful programs</a></li>
   <li><a href="#not-so-useful-programs" id="toc-not-so-useful-programs" class="nav-link" data-scroll-target="#not-so-useful-programs">Not so useful programs</a></li>
+  <li><a href="#background-jobs" id="toc-background-jobs" class="nav-link" data-scroll-target="#background-jobs">Background jobs</a></li>
   <li><a href="#awk" id="toc-awk" class="nav-link" data-scroll-target="#awk">awk</a></li>
   <li><a href="#sed" id="toc-sed" class="nav-link" data-scroll-target="#sed">sed</a></li>
   <li><a href="#ssh" id="toc-ssh" class="nav-link" data-scroll-target="#ssh">ssh</a></li>
@@ -306,6 +307,7 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <p><code>wc</code> - counter, counts the number of things, line lines, words, bytes, chars.</p>
 <p><code>seq</code> - print out a sequence of numbers</p>
 <p><code>nl</code> - given a sequence of lines, add line numbers</p>
+<p><code>comm</code> - compare two files line by line (or stdin). It is useful for finding the intersection and difference between two files with the options <code>-12</code>, <code>-23</code> respectively.</p>
 <p><code>jq</code> - simple interface to json files, use to quickly explore and process json files. e.g.&nbsp;<code>cat test.json | jq '.["key"]'</code></p>
 <p><code>yq</code> - similar to jq, but for yaml, toml files</p>
 <p><code>diff</code> - compare two files, printing out lines where they differ, useful for debugging and error analysis.</p>
@@ -327,46 +329,56 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <p><code>fold</code> - wrap input lines of a file</p>
 <p><code>split</code> - split up a file into separate files of some length</p>
 <p><code>fmt</code> - simple text formatter, squishes everything into lines of some specified length</p>
+<p><code>basename</code> - returns the top-level name of a path with all the upper directories removed, e.g.&nbsp;<code>/home/user/dir/file</code> -&gt; <code>file</code></p>
+</section>
+<section id="background-jobs" class="level2">
+<h2 class="anchored" data-anchor-id="background-jobs">Background jobs</h2>
+<p>One can use <code>&amp;</code> to send the command or job to run in the background. Then view the background running jobs with <code>jobs -l</code>. To pull it to the foreground again use <code>fg &lt;job id&gt;</code>. e.g.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">job-command-1</span> <span class="kw">&amp;</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">jobs</span> <span class="at">-l</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">fg</span> <span class="op">&lt;</span>job id<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Also use <code>wait</code> to ensure all background processes to finish before continuing. This is particularly useful if there are outputs of one stage that are required by the next stage.</p>
+<p>Note <code>jobs/fg/&amp;</code> is limited to one session, and processes started with <code>&amp;</code> will be terminated if the shell session ends. To run jobs in the background independently of the shell session, use <code>screen</code>, which acts as a terminal multiplexer to run long processes irrespective of the shell session.</p>
 </section>
 <section id="awk" class="level2">
 <h2 class="anchored" data-anchor-id="awk">awk</h2>
 <p>Useful for command-line exploration and basic processing of datasets. Use is to quickly view tables of data and basic processing in combination with <code>grep</code> , <code>cat</code> and <code>|</code> <code>&gt;</code> operators.</p>
 <p>Basic usage is of the form</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> <span class="st">'selection-criteria {action}'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> <span class="st">'selection-criteria {action}'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Some useful examples and options</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span> <span class="st">','</span> <span class="st">'NR&lt;10 {print $2}'</span> data.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span> <span class="st">','</span> <span class="st">'NR&lt;10 {print $2}'</span> data.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Print out the second column of the first 10 rows of a comma-separated-value dataset.</p>
 <p>awk is especially powerful when used in combination with <code>grep</code> <code>sort</code> <code>uniq</code> . For example we can find the unique values in a column using</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span> <span class="at">-F</span> <span class="st">','</span> <span class="st">'{print $2}'</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span> <span class="st">','</span> <span class="st">'{print $2}'</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Awk is particularly well suited to simple operations that one could do using pandas, but without needing to write a script or open jupyter</p>
 </section>
 <section id="sed" class="level2">
 <h2 class="anchored" data-anchor-id="sed">sed</h2>
 <p><code>sed</code> is a stream editor, it can be used to modify piped in streams or files of text. You can use it for selecting, printing (p), substituting (s), adding lines (a, i), deleting lines (d) and modifying files. It relies on pattern matches with regex, much like grep.</p>
 <p>Follows the general pattern</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">'selection action'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">'selection action'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>select lines 1-4 and print to terminal</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">'1,4p'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">'1,4p'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>substitution</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> helloworld <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/world/city'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">'7,9 s/day/week/gip'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> helloworld <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/world/city'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">'7,9 s/day/week/gip'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>for lines 7 to 9, replace ‘day’ with ‘week’, in case-insensitive manner (i), globally (g) so we perform the match-replace more than once, and print (p) the output.</p>
 <p>cut entire lines that match the pattern</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">'/pattern/c replacement_text'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">'/pattern/c replacement_text'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>append after lines that match pattern</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">'/pattern/a text_to_append'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">'/pattern/a text_to_append'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>insert before lines that match</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">'/pattern/i text_to_insert'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">'/pattern/i text_to_insert'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>delete lines</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">'3d'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">'3d'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>use the <code>-n</code> option to quietly perform operation, only print out the lines selected, particularly useful for long files.</p>
 <p>Save you changes by outputting to a new file with <code>&gt;</code> or by performing operations in place with <code>-i</code> option.</p>
 <p>A super useful application is in converting CSVs to TSVs for use with awk</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-E</span> <span class="st">'s/("([^"]*)")?,/\2\t/g'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-E</span> <span class="st">'s/("([^"]*)")?,/\2\t/g'</span> file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You can create sed scripts to perform more complicated and saved tasks. <code>script.sed</code> e.g.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">4i\ </span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">s/,/\t\t/</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">s/,/</span> /</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">4i\ </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">s/,/\t\t/</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">s/,/</span> /</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>And run with <code>sed -i -f script.sed filename</code></p>
 </section>
 <section id="ssh" class="level2">
@@ -383,46 +395,46 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <section id="gnuplot" class="level2">
 <h2 class="anchored" data-anchor-id="gnuplot">gnuplot</h2>
 <p><a href="https://gnuplot.sourceforge.net/">gnuplot</a> is a command line plotting utility. It can be used to create simple plots and graphs from data files, or from the output of other command line programs. It is particularly useful for quick visualisation of data without needing to write a script or open a jupyter notebook. It is thus the ideal companion to the command line utilities and bash scripts. The quality of the plots is very good; comparable to matplotlib and seaborn. In fact it was the standard for academic plotting before matplotlib became popular. The usage is similar to python in that you can run it via an interpreter or a script.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gnuplot</span> plotscript.gnu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gnuplot</span> plotscript.gnu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="bash-scripts" class="level1">
 <h1>Bash scripts</h1>
 <p>Bash scripts can be remarkable capable. Combining variables, simple loops and pipeing alongside mature programs like <code>grep</code> and <code>awk</code> can create sophisticated scripts.</p>
 <p>For example, if I wants a short program to extract the phone numbers for all names starting with G, from a table of names and numbers, I can use:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for input argument (file name)</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$#</span><span class="st">"</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> &lt;filename&gt;"</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign the file name to a variable</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="va">input_file</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the file exists</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$input_file</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"File '</span><span class="va">$input_file</span><span class="st">' not found!"</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract lines where the name starts with G, then extract phone numbers using awk</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"^G"</span> <span class="st">"</span><span class="va">$input_file</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $2}'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for input argument (file name)</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$#</span><span class="st">"</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> &lt;filename&gt;"</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign the file name to a variable</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="va">input_file</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the file exists</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$input_file</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"File '</span><span class="va">$input_file</span><span class="st">' not found!"</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract lines where the name starts with G, then extract phone numbers using awk</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"^G"</span> <span class="st">"</span><span class="va">$input_file</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $2}'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="data-processing-with-bash" class="level1">
 <h1>Data processing with bash</h1>
 <p>With all these tools, it becomes clear that bash scripts can be created to build sophisticaed data processing pipelines. Together with standard command-line tools like <code>grep</code>, <code>awk</code>, <code>sed</code>, <code>jq</code> and <code>gnuplot</code>, you can create powerful scripts to process and analyze data without needing to write custom Python or R scripts. We could for example create a bash script to pull data from a database with <code>sqlite3</code> (see also notes on SQL), process it with <code>awk</code> and <code>sed</code>, and then visualize it with <code>gnuplot</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example bash script to process data from a SQLite database and visualize it</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Query data from SQLite database</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> my_database.db <span class="st">"SELECT date, value FROM measurements;"</span> <span class="op">&gt;</span> data.csv</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Process the CSV: extract columns, clean up, and convert to TSV</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">','</span> <span class="st">'{print $1 "\t" $2}'</span> data.csv <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/"//g'</span> <span class="op">&gt;</span> data.tsv</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Run gnuplot to create the plot</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="ex">gnuplot</span> plotscript.gnu</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Plot saved as plot.png"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example bash script to process data from a SQLite database and visualize it</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Query data from SQLite database</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> my_database.db <span class="st">"SELECT date, value FROM measurements;"</span> <span class="op">&gt;</span> data.csv</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Process the CSV: extract columns, clean up, and convert to TSV</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">','</span> <span class="st">'{print $1 "\t" $2}'</span> data.csv <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/"//g'</span> <span class="op">&gt;</span> data.tsv</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Run gnuplot to create the plot</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="ex">gnuplot</span> plotscript.gnu</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Plot saved as plot.png"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Combined with the command line interfaces to some other popular software such as the statistical software R, or the large language model library, you can create sophisticated data processing pipelines that are easy to run and modify.</p>
 
 

@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Henry Watkins">
-<meta name="dcterms.date" content="2025-06-15">
-<meta name="description" content="An brief introduction">
+<meta name="dcterms.date" content="2025-11-21">
+<meta name="description" content="Understanding how quantum field theories deal with infinities">
 
-<title>Path Integrals in Quantum Field Theory – Modulo</title>
+<title>Renormalization in Quantum Field Theory – Modulo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -214,10 +214,10 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Path Integrals in Quantum Field Theory</h1>
+      <h1 class="title">Renormalization in Quantum Field Theory</h1>
                   <div>
         <div class="description">
-          An brief introduction
+          Understanding how quantum field theories deal with infinities
         </div>
       </div>
                           <div class="quarto-categories">
@@ -239,7 +239,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 15, 2025</p>
+        <p class="date">November 21, 2025</p>
       </div>
     </div>
     
@@ -255,11 +255,21 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#path-integrals-in-quantum-mechanics" id="toc-path-integrals-in-quantum-mechanics" class="nav-link active" data-scroll-target="#path-integrals-in-quantum-mechanics">Path Integrals in Quantum Mechanics</a></li>
-  <li><a href="#paths-in-quantum-mechanics" id="toc-paths-in-quantum-mechanics" class="nav-link" data-scroll-target="#paths-in-quantum-mechanics">Paths in quantum mechanics</a></li>
-  <li><a href="#path-integrals-in-quantum-field-theory" id="toc-path-integrals-in-quantum-field-theory" class="nav-link" data-scroll-target="#path-integrals-in-quantum-field-theory">Path Integrals in Quantum Field Theory</a></li>
-  <li><a href="#the-propagator" id="toc-the-propagator" class="nav-link" data-scroll-target="#the-propagator">The Propagator</a></li>
-  <li><a href="#the-potential" id="toc-the-potential" class="nav-link" data-scroll-target="#the-potential">The Potential</a></li>
+  <li><a href="#the-path-integral-and-perturbation-theory" id="toc-the-path-integral-and-perturbation-theory" class="nav-link active" data-scroll-target="#the-path-integral-and-perturbation-theory">The Path Integral and Perturbation Theory</a>
+  <ul class="collapse">
+  <li><a href="#observables-and-correlation-functions" id="toc-observables-and-correlation-functions" class="nav-link" data-scroll-target="#observables-and-correlation-functions">Observables and Correlation Functions</a></li>
+  <li><a href="#the-problem-divergences-in-perturbation-theory" id="toc-the-problem-divergences-in-perturbation-theory" class="nav-link" data-scroll-target="#the-problem-divergences-in-perturbation-theory">The Problem: Divergences in Perturbation Theory</a></li>
+  </ul></li>
+  <li><a href="#the-heart-of-the-matter-renormalization" id="toc-the-heart-of-the-matter-renormalization" class="nav-link" data-scroll-target="#the-heart-of-the-matter-renormalization">The Heart of the Matter: Renormalization</a>
+  <ul class="collapse">
+  <li><a href="#understanding-the-divergences" id="toc-understanding-the-divergences" class="nav-link" data-scroll-target="#understanding-the-divergences">Understanding the Divergences</a></li>
+  <li><a href="#loop-corrections-and-divergences" id="toc-loop-corrections-and-divergences" class="nav-link" data-scroll-target="#loop-corrections-and-divergences">Loop Corrections and Divergences</a></li>
+  <li><a href="#the-renormalization-procedure" id="toc-the-renormalization-procedure" class="nav-link" data-scroll-target="#the-renormalization-procedure">The Renormalization Procedure</a></li>
+  <li><a href="#the-renormalization-group-and-running-couplings" id="toc-the-renormalization-group-and-running-couplings" class="nav-link" data-scroll-target="#the-renormalization-group-and-running-couplings">The Renormalization Group and Running Couplings</a></li>
+  <li><a href="#why-some-theories-are-non-renormalizable" id="toc-why-some-theories-are-non-renormalizable" class="nav-link" data-scroll-target="#why-some-theories-are-non-renormalizable">Why Some Theories Are Non-Renormalizable</a></li>
+  </ul></li>
+  <li><a href="#regularization-techniques" id="toc-regularization-techniques" class="nav-link" data-scroll-target="#regularization-techniques">Regularization Techniques</a></li>
+  <li><a href="#implications-and-broader-context" id="toc-implications-and-broader-context" class="nav-link" data-scroll-target="#implications-and-broader-context">Implications and Broader Context</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
@@ -271,184 +281,186 @@ window.Quarto = {
 
 
 
-<p>In this post I am going to give a brief introduction to one of the central ideas in theoretical physics. Quantum field theory might seem a daunting subject, but behind the intimidating mathematical formulation lies an approachable interpretation for describing physics processes. Like most physicists, I was first taught field theory in the form of canonical quantization. However, I find the alternative approach of the path integral formalism to much more approachable and intuitive. Path integral formulations also exist for statistical mechanics applications, but here I will describe how it is used in quantum mechanics.</p>
-<p>Initially, quantum field theory grew out of an attempt to reconcile special relativity with Quantum Mechanics. While Quantum Mechanics describes quantum <em>states</em> and their evolution and interaction, central to Quantum Field Theory are the <em>fields</em> whose behavior are described by the Lagrangian and the Euler-Lagrange field equations. These fields then act on states, possibly creating and annihilating quanta (or particles) of the field. Using the path integral of the field it is possible to calculate probabilities for processes that can be observed. Quantum field theories are able to explain particle interaction and the creation and annihilation of particles that does not occur in standard quantum mechanics making such theories much more flexible. The Standard Model is built in terms of quantum field theories, where each fundamental particle is described by a field.</p>
-<p>There are plenty of good resources for learning about quantum field theory and path integrals, but I will rely heavily on the book by <span class="citation" data-cites="zee2010quantum">Zee (<a href="#ref-zee2010quantum" role="doc-biblioref">2010</a>)</span>. It is an excellent introduction to the subject and I highly recommend it.</p>
-<section id="path-integrals-in-quantum-mechanics" class="level2">
-<h2 class="anchored" data-anchor-id="path-integrals-in-quantum-mechanics">Path Integrals in Quantum Mechanics</h2>
-<p>The underlying principle of the path integral approach is that all possible paths of evolution from the initial to final state are considered. When a quantum state evolves from one state to another, we consider and incorporate all contributions from all possible paths into a final amplitude that describes the process. The advantage of the path integral method in quantum mechanical calculations is that it provides a simpler method of calculating certain processes, and in particular it gives a much more elegant way of approaching field theory. I will start by following <span class="citation" data-cites="mackenzie2000path">MacKenzie (<a href="#ref-mackenzie2000path" role="doc-biblioref">2000</a>)</span>.</p>
-<p>The path integral determines the amplitude of evolving from one state to another. Quantum mechanically, the amplitude for this is</p>
+<p>Quantum field theory is one of the most successful frameworks in modern physics, underlying our understanding of particle physics through the Standard Model. However, when we try to calculate anything beyond the simplest processes we encounter a serious problem: many calculations give infinite results.</p>
+<p>This might seem like a fatal flaw that would render quantum field theory useless, but it turns out that these infinities can be systematically dealt with through a procedure called <strong>renormalization</strong>. This process not only makes the theory mathematically consistent, but also leads to new physical phenomena, including the concept of running coupling constants and the renormalization group.</p>
+<p>This post explores the key ideas behind renormalization, starting with the related concept of spontaneous symmetry breaking and the Higgs mechanism, then diving into the heart of renormalization theory. The mathematical treatment follows closely from quantum field theory techniques, and I’ll aim to show both the technical details and the physical intuition behind this remarkable procedure.</p>
+<p>For readers wanting to dive deeper into these topics, I recommend the classic texts on quantum field theory such as Zee’s “Quantum Field Theory in a Nutshell” <span class="citation" data-cites="zee2010quantum">(<a href="#ref-zee2010quantum" role="doc-biblioref">Zee 2010</a>)</span> for an accessible introduction. For this post I also draw on <span class="citation" data-cites="mandl2013quantum">Mandl and Shaw (<a href="#ref-mandl2013quantum" role="doc-biblioref">2013</a>)</span>.</p>
+<section id="the-path-integral-and-perturbation-theory" class="level1">
+<h1>The Path Integral and Perturbation Theory</h1>
+<p>To understand why renormalization is necessary, we need to see how calculations are performed in quantum field theory and where the infinities arise. In quantum field theory, physical processes are calculated using path integrals. For a scalar field theory, the generating functional is:</p>
 <p><span class="math display">\[
-M=\bra{q'}e^{-iHT}\ket{q}.
+Z = \langle 0 | e^{-iHt} | 0 \rangle = \int \mathcal{D} \phi \, e^{iS/\hbar}
 \]</span></p>
-<p>Where I have used the notation <span class="math inline">\(\bra{q'}\)</span> to signify the state at time <span class="math inline">\(T\)</span> and <span class="math inline">\(\ket{q}\)</span> to signify the state at time <span class="math inline">\(0\)</span>. The Hamiltonian <span class="math inline">\(H\)</span> is the operator that governs the evolution of the system. The amplitude <span class="math inline">\(M\)</span> is a complex number that gives the probability of evolving from state <span class="math inline">\(\ket{q}\)</span> to state <span class="math inline">\(\bra{q'}\)</span> in time <span class="math inline">\(T\)</span>.</p>
-</section>
-<section id="paths-in-quantum-mechanics" class="level2">
-<h2 class="anchored" data-anchor-id="paths-in-quantum-mechanics">Paths in quantum mechanics</h2>
-<p>Consider a quantum mechanical particle with quantum state <span class="math inline">\(\psi\)</span> at position <span class="math inline">\(x_i\)</span> at time <span class="math inline">\(t_i\)</span>. We find this from the inner product of the eigenstate of the initial position/time with the particle’s state vector. This simple system can be written in bra-ket notation by</p>
-<p><span id="eq-init"><span class="math display">\[
-\langle x_i, t_i | \psi \rangle = \Psi(x_i, t_i)
-\tag{1}\]</span></span></p>
-<p>The capital psi has been used to denote the wavefunction as a funciton of the position, and we find the probability of the particle being at this position by the Born rule. $ ||^2 $</p>
-<p>The key task in using path integrals in this quantum mechanical context is to find the probability amplitude of a particle moving from an initial point <span class="math inline">\(x_i\)</span> at time <span class="math inline">\(t_i\)</span> to another point <span class="math inline">\(x_f\)</span> at a later time <span class="math inline">\(t_f\)</span>. The probability amplitude is found by summing over all possible paths, weighted in such a way that it converges to the classical result in limit <span class="math inline">\(\hbar \to 0\)</span>.</p>
-<p>Now let us introduce the path integral from the start point to the end point. The cursive D represents a small change over the path and S is the action. <span id="eq-pathint"><span class="math display">\[
-\langle x_f, t_f | x_i, t_i \rangle = \int \mathcal{D}x(t) \, e^{\frac{i}{\hbar} S[x(t)]}
-\tag{2}\]</span></span> <span class="math display">\[
-S[x(t)] = \int_{t_i}^{t_f} dt \, L(x(t), \dot{x}(t))
-\]</span> These integrals arise from the time evolution of a system subject to a Lagrangian <span class="math inline">\(L\)</span>; this therefore encodes the equations of motion we expect the system to satisfy. From these equations we can see that in the limit <span class="math inline">\(\hbar \to 0\)</span>, the phase factor oscillates rapidly so that nearly all paths cancel except for the classical path that minimizes the action. This construct is in fact our <strong>propagator</strong>. <span id="eq-prop"><span class="math display">\[
-K(x_f, t_f; x_i, t_i) = \langle x_f, t_f | x_i, t_i \rangle
-\tag{3}\]</span></span> We will see it acts as a weighting factor in our calculations of the probability amplitude. In effect, the propagator weights particular paths, so that in the classical limit only the path that minimizes the action remains.</p>
-<p>What is the wavefunction of the final state? We can make the link between the final state wavefunction and the propagator by using the completeness relation <span class="math display">\[
-\int | x_i, t_i \rangle \langle x_i, t_i | dx_i = \textbf{1}.
-\]</span> This statement simply expresses that the sum over all positions at that time should sum to the identity operator. With this we can write the final-state wavefunction as <span class="math display">\[
-\Psi(x_f, t_f) = \langle x_f, t_f | \psi \rangle = \int \langle x_f, t_f | x_i, t_i \rangle \langle x_i, t_i | \psi \rangle dx_i
-\]</span> Note we can re-write this using #eq-init and #eq-prop in the form such that the propagator acts as a Green’s function <span class="math display">\[
-\Psi(x_f, t_f) = \int K(x_f, t_f; x_i, t_i)  \, \Psi(x_i, t_i) dx_i
+<p>where the action <span class="math inline">\(S = \int \mathcal{L} \, d^4x\)</span> and the Lagrangian for a simple scalar field theory is:</p>
+<p><span class="math display">\[
+\mathcal{L} = \frac{1}{2} \partial_\mu \phi \, \partial^\mu \phi - \frac{1}{2} \mu^2 \phi^2 + J \phi + \frac{\lambda}{4!} \phi^4
 \]</span></p>
-<p>But what about the time evolution? The time evolution arises from the Schrödinger equation, <span class="math display">\[
-i \hbar \frac{\partial | \psi \rangle}{\partial t} = \hat{H} | \psi \rangle
-\]</span> where <span class="math inline">\(\hat{H}\)</span> is the Hamiltonian. This is the equation that determines the time evolution of a quantum state, and if we calculate #eq-pathint for the case of the Schrödinger Lagrangian, the propagator for some small time duration <span class="math inline">\(\Delta t\)</span> is <span class="math display">\[
-K = \langle x_f | e^{-\frac{i \hat{H} \Delta t}{\hbar}} | x_i \rangle
-\]</span> What if we go further, and split the time duration between <span class="math inline">\(t_i\)</span> and <span class="math inline">\(t_f\)</span> into many <span class="math inline">\(N\)</span> parts, <span class="math display">\[
-\Delta t = \frac{t_f - t_i}{N}
+<p>The path integral <span class="math inline">\(\int \mathcal{D}\phi\)</span> represents the limit <span class="math inline">\(\lim_{N \to \infty} \prod_i d\phi_i\)</span>—a sum over all possible field configurations.</p>
+<section id="observables-and-correlation-functions" class="level2">
+<h2 class="anchored" data-anchor-id="observables-and-correlation-functions">Observables and Correlation Functions</h2>
+<p>Physical observables are extracted from <strong>n-point correlation functions</strong> with time ordering:</p>
+<p><span class="math display">\[
+G_n(x_1, \dots, x_n) = \langle 0 | \mathcal{T} \{ \phi(x_1) \dots \phi(x_n) \} | 0 \rangle
 \]</span></p>
-<p>In this case the propagator can be seen as the accumulation of many little contributions from lots of paths <span class="math display">\[
-\langle x_f, t_f | x_i, t_i \rangle = \int \langle x_f, t_f | x_N, t_N \rangle \cdots  \langle x_2, t_2 | x_1, t_1 \rangle  \langle x_1, t_1 | x_i, t_i \rangle dx_N \cdots dx_2 dx_1
+<p>These can be expressed as functional derivatives of the generating functional:</p>
+<p><span class="math display">\[
+G_n(x_1, \dots, x_n) = \frac{ \int \mathcal{D}\phi \, \phi(x_1) \dots \phi(x_n) e^{iS/\hbar} }{ \int \mathcal{D}\phi \, e^{iS/\hbar} }
 \]</span></p>
-<p>This is reminiscent of the double slit experiment in which light is fed through two slits. If there are two slits (<a href="#fig-doubleslit" class="quarto-xref">Figure&nbsp;1</a>), there are two possible paths, and two corresponding factors, but as extra slits are added the number increases.</p>
-<div id="fig-doubleslit" class="quarto-layout-panel">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-doubleslit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="doubleslit1.png" class="img-fluid figure-img" style="width:2in"></p>
-<figcaption>one barrier</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="doubleslit2.png" class="img-fluid figure-img" style="width:5in"></p>
-<figcaption>two barriers</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="doubleslit3.png" class="img-fluid figure-img" style="width:3in"></p>
-<figcaption>three barriers</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-doubleslit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: The double slit experiment with one, two and three barriers. The number of paths increases with the number of barriers.
-</figcaption>
-</figure>
-</div>
-<p>We can extend the analogy of barriers in a double slit experiment to time steps in an evolution from one state to another. If we look at one of these little contributions, we can can Taylor expand the exponent. <span class="math display">\[
-\langle x_1 | e^{-i \hat{H} \Delta t / \hbar} | x_0 \rangle = \langle x_1 | \left[1 - \frac{i \hat{H} \Delta t}{\hbar} + \mathcal{O}(\Delta t^2) \right] | x_0 \rangle
-\]</span> <span class="math display">\[
-= \delta(x_1 - x_0) - \frac{i \Delta t}{\hbar} \langle x_1 | \hat{H} | x_0 \rangle + \mathcal{O}(\Delta t^2)
-\]</span> and let us quickly transform into momentum space <span class="math display">\[
-= \frac{1}{2\pi} \int dp \, e^{i p (x_1 - x_0)} \left[ 1 - \frac{i \Delta t}{\hbar} H(p, x_1) \mathcal{O}(\Delta t^2) \right]
-\]</span> <span class="math display">\[
-= \frac{1}{2\pi} \int dp \, \exp \left\{ \frac{i \Delta t}{\hbar} \left[ p \frac{x_1 - x_0}{\Delta t} - H(p, x_1) \right] \mathcal{O}(\Delta t^2) \right\}
-\]</span> in the limit of <span class="math inline">\(N \to \infty\)</span> <span class="math display">\[
-\langle x_n, t_n | x_0, t_0 \rangle = \int dp_0 \prod_{k=1}^{n-1} \frac{dp_k \, dx_k}{2\pi} \exp \left[ i \sum_{j=0}^{n-1} \Delta t \left( p_j \frac{\Delta x_j}{\Delta t} - H_j \right) \right]
-\]</span> <span class="math display">\[
-\Rightarrow \int [dx][dp] \exp \left\{ i \int dt \left[ p \dot{x} - H(p, x) \right] \right\}
-\]</span> where <span class="math display">\[
-[dx][dp] = \prod_{i=1}^{n-1} dx_i \, dp_i \cdot dp_0
-\]</span> and the integral over momenta can be reverse-transformed, and the Hamiltonian written out in full. <span class="math display">\[
-\frac{1}{\hbar} \int dp \, e^{i \Delta t \left[ p \frac{\Delta x}{\Delta t} - H \right]} = \left( \frac{m}{2\pi i \hbar \Delta t} \right)^{1/2} \exp \left[ i \Delta t \left( \frac{m}{2} \left( \frac{\Delta x}{\Delta t} \right)^2 - V \right) \right]
-\]</span> So <span class="math display">\[
-\langle x_n, t_n | x_0, t_0 \rangle = N \int \prod_{i=1}^{n-1} dx_i \, \exp \left( i \int dt \, L \right)
-\]</span> with <span class="math display">\[
-N = \lim_{n \to \infty} \left( \frac{m}{2\pi i \hbar \Delta t} \right)^{n/2}
-\]</span> Altogether we have finally reached the derivation of the path integral in quantum mechanics (where the cursive D has absorbed the prefactors and product over i) <span class="math display">\[
-\langle x_f, t_f | x_0, t_0 \rangle = \int \mathcal{D}x \, e^{\frac{i}{\hbar} S[x(t)]}
+<p><span class="math display">\[
+= (-i\hbar)^n \, \left. \frac{1}{Z(J=0)} \, \frac{\delta^n Z}{\delta J(x_1) \dots \delta J(x_n)} \right|_{J=0}
 \]</span></p>
 </section>
-<section id="path-integrals-in-quantum-field-theory" class="level2">
-<h2 class="anchored" data-anchor-id="path-integrals-in-quantum-field-theory">Path Integrals in Quantum Field Theory</h2>
-<p>To move from quantum mechanics the quantum field theory, only a small change is needed to the path integral. In quantum field theory the states are no longer the basic objects; they are replaced by fields that act on vacuum states to create particles.</p>
-<p>It is now the Lagrangian density that appears in the action. The Lagrangian density is a function of the field and its derivatives rather than the position and momentum of a particle as in the quantum mechanical case. The variable q in the path integral is replaced by the field <span class="math inline">\(\phi\)</span>, the index j becomes a continuum and the path integral is no longer taken as the evolution between two states <span class="math inline">\(\ket{q},\ket{q'}\)</span> but between two vacuum states, <span class="math inline">\(\ket{0}\)</span>. This is only convention and represents the fact it is possible to create any state by acting the field operator on the vacuum. So the path integral becomes</p>
+<section id="the-problem-divergences-in-perturbation-theory" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem-divergences-in-perturbation-theory">The Problem: Divergences in Perturbation Theory</h2>
+<p>To make calculations tractable, we expand in powers of the coupling constant <span class="math inline">\(\lambda\)</span>:</p>
 <p><span class="math display">\[
-Z=\int D\phi e^{i\int \mathcal{L}d^4 x}
+\exp\left[-\frac{i\lambda}{4!} \int d^4x \, \phi^4 \right] = 1 - \frac{i\lambda}{4!} \int d^4x \, \phi^4 + \mathcal{O}(\lambda^2) + \dots
 \]</span></p>
-<p>The question now with the path integral in quantum field theory is how to use it to find observables. The key component one can find from the path integral is the propagator, which gives the probability of a particle moving from one point to another. The propagator is derived from the action and is a central object in quantum field theory.</p>
+<p>For the free theory (<span class="math inline">\(\lambda = 0\)</span>), we can solve this system exactly. The Klein-Gordon operator</p>
+<p><span class="math display">\[
+(\Box + m^2) D(x - y) = \delta^{(4)}(x - y)
+\]</span></p>
+<p>has the solution (this is where we get our propagator)</p>
+<p><span class="math display">\[
+D(x - y) = \int \frac{d^4k}{(2\pi)^4} \, \frac{e^{ik(x - y)}}{k^2 - m^2}
+\]</span></p>
+<p>This gives us the generating functional:</p>
+<p><span class="math display">\[
+\mathcal{Z}[J] = \mathcal{Z}[0] \, e^{\frac{i}{2} W[J]}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+W[J] = -\frac{1}{2} \iint d^4x \, d^4y \, J(x) D(x - y) J(y)
+\]</span></p>
+<p>However, when we include interactions and calculate loop corrections, we encounter infinities.</p>
 </section>
-<section id="the-propagator" class="level2">
-<h2 class="anchored" data-anchor-id="the-propagator">The Propagator</h2>
-<p>The square of the absolute value of the propagator gives us the probability of a particle moving from one place to another (hence <em>propagation</em>) and is derived from the governing equation of the field. The path integral for a scalar field theory is (lower case letters like x, y signify 4-vectors)</p>
-<p><span class="math display">\[
-Z=\int D\phi e^{iS}
-\]</span></p>
-<p>where D signifies the integration measure that includes the product, limit etc. S is the action given by</p>
-<p><span class="math display">\[
-S=\int d^4 x \dfrac{1}{2} (\partial_\mu \phi \partial^\mu \phi -m^2\phi^2)+J\phi.
-\]</span></p>
-<p>Where J is some source function and <span class="math inline">\(\mu \in(0,1,2,3,4)\)</span>. To calculate the propagator first one must focus on the action and integrate by parts to get</p>
-<p><span class="math display">\[
-\int d^4 x \left[ -\phi\frac{1}{2}(\partial_\mu \partial^\mu +m^2)\phi +J\phi\right].
-\]</span></p>
-<p>Then use the Green’s function form</p>
-<p><span class="math display">\[
-(\partial_\mu \partial^\mu +m^2)D(x-y)=-\delta^{(4)}(x-y)
-\]</span></p>
-<p>such that the field satisfies</p>
-<p><span class="math display">\[
-\phi(x)=\int d^4 y D(x-y)J(y)
-\]</span></p>
-<p>and putting this form into the action above, the result is</p>
-<p><span class="math display">\[
-\frac{1}{2}\int d^4 x \int d^4 y J(x) D(x-y) J(y)
-\]</span></p>
-<p>and using Fourier transforms shows the explicit appearance of the propagator</p>
-<p><span class="math display">\[
-\tilde{D}(k)=\dfrac{1}{k^2-m^2}
-\]</span></p>
-<p>where the denominator can be replaced by whatever dispersion relation that follows the simple scalar field in Minkowski space form i.e just add extra positive terms for time-like dimensions and negative ones for space-like dimensions.</p>
 </section>
-<section id="the-potential" class="level2">
-<h2 class="anchored" data-anchor-id="the-potential">The Potential</h2>
-<p>A simple application of the propagator is to calculate the potential between two particles. The potential is a measure of the interaction between particles and can be derived from the propagator. In quantum field theory, the potential is not a fundamental quantity but rather an emergent one that arises from the interactions of particles. The potential can be found by taking the spatial Fourier transform of the propagator. The hardest and perhaps most important part is how the sources and sinks are set up in the calculation of a potential. In the path integral formulation this must be done to allow a potential to appear, after all there can be no propagator and hence no potential without anything to propagate between.</p>
-<p>As a first example the potential will derived in 3+1 dimensions using a source function that consists of two Dirac delta sources <span class="math inline">\(J(x)=\delta^{(3)}(\vec{x}-\vec{x_1})+ \delta^{(3)}(\vec{x}-\vec{x_2})\)</span>. These are fixed at the spatial positions <span class="math inline">\(\vec{x_1}\)</span> and <span class="math inline">\(\vec{x_2}\)</span>. There will be a number of terms in the action arising from the product of the two source functions but since the only interesting one is where a particle is created at 1 and annihilated at 2 the only one that is considered is</p>
+<section id="the-heart-of-the-matter-renormalization" class="level1">
+<h1>The Heart of the Matter: Renormalization</h1>
+<p>Renormalization emerges as a systematic procedure to deal with divergences that appear in perturbative calculations. These divergences appear in the ultraviolet limit when we consider loop diagrams—quantum corrections to tree-level processes. The key insight is that these infinities can be <em>absorbed</em> into redefinitions of the parameters in our theory (masses, coupling constants, etc.), leaving finite, measurable quantities.</p>
+<section id="understanding-the-divergences" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-the-divergences">Understanding the Divergences</h2>
+<p>Consider the <span class="math inline">\(\phi^4\)</span> theory with Lagrangian:</p>
 <p><span class="math display">\[
-S=-\dfrac{1}{(2\pi)^4} \int d^4 x' \int d^4 x \int d^4 k \dfrac{\delta(\vec{x}-\vec{x_1}) e^{ik\cdot(x-x')} \delta(\vec{x'}-\vec{x'_2})}{\omega^2-k^2-m^2}
+\mathcal{L} = \frac{1}{2} \left\{ \partial_\mu \phi_0 \partial^\mu \phi_0 - \mu_0^2 \phi_0^2 \right\} - \frac{\lambda_0}{4!} \phi_0^4
 \]</span></p>
-<p>Where the sources are placed at a particular position in space but have no fixed time coordinate. This leads to</p>
+<p>The subscript <span class="math inline">\(0\)</span> indicates these are “bare” parameters—the parameters that appear in the original Lagrangian before we account for quantum corrections. The propagator for this theory is:</p>
 <p><span class="math display">\[
-\begin{aligned}
-S&amp;=-\dfrac{1}{(2\pi)^4} \int dt' \int dt \int d\omega e^{i\omega(t-t')} \int d^3 k \dfrac{e^{-i\vec{k}(\vec{x_1}-\vec{x'_2})}}{\omega^2-k^2-m^2}\\
-&amp;=-\dfrac{1}{(2\pi)^3}\int dt \int d\omega \delta(\omega) \int d^3 k \dfrac{e^{-i\vec{k}(\vec{x_1}-\vec{x'_2})}}{\omega^2-k^2-m^2}\\
-&amp;=\dfrac{1}{(2\pi)^3}\int dt \int d^3 k \dfrac{e^{i\vec{k}(\vec{x_1}-\vec{x'_2})}}{k^2+m^2}
-\end{aligned}
+i\Delta(p) = \int d^4x \, e^{-ipx} \langle 0 | T \phi_0(x) \phi_0(0) | 0 \rangle
 \]</span></p>
-<p>Letting the time integral be <span class="math inline">\(\int dt=T\)</span> to make the association with the T in <span class="math inline">\(\bra{0} e^{-iHT}\ket{0}=e^{-iET}\)</span> so the potential is (and writing <span class="math inline">\(\vec{x}=\vec{x_1}-\vec{x'_2}\)</span>)</p>
+<p>When we expand in powers of <span class="math inline">\(\lambda_0\)</span> to include quantum corrections, we encounter the self-energy <span class="math inline">\(\Sigma(p^2)\)</span>:</p>
 <p><span class="math display">\[
-\int \dfrac{d^3 k}{(2\pi)^3}\dfrac{e^{i\vec{k}.\vec{x}}}{k^2+m^2}=\frac{1}{4 \pi r}e^{-mr}
+i\Delta(p) = \frac{i}{p^2 - \mu_0^2 + i\varepsilon} + \frac{i}{p^2 - \mu_0^2 + i\varepsilon} (-i \Sigma(p^2)) \frac{i}{p^2 - \mu_0^2 + i\varepsilon} + \dots
 \]</span></p>
-<p>Another important point is the validity of fixing the source and sink in space but not in time. When this was done is was clear that a Dirac delta function appeared in <span class="math inline">\(\omega\)</span> that cut out the time-term from the propagator. From the path integral approach as described in <span class="citation" data-cites="zee2010quantum">Zee (<a href="#ref-zee2010quantum" role="doc-biblioref">2010</a>)</span> the specification of the sources and sinks is essential to correctly calculate the potential arising from particle propagation from source to sink.</p>
-<p>This form of potential between two particles is called the Yukawa potential. It acts as the familiar Coulomb potential for massless particles, but for massive particles the potential is exponentially suppressed at large distances.</p>
+<p><span class="math display">\[
+= \frac{i}{p^2 - \mu_0^2 - \Sigma(p^2) + i\varepsilon}
+\]</span></p>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>In this brief intro I have mentioned some high-level concepts such as Green’s functions, four-vectors and the Lagrangian density. These are all important concepts in quantum field theory and this post shouldn’t be seen as a comprehensive guide, but rather a jumping off point to explore these ideas further. The path integral approach to quantum field theory is a powerful tool that allows for the calculation of probabilities and potentials in a way that is I think is more intuitive than the canonical quantization approach. It is a central part of the modern understanding of particle physics and is essential for understanding the Standard Model.</p>
+<section id="loop-corrections-and-divergences" class="level2">
+<h2 class="anchored" data-anchor-id="loop-corrections-and-divergences">Loop Corrections and Divergences</h2>
+<p>Let’s examine some specific loop corrections:</p>
+<p><strong>One-loop, 2-point function (self-energy):</strong></p>
+<p><span class="math display">\[
+-i \Sigma(p^2) = -\frac{i \lambda_0}{2} \int \frac{d^4 \ell}{(2\pi)^4} \frac{i}{\ell^2 - \mu_0^2 + i\varepsilon}
+\]</span></p>
+<p><strong>One-loop, 4-point function:</strong></p>
+<p><span class="math display">\[
+\Gamma(p^2) = (-i\lambda_0)^2 \int \frac{d^4\ell}{(2\pi)^4} \frac{i}{\ell^2 - \mu_0^2} \cdot \frac{i}{(\ell - p)^2 - \mu_0^2}
+\]</span></p>
+<p>Both of these integrals are <strong>divergent</strong>! In four spacetime dimensions, these momentum integrals grow without bound in the ultraviolet (high momentum) region. The key observation is that the divergences appear only in the first few terms of an expansion around external momenta. We can write:</p>
+<p><span class="math display">\[
+\Gamma(s) = \Gamma(0) + \tilde{\Gamma}(s)
+\]</span></p>
+<p>where <span class="math inline">\(\Gamma(0)\)</span> contains all the divergent parts, while <span class="math inline">\(\tilde{\Gamma}(s)\)</span> is finite.</p>
+</section>
+<section id="the-renormalization-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="the-renormalization-procedure">The Renormalization Procedure</h2>
+<p>The solution is to renormalize by redefining our parameters. We separate the self-energy into divergent and finite parts:</p>
+<p><span class="math display">\[
+\Sigma(p^2) = \Sigma(\mu^2) + (p^2 - \mu^2)\Sigma'(\mu^2) + \tilde{\Sigma}(p^2)
+\]</span></p>
+<p>where the finite remainder <span class="math inline">\(\tilde{\Sigma}\)</span> satisfies:</p>
+<p><span class="math display">\[
+\tilde{\Sigma}(\mu^2) = \tilde{\Sigma}'(\mu^2) = 0
+\]</span></p>
+<p>Now we can redefine our mass parameter:</p>
+<p><span class="math display">\[
+\mu^2 = \mu_0^2 + \Sigma(\mu^2)
+\]</span></p>
+<p>Here, <span class="math inline">\(\mu_0\)</span> is the “bare mass” that appears in the Lagrangian, while <span class="math inline">\(\mu\)</span> is the “physical mass” that we actually measure. The difference between them exactly cancels the divergent part of the self-energy.</p>
+<p>Similarly, we can perform <strong>wave function renormalization</strong> by defining:</p>
+<p><span class="math display">\[
+Z_\varphi = \left[ 1 - \Sigma'(\mu^2) \right]^{-1}
+\]</span></p>
+<p>and relating the bare field to the renormalized field: <span class="math inline">\(\phi_0 = Z_\varphi^{1/2} \phi\)</span>. The remarkable result is that after these redefinitions, our propagator becomes:</p>
+<p><span class="math display">\[
+i\Delta(p) = i Z_\varphi \left[ (p^2 - \mu^2) - \tilde{\Sigma}(p^2) + i\varepsilon \right]^{-1}
+\]</span></p>
+<p>All the infinities have been absorbed into the relationship between bare and renormalized parameters.</p>
+</section>
+<section id="the-renormalization-group-and-running-couplings" class="level2">
+<h2 class="anchored" data-anchor-id="the-renormalization-group-and-running-couplings">The Renormalization Group and Running Couplings</h2>
+<p>Beyond one-loop calculations, things become more complex, but the basic principle remains the same. The change in couplings with energy scale follows a <strong>beta function</strong>:</p>
+<p><span class="math display">\[
+\frac{\partial g}{\partial \log \mu} = \beta(g)
+\]</span></p>
+<p>This describes <strong>renormalization group flow</strong>, and the couplings become <strong>running couplings</strong> that change with energy scale. This leads to:</p>
+<ul>
+<li>In QED, the fine structure constant actually increases at higher energies</li>
+<li>In QCD, the strong coupling decreases at high energy (this is known as asymptotic freedom)</li>
+<li>The <strong>fixed points</strong> of the beta function (where <span class="math inline">\(\beta(\lambda^*) = 0\)</span>) represent the most important physical interactions.</li>
+</ul>
+</section>
+<section id="why-some-theories-are-non-renormalizable" class="level2">
+<h2 class="anchored" data-anchor-id="why-some-theories-are-non-renormalizable">Why Some Theories Are Non-Renormalizable</h2>
+<p>This procedure works beautifully for theories like QED, QCD, and the Standard Model. However, it fails for some theories, including gravity in four dimensions. <strong>Gravity is non-renormalizable</strong> because it produces infinitely many types of divergences. Unlike renormalizable theories where all divergences can be absorbed into a finite number of parameter redefinitions, gravity requires infinitely many new counterterms at each loop order. The theory “works” at one-loop level but cannot be consistently extended to higher orders.</p>
+<p>In short, renormalization works when we have a theory described by a generating functional <span class="math inline">\(Z\)</span> with state variables <span class="math inline">\(\{s_i\}\)</span> and couplings <span class="math inline">\(\{\lambda_j\}\)</span>. If there exists a <strong>scale transformation</strong> <span class="math inline">\(\{s_i\} \rightarrow \{\tilde{s}_i\}\)</span> with fewer independent variables, and we can rewrite <span class="math inline">\(Z\)</span> in terms of these new variables by changing the couplings, then the theory is <strong>renormalizable</strong>.</p>
+</section>
+</section>
+<section id="regularization-techniques" class="level1">
+<h1>Regularization Techniques</h1>
+<p>To make the renormalization procedure concrete, we need a way to handle the divergent integrals mathematically. This is achieved through <strong>regularization</strong>—introducing a cutoff parameter that makes the integrals finite, so we can separate the divergent from finite parts.</p>
+<p>The most elegant and widely used method is <strong>dimensional regularization</strong>, where we analytically continue to <span class="math inline">\(D = 4 - 2\epsilon\)</span> spacetime dimensions:</p>
+<p><span class="math display">\[
+\int \frac{d^D k}{(k^2)^\alpha} = \int \frac{d^{4-2\epsilon} k}{(k^2)^\alpha}
+\]</span></p>
+<p>As <span class="math inline">\(\epsilon \to 0\)</span>, we recover four dimensions, but the pole in <span class="math inline">\(\epsilon\)</span> captures the divergence structure.</p>
+<p><strong>Advantages of dimensional regularization:</strong></p>
+<ul>
+<li>It <strong>maintains gauge invariance</strong>, which is crucial for gauge theories (though there are some problems with chiral theories)</li>
+<li>It’s <strong>simple to renormalize</strong> - introduces a common factor of <span class="math inline">\(\frac{1}{\epsilon} + \ln(4\pi) - \gamma_E\)</span> in all calculations</li>
+<li>It works for both <strong>ultraviolet (UV)</strong> and <strong>infrared (IR) divergences</strong> (in general, there are however some caveats in the application to IR divergences)</li>
+</ul>
+<p>A typical result after dimensional regularization looks like:</p>
+<p><span class="math display">\[
+\Sigma(p^2) = \frac{\lambda}{(4\pi)^2} \left[ \frac{1}{\epsilon} + \ln\left(\frac{\mu^2}{m^2}\right) + \text{finite terms} \right]
+\]</span></p>
+<p>The divergent <span class="math inline">\(\frac{1}{\epsilon}\)</span> pole gets absorbed into the parameter redefinition, while the logarithmic terms give rise to the running of coupling constants.</p>
+</section>
+<section id="implications-and-broader-context" class="level1">
+<h1>Implications and Broader Context</h1>
+<p>Renormalization represents one of the most important developments in theoretical physics. What initially appeared to be a fatal mathematical inconsistency turned out to reveal deep physics about how theories behave across different energy scales.</p>
+<p><strong>Key insights from renormalization:</strong></p>
+<ol type="1">
+<li><strong>Effective Field Theory</strong>: Our theories are valid only up to some energy scale, above which new physics becomes important</li>
+<li><strong>Universality</strong>: Many different microscopic theories can give the same low-energy physics</li>
+<li><strong>Scale Dependence</strong>: Physical parameters like coupling constants are not truly constant but depend on the energy scale</li>
+<li><strong>Predictive Power</strong>: Despite infinities in calculations, we can make finite, testable predictions</li>
+</ol>
+<p>The success of renormalization in QED led to its application in the Standard Model, where all interactions (electromagnetic, weak, and strong) are described by renormalizable quantum field theories. This framework has been spectacularly successful, predicting phenomena like the anomalous magnetic moment of the electron to extraordinary precision. However, the non-renormalizability of gravity suggests that our current understanding is incomplete. This has motivated searches for new approaches to quantum gravity, from string theory to loop quantum gravity to asymptotic safety programs.</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Renormalization stands as one of the most elegant solutions to a seemingly impossible problem in physics. By recognizing that infinities arise from our ignorance of physics at very high energies, and by systematically absorbing these infinities into parameter redefinitions, we can extract finite, measurable predictions from quantum field theories.</p>
+<p>Renormalization has also revealed fundamental truths about the nature of physical theories: they are inherently scale-dependent, effective descriptions valid within certain energy ranges. The running of coupling constants and the concept of universality classes have found applications beyond particle physics, from condensed matter to statistical mechanics to cosmology. Perhaps most importantly, the experience with renormalization reminds us that even when faced with apparent mathematical inconsistencies, careful analysis can reveal a deeper understanding about the fundamental structure of our universe.</p>
 
 
 
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-mackenzie2000path" class="csl-entry" role="listitem">
-MacKenzie, Richard. 2000. <span>“Path Integral Methods and Applications.”</span> <em>arXiv Preprint Quant-Ph/0004090</em>.
+<div id="ref-mandl2013quantum" class="csl-entry" role="listitem">
+Mandl, Franz, and Graham Shaw. 2013. <em>Quantum Field Theory</em>. John Wiley &amp; Sons.
 </div>
 <div id="ref-zee2010quantum" class="csl-entry" role="listitem">
 Zee, Anthony. 2010. <em>Quantum Field Theory in a Nutshell</em>. Princeton university press.
