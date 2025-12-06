@@ -148,6 +148,8 @@ You can also use brackets with `$`  to define more complicated, calculated varia
 
 `fmt` - simple text formatter, squishes everything into lines of some specified length
 
+`crontab` - schedule commands to run regularly at a specified time
+
 `basename` - returns the top-level name of a path with all the upper directories removed, e.g. `/home/user/dir/file` -> `file`
 
 ## Background jobs

@@ -1,0 +1,329 @@
+---
+title: "Phase Transitions and the Ising Model: From Magnets to Critical Phenomena"
+description: "Exploring statistical field theory"
+author: "Henry Watkins"
+date: "12/05/2025"
+image: steam.png
+draft: false
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+categories:
+  - physics
+  - statistical mechanics
+---
+
+Water boils, magnets lose their magnetism, and ice melts. These everyday transformations are all examples of phase transitions, and their description lies in statistical field theory, a powerful framework that reveals the deep mathematical structures underlying all these physical transformations. This post covers some more about statistical mechanics and its application to phase transitions, first by considering the famous Ising model, then moving the Landau-Ginzburg theory and the link with quantum field theory.
+
+## Critical Phenomena: When Systems Go Singular
+
+Statistical field theory provides us with the tools to describe phase transitions in equilibrium statistical systems. When we vary external parameters like temperature $T$ or magnetic field $B$, systems can exhibit singularities in their thermodynamic variables. These aren't just mathematical curiosities: they correspond to dramatic changes in physical behavior.
+
+Phase transitions come in two fundamental flavors. **First-order transitions** are abrupt and discontinuous. When water boils, for instance, there's a discontinuity in entropy—a sudden jump as liquid transforms to vapor. You can see both phases coexisting: bubbles of steam forming in the liquid. In contrast, **second-order transitions** are continuous. Consider how iron loses its magnetism at the Curie temperature. The magnetization doesn't jump to zero; it smoothly but singularly vanishes. There's no latent heat, but the system's susceptibility diverges.
+
+These second-order transitions are examples of **critical phenomena**, and they reveal something profound: the behavior of a physical system is described by different variables at different scales. The relationship between these scale-dependent descriptions is captured by what physicists call the **renormalization group equations**—a set of ideas that transformed our understanding of phase transitions and much of theoretical physics besides.
+
+## The Ising Model: The simplest phase transition model
+
+To understand critical phenomena, physicists often turn to the Ising model, perhaps the most studied model in statistical mechanics. Named after Ernst Ising, this model has since become a cornerstone of theoretical physics. Despite its apparent simplicity, it captures the essence of magnetic phase transitions and much more.
+
+Imagine a crystal lattice, a regular array of sites positioned at $\mathbf{n} = \sum_{i=1}^{d} n_i \mathbf{e}_i$. Picture a checkerboard pattern extending in space: at each site sits a spin that can point either up or down: $\sigma_n \in \{-1, +1\}$. These spins interact only with their nearest neighbors, and the energy of the system is given by the sum over all such neighboring pairs:
+
+$$
+E = -J \sum_{\langle n, m \rangle} \sigma_n \sigma_m
+$$
+
+where the notation $\langle n, m \rangle$ indicates that the sum runs only over nearest-neighbor pairs. Here $J$ is the coupling constant that determines the strength of the interaction. When spins align, the energy is lower; when they point in opposite directions, the energy is higher. Add an external magnetic field $h$, and the total Hamiltonian becomes:
+
+$$
+H = E - h \sum_n \sigma_n
+$$
+
+This deceptively simple model contains a wealth of physics. The challenge is to understand how the collective behavior of millions of interacting spins gives rise to macroscopic magnetization.
+
+## The Partition Function: Summing Over Possibilities
+
+The key to unlocking the Ising model lies in the partition function, the fundamental object in statistical mechanics:
+
+$$
+Z = \sum_{\text{configurations}} \exp(-\beta H(\sigma))
+$$
+
+where $\beta = 1/(k_B T)$ and the sum runs over all possible configurations of spins. The partition function encodes everything: from it we can extract the probability of any configuration:
+
+$$
+P(\sigma) = \frac{1}{Z} \exp\left( -\beta H(\sigma) \right)
+$$
+
+This probability distribution allows us to calculate the expectation value of any observable:
+
+$$
+\langle O(\sigma) \rangle = \sum_{\text{configurations}} P(\sigma) O(\sigma)
+$$
+
+The magnetization, the average total spin, is simply:
+
+$$
+M = \left\langle \sum_n \sigma_n \right\rangle = N \langle \sigma_0 \rangle
+$$
+
+where $N$ is the number of sites and we've used translational invariance to express it in terms of a single site.
+
+From the partition function we can also derive the Helmholtz free energy:
+
+$$
+F = -k_B T \log Z
+$$
+
+This thermodynamic potential is the key to understanding equilibrium. The system naturally evolves to minimize the free energy, balancing internal energy against entropy. We can relate the free energy to other thermodynamic quantities through:
+
+$$
+U - hM = -\frac{\partial \log Z}{\partial \beta}, \quad M = -\left( \frac{\partial F}{\partial h} \right)_T
+$$
+
+The fundamental thermodynamic relation emerges naturally:
+
+$$
+dU = T dS - P dV + h dM
+$$
+
+## Correlation Functions: How Spins Talk to Each Other
+
+One of the most important concepts in statistical field theory is the correlation function. It measures how a fluctuation at one point affects the system at another point. For the Ising model, we define:
+
+$$
+G(r) = \langle \sigma_0 \sigma_r \rangle - \langle \sigma_0 \rangle \langle \sigma_r \rangle
+$$
+
+This tells us how correlated the spin at the origin is with a spin at distance $r$. The susceptibility is directly related to the sum of correlations. We can define the susceptibility as:
+
+$$
+\chi = \frac{\partial M}{\partial h}\Big|_T = k_B T \frac{\partial^2 \log Z}{\partial h^2}\Big|_T
+$$
+
+Through some algebra, this leads to the result:
+
+$$
+\chi = \beta N \sum_r G(r)
+$$
+
+This equation tells us that the susceptibility is simply the integrated correlation function. The correlation function itself gives the response of the average magnetization at one point to a fluctuation at distance $r$ away.
+
+Near a critical point, correlations don't just extend over a few lattice spacings—they span the entire system. This is characterized by the correlation length $\xi$, which encodes how correlations decay with distance:
+
+$$
+G(r) = \begin{cases}
+\frac{1}{r^{D-2+\eta}} & r \ll \xi \\
+\frac{e^{-r/\xi}}{(\xi r)^{D/2}} & r \gg \xi
+\end{cases}
+$$
+
+At the critical temperature, $\xi$ diverges. Suddenly, the system doesn't have a characteristic length scale—fluctuations at all scales become important. This scale invariance is the signature of a critical point.
+
+## Solving the One-Dimensional Ising Model
+
+While the Ising model seems simple, it's only exactly solvable in one and two dimensions. The one-dimensional case provides valuable insights through the transfer matrix method.
+
+For a one-dimensional chain, we can write the partition function as a product of transfer matrices:
+
+$$
+Z = \sum_{\sigma_i = \pm 1} \prod_{i=0}^{N-1} \exp\left[\beta J \, \sigma_i \sigma_{i+1} + \frac{1}{2} \beta h (\sigma_i + \sigma_{i+1})\right]
+$$
+
+This can be rewritten as:
+
+$$
+Z = \sum_{\sigma_1 \dots \sigma_N} W_{\sigma_1 \sigma_2} W_{\sigma_2 \sigma_3} \dots W_{\sigma_{N-1} \sigma_N}
+$$
+
+where the transfer matrix elements are:
+
+$$
+W_{\sigma \sigma'} = \exp\left[\beta J \sigma \sigma' + \frac{1}{2} \beta h (\sigma + \sigma')\right]
+$$
+
+This $2 \times 2$ matrix can be written explicitly as:
+
+$$
+W = \begin{bmatrix}
+\mu z & z^{-1} \\
+z^{-1} & \frac{1}{\mu z}
+\end{bmatrix}
+$$
+
+where $\mu = e^{\beta h}$ and $z = e^{\beta J}$. The partition function becomes simply:
+
+$$
+Z = \text{Tr}(W^N) = \lambda_+^N + \lambda_-^N
+$$
+
+where $\lambda_\pm$ are the eigenvalues of $W$. For large $N$, the larger eigenvalue dominates, so $Z \approx \lambda_+^N$:
+
+$$
+\lambda_+ = z \cosh(\beta h) + \sqrt{z^2 \sinh^2(\beta h) + z^{-2}}
+$$
+
+The free energy is thus:
+
+$$
+F = -N k_B T \log \lambda_+
+$$
+
+From this, we can extract the magnetization:
+
+$$
+\frac{M}{N} = k_B T \frac{\partial \log \lambda_+}{\partial h} = \frac{e^{\beta J} \sinh(\beta h)}{\sqrt{e^{2\beta J} \sinh^2(\beta h) + e^{-2\beta J}}}
+$$
+
+To find the correlation function, we need to calculate $\langle \sigma_0 \sigma_r \rangle$. This involves inserting spin operators into the trace:
+
+$$
+\langle \sigma_0 \sigma_r \rangle = \frac{1}{Z} \sum_\sigma \sigma_0 W_{\sigma_0 \sigma_1} \dots \sigma_r W_{\sigma_r \sigma_{r+1}} \dots W_{\sigma_{N-1} \sigma_N}
+$$
+
+After diagonalizing the transfer matrix with an orthogonal transformation $W = P \Lambda P^{-1}$, we find that the correlation function takes an exponential form:
+
+$$
+G(r) = \sin^2 2\phi \, e^{-r/\xi}
+$$
+
+where the correlation length is:
+
+$$
+\xi = \left( \log \frac{\lambda_+}{\lambda_-} \right)^{-1}
+$$
+
+Remarkably, this shows that the one-dimensional Ising model has no phase transition at finite temperature—the correlation length remains finite for all $T > 0$. It takes two or more dimensions for the cooperative effects to be strong enough to produce a true phase transition.
+
+## The Phenomenology of Phase Transitions
+
+Having explored a specific solvable model, let's step back and consider the general features that characterize all phase transitions, regardless of the microscopic details. Phase transitions occur at specific values of external fields $(T, B, P)$ where thermodynamic observables become singular. Equilibrium for fixed external fields is defined by the minimum of an appropriate thermodynamic potential:
+
+- **Internal energy** $U$ for fixed entropy $S$ and volume $V$
+- **Helmholtz free energy** $F$ for fixed temperature $T$ and volume $V$
+- **Gibbs free energy** $G$ for fixed temperature $T$ and pressure $P$
+- **Enthalpy** $H$ for fixed entropy $S$ and pressure $P$
+
+First-order transitions are characterized by:
+
+- Singularities appearing as discontinuities
+- Non-zero latent heat
+- Finite correlation length
+- Bodies in two phases may coexist in equilibrium at the transition point
+
+Second-order transitions, by contrast, feature:
+
+- Singularities appearing as divergences
+- Zero latent heat
+- Divergent correlation length
+- No mixing of phases at the transition point
+- The symmetry of one phase is a subgroup of the symmetry of another
+
+The key to distinguishing phases is the **order parameter**, a quantity that takes different values in different phases and is usually intrinsic to the system. For the Ising model, the magnetization $M$ serves this role—it's zero in the paramagnetic phase and non-zero in the ferromagnetic phase. For liquid-gas transitions like boiling water, it's the density $\rho$ that distinguishes the phases.
+
+Consider the phase diagram of water. Along one curve (the first-order transition line), liquid and gas can coexist with different densities. This line terminates at a critical point. If we approach this critical point from different directions, we pass through a second-order transition where the distinction between liquid and gas disappears continuously.
+
+## Landau-Ginzburg Theory: A Phenomenological Approach
+
+Lev Landau developed a powerful phenomenological theory that describes phase transitions using classical physics. The idea is elegant: expand the equilibrium free energy as a power series in the order parameter $M$:
+
+$$
+A(T, M) = A_0 + \frac{1}{2} A_2 M^2 + \frac{1}{4} A_4 M^4 + \dots
+$$
+
+Near the critical temperature $T_c$, the coefficient $A_2$ changes sign:
+
+$$
+A_2 = a_2(T - T_c) \quad \text{as } T \to T_c
+$$
+
+For $T > T_c$, the minimum is at $M = 0$ (no magnetization). For $T < T_c$, a non-zero magnetization minimizes the free energy. At equilibrium, $\frac{dA}{dM} = 0$, which gives:
+
+$$
+|M(T)| = \left| \frac{A_2}{A_4} \right|^{1/2} \left( 1 + \frac{1}{2} \frac{A_6 A_2}{A_4^2} + \dots \right)
+$$
+
+This simplifies near the critical point to:
+
+$$
+M(T) \sim |T - T_c|^{\beta_{\text{crit}}}
+$$
+
+where the critical exponent $\beta_{\text{crit}} = 1/2$ (not to be confused with the inverse temperature $\beta = 1/(k_B T)$ used elsewhere). This power law behavior is characteristic of mean-field theory for second-order phase transitions.
+
+We can make this more general by writing:
+
+$$
+M(T) = \left| \frac{A_2}{A_4} \right|^{1/2} \mathcal{M}(x), \quad x = \frac{A_2 A_6}{A_4^2}
+$$
+
+where $\mathcal{M}(x)$ is a universal scaling function that depends on the microscopic details of the system.
+
+When we apply an external field $h$, the symmetry $M \to -M$ is broken:
+
+$$
+A = A_0 - hM + \frac{1}{2} A_2 M^2 + \frac{1}{4} A_4 M^4
+$$
+
+At $T = T_c$ where $A_2 = 0$, the equilibrium condition becomes:
+
+$$
+-h + A_4 M^3 = 0
+$$
+
+If $T > T_c$, the equation of state is:
+
+$$
+-h + a_2 (T - T_c) M + A_4 M^3 = 0
+$$
+
+Let $\epsilon = T - T_c$ denote the distance from criticality. The susceptibility, which measures the response to the field, becomes:
+
+$$
+\chi = \frac{\partial M}{\partial h} \Big|_{h \to 0} = \frac{1}{a_2 T_c \epsilon}
+$$
+
+This gives us another critical exponent: the susceptibility diverges as $\chi \sim \epsilon^{-1}$, so the exponent is $\gamma = 1$.
+
+The boundary between first and second order transitions occurs when $A_4 \to 0$ at $T = T_c$, defining the critical point. The Landau-Ginzburg theory successfully captures the qualitative features of phase transitions and provides a framework for calculating critical exponents, though it gets some of the quantitative details wrong. More sophisticated approaches—particularly the renormalization group—are needed for accurate predictions beyond mean-field theory.
+
+## The Deep Connection to Quantum Field Theory
+
+There's a beautiful and profound connection between statistical mechanics and quantum field theory that deserves attention. In quantum mechanics, the path integral formulation expresses transition amplitudes as sums over all possible paths. In statistical mechanics, we can write the partition function as a path integral too.
+
+In statistical physics, the partition function is:
+
+$$
+Z = \sum_n e^{-\beta E_n} = \text{Tr}(e^{-\beta H})
+$$
+
+We can express this in a path integral form by inserting complete sets of states:
+
+$$
+Z = \sum_n \langle n | e^{-\beta H} | n \rangle = \int dx \langle x | e^{-\beta H} | x \rangle
+$$
+
+This can be written as:
+
+$$
+Z = \int \mathcal{D}x(\tau) \, e^{-S_E}
+$$
+
+where $S_E$ is the Euclidean action. This resembles the quantum mechanical path integral but with a Wick rotation $t \to -i\tau$—we're summing over closed paths in imaginary time rather than forward-evolving paths in real time.
+
+In quantum field theory, we have vacuum-to-vacuum transition amplitudes:
+
+$$
+\langle 0, \infty | 0, -\infty \rangle = Z[J]
+$$
+
+where the generating functional is:
+
+$$
+Z[J] = \frac{1}{Z_0} \int [d\phi] \exp \left\{ i\int d^4x \left[ \mathcal{L}(\phi) + J(x)\phi \right] \right\}
+$$
+
+After a Wick rotation to Euclidean time, this takes exactly the same mathematical form as the statistical mechanical partition function. This deep connection means that techniques developed for one field directly apply to the other. The renormalization group, developed to handle divergences in quantum field theory, revolutionized our understanding of critical phenomena in statistical mechanics. Conversely, insights about phase transitions inform our understanding of symmetry breaking in particle physics.
+
+Statistical field theory provides a unified framework for understanding how matter behaves at critical points. The Ising model, despite its apparent simplicity, captures the essential physics of magnetic phase transitions and serves as a testing ground for theoretical techniques that apply far more broadly.
+
+What emerges from this mathematical framework is a picture of critical phenomena as fundamentally collective behavior. Near a phase transition, individual microscopic details become less important than the large-scale correlations that span the entire system. The correlation length diverges, fluctuations at all scales become important, and the system exhibits scale invariance—a kind of self-similarity that connects physics at different length scales.
