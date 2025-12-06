@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Henry Watkins">
+<meta name="dcterms.date" content="2025-12-05">
+<meta name="description" content="Exploring statistical field theory">
+
+<title>Phase Transitions and the Ising Model: From Magnets to Critical Phenomena – Modulo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-0b4226dda13982b4c7661a3d40776f41.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4KRLE15B5S"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Modulo</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../book/index.html"> 
+<span class="menu-text">Plasma Book</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../monograph/index.html"> 
+<span class="menu-text">Extratemporal Dimensions</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Code Notes</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-code-notes">    
+        <li>
+    <a class="dropdown-item" href="../../code_notes/python-notes.html">
+ <span class="dropdown-text">Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/bash-notes.html">
+ <span class="dropdown-text">Command Line</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/git-notes.html">
+ <span class="dropdown-text">Git</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/sql-notes.html">
+ <span class="dropdown-text">SQL</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/cython-notes.html">
+ <span class="dropdown-text">Cython</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/docker-notes.html">
+ <span class="dropdown-text">Docker</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/rust-notes.html">
+ <span class="dropdown-text">Rust</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Phase Transitions and the Ising Model: From Magnets to Critical Phenomena</h1>
+                  <div>
+        <div class="description">
+          Exploring statistical field theory
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">physics</div>
+                <div class="quarto-category">statistical mechanics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Henry Watkins </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 5, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>Water boils, magnets lose their magnetism, and ice melts. These everyday transformations are all examples of phase transitions, and their description lies in statistical field theory, a powerful framework that reveals the deep mathematical structures underlying all these physical transformations. This post covers some more about statistical mechanics and its application to phase transitions, first by considering the famous Ising model, then moving the Landau-Ginzburg theory and the link with quantum field theory.</p>
+<section id="critical-phenomena-when-systems-go-singular" class="level2">
+<h2 class="anchored" data-anchor-id="critical-phenomena-when-systems-go-singular">Critical Phenomena: When Systems Go Singular</h2>
+<p>Statistical field theory provides us with the tools to describe phase transitions in equilibrium statistical systems. When we vary external parameters like temperature <span class="math inline">\(T\)</span> or magnetic field <span class="math inline">\(B\)</span>, systems can exhibit singularities in their thermodynamic variables. These aren’t just mathematical curiosities: they correspond to dramatic changes in physical behavior.</p>
+<p>Phase transitions come in two fundamental flavors. <strong>First-order transitions</strong> are abrupt and discontinuous. When water boils, for instance, there’s a discontinuity in entropy—a sudden jump as liquid transforms to vapor. You can see both phases coexisting: bubbles of steam forming in the liquid. In contrast, <strong>second-order transitions</strong> are continuous. Consider how iron loses its magnetism at the Curie temperature. The magnetization doesn’t jump to zero; it smoothly but singularly vanishes. There’s no latent heat, but the system’s susceptibility diverges.</p>
+<p>These second-order transitions are examples of <strong>critical phenomena</strong>, and they reveal something profound: the behavior of a physical system is described by different variables at different scales. The relationship between these scale-dependent descriptions is captured by what physicists call the <strong>renormalization group equations</strong>—a set of ideas that transformed our understanding of phase transitions and much of theoretical physics besides.</p>
+</section>
+<section id="the-ising-model-the-simplest-phase-transition-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-ising-model-the-simplest-phase-transition-model">The Ising Model: The simplest phase transition model</h2>
+<p>To understand critical phenomena, physicists often turn to the Ising model, perhaps the most studied model in statistical mechanics. Named after Ernst Ising, this model has since become a cornerstone of theoretical physics. Despite its apparent simplicity, it captures the essence of magnetic phase transitions and much more.</p>
+<p>Imagine a crystal lattice, a regular array of sites positioned at <span class="math inline">\(\mathbf{n} = \sum_{i=1}^{d} n_i \mathbf{e}_i\)</span>. Picture a checkerboard pattern extending in space: at each site sits a spin that can point either up or down: <span class="math inline">\(\sigma_n \in \{-1, +1\}\)</span>. These spins interact only with their nearest neighbors, and the energy of the system is given by the sum over all such neighboring pairs:</p>
+<p><span class="math display">\[
+E = -J \sum_{\langle n, m \rangle} \sigma_n \sigma_m
+\]</span></p>
+<p>where the notation <span class="math inline">\(\langle n, m \rangle\)</span> indicates that the sum runs only over nearest-neighbor pairs. Here <span class="math inline">\(J\)</span> is the coupling constant that determines the strength of the interaction. When spins align, the energy is lower; when they point in opposite directions, the energy is higher. Add an external magnetic field <span class="math inline">\(h\)</span>, and the total Hamiltonian becomes:</p>
+<p><span class="math display">\[
+H = E - h \sum_n \sigma_n
+\]</span></p>
+<p>This deceptively simple model contains a wealth of physics. The challenge is to understand how the collective behavior of millions of interacting spins gives rise to macroscopic magnetization.</p>
+</section>
+<section id="the-partition-function-summing-over-possibilities" class="level2">
+<h2 class="anchored" data-anchor-id="the-partition-function-summing-over-possibilities">The Partition Function: Summing Over Possibilities</h2>
+<p>The key to unlocking the Ising model lies in the partition function, the fundamental object in statistical mechanics:</p>
+<p><span class="math display">\[
+Z = \sum_{\text{configurations}} \exp(-\beta H(\sigma))
+\]</span></p>
+<p>where <span class="math inline">\(\beta = 1/(k_B T)\)</span> and the sum runs over all possible configurations of spins. The partition function encodes everything: from it we can extract the probability of any configuration:</p>
+<p><span class="math display">\[
+P(\sigma) = \frac{1}{Z} \exp\left( -\beta H(\sigma) \right)
+\]</span></p>
+<p>This probability distribution allows us to calculate the expectation value of any observable:</p>
+<p><span class="math display">\[
+\langle O(\sigma) \rangle = \sum_{\text{configurations}} P(\sigma) O(\sigma)
+\]</span></p>
+<p>The magnetization, the average total spin, is simply:</p>
+<p><span class="math display">\[
+M = \left\langle \sum_n \sigma_n \right\rangle = N \langle \sigma_0 \rangle
+\]</span></p>
+<p>where <span class="math inline">\(N\)</span> is the number of sites and we’ve used translational invariance to express it in terms of a single site.</p>
+<p>From the partition function we can also derive the Helmholtz free energy:</p>
+<p><span class="math display">\[
+F = -k_B T \log Z
+\]</span></p>
+<p>This thermodynamic potential is the key to understanding equilibrium. The system naturally evolves to minimize the free energy, balancing internal energy against entropy. We can relate the free energy to other thermodynamic quantities through:</p>
+<p><span class="math display">\[
+U - hM = -\frac{\partial \log Z}{\partial \beta}, \quad M = -\left( \frac{\partial F}{\partial h} \right)_T
+\]</span></p>
+<p>The fundamental thermodynamic relation emerges naturally:</p>
+<p><span class="math display">\[
+dU = T dS - P dV + h dM
+\]</span></p>
+</section>
+<section id="correlation-functions-how-spins-talk-to-each-other" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-functions-how-spins-talk-to-each-other">Correlation Functions: How Spins Talk to Each Other</h2>
+<p>One of the most important concepts in statistical field theory is the correlation function. It measures how a fluctuation at one point affects the system at another point. For the Ising model, we define:</p>
+<p><span class="math display">\[
+G(r) = \langle \sigma_0 \sigma_r \rangle - \langle \sigma_0 \rangle \langle \sigma_r \rangle
+\]</span></p>
+<p>This tells us how correlated the spin at the origin is with a spin at distance <span class="math inline">\(r\)</span>. The susceptibility is directly related to the sum of correlations. We can define the susceptibility as:</p>
+<p><span class="math display">\[
+\chi = \frac{\partial M}{\partial h}\Big|_T = k_B T \frac{\partial^2 \log Z}{\partial h^2}\Big|_T
+\]</span></p>
+<p>Through some algebra, this leads to the result:</p>
+<p><span class="math display">\[
+\chi = \beta N \sum_r G(r)
+\]</span></p>
+<p>This equation tells us that the susceptibility is simply the integrated correlation function. The correlation function itself gives the response of the average magnetization at one point to a fluctuation at distance <span class="math inline">\(r\)</span> away.</p>
+<p>Near a critical point, correlations don’t just extend over a few lattice spacings—they span the entire system. This is characterized by the correlation length <span class="math inline">\(\xi\)</span>, which encodes how correlations decay with distance:</p>
+<p><span class="math display">\[
+G(r) = \begin{cases}
+\frac{1}{r^{D-2+\eta}} &amp; r \ll \xi \\
+\frac{e^{-r/\xi}}{(\xi r)^{D/2}} &amp; r \gg \xi
+\end{cases}
+\]</span></p>
+<p>At the critical temperature, <span class="math inline">\(\xi\)</span> diverges. Suddenly, the system doesn’t have a characteristic length scale—fluctuations at all scales become important. This scale invariance is the signature of a critical point.</p>
+</section>
+<section id="solving-the-one-dimensional-ising-model" class="level2">
+<h2 class="anchored" data-anchor-id="solving-the-one-dimensional-ising-model">Solving the One-Dimensional Ising Model</h2>
+<p>While the Ising model seems simple, it’s only exactly solvable in one and two dimensions. The one-dimensional case provides valuable insights through the transfer matrix method.</p>
+<p>For a one-dimensional chain, we can write the partition function as a product of transfer matrices:</p>
+<p><span class="math display">\[
+Z = \sum_{\sigma_i = \pm 1} \prod_{i=0}^{N-1} \exp\left[\beta J \, \sigma_i \sigma_{i+1} + \frac{1}{2} \beta h (\sigma_i + \sigma_{i+1})\right]
+\]</span></p>
+<p>This can be rewritten as:</p>
+<p><span class="math display">\[
+Z = \sum_{\sigma_1 \dots \sigma_N} W_{\sigma_1 \sigma_2} W_{\sigma_2 \sigma_3} \dots W_{\sigma_{N-1} \sigma_N}
+\]</span></p>
+<p>where the transfer matrix elements are:</p>
+<p><span class="math display">\[
+W_{\sigma \sigma'} = \exp\left[\beta J \sigma \sigma' + \frac{1}{2} \beta h (\sigma + \sigma')\right]
+\]</span></p>
+<p>This <span class="math inline">\(2 \times 2\)</span> matrix can be written explicitly as:</p>
+<p><span class="math display">\[
+W = \begin{bmatrix}
+\mu z &amp; z^{-1} \\
+z^{-1} &amp; \frac{1}{\mu z}
+\end{bmatrix}
+\]</span></p>
+<p>where <span class="math inline">\(\mu = e^{\beta h}\)</span> and <span class="math inline">\(z = e^{\beta J}\)</span>. The partition function becomes simply:</p>
+<p><span class="math display">\[
+Z = \text{Tr}(W^N) = \lambda_+^N + \lambda_-^N
+\]</span></p>
+<p>where <span class="math inline">\(\lambda_\pm\)</span> are the eigenvalues of <span class="math inline">\(W\)</span>. For large <span class="math inline">\(N\)</span>, the larger eigenvalue dominates, so <span class="math inline">\(Z \approx \lambda_+^N\)</span>:</p>
+<p><span class="math display">\[
+\lambda_+ = z \cosh(\beta h) + \sqrt{z^2 \sinh^2(\beta h) + z^{-2}}
+\]</span></p>
+<p>The free energy is thus:</p>
+<p><span class="math display">\[
+F = -N k_B T \log \lambda_+
+\]</span></p>
+<p>From this, we can extract the magnetization:</p>
+<p><span class="math display">\[
+\frac{M}{N} = k_B T \frac{\partial \log \lambda_+}{\partial h} = \frac{e^{\beta J} \sinh(\beta h)}{\sqrt{e^{2\beta J} \sinh^2(\beta h) + e^{-2\beta J}}}
+\]</span></p>
+<p>To find the correlation function, we need to calculate <span class="math inline">\(\langle \sigma_0 \sigma_r \rangle\)</span>. This involves inserting spin operators into the trace:</p>
+<p><span class="math display">\[
+\langle \sigma_0 \sigma_r \rangle = \frac{1}{Z} \sum_\sigma \sigma_0 W_{\sigma_0 \sigma_1} \dots \sigma_r W_{\sigma_r \sigma_{r+1}} \dots W_{\sigma_{N-1} \sigma_N}
+\]</span></p>
+<p>After diagonalizing the transfer matrix with an orthogonal transformation <span class="math inline">\(W = P \Lambda P^{-1}\)</span>, we find that the correlation function takes an exponential form:</p>
+<p><span class="math display">\[
+G(r) = \sin^2 2\phi \, e^{-r/\xi}
+\]</span></p>
+<p>where the correlation length is:</p>
+<p><span class="math display">\[
+\xi = \left( \log \frac{\lambda_+}{\lambda_-} \right)^{-1}
+\]</span></p>
+<p>Remarkably, this shows that the one-dimensional Ising model has no phase transition at finite temperature—the correlation length remains finite for all <span class="math inline">\(T &gt; 0\)</span>. It takes two or more dimensions for the cooperative effects to be strong enough to produce a true phase transition.</p>
+</section>
+<section id="the-phenomenology-of-phase-transitions" class="level2">
+<h2 class="anchored" data-anchor-id="the-phenomenology-of-phase-transitions">The Phenomenology of Phase Transitions</h2>
+<p>Having explored a specific solvable model, let’s step back and consider the general features that characterize all phase transitions, regardless of the microscopic details. Phase transitions occur at specific values of external fields <span class="math inline">\((T, B, P)\)</span> where thermodynamic observables become singular. Equilibrium for fixed external fields is defined by the minimum of an appropriate thermodynamic potential:</p>
+<ul>
+<li><strong>Internal energy</strong> <span class="math inline">\(U\)</span> for fixed entropy <span class="math inline">\(S\)</span> and volume <span class="math inline">\(V\)</span></li>
+<li><strong>Helmholtz free energy</strong> <span class="math inline">\(F\)</span> for fixed temperature <span class="math inline">\(T\)</span> and volume <span class="math inline">\(V\)</span></li>
+<li><strong>Gibbs free energy</strong> <span class="math inline">\(G\)</span> for fixed temperature <span class="math inline">\(T\)</span> and pressure <span class="math inline">\(P\)</span></li>
+<li><strong>Enthalpy</strong> <span class="math inline">\(H\)</span> for fixed entropy <span class="math inline">\(S\)</span> and pressure <span class="math inline">\(P\)</span></li>
+</ul>
+<p>First-order transitions are characterized by:</p>
+<ul>
+<li>Singularities appearing as discontinuities</li>
+<li>Non-zero latent heat</li>
+<li>Finite correlation length</li>
+<li>Bodies in two phases may coexist in equilibrium at the transition point</li>
+</ul>
+<p>Second-order transitions, by contrast, feature:</p>
+<ul>
+<li>Singularities appearing as divergences</li>
+<li>Zero latent heat</li>
+<li>Divergent correlation length</li>
+<li>No mixing of phases at the transition point</li>
+<li>The symmetry of one phase is a subgroup of the symmetry of another</li>
+</ul>
+<p>The key to distinguishing phases is the <strong>order parameter</strong>, a quantity that takes different values in different phases and is usually intrinsic to the system. For the Ising model, the magnetization <span class="math inline">\(M\)</span> serves this role—it’s zero in the paramagnetic phase and non-zero in the ferromagnetic phase. For liquid-gas transitions like boiling water, it’s the density <span class="math inline">\(\rho\)</span> that distinguishes the phases.</p>
+<p>Consider the phase diagram of water. Along one curve (the first-order transition line), liquid and gas can coexist with different densities. This line terminates at a critical point. If we approach this critical point from different directions, we pass through a second-order transition where the distinction between liquid and gas disappears continuously.</p>
+</section>
+<section id="landau-ginzburg-theory-a-phenomenological-approach" class="level2">
+<h2 class="anchored" data-anchor-id="landau-ginzburg-theory-a-phenomenological-approach">Landau-Ginzburg Theory: A Phenomenological Approach</h2>
+<p>Lev Landau developed a powerful phenomenological theory that describes phase transitions using classical physics. The idea is elegant: expand the equilibrium free energy as a power series in the order parameter <span class="math inline">\(M\)</span>:</p>
+<p><span class="math display">\[
+A(T, M) = A_0 + \frac{1}{2} A_2 M^2 + \frac{1}{4} A_4 M^4 + \dots
+\]</span></p>
+<p>Near the critical temperature <span class="math inline">\(T_c\)</span>, the coefficient <span class="math inline">\(A_2\)</span> changes sign:</p>
+<p><span class="math display">\[
+A_2 = a_2(T - T_c) \quad \text{as } T \to T_c
+\]</span></p>
+<p>For <span class="math inline">\(T &gt; T_c\)</span>, the minimum is at <span class="math inline">\(M = 0\)</span> (no magnetization). For <span class="math inline">\(T &lt; T_c\)</span>, a non-zero magnetization minimizes the free energy. At equilibrium, <span class="math inline">\(\frac{dA}{dM} = 0\)</span>, which gives:</p>
+<p><span class="math display">\[
+|M(T)| = \left| \frac{A_2}{A_4} \right|^{1/2} \left( 1 + \frac{1}{2} \frac{A_6 A_2}{A_4^2} + \dots \right)
+\]</span></p>
+<p>This simplifies near the critical point to:</p>
+<p><span class="math display">\[
+M(T) \sim |T - T_c|^{\beta_{\text{crit}}}
+\]</span></p>
+<p>where the critical exponent <span class="math inline">\(\beta_{\text{crit}} = 1/2\)</span> (not to be confused with the inverse temperature <span class="math inline">\(\beta = 1/(k_B T)\)</span> used elsewhere). This power law behavior is characteristic of mean-field theory for second-order phase transitions.</p>
+<p>We can make this more general by writing:</p>
+<p><span class="math display">\[
+M(T) = \left| \frac{A_2}{A_4} \right|^{1/2} \mathcal{M}(x), \quad x = \frac{A_2 A_6}{A_4^2}
+\]</span></p>
+<p>where <span class="math inline">\(\mathcal{M}(x)\)</span> is a universal scaling function that depends on the microscopic details of the system.</p>
+<p>When we apply an external field <span class="math inline">\(h\)</span>, the symmetry <span class="math inline">\(M \to -M\)</span> is broken:</p>
+<p><span class="math display">\[
+A = A_0 - hM + \frac{1}{2} A_2 M^2 + \frac{1}{4} A_4 M^4
+\]</span></p>
+<p>At <span class="math inline">\(T = T_c\)</span> where <span class="math inline">\(A_2 = 0\)</span>, the equilibrium condition becomes:</p>
+<p><span class="math display">\[
+-h + A_4 M^3 = 0
+\]</span></p>
+<p>If <span class="math inline">\(T &gt; T_c\)</span>, the equation of state is:</p>
+<p><span class="math display">\[
+-h + a_2 (T - T_c) M + A_4 M^3 = 0
+\]</span></p>
+<p>Let <span class="math inline">\(\epsilon = T - T_c\)</span> denote the distance from criticality. The susceptibility, which measures the response to the field, becomes:</p>
+<p><span class="math display">\[
+\chi = \frac{\partial M}{\partial h} \Big|_{h \to 0} = \frac{1}{a_2 T_c \epsilon}
+\]</span></p>
+<p>This gives us another critical exponent: the susceptibility diverges as <span class="math inline">\(\chi \sim \epsilon^{-1}\)</span>, so the exponent is <span class="math inline">\(\gamma = 1\)</span>.</p>
+<p>The boundary between first and second order transitions occurs when <span class="math inline">\(A_4 \to 0\)</span> at <span class="math inline">\(T = T_c\)</span>, defining the critical point. The Landau-Ginzburg theory successfully captures the qualitative features of phase transitions and provides a framework for calculating critical exponents, though it gets some of the quantitative details wrong. More sophisticated approaches—particularly the renormalization group—are needed for accurate predictions beyond mean-field theory.</p>
+</section>
+<section id="the-deep-connection-to-quantum-field-theory" class="level2">
+<h2 class="anchored" data-anchor-id="the-deep-connection-to-quantum-field-theory">The Deep Connection to Quantum Field Theory</h2>
+<p>There’s a beautiful and profound connection between statistical mechanics and quantum field theory that deserves attention. In quantum mechanics, the path integral formulation expresses transition amplitudes as sums over all possible paths. In statistical mechanics, we can write the partition function as a path integral too.</p>
+<p>In statistical physics, the partition function is:</p>
+<p><span class="math display">\[
+Z = \sum_n e^{-\beta E_n} = \text{Tr}(e^{-\beta H})
+\]</span></p>
+<p>We can express this in a path integral form by inserting complete sets of states:</p>
+<p><span class="math display">\[
+Z = \sum_n \langle n | e^{-\beta H} | n \rangle = \int dx \langle x | e^{-\beta H} | x \rangle
+\]</span></p>
+<p>This can be written as:</p>
+<p><span class="math display">\[
+Z = \int \mathcal{D}x(\tau) \, e^{-S_E}
+\]</span></p>
+<p>where <span class="math inline">\(S_E\)</span> is the Euclidean action. This resembles the quantum mechanical path integral but with a Wick rotation <span class="math inline">\(t \to -i\tau\)</span>—we’re summing over closed paths in imaginary time rather than forward-evolving paths in real time.</p>
+<p>In quantum field theory, we have vacuum-to-vacuum transition amplitudes:</p>
+<p><span class="math display">\[
+\langle 0, \infty | 0, -\infty \rangle = Z[J]
+\]</span></p>
+<p>where the generating functional is:</p>
+<p><span class="math display">\[
+Z[J] = \frac{1}{Z_0} \int [d\phi] \exp \left\{ i\int d^4x \left[ \mathcal{L}(\phi) + J(x)\phi \right] \right\}
+\]</span></p>
+<p>After a Wick rotation to Euclidean time, this takes exactly the same mathematical form as the statistical mechanical partition function. This deep connection means that techniques developed for one field directly apply to the other. The renormalization group, developed to handle divergences in quantum field theory, revolutionized our understanding of critical phenomena in statistical mechanics. Conversely, insights about phase transitions inform our understanding of symmetry breaking in particle physics.</p>
+<p>Statistical field theory provides a unified framework for understanding how matter behaves at critical points. The Ising model, despite its apparent simplicity, captures the essential physics of magnetic phase transitions and serves as a testing ground for theoretical techniques that apply far more broadly.</p>
+<p>What emerges from this mathematical framework is a picture of critical phenomena as fundamentally collective behavior. Near a phase transition, individual microscopic details become less important than the large-scale correlations that span the entire system. The correlation length diverges, fluctuations at all scales become important, and the system exhibits scale invariance—a kind of self-similarity that connects physics at different length scales.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
