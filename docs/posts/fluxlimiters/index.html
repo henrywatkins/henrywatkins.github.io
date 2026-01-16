@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Henry Watkins">
+<meta name="dcterms.date" content="2026-01-16">
+<meta name="description" content="Simulating plasma physics systems">
+
+<title>Numerical Methods for MHD: Flux Limiters and Hyperbolic Solvers – Modulo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-0b4226dda13982b4c7661a3d40776f41.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4KRLE15B5S"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Modulo</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../book/index.html"> 
+<span class="menu-text">Plasma Book</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../monograph/index.html"> 
+<span class="menu-text">Extratemporal Dimensions</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Code Notes</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-code-notes">    
+        <li>
+    <a class="dropdown-item" href="../../code_notes/python-notes.html">
+ <span class="dropdown-text">Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/bash-notes.html">
+ <span class="dropdown-text">Command Line</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/git-notes.html">
+ <span class="dropdown-text">Git</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/sql-notes.html">
+ <span class="dropdown-text">SQL</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/cython-notes.html">
+ <span class="dropdown-text">Cython</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/docker-notes.html">
+ <span class="dropdown-text">Docker</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/rust-notes.html">
+ <span class="dropdown-text">Rust</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Numerical Methods for MHD: Flux Limiters and Hyperbolic Solvers</h1>
+                  <div>
+        <div class="description">
+          Simulating plasma physics systems
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">physics</div>
+                <div class="quarto-category">hpc</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Henry Watkins </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 16, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#part-1-conservative-finite-volume-methods" id="toc-part-1-conservative-finite-volume-methods" class="nav-link" data-scroll-target="#part-1-conservative-finite-volume-methods">Part 1: Conservative Finite Volume Methods</a>
+  <ul class="collapse">
+  <li><a href="#the-mhd-state-vector" id="toc-the-mhd-state-vector" class="nav-link" data-scroll-target="#the-mhd-state-vector">The MHD State Vector</a></li>
+  <li><a href="#the-flux-tensor" id="toc-the-flux-tensor" class="nav-link" data-scroll-target="#the-flux-tensor">The Flux Tensor</a></li>
+  <li><a href="#finite-volume-discretization" id="toc-finite-volume-discretization" class="nav-link" data-scroll-target="#finite-volume-discretization">Finite Volume Discretization</a></li>
+  </ul></li>
+  <li><a href="#part-2-the-riemann-problem" id="toc-part-2-the-riemann-problem" class="nav-link" data-scroll-target="#part-2-the-riemann-problem">Part 2: The Riemann Problem</a>
+  <ul class="collapse">
+  <li><a href="#the-hll-approximate-solver" id="toc-the-hll-approximate-solver" class="nav-link" data-scroll-target="#the-hll-approximate-solver">The HLL Approximate Solver</a></li>
+  <li><a href="#magnetosonic-speeds" id="toc-magnetosonic-speeds" class="nav-link" data-scroll-target="#magnetosonic-speeds">Magnetosonic Speeds</a></li>
+  </ul></li>
+  <li><a href="#part-3-flux-limiters---the-core-topic" id="toc-part-3-flux-limiters---the-core-topic" class="nav-link" data-scroll-target="#part-3-flux-limiters---the-core-topic">Part 3: Flux Limiters - The Core Topic</a>
+  <ul class="collapse">
+  <li><a href="#the-problem-diffusion-vs.-oscillations" id="toc-the-problem-diffusion-vs.-oscillations" class="nav-link" data-scroll-target="#the-problem-diffusion-vs.-oscillations">The Problem: Diffusion vs.&nbsp;Oscillations</a></li>
+  <li><a href="#the-solution-adaptive-blending" id="toc-the-solution-adaptive-blending" class="nav-link" data-scroll-target="#the-solution-adaptive-blending">The Solution: Adaptive Blending</a></li>
+  <li><a href="#common-flux-limiters" id="toc-common-flux-limiters" class="nav-link" data-scroll-target="#common-flux-limiters">Common Flux Limiters</a>
+  <ul class="collapse">
+  <li><a href="#van-leer-limiter" id="toc-van-leer-limiter" class="nav-link" data-scroll-target="#van-leer-limiter">Van Leer Limiter</a></li>
+  <li><a href="#superbee-limiter" id="toc-superbee-limiter" class="nav-link" data-scroll-target="#superbee-limiter">Superbee Limiter</a></li>
+  <li><a href="#minmod-limiter" id="toc-minmod-limiter" class="nav-link" data-scroll-target="#minmod-limiter">Minmod Limiter</a></li>
+  </ul></li>
+  <li><a href="#tvd-and-monotonicity" id="toc-tvd-and-monotonicity" class="nav-link" data-scroll-target="#tvd-and-monotonicity">TVD and Monotonicity</a></li>
+  <li><a href="#physical-interpretation" id="toc-physical-interpretation" class="nav-link" data-scroll-target="#physical-interpretation">Physical Interpretation</a></li>
+  </ul></li>
+  <li><a href="#part-4-muscl-hancock-scheme" id="toc-part-4-muscl-hancock-scheme" class="nav-link" data-scroll-target="#part-4-muscl-hancock-scheme">Part 4: MUSCL-Hancock Scheme</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#step-1-reconstruction" id="toc-step-1-reconstruction" class="nav-link" data-scroll-target="#step-1-reconstruction">Step 1: Reconstruction</a></li>
+  <li><a href="#step-2-half-timestep-evolution" id="toc-step-2-half-timestep-evolution" class="nav-link" data-scroll-target="#step-2-half-timestep-evolution">Step 2: Half-Timestep Evolution</a></li>
+  <li><a href="#step-3-riemann-solve-and-update" id="toc-step-3-riemann-solve-and-update" class="nav-link" data-scroll-target="#step-3-riemann-solve-and-update">Step 3: Riemann Solve and Update</a></li>
+  <li><a href="#putting-it-together" id="toc-putting-it-together" class="nav-link" data-scroll-target="#putting-it-together">Putting It Together</a></li>
+  </ul></li>
+  <li><a href="#part-5-gawain---putting-theory-into-practice" id="toc-part-5-gawain---putting-theory-into-practice" class="nav-link" data-scroll-target="#part-5-gawain---putting-theory-into-practice">Part 5: Gawain - Putting Theory into Practice</a>
+  <ul class="collapse">
+  <li><a href="#installation-and-setup" id="toc-installation-and-setup" class="nav-link" data-scroll-target="#installation-and-setup">Installation and Setup</a></li>
+  <li><a href="#a-working-example-the-sod-shock-tube" id="toc-a-working-example-the-sod-shock-tube" class="nav-link" data-scroll-target="#a-working-example-the-sod-shock-tube">A Working Example: The Sod Shock Tube</a></li>
+  <li><a href="#beyond-sod-mhd-simulations" id="toc-beyond-sod-mhd-simulations" class="nav-link" data-scroll-target="#beyond-sod-mhd-simulations">Beyond Sod: MHD Simulations</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>When simulating magnetohydrodynamic (MHD) flows in plasma physics problems, we face a fundamental numerical dilemma. First-order accurate schemes are stable but diffusive, smearing out discontinuities like shocks until they become physically meaningless. Second-order schemes capture sharp features accurately but produce spurious oscillations that can drive the simulation unstable or create unphysical negative densities.</p>
+<p>In astrophysical jets, solar flares, and fusion plasmas, the physics happens at discontinuities: shock fronts compress and heat material, current sheets reconnect magnetic field lines, and contact discontinuities separate distinct plasma populations. If our numerical methods can’t resolve these features accurately and stably, we can’t trust the physics we extract from simulations.</p>
+<p><strong>Flux limiters</strong> solve this problem by blending first and second-order methods adaptively. In smooth regions, they activate the second-order scheme for accuracy. Near discontinuities, they revert to first-order to suppress oscillations. This adaptive strategy gives us the best of both worlds: sharp shock resolution without numerical instabilities.</p>
+<p>I was first taught these methods in the context of conservative finite volume schemes for hyperbolic partial differential equations. The mathematical framework extends far beyond MHD: the same techniques appear in computational fluid dynamics, astrophysics codes, weather modeling, and anywhere else we need to solve conservation laws with discontinuous solutions. Production MHD codes like ATHENA++ <span class="citation" data-cites="stone2020athena">(<a href="#ref-stone2020athena" role="doc-biblioref">Stone et al. 2020</a>)</span>, PLUTO <span class="citation" data-cites="mignone2007pluto">(<a href="#ref-mignone2007pluto" role="doc-biblioref">Mignone et al. 2007</a>)</span>, and FLASH <span class="citation" data-cites="fryxell2000flash">(<a href="#ref-fryxell2000flash" role="doc-biblioref">Fryxell et al. 2000</a>)</span> all employ flux-limited schemes as their numerical foundation.</p>
+<p>In this post, we’ll build up the machinery step by step: starting from conservative finite volume methods, introducing Riemann solvers, understanding flux limiters, and finally assembling these components into the MUSCL-Hancock scheme—a workhorse algorithm for modern MHD simulations. Along the way, I’ll show how these abstract numerical concepts translate into working code using Gawain, a Python package I developed for teaching and prototyping MHD algorithms.</p>
+</section>
+<section id="part-1-conservative-finite-volume-methods" class="level1">
+<h1>Part 1: Conservative Finite Volume Methods</h1>
+<p>The starting point for any discussion of numerical methods for conservation laws is the <strong>conservative form</strong> of the governing equations. For a generic hyperbolic system, we write:</p>
+<p><span id="eq-conservation"><span class="math display">\[
+\frac{\partial \mathbf{U}}{\partial t} + \nabla \cdot \mathbf{F}(\mathbf{U}) = \mathbf{S}
+\tag{1}\]</span></span></p>
+<p>This equation expresses a fundamental physical principle: the rate of change of some conserved quantity <span class="math inline">\(\mathbf{U}\)</span> within a volume equals the flux <span class="math inline">\(\mathbf{F}\)</span> flowing across its boundaries plus any sources <span class="math inline">\(\mathbf{S}\)</span> acting inside.</p>
+<section id="the-mhd-state-vector" class="level2">
+<h2 class="anchored" data-anchor-id="the-mhd-state-vector">The MHD State Vector</h2>
+<p>For ideal magnetohydrodynamics, the <strong>state vector</strong> <span class="math inline">\(\mathbf{U}\)</span> contains eight conserved quantities in three dimensions:</p>
+<p><span id="eq-state-vector"><span class="math display">\[
+\mathbf{U} = \begin{pmatrix}
+\rho \\
+\rho v_x \\
+\rho v_y \\
+\rho v_z \\
+E \\
+B_x \\
+B_y \\
+B_z
+\end{pmatrix}
+\tag{2}\]</span></span></p>
+<p>where <span class="math inline">\(\rho\)</span> is mass density, <span class="math inline">\(\rho \mathbf{v}\)</span> is momentum density, <span class="math inline">\(E\)</span> is total energy density, and <span class="math inline">\(\mathbf{B}\)</span> is the magnetic field. The total energy includes kinetic, thermal, and magnetic contributions:</p>
+<p><span id="eq-total-energy"><span class="math display">\[
+E = \frac{1}{2}\rho v^2 + \frac{P}{\gamma - 1} + \frac{B^2}{2\mu_0}
+\tag{3}\]</span></span></p>
+<p>Here <span class="math inline">\(P\)</span> is thermal pressure, <span class="math inline">\(\gamma\)</span> is the adiabatic index, and <span class="math inline">\(\mu_0\)</span> is the permeability of free space.</p>
+</section>
+<section id="the-flux-tensor" class="level2">
+<h2 class="anchored" data-anchor-id="the-flux-tensor">The Flux Tensor</h2>
+<p>The <strong>flux tensor</strong> <span class="math inline">\(\mathbf{F}^i\)</span> describes how these conserved quantities flow across surfaces perpendicular to direction <span class="math inline">\(i\)</span>. For the <span class="math inline">\(x\)</span>-direction:</p>
+<p><span id="eq-flux-tensor"><span class="math display">\[
+\mathbf{F}^x = \begin{pmatrix}
+\rho v_x \\
+\rho v_x^2 - B_x^2/\mu_0 + P_T \\
+\rho v_x v_y - B_x B_y/\mu_0 \\
+\rho v_x v_z - B_x B_z/\mu_0 \\
+(E + P_T) v_x - (\mathbf{B} \cdot \mathbf{v}) B_x/\mu_0 \\
+0 \\
+v_x B_y - v_y B_x \\
+v_x B_z - v_z B_x
+\end{pmatrix}
+\tag{4}\]</span></span></p>
+<p>where <span class="math inline">\(P_T = P + B^2/(2\mu_0)\)</span> is the <strong>total pressure</strong> including magnetic pressure. The flux tensor has analogous forms for the <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span> directions.</p>
+<p>Notice the magnetic field component <span class="math inline">\(B_x\)</span> has zero flux in the <span class="math inline">\(x\)</span>-direction. This enforces the divergence constraint <span class="math inline">\(\nabla \cdot \mathbf{B} = 0\)</span>—magnetic field lines cannot begin or end, only thread through our computational domain. Maintaining this constraint numerically is a subtle challenge that requires special techniques like constrained transport or divergence cleaning, but we’ll set that aside for now.</p>
+</section>
+<section id="finite-volume-discretization" class="level2">
+<h2 class="anchored" data-anchor-id="finite-volume-discretization">Finite Volume Discretization</h2>
+<p>The <strong>finite volume method</strong> discretizes space into cells and stores cell-averaged values of the conserved quantities. For a one-dimensional cell <span class="math inline">\(i\)</span> with width <span class="math inline">\(\Delta x\)</span>, the cell average is:</p>
+<p><span id="eq-cell-average"><span class="math display">\[
+\bar{U}_i = \frac{1}{\Delta x} \int_{x_{i-1/2}}^{x_{i+1/2}} U(x) \, dx
+\tag{5}\]</span></span></p>
+<p>Integrating <a href="#eq-conservation" class="quarto-xref">Equation&nbsp;1</a> over the cell and applying the divergence theorem gives the discrete update formula:</p>
+<p><span id="eq-discrete-update"><span class="math display">\[
+U_i^{n+1} = U_i^n - \frac{\Delta t}{\Delta x} \left( F_{i+1/2} - F_{i-1/2} \right)
+\tag{6}\]</span></span></p>
+<p>This says: the new cell average equals the old cell average minus the net flux that flowed out through the cell boundaries during time <span class="math inline">\(\Delta t\)</span>. The subscripts <span class="math inline">\(i \pm 1/2\)</span> denote the cell <strong>interfaces</strong> or edges.</p>
+<p>The challenge is computing <span class="math inline">\(F_{i+1/2}\)</span>—the numerical flux at the interface between cells <span class="math inline">\(i\)</span> and <span class="math inline">\(i+1\)</span>. This is where Riemann solvers enter the picture.</p>
+</section>
+</section>
+<section id="part-2-the-riemann-problem" class="level1">
+<h1>Part 2: The Riemann Problem</h1>
+<p>At each cell interface, we face a classic problem from the theory of hyperbolic PDEs: the <strong>Riemann problem</strong>. This is the initial value problem where two constant states meet at a discontinuity:</p>
+<p><span id="eq-riemann-initial"><span class="math display">\[
+U(x, 0) = \begin{cases}
+U_L &amp; x &lt; 0 \\
+U_R &amp; x &gt; 0
+\end{cases}
+\tag{7}\]</span></span></p>
+<p>Physically, imagine two reservoirs of gas at different densities and pressures, separated by a thin membrane. At <span class="math inline">\(t = 0\)</span>, we instantaneously remove the membrane. What happens? The discontinuity breaks up into wave patterns: shocks, rarefactions, and contact discontinuities propagate outward at characteristic speeds determined by the local sound speed (or in MHD, the magnetosonic speeds).</p>
+<p>For the Euler equations of hydrodynamics, the exact Riemann solution can be computed but requires iteratively solving nonlinear equations. For MHD, the exact solution is prohibitively expensive due to the seven wave modes (fast, Alfvén, and slow magnetosonic waves, plus contact discontinuities, traveling in both directions). Production codes therefore use <strong>approximate Riemann solvers</strong> that capture the essential wave structure without exact computation.</p>
+<section id="the-hll-approximate-solver" class="level2">
+<h2 class="anchored" data-anchor-id="the-hll-approximate-solver">The HLL Approximate Solver</h2>
+<p>The <strong>HLL (Harten-Lax-van Leer) solver</strong> <span class="citation" data-cites="harten1983upstream">(<a href="#ref-harten1983upstream" role="doc-biblioref">Harten, Lax, and Van Leer 1983</a>)</span> is one of the most robust and widely-used approximate Riemann solvers. It assumes a simplified wave structure with only two waves traveling at speeds <span class="math inline">\(S_L\)</span> (leftward) and <span class="math inline">\(S_R\)</span> (rightward), creating three constant regions in the solution:</p>
+<p><span id="eq-hll-flux"><span class="math display">\[
+F_{i+1/2} = \begin{cases}
+F_L &amp; \text{if } 0 \leq S_L \\
+F_{\text{HLL}} &amp; \text{if } S_L \leq 0 \leq S_R \\
+F_R &amp; \text{if } 0 \geq S_R
+\end{cases}
+\tag{8}\]</span></span></p>
+<p>where <span class="math inline">\(F_L = F(U_L)\)</span> and <span class="math inline">\(F_R = F(U_R)\)</span> are the physical fluxes computed from the left and right states. In the intermediate region, the flux is:</p>
+<p><span id="eq-hll-intermediate"><span class="math display">\[
+F_{\text{HLL}} = \frac{S_R F_L - S_L F_R + S_L S_R (U_R - U_L)}{S_R - S_L}
+\tag{9}\]</span></span></p>
+<p>The wave speeds <span class="math inline">\(S_L\)</span> and <span class="math inline">\(S_R\)</span> must bound the fastest waves emerging from the interface. A common choice (Davis estimate) uses the magnetosonic speeds:</p>
+<p><span id="eq-wave-speeds"><span class="math display">\[
+\begin{align}
+S_L &amp;= \min(v_L - c_f^L, v_R - c_f^R) \\
+S_R &amp;= \max(v_L + c_f^L, v_R + c_f^R)
+\end{align}
+\tag{10}\]</span></span></p>
+<p>where <span class="math inline">\(v\)</span> is the fluid velocity normal to the interface and <span class="math inline">\(c_f\)</span> is the <strong>fast magnetosonic speed</strong>—the fastest wave mode in MHD. For pure hydrodynamics, <span class="math inline">\(c_f\)</span> reduces to the sound speed <span class="math inline">\(c_s = \sqrt{\gamma P/\rho}\)</span>.</p>
+</section>
+<section id="magnetosonic-speeds" class="level2">
+<h2 class="anchored" data-anchor-id="magnetosonic-speeds">Magnetosonic Speeds</h2>
+<p>MHD supports three types of wave modes, each with its own propagation speed:</p>
+<ul>
+<li><strong>Fast magnetosonic waves</strong>: Compressional waves that couple gas pressure and magnetic pressure, <span class="math inline">\(c_f^2 = \frac{1}{2}(c_s^2 + c_A^2) + \frac{1}{2}\sqrt{(c_s^2 + c_A^2)^2 - 4c_s^2 c_{Ax}^2}\)</span></li>
+<li><strong>Alfvén waves</strong>: Transverse perturbations propagating along field lines at <span class="math inline">\(c_A = B/\sqrt{\mu_0 \rho}\)</span></li>
+<li><strong>Slow magnetosonic waves</strong>: Mixed compressional-magnetic modes slower than Alfvén waves</li>
+</ul>
+<p>Here <span class="math inline">\(c_s = \sqrt{\gamma P/\rho}\)</span> is the sound speed, <span class="math inline">\(c_A = |\mathbf{B}|/\sqrt{\mu_0 \rho}\)</span> is the Alfvén speed, and <span class="math inline">\(c_{Ax} = |B_x|/\sqrt{\mu_0 \rho}\)</span> is the Alfvén speed in the direction normal to the interface.</p>
+<p>The fast magnetosonic speed gives the information propagation speed—the domain of dependence for the Riemann problem. Using it to estimate <span class="math inline">\(S_L\)</span> and <span class="math inline">\(S_R\)</span> ensures the HLL solver captures all physically relevant information crossing the interface.</p>
+</section>
+</section>
+<section id="part-3-flux-limiters---the-core-topic" class="level1">
+<h1>Part 3: Flux Limiters - The Core Topic</h1>
+<p>Now we come to the heart of the matter. With our finite volume discretization (<a href="#eq-discrete-update" class="quarto-xref">Equation&nbsp;6</a>) and our ability to solve Riemann problems (HLL), we can build a basic first-order scheme. But first-order methods are too diffusive for practical use. We need second-order accuracy. Naively achieving this introduces oscillations. Flux limiters solve this problem.</p>
+<section id="the-problem-diffusion-vs.-oscillations" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem-diffusion-vs.-oscillations">The Problem: Diffusion vs.&nbsp;Oscillations</h2>
+<p>Consider the simplest first-order <strong>upwind scheme</strong>, where we use the upwind value (the value from whichever direction the wave is traveling) at each interface:</p>
+<p><span id="eq-first-order"><span class="math display">\[
+F_{i+1/2} = F(U_i)
+\tag{11}\]</span></span></p>
+<p>This scheme is stable and monotone-preserving—it never creates new maxima or minima that weren’t in the initial data. But it’s also highly diffusive. Sharp discontinuities smear out over several cells after just a few timesteps.</p>
+<p>The natural fix is to use a centered, second-order accurate flux:</p>
+<p><span id="eq-second-order"><span class="math display">\[
+F_{i+1/2} = F\left(\frac{U_i + U_{i+1}}{2}\right)
+\tag{12}\]</span></span></p>
+<p>or more sophisticatedly, the <strong>Lax-Wendroff scheme</strong> which includes time-centering. These methods have much lower numerical diffusion and maintain sharp features well—in smooth regions. Near discontinuities, however, they produce spurious oscillations called <strong>Gibbs phenomena</strong> or <strong>ringing</strong>. These oscillations can grow unbounded, making the scheme unstable, or create unphysical negative densities.</p>
+<p>This is a manifestation of <strong>Godunov’s theorem</strong>: for linear schemes, there is no method that is both second-order accurate and monotonicity-preserving. We must give up linearity.</p>
+</section>
+<section id="the-solution-adaptive-blending" class="level2">
+<h2 class="anchored" data-anchor-id="the-solution-adaptive-blending">The Solution: Adaptive Blending</h2>
+<p><strong>Flux limiters</strong> resolve the dilemma by making the scheme nonlinear—they blend first and second-order fluxes based on local solution smoothness:</p>
+<p><span id="eq-flux-limiter-general"><span class="math display">\[
+F_{i+1/2} = F_{i+1/2}^{\text{LO}} + \phi(r_{i+1/2}) \left[ F_{i+1/2}^{\text{HI}} - F_{i+1/2}^{\text{LO}} \right]
+\tag{13}\]</span></span></p>
+<p>Here <span class="math inline">\(F^{\text{LO}}\)</span> is a first-order flux (upwind or Lax-Friedrichs), <span class="math inline">\(F^{\text{HI}}\)</span> is a second-order flux (Lax-Wendroff or MUSCL reconstruction), and <span class="math inline">\(\phi(r)\)</span> is the <strong>flux limiter function</strong>. The parameter <span class="math inline">\(r\)</span> measures local smoothness:</p>
+<p><span id="eq-smoothness-ratio"><span class="math display">\[
+r_{i+1/2} = \frac{U_i - U_{i-1}}{U_{i+1} - U_i}
+\tag{14}\]</span></span></p>
+<p>This ratio compares consecutive gradients. If the solution is smooth, both gradients have the same sign and similar magnitudes, so <span class="math inline">\(r \approx 1\)</span>. Near a discontinuity, the gradients differ wildly or have opposite signs, giving <span class="math inline">\(r \ll 1\)</span> or <span class="math inline">\(r &lt; 0\)</span>.</p>
+<p>The limiter function <span class="math inline">\(\phi(r)\)</span> activates the second-order flux when <span class="math inline">\(r \approx 1\)</span> (smooth region) and reverts to first-order when <span class="math inline">\(r\)</span> is small or negative (near discontinuity).</p>
+</section>
+<section id="common-flux-limiters" class="level2">
+<h2 class="anchored" data-anchor-id="common-flux-limiters">Common Flux Limiters</h2>
+<p>Several limiter functions have been developed, each with slightly different properties:</p>
+<section id="van-leer-limiter" class="level3">
+<h3 class="anchored" data-anchor-id="van-leer-limiter">Van Leer Limiter</h3>
+<p><span id="eq-van-leer"><span class="math display">\[
+\phi(r) = \frac{r + |r|}{1 + |r|}
+\tag{15}\]</span></span></p>
+<p>The <strong>Van Leer limiter</strong> is smooth and symmetric, providing good performance across a wide range of problems. It’s slightly compressive, meaning it can sharpen smooth extrema slightly. This is often desirable for resolving contact discontinuities.</p>
+</section>
+<section id="superbee-limiter" class="level3">
+<h3 class="anchored" data-anchor-id="superbee-limiter">Superbee Limiter</h3>
+<p><span id="eq-superbee"><span class="math display">\[
+\phi(r) = \max(0, \min(1, 2r), \min(2, r))
+\tag{16}\]</span></span></p>
+<p>The <strong>Superbee limiter</strong> is the most aggressive, creating the sharpest possible discontinuities allowed by the <strong>TVD (Total Variation Diminishing)</strong> constraint. TVD schemes guarantee that the total variation—roughly, the sum of all jumps in the solution—does not increase in time, preventing spurious oscillations. Superbee sits on the boundary of the TVD region, giving maximum sharpness. However, it can sometimes create overly sharp features in smooth regions (the “staircase effect”) or produce slight over/undershoots at extrema.</p>
+</section>
+<section id="minmod-limiter" class="level3">
+<h3 class="anchored" data-anchor-id="minmod-limiter">Minmod Limiter</h3>
+<p><span id="eq-minmod"><span class="math display">\[
+\phi(r) = \max(0, \min(1, r))
+\tag{17}\]</span></span></p>
+<p>The <strong>Minmod limiter</strong> is the most conservative, applying the smallest correction consistent with TVD. It’s the most diffusive of the limiters but also the most robust. Use it when stability is paramount, or when dealing with particularly difficult problems like strong rarefactions.</p>
+</section>
+</section>
+<section id="tvd-and-monotonicity" class="level2">
+<h2 class="anchored" data-anchor-id="tvd-and-monotonicity">TVD and Monotonicity</h2>
+<p>All three limiters above satisfy the <strong>TVD property</strong>, which constrains the limiter function to lie within a specific region of the <span class="math inline">\(r\)</span>-<span class="math inline">\(\phi\)</span> plane. For scalar equations, TVD schemes are monotonicity-preserving—they don’t create new extrema—and oscillation-free near discontinuities.</p>
+<p>For systems like MHD, TVD is not sufficient to guarantee physical states (e.g., positive pressure), but it’s still a useful design principle. The local characteristic decomposition required for rigorous TVD extension to systems is computationally expensive, so most codes apply limiters in the conserved variables directly—a pragmatic compromise that works well in practice.</p>
+</section>
+<section id="physical-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="physical-interpretation">Physical Interpretation</h2>
+<p>Think of the limiter as a smoothness detector. When <span class="math inline">\(r \approx 1\)</span>, the solution is locally linear—the flow is smooth and we can safely extrapolate to second-order accuracy. When <span class="math inline">\(r \ll 1\)</span> or <span class="math inline">\(r &lt; 0\)</span>, we’re near a jump or inflection point where extrapolation would overshoot. The limiter backs off to first-order, sacrificing accuracy locally to maintain stability globally.</p>
+<p>This is remarkably effective because in typical shock-capturing problems, discontinuities occupy only a small fraction of the domain. Most of the domain is smooth, so we get second-order accuracy almost everywhere. Only near shocks do we revert to first-order, but that’s exactly where we need robustness over accuracy anyway.</p>
+</section>
+</section>
+<section id="part-4-muscl-hancock-scheme" class="level1">
+<h1>Part 4: MUSCL-Hancock Scheme</h1>
+<p>Now we assemble the pieces. The <strong>MUSCL-Hancock scheme</strong> (MUSCL = Monotone Upstream-Centered Scheme for Conservation Laws) is a widely-used second-order method that combines reconstruction, evolution, and flux limiting into a coherent algorithm.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The scheme proceeds in three stages each timestep:</p>
+<ol type="1">
+<li><strong>Reconstruction</strong>: Construct piecewise-linear approximations within each cell using limited slopes</li>
+<li><strong>Evolution</strong>: Evolve the interface states forward by half a timestep using the physical flux</li>
+<li><strong>Riemann solve</strong>: Use an approximate Riemann solver (e.g., HLL) to compute interface fluxes and update cell averages</li>
+</ol>
+<p>The “Hancock” part refers to the half-timestep evolution, which achieves second-order accuracy in time. Without it, we’d have second-order spatial accuracy but first-order temporal accuracy—an imbalanced scheme.</p>
+</section>
+<section id="step-1-reconstruction" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-reconstruction">Step 1: Reconstruction</h2>
+<p>From the cell-averaged value <span class="math inline">\(U_i^n\)</span>, we reconstruct left and right interface values:</p>
+<p><span id="eq-reconstruction"><span class="math display">\[
+\begin{align}
+U_i^L &amp;= U_i^n - \frac{1}{2} \bar{\Delta}_i \\
+U_i^R &amp;= U_i^n + \frac{1}{2} \bar{\Delta}_i
+\end{align}
+\tag{18}\]</span></span></p>
+<p>where <span class="math inline">\(\bar{\Delta}_i\)</span> is the <strong>limited slope</strong> in cell <span class="math inline">\(i\)</span>. The slope is computed by applying a limiter to the forward and backward differences:</p>
+<p><span id="eq-differences"><span class="math display">\[
+\begin{align}
+\Delta_{i-1/2} &amp;= U_i^n - U_{i-1}^n \\
+\Delta_{i+1/2} &amp;= U_{i+1}^n - U_i^n
+\end{align}
+\tag{19}\]</span></span></p>
+<p>The limited slope can be expressed using the minmod function:</p>
+<p><span id="eq-limited-slope"><span class="math display">\[
+\bar{\Delta}_i = \text{minmod}(\Delta_{i-1/2}, \Delta_{i+1/2})
+\tag{20}\]</span></span></p>
+<p>where <span class="math inline">\(\text{minmod}(a, b) = \text{sign}(a) \cdot \max(0, \min(|a|, |b|))\)</span> if <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> have the same sign, otherwise zero. This corresponds to the minmod limiter. Alternatively, we can use:</p>
+<p><span id="eq-limited-slope-alt"><span class="math display">\[
+\bar{\Delta}_i = \phi(r_i) \cdot \frac{1}{2}(U_{i+1} - U_{i-1})
+\tag{21}\]</span></span></p>
+<p>where <span class="math inline">\(r_i = \Delta_{i-1/2}/\Delta_{i+1/2}\)</span> and <span class="math inline">\(\phi\)</span> is one of our limiter functions (Van Leer, Superbee, etc.).</p>
+</section>
+<section id="step-2-half-timestep-evolution" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-half-timestep-evolution">Step 2: Half-Timestep Evolution</h2>
+<p>The reconstructed states <span class="math inline">\(U_i^L\)</span> and <span class="math inline">\(U_i^R\)</span> are defined at time <span class="math inline">\(t^n\)</span>. To achieve second-order temporal accuracy, we evolve them forward by <span class="math inline">\(\Delta t/2\)</span> using a predictor step:</p>
+<p><span id="eq-half-step-evolution"><span class="math display">\[
+\begin{align}
+\bar{U}_i^L &amp;= U_i^L + \frac{\Delta t}{2\Delta x} \left[ F(U_i^L) - F(U_i^R) \right] \\
+\bar{U}_i^R &amp;= U_i^R + \frac{\Delta t}{2\Delta x} \left[ F(U_i^L) - F(U_i^R) \right]
+\end{align}
+\tag{22}\]</span></span></p>
+<p>This uses the same flux difference within the cell to update both the left and right states. The result is interface states <span class="math inline">\(\bar{U}_i^R\)</span> and <span class="math inline">\(\bar{U}_{i+1}^L\)</span> that are centered in time at <span class="math inline">\(t^{n+1/2}\)</span>, giving second-order temporal accuracy.</p>
+</section>
+<section id="step-3-riemann-solve-and-update" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-riemann-solve-and-update">Step 3: Riemann Solve and Update</h2>
+<p>Finally, we solve Riemann problems at each interface using the half-step-evolved states:</p>
+<p><span id="eq-riemann-solve-muscl"><span class="math display">\[
+F_{i+1/2}^{n+1/2} = F_{\text{Riemann}}(\bar{U}_i^R, \bar{U}_{i+1}^L)
+\tag{23}\]</span></span></p>
+<p>where <span class="math inline">\(F_{\text{Riemann}}\)</span> is our approximate Riemann solver (HLL, HLLE, etc.). The cell-averaged values are then updated:</p>
+<p><span id="eq-final-update"><span class="math display">\[
+U_i^{n+1} = U_i^n - \frac{\Delta t}{\Delta x} \left( F_{i+1/2}^{n+1/2} - F_{i-1/2}^{n+1/2} \right)
+\tag{24}\]</span></span></p>
+<p>This is the same conservative update formula as before (<a href="#eq-discrete-update" class="quarto-xref">Equation&nbsp;6</a>), but now using the carefully constructed fluxes that are both second-order accurate and TVD.</p>
+</section>
+<section id="putting-it-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-together">Putting It Together</h2>
+<p>The MUSCL-Hancock scheme is elegant in its modularity. Each component—reconstruction, evolution, Riemann solving—can be swapped independently. Want a different limiter? Just change <span class="math inline">\(\phi(r)\)</span>. Want a more sophisticated Riemann solver? Replace HLL with HLLD or Roe. Need higher-order accuracy? Extend to piecewise-parabolic reconstruction (PPM). This flexibility explains why finite volume methods dominate computational MHD.</p>
+<p>The scheme is also provably TVD (under suitable CFL restrictions) and exactly conservative—mass, momentum, and energy are conserved to machine precision. For MHD, the added complexity of the magnetic field evolution requires careful treatment to maintain <span class="math inline">\(\nabla \cdot \mathbf{B} = 0\)</span>, but the basic structure remains the same.</p>
+</section>
+</section>
+<section id="part-5-gawain---putting-theory-into-practice" class="level1">
+<h1>Part 5: Gawain - Putting Theory into Practice</h1>
+<p>All these algorithms and equations are worthless unless they translate into working code. This is where Gawain comes in—a Python package I developed specifically for making MHD simulations accessible and transparent. Let me show you how the theory we’ve built up manifests in actual implementation.</p>
+<section id="installation-and-setup" class="level2">
+<h2 class="anchored" data-anchor-id="installation-and-setup">Installation and Setup</h2>
+<p>Gawain can be installed directly from GitHub:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/henrywatkins/gawain.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> gawain</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-e</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The package requires Python ≥3.12 and has minimal dependencies: NumPy, h5py, Pydantic, and matplotlib. For GPU acceleration, install CuPy with <code>pip install -e ".[gpu]"</code>.</p>
+</section>
+<section id="a-working-example-the-sod-shock-tube" class="level2">
+<h2 class="anchored" data-anchor-id="a-working-example-the-sod-shock-tube">A Working Example: The Sod Shock Tube</h2>
+<p>The <strong>Sod shock tube</strong> <span class="citation" data-cites="sod1978survey">(<a href="#ref-sod1978survey" role="doc-biblioref">Sod 1978</a>)</span> is the canonical test problem for hydrodynamics codes. Two gas regions at different densities and pressures meet at <span class="math inline">\(x = 0.5\)</span>. When we remove the barrier at <span class="math inline">\(t = 0\)</span>, a shock wave, contact discontinuity, and rarefaction fan emerge. This single test validates shock capturing, contact resolution, and wave speed accuracy.</p>
+<p>Here’s the complete code to run this simulation with Gawain:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gawain.main <span class="im">import</span> run_gawain</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mesh setup: 1D simulation using 3D arrays with ny=nz=1</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>nx, ny, nz <span class="op">=</span> <span class="dv">200</span>, <span class="dv">1</span>, <span class="dv">1</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>lx, ly, lz <span class="op">=</span> <span class="fl">1.0</span>, <span class="fl">0.001</span>, <span class="fl">0.001</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="fl">0.0</span>, lx, num<span class="op">=</span>nx)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="fl">0.0</span>, ly, num<span class="op">=</span>ny)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.linspace(<span class="fl">0.0</span>, lz, num<span class="op">=</span>nz)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>X, Y, Z <span class="op">=</span> np.meshgrid(x, y, z, indexing<span class="op">=</span><span class="st">"ij"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial conditions: discontinuity at x=0.5</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>rho <span class="op">=</span> np.piecewise(X, [X <span class="op">&lt;</span> <span class="fl">0.5</span>, X <span class="op">&gt;=</span> <span class="fl">0.5</span>], [<span class="fl">1.0</span>, <span class="fl">0.125</span>])</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>pressure <span class="op">=</span> np.piecewise(X, [X <span class="op">&lt;</span> <span class="fl">0.5</span>, X <span class="op">&gt;=</span> <span class="fl">0.5</span>], [<span class="fl">1.0</span>, <span class="fl">0.1</span>])</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>mx <span class="op">=</span> my <span class="op">=</span> mz <span class="op">=</span> np.zeros(X.shape)  <span class="co"># Initially at rest</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute total energy: kinetic + thermal (no magnetic field)</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> <span class="fl">1.4</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> pressure <span class="op">/</span> (gamma <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> mx<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> rho</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>initial_condition <span class="op">=</span> np.array([rho, mx, my, mz, e])</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Configuration dictionary</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> {</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"run_name"</span>: <span class="st">"sod_shock_tube"</span>,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cfl"</span>: <span class="fl">0.25</span>,                    <span class="co"># Courant number for stability</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mesh_shape"</span>: (nx, ny, nz),</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mesh_size"</span>: (lx, ly, lz),</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mesh_grid"</span>: (X, Y, Z),</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"t_max"</span>: <span class="fl">0.25</span>,                  <span class="co"># Final simulation time</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n_dumps"</span>: <span class="dv">100</span>,                 <span class="co"># Number of output snapshots</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"initial_condition"</span>: initial_condition,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"boundary_type"</span>: [<span class="st">"fixed"</span>, <span class="st">"periodic"</span>, <span class="st">"periodic"</span>],</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"adi_idx"</span>: gamma,               <span class="co"># Adiabatic index</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"integrator"</span>: <span class="st">"euler"</span>,          <span class="co"># Time integration method</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"fluxer"</span>: <span class="st">"hll"</span>,                <span class="co"># Riemann solver: HLL</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"output_dir"</span>: <span class="st">"runs"</span>,</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"with_mhd"</span>: <span class="va">False</span>,              <span class="co"># Pure hydrodynamics</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>run_gawain(config)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This produces an HDF5 file containing 100 snapshots showing the shock structure evolving. Notice how concise this is: no boundary condition implementation, no flux calculation details, no timestepping logic. Gawain handles all of that internally, applying the MUSCL-Hancock scheme with HLL solving we discussed.</p>
+</section>
+<section id="beyond-sod-mhd-simulations" class="level2">
+<h2 class="anchored" data-anchor-id="beyond-sod-mhd-simulations">Beyond Sod: MHD Simulations</h2>
+<p>For MHD, simply add magnetic field components to the initial condition and set <code>with_mhd=True</code>. The Brio-Wu shock tube <span class="citation" data-cites="brio1988upwind">(<a href="#ref-brio1988upwind" role="doc-biblioref">Brio and Wu 1988</a>)</span>—an MHD analog of Sod—tests the code’s handling of the complex MHD wave structure:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add magnetic field to initial conditions</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Bx <span class="op">=</span> np.ones(X.shape) <span class="op">*</span> <span class="fl">0.75</span>  <span class="co"># Constant transverse field</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>By <span class="op">=</span> np.piecewise(X, [X <span class="op">&lt;</span> <span class="fl">0.5</span>, X <span class="op">&gt;=</span> <span class="fl">0.5</span>], [<span class="fl">1.0</span>, <span class="op">-</span><span class="fl">1.0</span>])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Bz <span class="op">=</span> np.zeros(X.shape)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Update total energy to include magnetic contribution</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> pressure <span class="op">/</span> (gamma <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> mx<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> rho <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> (Bx<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> By<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> Bz<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Extend state vector to include magnetic field</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>initial_condition <span class="op">=</span> np.array([rho, mx, my, mz, e, Bx, By, Bz])</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>config[<span class="st">"with_mhd"</span>] <span class="op">=</span> <span class="va">True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>We’ve journeyed from the abstract mathematics of conservation laws to working simulations of plasma physics. The path connected several key ideas:</p>
+<p><strong>Conservative finite volume methods</strong> provide the framework—update cell averages using interface fluxes that rigorously conserve mass, momentum, and energy. <strong>Riemann solvers</strong> compute those interface fluxes by exploiting the hyperbolic wave structure of the equations. The HLL solver, though approximate, captures the essential physics: information propagates at finite characteristic speeds. <strong>Flux limiters</strong> resolve the fundamental tension between accuracy and stability by adaptively blending first and second-order schemes based on local solution smoothness. And the <strong>MUSCL-Hancock scheme</strong> assembles these components into a practical second-order TVD algorithm.</p>
+<p>Why does this matter for MHD specifically? The magnetic field introduces complex wave physics—fast and slow magnetosonic waves, Alfvén waves, degenerate wave modes—that make exact Riemann solving prohibitively expensive. Approximate solvers combined with flux limiting give us a practical path forward. Production MHD codes like ATHENA++, PLUTO, and FLASH all build on these foundations, adding refinements like adaptive mesh, divergence cleaning, and higher-order reconstruction.</p>
+<p>Looking forward, several directions extend this framework: <strong>adaptive mesh refinement</strong> focuses resolution where needed, <strong>WENO (Weighted Essentially Non-Oscillatory) schemes</strong> achieve higher-order accuracy with better smoothness properties, and <strong>well-balanced schemes</strong> preserve certain equilibrium states exactly. For MHD specifically, <strong>positivity-preserving limiters</strong> ensure physical states even in low-density, low-pressure regions, and <strong>implicit-explicit (IMEX) timestepping</strong> handles stiff source terms efficiently.</p>
+<p>If you want to experiment with these methods yourself, the Gawain repository at <a href="https://github.com/henrywatkins/gawain">github.com/henrywatkins/gawain</a> provides a complete implementation with documented examples. Start with the Sod shock tube, move to Brio-Wu for MHD, then try the Orszag-Tang vortex to see turbulent dynamics. The code is written to be readable—understanding these algorithms through implementation is the best way to truly internalize them.</p>
+<p>Numerical methods for conservation laws represent one of the great success stories of computational physics. From von Neumann’s work on shocks in the Manhattan Project to modern exascale simulations of stellar explosions, the core ideas have proven remarkably robust. They’ve enabled discoveries across astrophysics, plasma physics, and fluid dynamics that would be impossible through theory or experiment alone.</p>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-brio1988upwind" class="csl-entry" role="listitem">
+Brio, Moysey, and CC Wu. 1988. <span>“An Upwind Differencing Scheme for the Equations of Ideal Magnetohydrodynamics.”</span> <em>Journal of Computational Physics</em> 75 (2): 400–422. <a href="https://doi.org/10.1016/0021-9991(88)90120-9">https://doi.org/10.1016/0021-9991(88)90120-9</a>.
+</div>
+<div id="ref-fryxell2000flash" class="csl-entry" role="listitem">
+Fryxell, Bruce, Kevin Olson, Paul Ricker, FX Timmes, Michael Zingale, Don Q Lamb, Peter MacNeice, Robert Rosner, James W Truran, and Henry Tufo. 2000. <span>“FLASH: An Adaptive Mesh Hydrodynamics Code for Modeling Astrophysical Thermonuclear Flashes.”</span> <em>The Astrophysical Journal Supplement Series</em> 131 (1): 273. <a href="https://doi.org/10.1086/317361">https://doi.org/10.1086/317361</a>.
+</div>
+<div id="ref-harten1983upstream" class="csl-entry" role="listitem">
+Harten, Amiram, Peter D Lax, and Bram Van Leer. 1983. <span>“On Upstream Differencing and Godunov-Type Schemes for Hyperbolic Conservation Laws.”</span> <em>SIAM Review</em> 25 (1): 35–61. <a href="https://doi.org/10.1137/1025002">https://doi.org/10.1137/1025002</a>.
+</div>
+<div id="ref-mignone2007pluto" class="csl-entry" role="listitem">
+Mignone, Andrea, Gianluigi Bodo, Silvano Massaglia, Titos Matsakos, Ovidiu Tesileanu, Claudio Zanni, and Attilio Ferrari. 2007. <span>“PLUTO: A Numerical Code for Computational Astrophysics.”</span> <em>The Astrophysical Journal Supplement Series</em> 170 (1): 228. <a href="https://doi.org/10.1086/513316">https://doi.org/10.1086/513316</a>.
+</div>
+<div id="ref-sod1978survey" class="csl-entry" role="listitem">
+Sod, Gary A. 1978. <span>“A Survey of Several Finite Difference Methods for Systems of Nonlinear Hyperbolic Conservation Laws.”</span> <em>Journal of Computational Physics</em> 27 (1): 1–31. <a href="https://doi.org/10.1016/0021-9991(78)90023-2">https://doi.org/10.1016/0021-9991(78)90023-2</a>.
+</div>
+<div id="ref-stone2020athena" class="csl-entry" role="listitem">
+Stone, James M, Kengo Tomida, Christopher J White, and Kyle G Felker. 2020. <span>“Athena++: A High-Performance AMR MHD Code for Astrophysics.”</span> <em>The Astrophysical Journal Supplement Series</em> 249 (1): 4. <a href="https://doi.org/10.3847/1538-4365/ab929b">https://doi.org/10.3847/1538-4365/ab929b</a>.
+</div>
+</div>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2025 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -184,11 +184,12 @@ Q &= \sum_i g_i \exp(-\epsilon_i/k_b T)\\
 &= \sum_k\sum_l g_k g_l \exp(-\epsilon_k/k_b T)\exp(-\epsilon_l/k_b T)\\
 &= [\sum_k g_k \exp(-\epsilon_k/k_b T)] [\sum_l g_l \exp(-\epsilon_l/k_b T)]\\
 &= Q_{trans} Q_{electron}
+\end{align}
 $$
 
 In a 'square well' potential $\lambda = 2 l /n$ and $p = h/\lambda$ and $\epsilon_n = \frac{n^2 h^2}{8m l^2}$
 $$
-Q_{trans} = \sum_{n=1}^\infinity \exp (-\frac{n^2 h^2}{8m l^2 k_b T}) \approx \int_0^\infinity \exp (-\frac{n^2 h^2}{8m l^2 k_b T}) dn 
+Q_{trans} = \sum_{n=1}^\inf \exp (-\frac{n^2 h^2}{8m l^2 k_b T}) \approx \int_0^\inf \exp (-\frac{n^2 h^2}{8m l^2 k_b T}) dn 
 $$
 A change of variables and application of the solution to a Gaussian integral yields $Q_{trans} = (\frac{2\pi mk_b T}{h^2})^{3/2} V$, where V is the volume of the square well.
 

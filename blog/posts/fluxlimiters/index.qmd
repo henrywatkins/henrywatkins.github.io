@@ -1,0 +1,426 @@
+---
+title: "Numerical Methods for MHD: Flux Limiters and Hyperbolic Solvers"
+description: "Simulating plasma physics systems"
+author: "Henry Watkins"
+date: "01/16/2026"
+image: vortex.png
+draft: false
+toc: true
+bibliography: paper.bib
+license: "CC BY"
+copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
+categories:
+  - physics
+  - hpc
+---
+
+# Introduction
+
+When simulating magnetohydrodynamic (MHD) flows in plasma physics problems, we face a fundamental numerical dilemma. First-order accurate schemes are stable but diffusive, smearing out discontinuities like shocks until they become physically meaningless. Second-order schemes capture sharp features accurately but produce spurious oscillations that can drive the simulation unstable or create unphysical negative densities.
+
+In astrophysical jets, solar flares, and fusion plasmas, the physics happens at discontinuities: shock fronts compress and heat material, current sheets reconnect magnetic field lines, and contact discontinuities separate distinct plasma populations. If our numerical methods can't resolve these features accurately and stably, we can't trust the physics we extract from simulations.
+
+**Flux limiters** solve this problem by blending first and second-order methods adaptively. In smooth regions, they activate the second-order scheme for accuracy. Near discontinuities, they revert to first-order to suppress oscillations. This adaptive strategy gives us the best of both worlds: sharp shock resolution without numerical instabilities.
+
+I was first taught these methods in the context of conservative finite volume schemes for hyperbolic partial differential equations. The mathematical framework extends far beyond MHD: the same techniques appear in computational fluid dynamics, astrophysics codes, weather modeling, and anywhere else we need to solve conservation laws with discontinuous solutions. Production MHD codes like ATHENA++ [@stone2020athena], PLUTO [@mignone2007pluto], and FLASH [@fryxell2000flash] all employ flux-limited schemes as their numerical foundation.
+
+In this post, we'll build up the machinery step by step: starting from conservative finite volume methods, introducing Riemann solvers, understanding flux limiters, and finally assembling these components into the MUSCL-Hancock scheme—a workhorse algorithm for modern MHD simulations. Along the way, I'll show how these abstract numerical concepts translate into working code using Gawain, a Python package I developed for teaching and prototyping MHD algorithms.
+
+# Part 1: Conservative Finite Volume Methods
+
+The starting point for any discussion of numerical methods for conservation laws is the **conservative form** of the governing equations. For a generic hyperbolic system, we write:
+
+$$
+\frac{\partial \mathbf{U}}{\partial t} + \nabla \cdot \mathbf{F}(\mathbf{U}) = \mathbf{S}
+$$ {#eq-conservation}
+
+This equation expresses a fundamental physical principle: the rate of change of some conserved quantity $\mathbf{U}$ within a volume equals the flux $\mathbf{F}$ flowing across its boundaries plus any sources $\mathbf{S}$ acting inside.
+
+## The MHD State Vector
+
+For ideal magnetohydrodynamics, the **state vector** $\mathbf{U}$ contains eight conserved quantities in three dimensions:
+
+$$
+\mathbf{U} = \begin{pmatrix}
+\rho \\
+\rho v_x \\
+\rho v_y \\
+\rho v_z \\
+E \\
+B_x \\
+B_y \\
+B_z
+\end{pmatrix}
+$$ {#eq-state-vector}
+
+where $\rho$ is mass density, $\rho \mathbf{v}$ is momentum density, $E$ is total energy density, and $\mathbf{B}$ is the magnetic field. The total energy includes kinetic, thermal, and magnetic contributions:
+
+$$
+E = \frac{1}{2}\rho v^2 + \frac{P}{\gamma - 1} + \frac{B^2}{2\mu_0}
+$$ {#eq-total-energy}
+
+Here $P$ is thermal pressure, $\gamma$ is the adiabatic index, and $\mu_0$ is the permeability of free space.
+
+## The Flux Tensor
+
+The **flux tensor** $\mathbf{F}^i$ describes how these conserved quantities flow across surfaces perpendicular to direction $i$. For the $x$-direction:
+
+$$
+\mathbf{F}^x = \begin{pmatrix}
+\rho v_x \\
+\rho v_x^2 - B_x^2/\mu_0 + P_T \\
+\rho v_x v_y - B_x B_y/\mu_0 \\
+\rho v_x v_z - B_x B_z/\mu_0 \\
+(E + P_T) v_x - (\mathbf{B} \cdot \mathbf{v}) B_x/\mu_0 \\
+0 \\
+v_x B_y - v_y B_x \\
+v_x B_z - v_z B_x
+\end{pmatrix}
+$$ {#eq-flux-tensor}
+
+where $P_T = P + B^2/(2\mu_0)$ is the **total pressure** including magnetic pressure. The flux tensor has analogous forms for the $y$ and $z$ directions.
+
+Notice the magnetic field component $B_x$ has zero flux in the $x$-direction. This enforces the divergence constraint $\nabla \cdot \mathbf{B} = 0$—magnetic field lines cannot begin or end, only thread through our computational domain. Maintaining this constraint numerically is a subtle challenge that requires special techniques like constrained transport or divergence cleaning, but we'll set that aside for now.
+
+## Finite Volume Discretization
+
+The **finite volume method** discretizes space into cells and stores cell-averaged values of the conserved quantities. For a one-dimensional cell $i$ with width $\Delta x$, the cell average is:
+
+$$
+\bar{U}_i = \frac{1}{\Delta x} \int_{x_{i-1/2}}^{x_{i+1/2}} U(x) \, dx
+$$ {#eq-cell-average}
+
+Integrating @eq-conservation over the cell and applying the divergence theorem gives the discrete update formula:
+
+$$
+U_i^{n+1} = U_i^n - \frac{\Delta t}{\Delta x} \left( F_{i+1/2} - F_{i-1/2} \right)
+$$ {#eq-discrete-update}
+
+This says: the new cell average equals the old cell average minus the net flux that flowed out through the cell boundaries during time $\Delta t$. The subscripts $i \pm 1/2$ denote the cell **interfaces** or edges.
+
+The challenge is computing $F_{i+1/2}$—the numerical flux at the interface between cells $i$ and $i+1$. This is where Riemann solvers enter the picture.
+
+# Part 2: The Riemann Problem
+
+At each cell interface, we face a classic problem from the theory of hyperbolic PDEs: the **Riemann problem**. This is the initial value problem where two constant states meet at a discontinuity:
+
+$$
+U(x, 0) = \begin{cases}
+U_L & x < 0 \\
+U_R & x > 0
+\end{cases}
+$$ {#eq-riemann-initial}
+
+Physically, imagine two reservoirs of gas at different densities and pressures, separated by a thin membrane. At $t = 0$, we instantaneously remove the membrane. What happens? The discontinuity breaks up into wave patterns: shocks, rarefactions, and contact discontinuities propagate outward at characteristic speeds determined by the local sound speed (or in MHD, the magnetosonic speeds).
+
+For the Euler equations of hydrodynamics, the exact Riemann solution can be computed but requires iteratively solving nonlinear equations. For MHD, the exact solution is prohibitively expensive due to the seven wave modes (fast, Alfvén, and slow magnetosonic waves, plus contact discontinuities, traveling in both directions). Production codes therefore use **approximate Riemann solvers** that capture the essential wave structure without exact computation.
+
+## The HLL Approximate Solver
+
+The **HLL (Harten-Lax-van Leer) solver** [@harten1983upstream] is one of the most robust and widely-used approximate Riemann solvers. It assumes a simplified wave structure with only two waves traveling at speeds $S_L$ (leftward) and $S_R$ (rightward), creating three constant regions in the solution:
+
+$$
+F_{i+1/2} = \begin{cases}
+F_L & \text{if } 0 \leq S_L \\
+F_{\text{HLL}} & \text{if } S_L \leq 0 \leq S_R \\
+F_R & \text{if } 0 \geq S_R
+\end{cases}
+$$ {#eq-hll-flux}
+
+where $F_L = F(U_L)$ and $F_R = F(U_R)$ are the physical fluxes computed from the left and right states. In the intermediate region, the flux is:
+
+$$
+F_{\text{HLL}} = \frac{S_R F_L - S_L F_R + S_L S_R (U_R - U_L)}{S_R - S_L}
+$$ {#eq-hll-intermediate}
+
+The wave speeds $S_L$ and $S_R$ must bound the fastest waves emerging from the interface. A common choice (Davis estimate) uses the magnetosonic speeds:
+
+$$
+\begin{align}
+S_L &= \min(v_L - c_f^L, v_R - c_f^R) \\
+S_R &= \max(v_L + c_f^L, v_R + c_f^R)
+\end{align}
+$$ {#eq-wave-speeds}
+
+where $v$ is the fluid velocity normal to the interface and $c_f$ is the **fast magnetosonic speed**—the fastest wave mode in MHD. For pure hydrodynamics, $c_f$ reduces to the sound speed $c_s = \sqrt{\gamma P/\rho}$.
+
+## Magnetosonic Speeds
+
+MHD supports three types of wave modes, each with its own propagation speed:
+
+- **Fast magnetosonic waves**: Compressional waves that couple gas pressure and magnetic pressure, $c_f^2 = \frac{1}{2}(c_s^2 + c_A^2) + \frac{1}{2}\sqrt{(c_s^2 + c_A^2)^2 - 4c_s^2 c_{Ax}^2}$
+- **Alfvén waves**: Transverse perturbations propagating along field lines at $c_A = B/\sqrt{\mu_0 \rho}$
+- **Slow magnetosonic waves**: Mixed compressional-magnetic modes slower than Alfvén waves
+
+Here $c_s = \sqrt{\gamma P/\rho}$ is the sound speed, $c_A = |\mathbf{B}|/\sqrt{\mu_0 \rho}$ is the Alfvén speed, and $c_{Ax} = |B_x|/\sqrt{\mu_0 \rho}$ is the Alfvén speed in the direction normal to the interface.
+
+The fast magnetosonic speed gives the information propagation speed—the domain of dependence for the Riemann problem. Using it to estimate $S_L$ and $S_R$ ensures the HLL solver captures all physically relevant information crossing the interface.
+
+# Part 3: Flux Limiters - The Core Topic
+
+Now we come to the heart of the matter. With our finite volume discretization (@eq-discrete-update) and our ability to solve Riemann problems (HLL), we can build a basic first-order scheme. But first-order methods are too diffusive for practical use. We need second-order accuracy. Naively achieving this introduces oscillations. Flux limiters solve this problem.
+
+## The Problem: Diffusion vs. Oscillations
+
+Consider the simplest first-order **upwind scheme**, where we use the upwind value (the value from whichever direction the wave is traveling) at each interface:
+
+$$
+F_{i+1/2} = F(U_i)
+$$ {#eq-first-order}
+
+This scheme is stable and monotone-preserving—it never creates new maxima or minima that weren't in the initial data. But it's also highly diffusive. Sharp discontinuities smear out over several cells after just a few timesteps.
+
+The natural fix is to use a centered, second-order accurate flux:
+
+$$
+F_{i+1/2} = F\left(\frac{U_i + U_{i+1}}{2}\right)
+$$ {#eq-second-order}
+
+or more sophisticatedly, the **Lax-Wendroff scheme** which includes time-centering. These methods have much lower numerical diffusion and maintain sharp features well—in smooth regions. Near discontinuities, however, they produce spurious oscillations called **Gibbs phenomena** or **ringing**. These oscillations can grow unbounded, making the scheme unstable, or create unphysical negative densities.
+
+This is a manifestation of **Godunov's theorem**: for linear schemes, there is no method that is both second-order accurate and monotonicity-preserving. We must give up linearity.
+
+## The Solution: Adaptive Blending
+
+**Flux limiters** resolve the dilemma by making the scheme nonlinear—they blend first and second-order fluxes based on local solution smoothness:
+
+$$
+F_{i+1/2} = F_{i+1/2}^{\text{LO}} + \phi(r_{i+1/2}) \left[ F_{i+1/2}^{\text{HI}} - F_{i+1/2}^{\text{LO}} \right]
+$$ {#eq-flux-limiter-general}
+
+Here $F^{\text{LO}}$ is a first-order flux (upwind or Lax-Friedrichs), $F^{\text{HI}}$ is a second-order flux (Lax-Wendroff or MUSCL reconstruction), and $\phi(r)$ is the **flux limiter function**. The parameter $r$ measures local smoothness:
+
+$$
+r_{i+1/2} = \frac{U_i - U_{i-1}}{U_{i+1} - U_i}
+$$ {#eq-smoothness-ratio}
+
+This ratio compares consecutive gradients. If the solution is smooth, both gradients have the same sign and similar magnitudes, so $r \approx 1$. Near a discontinuity, the gradients differ wildly or have opposite signs, giving $r \ll 1$ or $r < 0$.
+
+The limiter function $\phi(r)$ activates the second-order flux when $r \approx 1$ (smooth region) and reverts to first-order when $r$ is small or negative (near discontinuity).
+
+## Common Flux Limiters
+
+Several limiter functions have been developed, each with slightly different properties:
+
+### Van Leer Limiter
+
+$$
+\phi(r) = \frac{r + |r|}{1 + |r|}
+$$ {#eq-van-leer}
+
+The **Van Leer limiter** is smooth and symmetric, providing good performance across a wide range of problems. It's slightly compressive, meaning it can sharpen smooth extrema slightly. This is often desirable for resolving contact discontinuities.
+
+### Superbee Limiter
+
+$$
+\phi(r) = \max(0, \min(1, 2r), \min(2, r))
+$$ {#eq-superbee}
+
+The **Superbee limiter** is the most aggressive, creating the sharpest possible discontinuities allowed by the **TVD (Total Variation Diminishing)** constraint. TVD schemes guarantee that the total variation—roughly, the sum of all jumps in the solution—does not increase in time, preventing spurious oscillations. Superbee sits on the boundary of the TVD region, giving maximum sharpness. However, it can sometimes create overly sharp features in smooth regions (the "staircase effect") or produce slight over/undershoots at extrema.
+
+### Minmod Limiter
+
+$$
+\phi(r) = \max(0, \min(1, r))
+$$ {#eq-minmod}
+
+The **Minmod limiter** is the most conservative, applying the smallest correction consistent with TVD. It's the most diffusive of the limiters but also the most robust. Use it when stability is paramount, or when dealing with particularly difficult problems like strong rarefactions.
+
+## TVD and Monotonicity
+
+All three limiters above satisfy the **TVD property**, which constrains the limiter function to lie within a specific region of the $r$-$\phi$ plane. For scalar equations, TVD schemes are monotonicity-preserving—they don't create new extrema—and oscillation-free near discontinuities.
+
+For systems like MHD, TVD is not sufficient to guarantee physical states (e.g., positive pressure), but it's still a useful design principle. The local characteristic decomposition required for rigorous TVD extension to systems is computationally expensive, so most codes apply limiters in the conserved variables directly—a pragmatic compromise that works well in practice.
+
+## Physical Interpretation
+
+Think of the limiter as a smoothness detector. When $r \approx 1$, the solution is locally linear—the flow is smooth and we can safely extrapolate to second-order accuracy. When $r \ll 1$ or $r < 0$, we're near a jump or inflection point where extrapolation would overshoot. The limiter backs off to first-order, sacrificing accuracy locally to maintain stability globally.
+
+This is remarkably effective because in typical shock-capturing problems, discontinuities occupy only a small fraction of the domain. Most of the domain is smooth, so we get second-order accuracy almost everywhere. Only near shocks do we revert to first-order, but that's exactly where we need robustness over accuracy anyway.
+
+# Part 4: MUSCL-Hancock Scheme
+
+Now we assemble the pieces. The **MUSCL-Hancock scheme** (MUSCL = Monotone Upstream-Centered Scheme for Conservation Laws) is a widely-used second-order method that combines reconstruction, evolution, and flux limiting into a coherent algorithm.
+
+## Overview
+
+The scheme proceeds in three stages each timestep:
+
+1. **Reconstruction**: Construct piecewise-linear approximations within each cell using limited slopes
+2. **Evolution**: Evolve the interface states forward by half a timestep using the physical flux
+3. **Riemann solve**: Use an approximate Riemann solver (e.g., HLL) to compute interface fluxes and update cell averages
+
+The "Hancock" part refers to the half-timestep evolution, which achieves second-order accuracy in time. Without it, we'd have second-order spatial accuracy but first-order temporal accuracy—an imbalanced scheme.
+
+## Step 1: Reconstruction
+
+From the cell-averaged value $U_i^n$, we reconstruct left and right interface values:
+
+$$
+\begin{align}
+U_i^L &= U_i^n - \frac{1}{2} \bar{\Delta}_i \\
+U_i^R &= U_i^n + \frac{1}{2} \bar{\Delta}_i
+\end{align}
+$$ {#eq-reconstruction}
+
+where $\bar{\Delta}_i$ is the **limited slope** in cell $i$. The slope is computed by applying a limiter to the forward and backward differences:
+
+$$
+\begin{align}
+\Delta_{i-1/2} &= U_i^n - U_{i-1}^n \\
+\Delta_{i+1/2} &= U_{i+1}^n - U_i^n
+\end{align}
+$$ {#eq-differences}
+
+The limited slope can be expressed using the minmod function:
+
+$$
+\bar{\Delta}_i = \text{minmod}(\Delta_{i-1/2}, \Delta_{i+1/2})
+$$ {#eq-limited-slope}
+
+where $\text{minmod}(a, b) = \text{sign}(a) \cdot \max(0, \min(|a|, |b|))$ if $a$ and $b$ have the same sign, otherwise zero. This corresponds to the minmod limiter. Alternatively, we can use:
+
+$$
+\bar{\Delta}_i = \phi(r_i) \cdot \frac{1}{2}(U_{i+1} - U_{i-1})
+$$ {#eq-limited-slope-alt}
+
+where $r_i = \Delta_{i-1/2}/\Delta_{i+1/2}$ and $\phi$ is one of our limiter functions (Van Leer, Superbee, etc.).
+
+## Step 2: Half-Timestep Evolution
+
+The reconstructed states $U_i^L$ and $U_i^R$ are defined at time $t^n$. To achieve second-order temporal accuracy, we evolve them forward by $\Delta t/2$ using a predictor step:
+
+$$
+\begin{align}
+\bar{U}_i^L &= U_i^L + \frac{\Delta t}{2\Delta x} \left[ F(U_i^L) - F(U_i^R) \right] \\
+\bar{U}_i^R &= U_i^R + \frac{\Delta t}{2\Delta x} \left[ F(U_i^L) - F(U_i^R) \right]
+\end{align}
+$$ {#eq-half-step-evolution}
+
+This uses the same flux difference within the cell to update both the left and right states. The result is interface states $\bar{U}_i^R$ and $\bar{U}_{i+1}^L$ that are centered in time at $t^{n+1/2}$, giving second-order temporal accuracy.
+
+## Step 3: Riemann Solve and Update
+
+Finally, we solve Riemann problems at each interface using the half-step-evolved states:
+
+$$
+F_{i+1/2}^{n+1/2} = F_{\text{Riemann}}(\bar{U}_i^R, \bar{U}_{i+1}^L)
+$$ {#eq-riemann-solve-muscl}
+
+where $F_{\text{Riemann}}$ is our approximate Riemann solver (HLL, HLLE, etc.). The cell-averaged values are then updated:
+
+$$
+U_i^{n+1} = U_i^n - \frac{\Delta t}{\Delta x} \left( F_{i+1/2}^{n+1/2} - F_{i-1/2}^{n+1/2} \right)
+$$ {#eq-final-update}
+
+This is the same conservative update formula as before (@eq-discrete-update), but now using the carefully constructed fluxes that are both second-order accurate and TVD.
+
+## Putting It Together
+
+The MUSCL-Hancock scheme is elegant in its modularity. Each component—reconstruction, evolution, Riemann solving—can be swapped independently. Want a different limiter? Just change $\phi(r)$. Want a more sophisticated Riemann solver? Replace HLL with HLLD or Roe. Need higher-order accuracy? Extend to piecewise-parabolic reconstruction (PPM). This flexibility explains why finite volume methods dominate computational MHD.
+
+The scheme is also provably TVD (under suitable CFL restrictions) and exactly conservative—mass, momentum, and energy are conserved to machine precision. For MHD, the added complexity of the magnetic field evolution requires careful treatment to maintain $\nabla \cdot \mathbf{B} = 0$, but the basic structure remains the same.
+
+# Part 5: Gawain - Putting Theory into Practice
+
+All these algorithms and equations are worthless unless they translate into working code. This is where Gawain comes in—a Python package I developed specifically for making MHD simulations accessible and transparent. Let me show you how the theory we've built up manifests in actual implementation.
+
+## Installation and Setup
+
+Gawain can be installed directly from GitHub:
+
+```bash
+git clone https://github.com/henrywatkins/gawain.git
+cd gawain
+pip install -e .
+```
+
+The package requires Python ≥3.12 and has minimal dependencies: NumPy, h5py, Pydantic, and matplotlib. For GPU acceleration, install CuPy with `pip install -e ".[gpu]"`.
+
+## A Working Example: The Sod Shock Tube
+
+The **Sod shock tube** [@sod1978survey] is the canonical test problem for hydrodynamics codes. Two gas regions at different densities and pressures meet at $x = 0.5$. When we remove the barrier at $t = 0$, a shock wave, contact discontinuity, and rarefaction fan emerge. This single test validates shock capturing, contact resolution, and wave speed accuracy.
+
+Here's the complete code to run this simulation with Gawain:
+
+```python
+import numpy as np
+from gawain.main import run_gawain
+
+# Mesh setup: 1D simulation using 3D arrays with ny=nz=1
+nx, ny, nz = 200, 1, 1
+lx, ly, lz = 1.0, 0.001, 0.001
+x = np.linspace(0.0, lx, num=nx)
+y = np.linspace(0.0, ly, num=ny)
+z = np.linspace(0.0, lz, num=nz)
+X, Y, Z = np.meshgrid(x, y, z, indexing="ij")
+
+# Initial conditions: discontinuity at x=0.5
+rho = np.piecewise(X, [X < 0.5, X >= 0.5], [1.0, 0.125])
+pressure = np.piecewise(X, [X < 0.5, X >= 0.5], [1.0, 0.1])
+mx = my = mz = np.zeros(X.shape)  # Initially at rest
+
+# Compute total energy: kinetic + thermal (no magnetic field)
+gamma = 1.4
+e = pressure / (gamma - 1) + 0.5 * mx**2 / rho
+initial_condition = np.array([rho, mx, my, mz, e])
+
+# Configuration dictionary
+config = {
+    "run_name": "sod_shock_tube",
+    "cfl": 0.25,                    # Courant number for stability
+    "mesh_shape": (nx, ny, nz),
+    "mesh_size": (lx, ly, lz),
+    "mesh_grid": (X, Y, Z),
+    "t_max": 0.25,                  # Final simulation time
+    "n_dumps": 100,                 # Number of output snapshots
+    "initial_condition": initial_condition,
+    "boundary_type": ["fixed", "periodic", "periodic"],
+    "adi_idx": gamma,               # Adiabatic index
+    "integrator": "euler",          # Time integration method
+    "fluxer": "hll",                # Riemann solver: HLL
+    "output_dir": "runs",
+    "with_mhd": False,              # Pure hydrodynamics
+}
+
+run_gawain(config)
+```
+
+This produces an HDF5 file containing 100 snapshots showing the shock structure evolving. Notice how concise this is: no boundary condition implementation, no flux calculation details, no timestepping logic. Gawain handles all of that internally, applying the MUSCL-Hancock scheme with HLL solving we discussed.
+
+## Beyond Sod: MHD Simulations
+
+For MHD, simply add magnetic field components to the initial condition and set `with_mhd=True`. The Brio-Wu shock tube [@brio1988upwind]—an MHD analog of Sod—tests the code's handling of the complex MHD wave structure:
+
+```python
+# Add magnetic field to initial conditions
+Bx = np.ones(X.shape) * 0.75  # Constant transverse field
+By = np.piecewise(X, [X < 0.5, X >= 0.5], [1.0, -1.0])
+Bz = np.zeros(X.shape)
+
+# Update total energy to include magnetic contribution
+e = pressure / (gamma - 1) + 0.5 * mx**2 / rho + 0.5 * (Bx**2 + By**2 + Bz**2)
+
+# Extend state vector to include magnetic field
+initial_condition = np.array([rho, mx, my, mz, e, Bx, By, Bz])
+config["with_mhd"] = True
+```
+
+# Conclusion
+
+We've journeyed from the abstract mathematics of conservation laws to working simulations of plasma physics. The path connected several key ideas:
+
+**Conservative finite volume methods** provide the framework—update cell averages using interface fluxes that rigorously conserve mass, momentum, and energy. **Riemann solvers** compute those interface fluxes by exploiting the hyperbolic wave structure of the equations. The HLL solver, though approximate, captures the essential physics: information propagates at finite characteristic speeds. **Flux limiters** resolve the fundamental tension between accuracy and stability by adaptively blending first and second-order schemes based on local solution smoothness. And the **MUSCL-Hancock scheme** assembles these components into a practical second-order TVD algorithm.
+
+Why does this matter for MHD specifically? The magnetic field introduces complex wave physics—fast and slow magnetosonic waves, Alfvén waves, degenerate wave modes—that make exact Riemann solving prohibitively expensive. Approximate solvers combined with flux limiting give us a practical path forward. Production MHD codes like ATHENA++, PLUTO, and FLASH all build on these foundations, adding refinements like adaptive mesh, divergence cleaning, and higher-order reconstruction.
+
+Looking forward, several directions extend this framework: **adaptive mesh refinement** focuses resolution where needed, **WENO (Weighted Essentially Non-Oscillatory) schemes** achieve higher-order accuracy with better smoothness properties, and **well-balanced schemes** preserve certain equilibrium states exactly. For MHD specifically, **positivity-preserving limiters** ensure physical states even in low-density, low-pressure regions, and **implicit-explicit (IMEX) timestepping** handles stiff source terms efficiently.
+
+If you want to experiment with these methods yourself, the Gawain repository at [github.com/henrywatkins/gawain](https://github.com/henrywatkins/gawain) provides a complete implementation with documented examples. Start with the Sod shock tube, move to Brio-Wu for MHD, then try the Orszag-Tang vortex to see turbulent dynamics. The code is written to be readable—understanding these algorithms through implementation is the best way to truly internalize them.
+
+Numerical methods for conservation laws represent one of the great success stories of computational physics. From von Neumann's work on shocks in the Manhattan Project to modern exascale simulations of stellar explosions, the core ideas have proven remarkably robust. They've enabled discoveries across astrophysics, plasma physics, and fluid dynamics that would be impossible through theory or experiment alone.
+
+# References
+
+::: {#refs}
+:::
