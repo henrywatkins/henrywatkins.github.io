@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Henry Watkins">
+<meta name="dcterms.date" content="2026-02-10">
+<meta name="description" content="Statistical mechanics, phase transitions, and Monte Carlo simulation of magnetic systems">
+
+<title>The Ising Model – Modulo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-0b4226dda13982b4c7661a3d40776f41.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4KRLE15B5S"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Modulo</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../book/index.html"> 
+<span class="menu-text">Plasma Book</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../monograph/index.html"> 
+<span class="menu-text">Extratemporal Dimensions</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Code Notes</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-code-notes">    
+        <li>
+    <a class="dropdown-item" href="../../code_notes/python-notes.html">
+ <span class="dropdown-text">Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/bash-notes.html">
+ <span class="dropdown-text">Command Line</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/git-notes.html">
+ <span class="dropdown-text">Git</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/sql-notes.html">
+ <span class="dropdown-text">SQL</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/cython-notes.html">
+ <span class="dropdown-text">Cython</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/docker-notes.html">
+ <span class="dropdown-text">Docker</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../code_notes/rust-notes.html">
+ <span class="dropdown-text">Rust</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Ising Model</h1>
+                  <div>
+        <div class="description">
+          Statistical mechanics, phase transitions, and Monte Carlo simulation of magnetic systems
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">physics</div>
+                <div class="quarto-category">statistical mechanics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Henry Watkins </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 10, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#theoretical-foundation" id="toc-theoretical-foundation" class="nav-link active" data-scroll-target="#theoretical-foundation">Theoretical Foundation</a>
+  <ul class="collapse">
+  <li><a href="#the-ising-hamiltonian" id="toc-the-ising-hamiltonian" class="nav-link" data-scroll-target="#the-ising-hamiltonian">The Ising Hamiltonian</a></li>
+  <li><a href="#statistical-mechanics-framework" id="toc-statistical-mechanics-framework" class="nav-link" data-scroll-target="#statistical-mechanics-framework">Statistical Mechanics Framework</a></li>
+  <li><a href="#thermodynamic-quantities" id="toc-thermodynamic-quantities" class="nav-link" data-scroll-target="#thermodynamic-quantities">Thermodynamic Quantities</a>
+  <ul class="collapse">
+  <li><a href="#internal-energy-and-magnetization" id="toc-internal-energy-and-magnetization" class="nav-link" data-scroll-target="#internal-energy-and-magnetization">Internal Energy and Magnetization</a></li>
+  <li><a href="#response-functions" id="toc-response-functions" class="nav-link" data-scroll-target="#response-functions">Response Functions</a></li>
+  </ul></li>
+  <li><a href="#correlation-functions-and-critical-behavior" id="toc-correlation-functions-and-critical-behavior" class="nav-link" data-scroll-target="#correlation-functions-and-critical-behavior">Correlation Functions and Critical Behavior</a></li>
+  <li><a href="#phase-transition" id="toc-phase-transition" class="nav-link" data-scroll-target="#phase-transition">Phase Transition</a></li>
+  </ul></li>
+  <li><a href="#monte-carlo-simulation" id="toc-monte-carlo-simulation" class="nav-link" data-scroll-target="#monte-carlo-simulation">Monte Carlo Simulation</a>
+  <ul class="collapse">
+  <li><a href="#the-challenge-of-direct-computation" id="toc-the-challenge-of-direct-computation" class="nav-link" data-scroll-target="#the-challenge-of-direct-computation">The Challenge of Direct Computation</a></li>
+  <li><a href="#the-metropolis-algorithm" id="toc-the-metropolis-algorithm" class="nav-link" data-scroll-target="#the-metropolis-algorithm">The Metropolis Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-steps" id="toc-algorithm-steps" class="nav-link" data-scroll-target="#algorithm-steps">Algorithm Steps</a></li>
+  <li><a href="#efficient-energy-calculation" id="toc-efficient-energy-calculation" class="nav-link" data-scroll-target="#efficient-energy-calculation">Efficient Energy Calculation</a></li>
+  <li><a href="#boundary-conditions" id="toc-boundary-conditions" class="nav-link" data-scroll-target="#boundary-conditions">Boundary Conditions</a></li>
+  </ul></li>
+  <li><a href="#observables-and-measurements" id="toc-observables-and-measurements" class="nav-link" data-scroll-target="#observables-and-measurements">Observables and Measurements</a>
+  <ul class="collapse">
+  <li><a href="#magnetization" id="toc-magnetization" class="nav-link" data-scroll-target="#magnetization">Magnetization</a></li>
+  <li><a href="#energy-per-site" id="toc-energy-per-site" class="nav-link" data-scroll-target="#energy-per-site">Energy per site</a></li>
+  <li><a href="#magnetic-susceptibility" id="toc-magnetic-susceptibility" class="nav-link" data-scroll-target="#magnetic-susceptibility">Magnetic Susceptibility</a></li>
+  <li><a href="#heat-capacity" id="toc-heat-capacity" class="nav-link" data-scroll-target="#heat-capacity">Heat Capacity</a></li>
+  </ul></li>
+  <li><a href="#equilibration-and-autocorrelation" id="toc-equilibration-and-autocorrelation" class="nav-link" data-scroll-target="#equilibration-and-autocorrelation">Equilibration and Autocorrelation</a></li>
+  </ul></li>
+  <li><a href="#an-ising-simulator" id="toc-an-ising-simulator" class="nav-link" data-scroll-target="#an-ising-simulator">An Ising Simulator</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>The Ising model stands as one of the most important models in statistical mechanics, providing a simple yet powerful framework for understanding magnetic phase transitions and critical phenomena. Named after Ernst Ising, who proposed it in his 1925 doctoral thesis, the model has found applications far beyond magnetism, serving as a paradigm for studying phase transitions in diverse systems from binary alloys to neural networks. In previous posts I have briefly introduced the model, but in this post I will explore the theoretical foundations of the Ising model, derive its key thermodynamic properties, and discuss the implementation of Monte Carlo simulations to study its behavior.</p>
+<p>The beauty of the Ising model lies in its simplicity: it reduces the complex quantum mechanical problem of interacting spins to a classical statistical mechanics problem. Despite this simplification, the model exhibits important physical phenomena, including spontaneous magnetization, critical behavior, and universality. The two-dimensional Ising model was famously solved exactly by Lars Onsager in 1944, providing one of the few examples of an exactly solvable model with a phase transition. However, for general geometries and in higher dimensions, numerical simulations remain essential for understanding the model’s behavior.</p>
+<p>The primary reference for this discussion is <span class="citation" data-cites="shekaari2021theory">Shekaari and Jafari (<a href="#ref-shekaari2021theory" role="doc-biblioref">2021</a>)</span>, which provides comprehensive coverage of both the theoretical foundations and computational approaches to the Ising model. For additional background on statistical mechanics and phase transitions, readers may also consult standard textbooks such as Statistical Mechanics by <span class="citation" data-cites="huang2021statistical">Huang (<a href="#ref-huang2021statistical" role="doc-biblioref">2021</a>)</span>.</p>
+<section id="theoretical-foundation" class="level1">
+<h1>Theoretical Foundation</h1>
+<section id="the-ising-hamiltonian" class="level2">
+<h2 class="anchored" data-anchor-id="the-ising-hamiltonian">The Ising Hamiltonian</h2>
+<p>The Ising model consists of a regular lattice with discrete spin variables at each site. Consider a lattice <span class="math inline">\(\Lambda = \{1, 2, \ldots, N\}\)</span> where each site <span class="math inline">\(i\)</span> contains a spin variable <span class="math inline">\(\sigma_i \in \{-1, +1\}\)</span>. The state of the entire system is described by a spin configuration <span class="math inline">\(\{\sigma\} = \{\sigma_1, \sigma_2, \ldots, \sigma_N\}\)</span>.</p>
+<p>The Hamiltonian (energy function) of the system is given by:</p>
+<p><span id="eq-hamiltonian"><span class="math display">\[
+H[\{\sigma\}] = -J \sum_{\langle i,j \rangle} \sigma_i \sigma_j - h \sum_i \sigma_i
+\tag{1}\]</span></span></p>
+<p>Here, the first sum runs over all nearest-neighbor pairs <span class="math inline">\(\langle i,j \rangle\)</span>, <span class="math inline">\(J\)</span> is the coupling constant that determines the strength of interaction between neighboring spins, and <span class="math inline">\(h\)</span> is an external magnetic field. The coupling constant <span class="math inline">\(J\)</span> determines the nature of the magnetic interaction:</p>
+<ul>
+<li><span class="math inline">\(J &gt; 0\)</span>: Ferromagnetic coupling, favoring aligned spins</li>
+<li><span class="math inline">\(J &lt; 0\)</span>: Antiferromagnetic coupling, favoring anti-aligned spins</li>
+<li><span class="math inline">\(J = 0\)</span>: Non-interacting spins</li>
+</ul>
+<p>The ground state of the ferromagnetic Ising model (<span class="math inline">\(J &gt; 0, h = 0\)</span>) corresponds to all spins aligned in the same direction, either all <span class="math inline">\(+1\)</span> or all <span class="math inline">\(-1\)</span>, giving an energy of <span class="math inline">\(E_0 = -J \times (\text{number of nearest-neighbor pairs})\)</span>.</p>
+</section>
+<section id="statistical-mechanics-framework" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-mechanics-framework">Statistical Mechanics Framework</h2>
+<p>At finite temperature <span class="math inline">\(T\)</span>, the system is described by the canonical ensemble. The probability of finding the system in an arbitrary particular configuration <span class="math inline">\(\{\sigma\}\)</span> is given by the Boltzmann distribution:</p>
+<p><span id="eq-boltzmann"><span class="math display">\[
+P[\{\sigma\}] = \frac{1}{Z} \exp(-\beta H[\{\sigma\}])
+\tag{2}\]</span></span></p>
+<p>where <span class="math inline">\(\beta = 1/(k_B T)\)</span> is the inverse temperature and <span class="math inline">\(Z\)</span> is the partition function:</p>
+<p><span id="eq-partition"><span class="math display">\[
+Z = \sum_{\{\sigma\}} \exp(-\beta H[\{\sigma\}])
+\tag{3}\]</span></span></p>
+<p>The sum runs over all <span class="math inline">\(2^N\)</span> possible spin configurations. The partition function encodes all thermodynamic information about the system and allows us to calculate observables as ensemble averages.</p>
+</section>
+<section id="thermodynamic-quantities" class="level2">
+<h2 class="anchored" data-anchor-id="thermodynamic-quantities">Thermodynamic Quantities</h2>
+<section id="internal-energy-and-magnetization" class="level3">
+<h3 class="anchored" data-anchor-id="internal-energy-and-magnetization">Internal Energy and Magnetization</h3>
+<p>The internal energy and magnetization are given by the ensemble averages:</p>
+<p><span id="eq-internal-energy"><span class="math display">\[
+U = \langle H \rangle = -\frac{\partial \log Z}{\partial \beta}
+\tag{4}\]</span></span></p>
+<p><span id="eq-magnetization"><span class="math display">\[
+M = \left\langle \sum_i \sigma_i \right\rangle = \frac{\partial \log Z}{\partial(\beta h)}
+\tag{5}\]</span></span></p>
+<p>The magnetization per site is <span class="math inline">\(m = M/N\)</span>, which serves as the order parameter for the ferromagnetic phase transition.</p>
+</section>
+<section id="response-functions" class="level3">
+<h3 class="anchored" data-anchor-id="response-functions">Response Functions</h3>
+<p>The magnetic susceptibility and heat capacity characterize the system’s response to external perturbations:</p>
+<p><span id="eq-susceptibility"><span class="math display">\[
+\chi = \frac{\partial M}{\partial h}\Big|_T = \beta(\langle M^2 \rangle - \langle M \rangle^2) = \beta N \text{Var}(m)
+\tag{6}\]</span></span></p>
+<p><span id="eq-heat-capacity"><span class="math display">\[
+C_V = \frac{\partial U}{\partial T}\Big|_h = \frac{1}{k_B T^2}(\langle H^2 \rangle - \langle H \rangle^2) = \frac{\beta^2}{N} \text{Var}(H)
+\tag{7}\]</span></span></p>
+<p>The form of these definitions comes directly from the thermodynamic relations (such as the Maxwell relations), and show how macroscopic thermodynamic properties emerge out of statistical systems. These quantities exhibit characteristic behavious at phase transitions. Near the critical temperature, both <span class="math inline">\(\chi\)</span> and <span class="math inline">\(C_V\)</span> show power-law divergences, indicating the critical behavior of the system.</p>
+</section>
+</section>
+<section id="correlation-functions-and-critical-behavior" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-functions-and-critical-behavior">Correlation Functions and Critical Behavior</h2>
+<p>The spin-spin correlation function measures correlations between spins at different sites:</p>
+<p><span id="eq-correlation"><span class="math display">\[
+G(r) = \langle \sigma_0 \sigma_r \rangle - \langle \sigma_0 \rangle \langle \sigma_r \rangle
+\tag{8}\]</span></span></p>
+<p>where <span class="math inline">\(r\)</span> is the distance between sites. Due to translational invariance, <span class="math inline">\(G(r)\)</span> depends only on the separation <span class="math inline">\(r\)</span>, not on the absolute positions. Near the critical temperature, the correlation function exhibits power-law behavior at short distances and exponential decay at long distances:</p>
+<p><span id="eq-correlation-scaling"><span class="math display">\[
+G(r) \propto \begin{cases}
+r^{-(d-2+\eta)} &amp; \text{for } r \ll \xi \\
+\xi^{-(d-2+\eta)/2} \exp(-r/\xi) &amp; \text{for } r \gg \xi
+\end{cases}
+\tag{9}\]</span></span></p>
+<p>where <span class="math inline">\(d\)</span> is the spatial dimension, <span class="math inline">\(\eta\)</span> is a critical exponent, and <span class="math inline">\(\xi\)</span> is the correlation length. The correlation length diverges at the critical point as <span class="math inline">\(\xi \propto |T - T_c|^{-\nu}\)</span>, where <span class="math inline">\(\nu\)</span> is another critical exponent.</p>
+</section>
+<section id="phase-transition" class="level2">
+<h2 class="anchored" data-anchor-id="phase-transition">Phase Transition</h2>
+<p>The Ising model exhibits a phase transition between a disordered paramagnetic phase at high temperatures and an ordered ferromagnetic phase at low temperatures. The critical temperature <span class="math inline">\(T_c\)</span> separates these phases:</p>
+<ul>
+<li><strong>High temperature (<span class="math inline">\(T &gt; T_c\)</span>)</strong>: Paramagnetic phase with <span class="math inline">\(\langle m \rangle = 0\)</span> and short-range correlations</li>
+<li><strong>Low temperature (<span class="math inline">\(T &lt; T_c\)</span>)</strong>: Ferromagnetic phase with spontaneous magnetization <span class="math inline">\(\langle m \rangle \neq 0\)</span></li>
+</ul>
+<p>For the two-dimensional Ising model on a square lattice, the exact critical temperature is:</p>
+<p><span id="eq-critical-temp"><span class="math display">\[
+\frac{k_B T_c}{J} = \frac{2}{\ln(1 + \sqrt{2})} \approx 2.269
+\tag{10}\]</span></span></p>
+<p>This exact result, derived by Onsager, represents a excellent example of the powerful results that can be derived from purely analytic methods.</p>
+</section>
+</section>
+<section id="monte-carlo-simulation" class="level1">
+<h1>Monte Carlo Simulation</h1>
+<p>The difficulty with the Ising model howeve ris going beyond this simplified system. While analytic results are powerful, we need numerical methods to explore the full parameter space and phenomena hidden in these statistical systems arising from complex interactions.</p>
+<section id="the-challenge-of-direct-computation" class="level2">
+<h2 class="anchored" data-anchor-id="the-challenge-of-direct-computation">The Challenge of Direct Computation</h2>
+<p>Direct computation of thermodynamic quantities requires summing over all <span class="math inline">\(2^N\)</span> spin configurations, which becomes computationally intractable for even modest system sizes. For a <span class="math inline">\(100 \times 100\)</span> lattice, this would require summing over <span class="math inline">\(2^{10,000}\)</span> configurations—a number far exceeding the number of atoms in the observable universe.</p>
+<p>Monte Carlo methods provide an elegant solution by sampling only the statistically important configurations according to their Boltzmann weights. Instead of computing the full sum, we estimate ensemble averages as:</p>
+<p><span id="eq-mc-average"><span class="math display">\[
+\langle A \rangle \approx \frac{1}{M} \sum_{i=1}^M A(\{\sigma\}^{(i)})
+\tag{11}\]</span></span></p>
+<p>where <span class="math inline">\(\{\sigma\}^{(i)}\)</span> are configurations sampled from the Boltzmann distribution, and <span class="math inline">\(M\)</span> is the number of samples. The key to this numerical problem is in selecting only those configuration that are important.</p>
+</section>
+<section id="the-metropolis-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="the-metropolis-algorithm">The Metropolis Algorithm</h2>
+<p>The Metropolis algorithm, introduced by Metropolis et al.&nbsp;in 1953, provides a method for sampling configurations according to the Boltzmann distribution. The algorithm satisfies detailed balance, ensuring that the equilibrium distribution is the desired Boltzmann distribution.</p>
+<section id="algorithm-steps" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-steps">Algorithm Steps</h3>
+<ol type="1">
+<li><strong>Initialize</strong>: Start with a random spin configuration <span class="math inline">\(\{\sigma\}\)</span></li>
+<li><strong>Propose</strong>: Randomly select a spin <span class="math inline">\(\sigma_i\)</span> and propose flipping it: <span class="math inline">\(\sigma_i \to -\sigma_i\)</span></li>
+<li><strong>Calculate</strong>: Compute the energy change <span class="math inline">\(\Delta E = H(\text{new}) - H(\text{old})\)</span></li>
+<li><strong>Accept/Reject</strong>:
+<ul>
+<li>If <span class="math inline">\(\Delta E \leq 0\)</span>, accept the move</li>
+<li>If <span class="math inline">\(\Delta E &gt; 0\)</span>, accept with probability <span class="math inline">\(p = \exp(-\beta \Delta E)\)</span></li>
+</ul></li>
+<li><strong>Repeat</strong>: Continue until sufficient statistics are collected</li>
+</ol>
+<p>The acceptance probability ensures detailed balance:</p>
+<p><span class="math display">\[
+\frac{P(\{\sigma'\} \to \{\sigma\})}{P(\{\sigma\} \to \{\sigma'\})} = \frac{P_{\text{eq}}(\{\sigma\})}{P_{\text{eq}}(\{\sigma'\})} = \exp(-\beta(H[\{\sigma\}] - H[\{\sigma'\}]))
+\]</span></p>
+</section>
+<section id="efficient-energy-calculation" class="level3">
+<h3 class="anchored" data-anchor-id="efficient-energy-calculation">Efficient Energy Calculation</h3>
+<p>A key optimization in Ising simulations is the efficient calculation of energy changes. When flipping spin <span class="math inline">\(\sigma_i\)</span>, only the interactions with its nearest neighbors contribute to <span class="math inline">\(\Delta E\)</span>:</p>
+<p><span id="eq-delta-e"><span class="math display">\[
+\Delta E = 2\sigma_i \left( J \sum_{j \in \text{nn}(i)} \sigma_j + h \right)
+\tag{12}\]</span></span></p>
+<p>For a 2D square lattice with periodic boundary conditions, each spin has exactly four nearest neighbors, so:</p>
+<p><span class="math display">\[
+\Delta E = 2\sigma_i \left( J(\sigma_{i+1,j} + \sigma_{i-1,j} + \sigma_{i,j+1} + \sigma_{i,j-1}) + h \right)
+\]</span></p>
+<p>In the absence of an external field (<span class="math inline">\(h = 0\)</span>), there are only five possible values for <span class="math inline">\(\Delta E\)</span>: <span class="math inline">\(\{-8J, -4J, 0, 4J, 8J\}\)</span>, corresponding to different local spin environments. This allows for pre-computation of acceptance probabilities, further optimizing the algorithm.</p>
+</section>
+<section id="boundary-conditions" class="level3">
+<h3 class="anchored" data-anchor-id="boundary-conditions">Boundary Conditions</h3>
+<p>Periodic boundary conditions are typically employed to minimize finite-size effects:</p>
+<p><span class="math display">\[
+\sigma_{i+L,j} = \sigma_{i,j}, \quad \sigma_{i,j+L} = \sigma_{i,j}
+\]</span></p>
+<p>where <span class="math inline">\(L\)</span> is the linear size of the system. This can be implemented efficiently using modular arithmetic: for a site at position <span class="math inline">\(i\)</span>, its neighbor at <span class="math inline">\(i+1\)</span> is located at position <span class="math inline">\((i+1) \bmod L\)</span>.</p>
+</section>
+</section>
+<section id="observables-and-measurements" class="level2">
+<h2 class="anchored" data-anchor-id="observables-and-measurements">Observables and Measurements</h2>
+<p>During the simulation, we measure various observables:</p>
+<section id="magnetization" class="level3">
+<h3 class="anchored" data-anchor-id="magnetization">Magnetization</h3>
+<p><span id="eq-measured-mag"><span class="math display">\[
+m = \frac{1}{N} \sum_i \sigma_i
+\tag{13}\]</span></span></p>
+</section>
+<section id="energy-per-site" class="level3">
+<h3 class="anchored" data-anchor-id="energy-per-site">Energy per site</h3>
+<p><span id="eq-measured-energy"><span class="math display">\[
+e = \frac{H}{N} = -\frac{J}{N} \sum_{\langle i,j \rangle} \sigma_i \sigma_j - h m
+\tag{14}\]</span></span></p>
+</section>
+<section id="magnetic-susceptibility" class="level3">
+<h3 class="anchored" data-anchor-id="magnetic-susceptibility">Magnetic Susceptibility</h3>
+<p><span id="eq-measured-chi"><span class="math display">\[
+\chi = \beta N (\langle m^2 \rangle - \langle |m| \rangle^2)
+\tag{15}\]</span></span></p>
+</section>
+<section id="heat-capacity" class="level3">
+<h3 class="anchored" data-anchor-id="heat-capacity">Heat Capacity</h3>
+<p><span id="eq-measured-cv"><span class="math display">\[
+C_V = \frac{\beta^2}{N} (\langle H^2 \rangle - \langle H \rangle^2)
+\tag{16}\]</span></span></p>
+</section>
+</section>
+<section id="equilibration-and-autocorrelation" class="level2">
+<h2 class="anchored" data-anchor-id="equilibration-and-autocorrelation">Equilibration and Autocorrelation</h2>
+<p>Monte Carlo simulations require careful attention to equilibration and statistical independence:</p>
+<ol type="1">
+<li><p><strong>Equilibration</strong>: The system must be allowed to reach thermal equilibrium before measurements begin. This typically requires <span class="math inline">\(10^3\)</span> to <span class="math inline">\(10^4\)</span> Monte Carlo sweeps.</p></li>
+<li><p><strong>Autocorrelation</strong>: Successive configurations are correlated. Measurements should be taken every <span class="math inline">\(\tau\)</span> sweeps, where <span class="math inline">\(\tau\)</span> is the autocorrelation time.</p></li>
+<li><p><strong>Finite-size scaling</strong>: Results depend on system size. Critical behavior is studied by analyzing how observables scale with system size <span class="math inline">\(L\)</span>.</p></li>
+</ol>
+</section>
+</section>
+<section id="an-ising-simulator" class="level1">
+<h1>An Ising Simulator</h1>
+<p>To illustrate the implementation and simulation of these systems, I have created a simple python package that implements the Metropolis-Hastings algorithm for the Ising model system <span class="citation" data-cites="watkins2025">(<a href="#ref-watkins2025" role="doc-biblioref">Watkins 2025</a>)</span>. This code uses the standard python stack with a user-friendly CLI interface to run Ising model simulations and scans on the command line. For example, I can study a system close to the critical temperature of the Ising system with</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ising</span> <span class="at">--single</span> <span class="at">--size</span> 32 <span class="at">--temperature</span> 2.26 <span class="at">--plot</span> <span class="at">--visualize</span> <span class="at">--save-plots</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="spin_config_L32_T2.260.png" class="img-fluid figure-img"></p>
+<figcaption>Ising model spin configuration for a 32 by 32 lattice at temperature 2.260. This system is close to the critical temperature, and exhibits a mixture of spins throughout the lattice.</figcaption>
+</figure>
+</div>
+<p>And if we run the system under a magnetic field, we can see how the system responds to the field with</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ising</span> <span class="at">--single</span> <span class="at">--size</span> 32 <span class="at">--temperature</span> 2.6 <span class="at">--field</span> 0.05  <span class="at">--visualize</span> <span class="at">--save-plots</span> <span class="at">--plot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="spin_config_L32_T2.600.png" class="img-fluid figure-img"></p>
+<figcaption>Ising model with magnetisation, note the magnetic field causes all the spins to align, even at the same temperature as the previous unmagnetised system.</figcaption>
+</figure>
+</div>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>The Ising model represents a cornerstone of statistical mechanics, bridging the gap between microscopic interactions and macroscopic thermodynamic behavior. Its exact solvability in two dimensions provides crucial insights into critical phenomena, while Monte Carlo simulations allow exploration of finite-size effects, dynamics, and extensions to more complex models. The Monte Carlo approach, particularly the Metropolis algorithm, demonstrates the power of stochastic methods in theoretical physics. By sampling configurations according to their statistical weights rather than enumerating all possibilities, we can study systems that would otherwise be computationally intractable. Modern applications of Ising-type models extend far beyond traditional magnetism, finding use in machine learning (Hopfield networks, Boltzmann machines), social dynamics, financial modeling, and biological systems. The computational techniques developed for the Ising model continue to inform approaches to complex many-body problems across diverse fields of science and engineering. The Ising system is a great way to start studying statistical mechanics systems in physics, both from a theoretical and computational starting point, and shows how intertwined the theoretical and computational sides of physics are.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-huang2021statistical" class="csl-entry" role="listitem">
+Huang, Haiping. 2021. <em>Statistical Mechanics of Neural Networks</em>. Vol. 310. Springer.
+</div>
+<div id="ref-shekaari2021theory" class="csl-entry" role="listitem">
+Shekaari, Ashkan, and Mahmoud Jafari. 2021. <span>“Theory and Simulation of the Ising Model.”</span> <em>arXiv Preprint arXiv:2105.00841</em>.
+</div>
+<div id="ref-watkins2025" class="csl-entry" role="listitem">
+Watkins, Henry. 2025. <span>“Ising: A 2D Ising Model Monte Carlo Simulation CLI.”</span> <a href="https://github.com/henrywatkins/ising">https://github.com/henrywatkins/ising</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-copyright"><h2 class="anchored quarto-appendix-heading">Copyright</h2><div class="quarto-appendix-contents"><div>Copyright © 2026 Henry Watkins. All Rights Reserved.</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

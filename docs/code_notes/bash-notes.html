@@ -204,14 +204,20 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#basic-commands" id="toc-basic-commands" class="nav-link active" data-scroll-target="#basic-commands">Basic commands</a></li>
+  <li><a href="#the-unix-philosophy" id="toc-the-unix-philosophy" class="nav-link active" data-scroll-target="#the-unix-philosophy">The Unix philosophy</a></li>
+  <li><a href="#basic-commands" id="toc-basic-commands" class="nav-link" data-scroll-target="#basic-commands">Basic commands</a></li>
   <li><a href="#command-line-extras" id="toc-command-line-extras" class="nav-link" data-scroll-target="#command-line-extras">Command line extras</a></li>
   <li><a href="#useful-programs" id="toc-useful-programs" class="nav-link" data-scroll-target="#useful-programs">Useful programs</a></li>
   <li><a href="#not-so-useful-programs" id="toc-not-so-useful-programs" class="nav-link" data-scroll-target="#not-so-useful-programs">Not so useful programs</a></li>
+  <li><a href="#parallel-jobs" id="toc-parallel-jobs" class="nav-link" data-scroll-target="#parallel-jobs">Parallel jobs</a></li>
   <li><a href="#background-jobs" id="toc-background-jobs" class="nav-link" data-scroll-target="#background-jobs">Background jobs</a></li>
+  <li><a href="#pipelines" id="toc-pipelines" class="nav-link" data-scroll-target="#pipelines">pipelines</a></li>
   <li><a href="#awk" id="toc-awk" class="nav-link" data-scroll-target="#awk">awk</a></li>
   <li><a href="#sed" id="toc-sed" class="nav-link" data-scroll-target="#sed">sed</a></li>
   <li><a href="#ssh" id="toc-ssh" class="nav-link" data-scroll-target="#ssh">ssh</a></li>
+  <li><a href="#datamash" id="toc-datamash" class="nav-link" data-scroll-target="#datamash">datamash</a></li>
+  <li><a href="#csvkit" id="toc-csvkit" class="nav-link" data-scroll-target="#csvkit">csvkit</a></li>
+  <li><a href="#pspp" id="toc-pspp" class="nav-link" data-scroll-target="#pspp">pspp</a></li>
   <li><a href="#llm" id="toc-llm" class="nav-link" data-scroll-target="#llm">llm</a></li>
   <li><a href="#gnuplot" id="toc-gnuplot" class="nav-link" data-scroll-target="#gnuplot">gnuplot</a></li>
   <li><a href="#bash-scripts" id="toc-bash-scripts" class="nav-link" data-scroll-target="#bash-scripts">Bash scripts</a></li>
@@ -253,6 +259,14 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 
 
 <p>Command line programs and Bash scripts can be remarkably useful and flexible for a whole range of tasks. It is often easier to use the capabilities of mature command line programs and simple bash scripts than write custom python scripts.</p>
+<section id="the-unix-philosophy" class="level2">
+<h2 class="anchored" data-anchor-id="the-unix-philosophy">The Unix philosophy</h2>
+<ol type="1">
+<li>Write programs that do one thing and do it well.</li>
+<li>Write programs to work together.</li>
+<li>Write programs to handle text streams, because that is a universal interface.</li>
+</ol>
+</section>
 <section id="basic-commands" class="level2">
 <h2 class="anchored" data-anchor-id="basic-commands">Basic commands</h2>
 <p><code>ls</code> - list contents of directory</p>
@@ -271,6 +285,7 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <p><code>sudo</code> - run with root privileges</p>
 <p><code>date</code> - prints out date and time</p>
 <p><code>time</code> - time the execution time of a program</p>
+<p><code>timeout</code> - run program with pre-defined time limit after which it is cancelled</p>
 <p><code>echo</code> - display a line of text, or the value of an environment variable</p>
 <p><code>chmod</code> - change permissions of a file or program, +x useful for making scripts executable.</p>
 <p><code>reboot</code> - reboot the computer, after an interval</p>
@@ -278,6 +293,7 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <p><code>ps</code> ,<code>top</code> and <code>htop</code> - list processes</p>
 <p><code>tree</code> - display the constituent files and folders of this directory in a tree structure.</p>
 <p><code>tee</code> display output and also write to file</p>
+<p><code>find</code> - locate files and folders</p>
 </section>
 <section id="command-line-extras" class="level2">
 <h2 class="anchored" data-anchor-id="command-line-extras">Command line extras</h2>
@@ -295,10 +311,13 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="useful-programs">Useful programs</h2>
 <p><code>grep</code> - regex search utility, search for a regex pattern in plain text</p>
 <p><code>nano</code> - simple terminal-based text editor</p>
+<p><code>xargs</code> - enables more complex chain commands on the command line</p>
 <p><code>shred</code> - completely destroy file</p>
 <p><code>wget</code> - download a file from the internet, supply with the path</p>
 <p><code>gdb</code> - simple debugger</p>
 <p><code>gprof</code> - simple profiler</p>
+<p><code>micro</code> - a terminal-based text editor, more features than nano</p>
+<p><code>vim</code> - the venerable terminal editor</p>
 <p><code>uniq</code> - find the unique rows in some output. filters out matching lines from input.</p>
 <p><code>sort</code> - sort the output</p>
 <p><code>join</code> - concatenate two files together</p>
@@ -319,7 +338,13 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <p><code>tqdm</code> - the python tqdm library for progress bars but in terminal</p>
 <p><code>aspell</code> - command line spell checker</p>
 <p><code>proselint</code> - command line linter for grose/grammar</p>
+<p><code>column</code> - simple tabular processing</p>
 <p><code>xclip</code> - post things to clipboard to copy/paste easily e.g.&nbsp;<code>cat file | xclip</code> then paste to stdout with <code>xclip -o</code></p>
+<p><code>which</code> - locate executable</p>
+<p><code>du</code> - disk usage</p>
+<p><code>ln</code> - create symbolic/hard links</p>
+<p><code>source</code> - execute commands from a file in the shell</p>
+<p><code>export</code> - set environment variables</p>
 </section>
 <section id="not-so-useful-programs" class="level2">
 <h2 class="anchored" data-anchor-id="not-so-useful-programs">Not so useful programs</h2>
@@ -331,6 +356,11 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <p><code>fmt</code> - simple text formatter, squishes everything into lines of some specified length</p>
 <p><code>crontab</code> - schedule commands to run regularly at a specified time</p>
 <p><code>basename</code> - returns the top-level name of a path with all the upper directories removed, e.g.&nbsp;<code>/home/user/dir/file</code> -&gt; <code>file</code></p>
+<p><code>dirname</code> - returns the rest of the paths</p>
+</section>
+<section id="parallel-jobs" class="level2">
+<h2 class="anchored" data-anchor-id="parallel-jobs">Parallel jobs</h2>
+<p>you can run multiprocessing across several processes using the <code>parallel</code>.</p>
 </section>
 <section id="background-jobs" class="level2">
 <h2 class="anchored" data-anchor-id="background-jobs">Background jobs</h2>
@@ -340,6 +370,10 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">fg</span> <span class="op">&lt;</span>job id<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Also use <code>wait</code> to ensure all background processes to finish before continuing. This is particularly useful if there are outputs of one stage that are required by the next stage.</p>
 <p>Note <code>jobs/fg/&amp;</code> is limited to one session, and processes started with <code>&amp;</code> will be terminated if the shell session ends. To run jobs in the background independently of the shell session, use <code>screen</code>, which acts as a terminal multiplexer to run long processes irrespective of the shell session.</p>
+</section>
+<section id="pipelines" class="level2">
+<h2 class="anchored" data-anchor-id="pipelines">pipelines</h2>
+<p>A key concept of terminal processing and bash scripting in general is pipelines. Here then pipe operator <code>|</code> is used to pass the result of one text-based command to another, enabling complex one-line programs.</p>
 </section>
 <section id="awk" class="level2">
 <h2 class="anchored" data-anchor-id="awk">awk</h2>
@@ -388,6 +422,26 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <p><code>sshfs</code> - mount a remote filesystem securely</p>
 <p><code>scp</code> - secure copy between hosts on a network</p>
 </section>
+<section id="datamash" class="level2">
+<h2 class="anchored" data-anchor-id="datamash">datamash</h2>
+<p><code>datamash</code> is a basic data processing command-line tool which performs basic numeric, textual and statistical operations on input textual data files.</p>
+<p>Examples:</p>
+<p>calculate the sum and mean of values 1 to 10:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span> 10 <span class="kw">|</span> <span class="ex">datamash</span> sum 1 mean 1</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">55</span> 5.5</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>group text file by one column and calculate mean and sample standard deviation on another, with automatic sorting and header line processing:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">datamash</span> <span class="at">--sort</span> <span class="at">--headers</span> groupby 2 mean 3 sstdev 3 <span class="op">&lt;</span> scores_h.txt</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">GroupBy</span><span class="er">(</span><span class="ex">Major</span><span class="kw">)</span>  <span class="ex">mean</span><span class="er">(</span><span class="ex">Score</span><span class="kw">)</span> <span class="ex">sstdev</span><span class="er">(</span><span class="ex">Score</span><span class="kw">)</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Arts</span>            68.94       10.42</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="csvkit" class="level2">
+<h2 class="anchored" data-anchor-id="csvkit">csvkit</h2>
+<p><code>csvkit</code> is a suite of command-line tools for converting to and working with CSV. The key components are <code>csvlook</code>, <code>csvcut</code>, <code>csvstat</code>, <code>csvgrep</code>, <code>csvsort</code>, <code>in2csv</code>, <code>csvstack</code>, <code>sql2csv</code>, <code>csvsql</code>, <code>csvformat</code>.</p>
+</section>
+<section id="pspp" class="level2">
+<h2 class="anchored" data-anchor-id="pspp">pspp</h2>
+<p><code>pspp</code> is a statistical command line tool based on the spss software. It is used for performing statistical analyses on tabular data.</p>
+</section>
 <section id="llm" class="level2">
 <h2 class="anchored" data-anchor-id="llm">llm</h2>
 <p>The llm library is a good CLI for tasks querying large lanuage models. It is a fantastic addition to the aformentioned command line utilities to solve complex problems strait from the command line.</p>
@@ -396,46 +450,46 @@ gtag('config', 'G-4KRLE15B5S', { 'anonymize_ip': true});
 <section id="gnuplot" class="level2">
 <h2 class="anchored" data-anchor-id="gnuplot">gnuplot</h2>
 <p><a href="https://gnuplot.sourceforge.net/">gnuplot</a> is a command line plotting utility. It can be used to create simple plots and graphs from data files, or from the output of other command line programs. It is particularly useful for quick visualisation of data without needing to write a script or open a jupyter notebook. It is thus the ideal companion to the command line utilities and bash scripts. The quality of the plots is very good; comparable to matplotlib and seaborn. In fact it was the standard for academic plotting before matplotlib became popular. The usage is similar to python in that you can run it via an interpreter or a script.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gnuplot</span> plotscript.gnu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gnuplot</span> plotscript.gnu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="bash-scripts" class="level1">
 <h1>Bash scripts</h1>
 <p>Bash scripts can be remarkable capable. Combining variables, simple loops and pipeing alongside mature programs like <code>grep</code> and <code>awk</code> can create sophisticated scripts.</p>
 <p>For example, if I wants a short program to extract the phone numbers for all names starting with G, from a table of names and numbers, I can use:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for input argument (file name)</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$#</span><span class="st">"</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> &lt;filename&gt;"</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign the file name to a variable</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="va">input_file</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the file exists</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$input_file</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"File '</span><span class="va">$input_file</span><span class="st">' not found!"</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract lines where the name starts with G, then extract phone numbers using awk</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"^G"</span> <span class="st">"</span><span class="va">$input_file</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $2}'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for input argument (file name)</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$#</span><span class="st">"</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> &lt;filename&gt;"</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign the file name to a variable</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="va">input_file</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the file exists</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$input_file</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"File '</span><span class="va">$input_file</span><span class="st">' not found!"</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract lines where the name starts with G, then extract phone numbers using awk</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"^G"</span> <span class="st">"</span><span class="va">$input_file</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $2}'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="data-processing-with-bash" class="level1">
 <h1>Data processing with bash</h1>
 <p>With all these tools, it becomes clear that bash scripts can be created to build sophisticaed data processing pipelines. Together with standard command-line tools like <code>grep</code>, <code>awk</code>, <code>sed</code>, <code>jq</code> and <code>gnuplot</code>, you can create powerful scripts to process and analyze data without needing to write custom Python or R scripts. We could for example create a bash script to pull data from a database with <code>sqlite3</code> (see also notes on SQL), process it with <code>awk</code> and <code>sed</code>, and then visualize it with <code>gnuplot</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example bash script to process data from a SQLite database and visualize it</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Query data from SQLite database</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> my_database.db <span class="st">"SELECT date, value FROM measurements;"</span> <span class="op">&gt;</span> data.csv</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Process the CSV: extract columns, clean up, and convert to TSV</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">','</span> <span class="st">'{print $1 "\t" $2}'</span> data.csv <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/"//g'</span> <span class="op">&gt;</span> data.tsv</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Run gnuplot to create the plot</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="ex">gnuplot</span> plotscript.gnu</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Plot saved as plot.png"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example bash script to process data from a SQLite database and visualize it</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Query data from SQLite database</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> my_database.db <span class="st">"SELECT date, value FROM measurements;"</span> <span class="op">&gt;</span> data.csv</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Process the CSV: extract columns, clean up, and convert to TSV</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">','</span> <span class="st">'{print $1 "\t" $2}'</span> data.csv <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/"//g'</span> <span class="op">&gt;</span> data.tsv</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Run gnuplot to create the plot</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="ex">gnuplot</span> plotscript.gnu</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Plot saved as plot.png"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Combined with the command line interfaces to some other popular software such as the statistical software R, or the large language model library, you can create sophisticated data processing pipelines that are easy to run and modify.</p>
 
 

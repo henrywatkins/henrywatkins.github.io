@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/ising/index.html",
       "/posts/fluxlimiters/index.html",
       "/posts/ionize/index.html",
       "/posts/statfield/index.html",
