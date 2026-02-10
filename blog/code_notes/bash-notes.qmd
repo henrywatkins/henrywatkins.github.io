@@ -10,6 +10,13 @@ copyright: "Copyright © 2025 Henry Watkins. All Rights Reserved."
 
 Command line programs and Bash scripts can be remarkably useful and flexible for a whole range of tasks. It is often easier to use the capabilities of mature command line programs and simple bash scripts than write custom python scripts.
 
+## The Unix philosophy
+
+1. Write programs that do one thing and do it well.
+2. Write programs to work together.
+3. Write programs to handle text streams, because that is a universal interface.
+
+
 ## Basic commands
 
 `ls`  - list contents of directory
@@ -44,6 +51,8 @@ Command line programs and Bash scripts can be remarkably useful and flexible for
 
 `time` - time the execution time of a program
 
+`timeout` - run program with pre-defined time limit after which it is cancelled
+
 `echo` - display a line of text, or the value of an environment variable
 
 `chmod` - change permissions of a file or program, +x useful for making scripts executable.
@@ -57,6 +66,8 @@ Command line programs and Bash scripts can be remarkably useful and flexible for
 `tree` - display the constituent files and folders of this directory in a tree structure.
 
 `tee` display output and also write to file
+
+`find` - locate files and folders
 
 ## Command line extras
 
@@ -84,6 +95,8 @@ You can also use brackets with `$`  to define more complicated, calculated varia
 
 `nano` - simple terminal-based text editor
 
+`xargs` - enables more complex chain commands on the command line
+
 `shred` - completely destroy file
 
 `wget` - download a file from the internet, supply with the path
@@ -91,6 +104,10 @@ You can also use brackets with `$`  to define more complicated, calculated varia
 `gdb` - simple debugger
 
 `gprof` - simple profiler
+
+`micro` - a terminal-based text editor, more features than nano
+
+`vim` - the venerable terminal editor
 
 `uniq` - find the unique rows in some output. filters out matching lines from input. 
 
@@ -132,7 +149,19 @@ You can also use brackets with `$`  to define more complicated, calculated varia
 
 `proselint` - command line linter for grose/grammar
 
+`column` - simple tabular processing 
+
 `xclip` - post things to clipboard to copy/paste easily e.g. `cat file | xclip` then paste to stdout with `xclip -o`
+
+`which` - locate executable
+
+`du` - disk usage
+
+`ln` - create symbolic/hard links
+
+`source` - execute commands from a file in the shell
+
+`export` - set environment variables
 
 ## Not so useful programs
 
@@ -152,6 +181,14 @@ You can also use brackets with `$`  to define more complicated, calculated varia
 
 `basename` - returns the top-level name of a path with all the upper directories removed, e.g. `/home/user/dir/file` -> `file`
 
+`dirname` - returns the rest of the paths
+
+## Parallel jobs
+
+you can run multiprocessing across several processes using the `parallel`.
+
+
+
 ## Background jobs
 
 One can use `&` to send the command or job to run in the background. Then view the background running jobs with `jobs -l`. To pull it to the foreground again use `fg <job id>`. e.g.
@@ -165,6 +202,10 @@ fg <job id>
 Also use `wait` to ensure all background processes to finish before continuing. This is particularly useful if there are outputs of one stage that are required by the next stage.
 
 Note `jobs/fg/&` is limited to one session, and processes started with `&` will be terminated if the shell session ends. To run jobs in the background independently of the shell session, use `screen`, which acts as a terminal multiplexer to run long processes irrespective of the shell session.
+
+## pipelines
+
+A key concept of terminal processing and bash scripting in general is pipelines. Here then pipe operator `|` is used to pass the result of one text-based command to another, enabling complex one-line programs. 
 
 ## awk
 
@@ -272,6 +313,37 @@ And run with `sed -i -f script.sed filename`
 
 `scp` - secure copy between hosts on a network
 
+
+## datamash
+
+`datamash` is a basic data processing command-line tool which performs basic numeric, textual and statistical operations on input textual data files.
+
+Examples:
+
+calculate the sum and mean of values 1 to 10:
+
+```bash
+seq 10 | datamash sum 1 mean 1
+55 5.5
+```
+
+group text file by one column and calculate
+mean and sample standard deviation on another,
+with automatic sorting and header line processing:
+
+```bash
+datamash --sort --headers groupby 2 mean 3 sstdev 3 < scores_h.txt
+GroupBy(Major)  mean(Score) sstdev(Score)
+Arts            68.94       10.42
+```
+
+## csvkit
+
+`csvkit` is a suite of command-line tools for converting to and working with CSV. The key components are `csvlook`, `csvcut`, `csvstat`, `csvgrep`, `csvsort`, `in2csv`, `csvstack`, `sql2csv`, `csvsql`, `csvformat`.
+
+## pspp
+
+`pspp` is a statistical command line tool based on the spss software. It is used for performing statistical analyses on tabular data.
 
 ## llm
 
