@@ -4,7 +4,7 @@ description: "Implementing a solver for reaction-diffusion systems"
 author: "Henry Watkins"
 date: "03/03/2026"
 image: reaction-diffusion.png
-draft: true
+draft: false
 license: "CC BY"
 bibliography: references.bib
 toc: true
