@@ -1,0 +1,157 @@
+---
+title: "Turing instabilities and the Fitzhugh-Nagumo model"
+description: "Implementing a solver for reaction-diffusion systems"
+author: "Henry Watkins"
+date: "03/03/2026"
+image: reaction-diffusion.png
+draft: true
+license: "CC BY"
+bibliography: references.bib
+toc: true
+copyright: "Copyright © 2026 Henry Watkins. All Rights Reserved."
+categories:
+  - physics
+---
+
+## Introduction
+
+Reaction-diffusion systems are fascinating mathematical models that describe how substances interact chemically while simultaneously spreading through space via diffusion. These systems can produce remarkable spatial patterns, from the spots on a leopard to the stripes on a zebra. But aside from morphological systems, these models also appear throughout science in biology, chemistry, and physics. In this post, we'll explore the FitzHugh-Nagumo model [@fitzhugh1961impulses; @nagumo1962active], a simplified version of the Hodgkin-Huxley equations [@hodgkin1952quantitative] that describes nerve impulse propagation, and examine how Turing instabilities [@turing1952chemical] can lead to spontaneous pattern formation.
+
+The general form of a reaction-diffusion system is:
+
+$$ \frac{\partial u}{\partial t} = D_u \nabla^2 u + f(u,v) $$
+$$ \frac{\partial v}{\partial t} = D_v \nabla^2 v + g(u,v) $$
+
+where $u$ and $v$ are the concentrations of two interacting species, $D_u$ and $D_v$ are their respective diffusion coefficients, and $f$ and $g$ describe the local reaction kinetics.
+
+## The FitzHugh-Nagumo Model
+
+The FitzHugh-Nagumo equations provide a simplified model of neural excitation:
+
+$$ \frac{\partial u}{\partial t} = d_u^2 \nabla^2 u + \lambda u - u^3 - k - \sigma v $$
+
+$$ \tau \frac{\partial v}{\partial t} = d_v^2 \nabla^2 v + u - v $$
+
+Here:
+- $u$ represents the membrane potential (activator)  
+- $v$ represents the recovery variable (inhibitor)
+- $\lambda, \sigma, k, d_u, d_v, \tau > 0$ are positive parameters
+- $d_u$ and $d_v$ are the diffusion coefficients
+- $\tau$ is the timescale separation parameter
+
+This system exhibits the key ingredients for pattern formation: an activator ($u$) that promotes its own production, an inhibitor ($v$) that suppresses the activator, and different diffusion rates along with a non-linear reaction term.
+
+## Turing Instability Theory
+
+One of the most remarkable features of reaction-diffusion systems is their ability to form spatial patterns through Turing instabilities. Alan Turing showed in 1952 that a system stable in the absence of diffusion can become unstable when diffusion is added, leading to spontaneous pattern formation. The key idea is that diffusion can destabilize a homogeneous steady state if the inhibitor diffuses faster than the activator, allowing local fluctuations to grow and form patterns. We can apply linear stability analysis to determine the conditions under which this occurs for our FitzHugh-Nagumo model.
+
+### Linear Stability Analysis
+
+Consider a homogeneous steady state $(u_*, v_*)$ where $f(u_*, v_*) = g(u_*, v_*) = 0$. We linearize around this state by setting $u = u_* + \tilde{u}$ and $v = v_* + \tilde{v}$:
+
+$$ \frac{\partial}{\partial t} \begin{bmatrix} \tilde{u} \\ \tilde{v} \end{bmatrix} = J \begin{bmatrix} \tilde{u} \\ \tilde{v} \end{bmatrix} + D \nabla^2 \begin{bmatrix} \tilde{u} \\ \tilde{v} \end{bmatrix} $$
+
+where $J$ is the reaction Jacobian:
+$$ J = \begin{bmatrix} 
+f_u & f_v \\ 
+g_u & g_v 
+\end{bmatrix}_{(u_*, v_*)} $$
+
+and $D = \text{diag}(D_u, D_v)$ is the diffusion matrix.
+
+### Fourier Mode Analysis
+
+We analyze the stability using Fourier modes $\tilde{u}, \tilde{v} \propto e^{\lambda t + ik \cdot x}$. If we input this form into the equations and re-write the system as a determinant, we obtain the characteristic equation. The growth rate $\lambda$ satisfies:
+
+$$ \det \begin{bmatrix} 
+f_u - D_u k^2 - \lambda & f_v \\ 
+g_u & g_v - D_v k^2 - \lambda 
+\end{bmatrix} = 0 $$
+
+This gives:
+$$ \lambda = \frac{1}{2}\left[\text{tr}(J) - k^2(D_u + D_v) \pm \sqrt{\Delta(k^2)}\right] $$
+
+where:
+$$ \Delta(k^2) = [\text{tr}(J) - k^2(D_u + D_v)]^2 - 4h(k^2) $$
+$$ h(k^2) = \det(J) + k^2(f_u D_v + g_v D_u) + D_u D_v k^4 $$
+
+### Conditions for Turing Patterns
+
+For Turing instability to occur, we need:
+
+1. **Stability without diffusion**: $\text{tr}(J) < 0$ and $\det(J) > 0$
+2. **Instability with diffusion**: $h(k^2) < 0$ for some $k^2 > 0$
+
+The critical condition is:
+$$ D_u g_v + D_v f_u > 2\sqrt{D_u D_v \det(J)} $$
+
+This typically requires unequal diffusion coefficients ($D_u \neq D_v$), with the activator usually diffusing more slowly than the inhibitor.
+
+### Pattern Selection
+
+The wavelength of the emerging pattern is determined by the wavenumber $k_c$ that maximizes the growth rate. At the onset of instability:
+
+$$ k_c^2 = \frac{f_u D_v + g_v D_u}{2D_u D_v} $$
+
+The corresponding pattern wavelength is $\lambda_{\text{pattern}} = 2\pi/k_c$.
+
+### The FitzHugh-Nagumo Example
+
+For the FitzHugh-Nagumo model, we can compute the Jacobian at the homogeneous steady state and apply the above conditions to determine the parameter regimes that lead to Turing patterns. By varying parameters such as $\lambda$, $\sigma$, and the diffusion coefficients, we can explore a rich variety of spatial patterns, including spots, stripes, and labyrinthine structures.
+
+For this model, the functions f and g are:
+$$ f(u,v) = \lambda u - u^3 - k - \sigma v $$
+$$ g(u,v) = u - v $$
+
+We can then use these to compute the Jacobian and apply the Turing instability conditions to find the parameter space where patterns emerge. The system Jacobian has the block structure:
+
+$$ \mathcal{J} = \begin{bmatrix} 
+\frac{\partial g_u}{\partial u} & \frac{\partial g_u}{\partial v} \\ 
+\frac{\partial g_v}{\partial u} & \frac{\partial g_v}{\partial v} 
+\end{bmatrix} $$
+
+where:
+- $\frac{\partial g_u}{\partial u} = \frac{d_u^2}{h^2} \Delta_h + \lambda - 3u_{ij}^2$ (diagonal terms differ from off-diagonal)
+- $\frac{\partial g_u}{\partial v} = -\sigma$
+- $\frac{\partial g_v}{\partial u} = \frac{1}{\tau}$
+- $\frac{\partial g_v}{\partial v} = \frac{d_v^2}{\tau h^2} \Delta_h - \frac{1}{\tau}$
+
+
+## Numerical Implementation
+
+But what does this look like in practice? To simulate the FitzHugh-Nagumo equations and observe pattern formation, we need to implement a numerical solver for the full non-linear system. The key steps involve discretizing space and time, handling the non-linear reaction terms, and ensuring stability of the numerical scheme.
+
+### Spatial Discretization
+
+To solve these equations numerically, we discretize space using finite differences. The Laplacian operator is approximated using a five-point stencil:
+
+$$ \nabla^2 u(x,y) \approx \frac{1}{h^2}[u(x-h,y) + u(x+h,y) + u(x,y-h) + u(x,y+h) - 4u(x,y)] $$
+
+This can be represented as a convolution with the stencil:
+$$ \Delta_h = \frac{1}{h^2} \begin{bmatrix} 0 & 1 & 0 \\ 1 & -4 & 1 \\ 0 & 1 & 0 \end{bmatrix} $$
+
+On a spatial mesh with grid points $(i,j)$, the discretized system becomes:
+
+$$ \frac{\partial u_{ij}}{\partial t} = d_u^2 \Delta_h u_{ij} + \lambda u_{ij} - u_{ij}^3 - k - \sigma v_{ij} $$
+
+$$ \tau \frac{\partial v_{ij}}{\partial t} = d_v^2 \Delta_h v_{ij} + u_{ij} - v_{ij} $$
+
+This transforms our partial differential equation into a large system of ordinary differential equations that can be solved using standard ODE solvers. This is an implementation of a technique known as the method of lines, where we discretize space first and then integrate in time.
+
+I have written up a Python implementation of this approach, which can be found in the accompanying code repository [@nagumorepowatkins2025]. The code uses NumPy for array operations and SciPy's ODE solvers for time integration. The `nagumo` software uses the LSODA method (Adams/BDF) for efficient time integration to solve the ODEs. Because these ODEs come from diffusive and reactive processes, they can be stiff, so LSODA automatically switches between non-stiff and stiff solvers as needed and also handles adaptive time-stepping to ensure accuracy and stability. This is necessary because such systems can be highly unstable, especially near the onset of pattern formation, and fixed time-stepping methods may require prohibitively small steps to maintain stability.
+
+To validate the numerical implementation, we can use analytical solutions for simplified cases:
+
+1. **Pure diffusion test**: Set reaction terms to zero and solve $\partial_t u = D \nabla^2 u$ with initial conditions like $u(x,0) = e^{-(x^2+y^2)}$ or $u(x,0) = \sin(\pi x)$
+
+2. **Exponential decay test**: Set diffusion to zero and solve $\partial_t u = -\alpha u$ with $u(x,0) = u_0$
+
+3. **Traveling wave solutions**: For certain parameter regimes, the FitzHugh-Nagumo equations admit exact traveling wave solutions that can be used to verify the accuracy of the numerical solver. These solitonic solutions have exact analytical forms that can be compared against the numerical results to ensure the implementation is correct.
+
+## Conclusion
+
+The FitzHugh-Nagumo model serves as an excellent introduction to reaction-diffusion systems and pattern formation. Its mathematical tractability, combined with interesting dynamics including Turing instabilities, makes it a valuable model for understanding how simple local interactions can give rise to complex spatial patterns.
+
+The interplay between reaction and diffusion, mediated by the relative timescales and diffusion coefficients, demonstrates how diffusion can drive pattern formation under the right conditions. This counterintuitive result, first discovered by Alan Turing in 1952 [@turing1952chemical], has found applications ranging from developmental biology [@murray2003mechanochemical] to plasma physics, highlighting the universal nature of these mathematical insights.
+
+The same mathematical framework applies to magnetized plasma systems, where magnetic and thermal phenomena can be modeled as reaction-diffusion processes. Phenomena like the magneto-thermal instability [@bissell2010magneto] or electro-thermal instability [@nelson1981electrothermal] may be understood through Turing analysis, particularly when considering the effects of magnetized transport on pattern formation.
